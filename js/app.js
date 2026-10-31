@@ -1,64 +1,58 @@
-import { store } from "./store.js";
+import { store } from './store.js';
+import { templates } from './components.js';
 
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. DOM Elements
-  const filterButtons = document.querySelectorAll(".project-filter-btn");
-  const projectCards = document.querySelectorAll(".project-card");
-  const contactForm = document.getElementById("contact-form");
-  const toastNotification = document.getElementById("toast-notification");
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Inject Templates into index.html
+    document.getElementById('site-header').innerHTML = templates.header;
+    document.getElementById('site-hero').innerHTML = templates.hero;
+    document.getElementById('site-services').innerHTML = templates.services;
+    document.getElementById('site-contact').innerHTML = templates.contact;
+    document.getElementById('site-footer').innerHTML = templates.footer;
 
-  // 2. Subscribe to State Changes (Reactive UI updates)
-  store.subscribe((state) => {
-    // Update Filter UI classes
-    filterButtons.forEach((btn) => {
-      const category = btn.dataset.filter;
-      if (category === state.activeFilter) {
-        btn.classList.add("bg-orange-500", "text-white");
-        btn.classList.remove("bg-gray-800", "text-gray-300");
-      } else {
-        btn.classList.remove("bg-orange-500", "text-white");
-        btn.classList.add("bg-gray-800", "text-gray-300");
-      }
-    });
+    // 2. Set Footer Year
+    const yearEl = document.getElementById('current-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Show/Hide Project Cards based on active filter
-    projectCards.forEach((card) => {
-      const cardCategory = card.dataset.category;
-      if (state.activeFilter === "all" || cardCategory === state.activeFilter) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
+    // 3. Mobile Menu Toggle Logic with Store
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-    // Handle Form Success Notification State
-    if (state.formSuccess && toastNotification) {
-      toastNotification.classList.remove("hidden");
-      setTimeout(() => {
-        store.setState({ formSuccess: false });
-        toastNotification.classList.add("hidden");
-      }, 4000);
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = !store.getState().isMobileMenuOpen;
+            store.setState({ isMobileMenuOpen: isOpen });
+        });
+
+        mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                store.setState({ isMobileMenuOpen: false });
+            });
+        });
+
+        store.subscribe((state) => {
+            if (state.isMobileMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+            }
+        });
     }
-  });
 
-  // 3. Event Listeners for State Mutators
-  filterButtons.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const selectedCategory = e.target.dataset.filter;
-      store.setState({ activeFilter: selectedCategory });
-    });
-  });
+    // 4. Contact Form Handler
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Sending...';
 
-  if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      store.setState({ formSubmitting: true });
-
-      // Simulate API submission delay (or hook up EmailJS / Formspree)
-      setTimeout(() => {
-        store.setState({ formSubmitting: false, formSuccess: true });
-        contactForm.reset();
-      }, 1000);
-    });
-  }
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Send Message';
+                alert('Message Sent Successfully!');
+                contactForm.reset();
+            }, 1000);
+        });
+    }
 });
