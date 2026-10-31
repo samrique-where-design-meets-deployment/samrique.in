@@ -1,643 +1,1141 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Samrique — Flutter Development & Digital Solutions</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: {
-                            950: '#070B14',
-                            900: '#0F172A',
-                            800: '#1E293B',
-                            700: '#334155'
-                        },
-                        accent: {
-                            DEFAULT: '#FF6B6B',
-                            light: '#FF8E8E',
-                            dark: '#E05252'
-                        },
-                        coral: {
-                            DEFAULT: '#F97316',
-                            light: '#FB923C'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              dark: {
+                950: "#070B14",
+                900: "#0F172A",
+                800: "#1E293B",
+                700: "#334155",
+              },
+              accent: {
+                DEFAULT: "#FF6B6B",
+                light: "#FF8E8E",
+                dark: "#E05252",
+              },
+              coral: {
+                DEFAULT: "#F97316",
+                light: "#FB923C",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
     </script>
     <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0F172A;
-            color: #F8FAFC;
-        }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .glass-nav {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 20%, rgba(249, 115, 22, 0.15) 0%, rgba(255, 107, 107, 0.08) 35%, transparent 70%);
-        }
-        .glow-accent {
-            box-shadow: 0 0 35px -5px rgba(249, 115, 22, 0.3);
-        }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0F172A;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
-        }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0f172a;
+        color: #f8fafc;
+      }
+      .glass-card {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .glass-nav {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .hero-gradient {
+        background: radial-gradient(
+          circle at 50% 20%,
+          rgba(249, 115, 22, 0.15) 0%,
+          rgba(255, 107, 107, 0.08) 35%,
+          transparent 70%
+        );
+      }
+      .glow-accent {
+        box-shadow: 0 0 35px -5px rgba(249, 115, 22, 0.3);
+      }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0f172a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #334155;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #475569;
+      }
     </style>
-</head>
-<body class="bg-dark-900 text-slate-100 antialiased selection:bg-coral selection:text-white">
-
+  </head>
+  <body
+    class="bg-dark-900 text-slate-100 antialiased selection:bg-coral selection:text-white"
+  >
     <!-- Navigation Bar -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-coral to-accent flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-coral/20 group-hover:scale-105 transition-transform">
-                    S
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
-                        Samrique <span class="w-2 h-2 rounded-full bg-coral inline-block animate-pulse"></span>
-                    </span>
-                    <span class="text-xs text-slate-400 font-medium">Digital Solutions</span>
-                </div>
-            </a>
+    <header
+      class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"
+      >
+        <!-- Brand Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div
+            class="w-10 h-10 rounded-xl bg-gradient-to-tr from-coral to-accent flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-coral/20 group-hover:scale-105 transition-transform"
+          >
+            S
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5"
+            >
+              Samrique
+              <span
+                class="w-2 h-2 rounded-full bg-coral inline-block animate-pulse"
+              ></span>
+            </span>
+            <span class="text-xs text-slate-400 font-medium"
+              >Digital Solutions</span
+            >
+          </div>
+        </a>
 
-            <!-- Desktop Navigation Links -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-                <a href="#services" class="hover:text-coral transition-colors">Services</a>
-                <a href="#projects" class="hover:text-coral transition-colors">Projects</a>
-                <a href="#about" class="hover:text-coral transition-colors">About</a>
-                <a href="#contact" class="hover:text-coral transition-colors">Contact</a>
-            </nav>
+        <!-- Desktop Navigation Links -->
+        <nav
+          class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300"
+        >
+          <a href="#services" class="hover:text-coral transition-colors"
+            >Services</a
+          >
+          <a href="#projects" class="hover:text-coral transition-colors"
+            >Projects</a
+          >
+          <a href="#about" class="hover:text-coral transition-colors">About</a>
+          <a href="#contact" class="hover:text-coral transition-colors"
+            >Contact</a
+          >
+        </nav>
 
-            <!-- Action Button -->
-            <div class="hidden sm:flex items-center gap-4">
-                <a href="#contact" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-semibold text-sm shadow-lg shadow-coral/25 hover:shadow-coral/40 hover:scale-[1.02] active:scale-[0.98] transition-all">
-                    Start a Project
-                </a>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg focus:outline-none">
-                <i class="fa-solid fa-bars text-xl"></i>
-            </button>
+        <!-- Action Button -->
+        <div class="hidden sm:flex items-center gap-4">
+          <a
+            href="#contact"
+            class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-semibold text-sm shadow-lg shadow-coral/25 hover:shadow-coral/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+          >
+            Start a Project
+          </a>
         </div>
 
-        <!-- Mobile Menu Drawer -->
-        <div id="mobile-menu" class="hidden md:hidden glass-card border-t border-slate-800 px-4 pt-4 pb-6 space-y-3">
-            <a href="#services" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors">Services</a>
-            <a href="#projects" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors">Projects</a>
-            <a href="#about" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors">About</a>
-            <a href="#contact" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors">Contact</a>
-            <div class="pt-2">
-                <a href="#contact" class="block w-full text-center px-5 py-3 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-semibold text-sm shadow-lg shadow-coral/25">
-                    Start a Project
-                </a>
-            </div>
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg focus:outline-none"
+        >
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Drawer -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden glass-card border-t border-slate-800 px-4 pt-4 pb-6 space-y-3"
+      >
+        <a
+          href="#services"
+          class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors"
+          >Services</a
+        >
+        <a
+          href="#projects"
+          class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors"
+          >Projects</a
+        >
+        <a
+          href="#about"
+          class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors"
+          >About</a
+        >
+        <a
+          href="#contact"
+          class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors"
+          >Contact</a
+        >
+        <div class="pt-2">
+          <a
+            href="#contact"
+            class="block w-full text-center px-5 py-3 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-semibold text-sm shadow-lg shadow-coral/25"
+          >
+            Start a Project
+          </a>
         </div>
+      </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 hero-gradient overflow-hidden">
-        <!-- Background Glow Orbs -->
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-coral/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-10 right-10 w-80 h-80 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+    <section
+      class="relative min-h-screen flex items-center justify-center pt-28 pb-20 hero-gradient overflow-hidden"
+    >
+      <!-- Background Glow Orbs -->
+      <div
+        class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-coral/10 rounded-full blur-3xl pointer-events-none"
+      ></div>
+      <div
+        class="absolute bottom-10 right-10 w-80 h-80 bg-accent/10 rounded-full blur-3xl pointer-events-none"
+      ></div>
 
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-coral/30 text-coral text-xs font-semibold uppercase tracking-wider mb-8 animate-bounce duration-1000">
-                <i class="fa-solid fa-bolt text-accent"></i> Flutter Development & Digital Solutions
-            </div>
-
-            <!-- Main Heading -->
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-                Crafting High-Performance <span class="bg-gradient-to-r from-coral via-accent to-orange-400 bg-clip-text text-transparent">Digital Products</span>
-            </h1>
-
-            <!-- Value Proposition -->
-            <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
-                Crafting high-performance cross-platform mobile apps, seamless payment integrations, and scalable digital products engineered for growth.
-            </p>
-
-            <!-- Action Buttons -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-                <a href="#projects" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-bold text-base shadow-xl shadow-coral/30 hover:shadow-coral/50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
-                    <span>View Projects</span>
-                    <i class="fa-solid fa-arrow-down"></i>
-                </a>
-                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-white font-bold text-base border border-slate-700 hover:border-coral/50 hover:bg-dark-800 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
-                    <span>Start a Project</span>
-                    <i class="fa-solid fa-paper-plane text-coral"></i>
-                </a>
-            </div>
-
-            <!-- Stats / Trust Indicators -->
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto mt-20 pt-10 border-t border-slate-800/80">
-                <div class="text-center">
-                    <div class="text-3xl font-extrabold text-white mb-1">40%</div>
-                    <div class="text-xs text-slate-400 font-medium">Cost Reduction in Cross-Platform Builds</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-extrabold text-white mb-1">99.9%</div>
-                    <div class="text-xs text-slate-400 font-medium">App Uptime & Smooth Performance</div>
-                </div>
-                <div class="text-center col-span-2 md:col-span-1">
-                    <div class="text-3xl font-extrabold text-white mb-1">100%</div>
-                    <div class="text-xs text-slate-400 font-medium">UPI & Secure Gateway Integration</div>
-                </div>
-            </div>
+      <div
+        class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
+      >
+        <!-- Badge -->
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-coral/30 text-coral text-xs font-semibold uppercase tracking-wider mb-8 animate-bounce duration-1000"
+        >
+          <i class="fa-solid fa-bolt text-accent"></i> Flutter Development &
+          Digital Solutions
         </div>
+
+        <!-- Main Heading -->
+        <h1
+          class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight"
+        >
+          Crafting High-Performance
+          <span
+            class="bg-gradient-to-r from-coral via-accent to-orange-400 bg-clip-text text-transparent"
+            >Digital Products</span
+          >
+        </h1>
+
+        <!-- Value Proposition -->
+        <p
+          class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal"
+        >
+          Crafting high-performance cross-platform mobile apps, seamless payment
+          integrations, and scalable digital products engineered for growth.
+        </p>
+
+        <!-- Action Buttons -->
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+        >
+          <a
+            href="#projects"
+            class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-bold text-base shadow-xl shadow-coral/30 hover:shadow-coral/50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3"
+          >
+            <span>View Projects</span>
+            <i class="fa-solid fa-arrow-down"></i>
+          </a>
+          <a
+            href="#contact"
+            class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-white font-bold text-base border border-slate-700 hover:border-coral/50 hover:bg-dark-800 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3"
+          >
+            <span>Start a Project</span>
+            <i class="fa-solid fa-paper-plane text-coral"></i>
+          </a>
+        </div>
+
+        <!-- Stats / Trust Indicators -->
+        <div
+          class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto mt-20 pt-10 border-t border-slate-800/80"
+        >
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-white mb-1">40%</div>
+            <div class="text-xs text-slate-400 font-medium">
+              Cost Reduction in Cross-Platform Builds
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-extrabold text-white mb-1">99.9%</div>
+            <div class="text-xs text-slate-400 font-medium">
+              App Uptime & Smooth Performance
+            </div>
+          </div>
+          <div class="text-center col-span-2 md:col-span-1">
+            <div class="text-3xl font-extrabold text-white mb-1">100%</div>
+            <div class="text-xs text-slate-400 font-medium">
+              UPI & Secure Gateway Integration
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="py-24 bg-dark-950 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-coral text-sm font-semibold tracking-wider uppercase mb-3 block">What We Do</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
-                    Engineering Excellence Across All Platforms
-                </h2>
-                <p class="text-slate-400 text-base sm:text-lg">
-                    Comprehensive digital solutions tailored to elevate your business, streamline user experiences, and accelerate time-to-market.
-                </p>
-            </div>
-
-            <!-- Services Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Service 1 -->
-                <div class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1">
-                    <div class="w-14 h-14 rounded-xl bg-coral/10 border border-coral/20 flex items-center justify-center text-coral text-2xl mb-6 group-hover:bg-coral group-hover:text-white transition-colors">
-                        <i class="fa-solid fa-mobile-screen-button"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-coral transition-colors">Flutter App Development</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        High-performance cross-platform mobile applications for Android and iOS engineered for speed, responsiveness, and fluid user experience.
-                    </p>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1">
-                    <div class="w-14 h-14 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-2xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
-                        <i class="fa-solid fa-wallet"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">UPI & Payment Integration</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Seamless, secure payment gateway and wallet payout implementations for frictionless user transactions and lightning-fast checkout flows.
-                    </p>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1">
-                    <div class="w-14 h-14 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 text-2xl mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors">E-Commerce & Marketplace Solutions</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Feature-rich digital storefronts and multi-vendor platforms with real-time tracking, secure checkout, and dynamic inventory management.
-                    </p>
-                </div>
-
-                <!-- Service 4 -->
-                <div class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1">
-                    <div class="w-14 h-14 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:bg-purple-500 group-hover:text-white transition-colors">
-                        <i class="fa-solid fa-pen-nib"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">UI/UX & Brand Design</h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Custom digital brand identities, design systems, and intuitive user interfaces crafted in Figma with conversion-first design principles.
-                    </p>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span
+            class="text-coral text-sm font-semibold tracking-wider uppercase mb-3 block"
+            >What We Do</span
+          >
+          <h2
+            class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4"
+          >
+            Engineering Excellence Across All Platforms
+          </h2>
+          <p class="text-slate-400 text-base sm:text-lg">
+            Comprehensive digital solutions tailored to elevate your business,
+            streamline user experiences, and accelerate time-to-market.
+          </p>
         </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Service 1 -->
+          <div
+            class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1"
+          >
+            <div
+              class="w-14 h-14 rounded-xl bg-coral/10 border border-coral/20 flex items-center justify-center text-coral text-2xl mb-6 group-hover:bg-coral group-hover:text-white transition-colors"
+            >
+              <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+            <h3
+              class="text-xl font-bold text-white mb-3 group-hover:text-coral transition-colors"
+            >
+              Flutter App Development
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              High-performance cross-platform mobile applications for Android
+              and iOS engineered for speed, responsiveness, and fluid user
+              experience.
+            </p>
+          </div>
+
+          <!-- Service 2 -->
+          <div
+            class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1"
+          >
+            <div
+              class="w-14 h-14 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-2xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors"
+            >
+              <i class="fa-solid fa-wallet"></i>
+            </div>
+            <h3
+              class="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors"
+            >
+              UPI & Payment Integration
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Seamless, secure payment gateway and wallet payout implementations
+              for frictionless user transactions and lightning-fast checkout
+              flows.
+            </p>
+          </div>
+
+          <!-- Service 3 -->
+          <div
+            class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1"
+          >
+            <div
+              class="w-14 h-14 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 text-2xl mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <h3
+              class="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors"
+            >
+              E-Commerce & Marketplace Solutions
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Feature-rich digital storefronts and multi-vendor platforms with
+              real-time tracking, secure checkout, and dynamic inventory
+              management.
+            </p>
+          </div>
+
+          <!-- Service 4 -->
+          <div
+            class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1"
+          >
+            <div
+              class="w-14 h-14 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:bg-purple-500 group-hover:text-white transition-colors"
+            >
+              <i class="fa-solid fa-pen-nib"></i>
+            </div>
+            <h3
+              class="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors"
+            >
+              UI/UX & Brand Design
+            </h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Custom digital brand identities, design systems, and intuitive
+              user interfaces crafted in Figma with conversion-first design
+              principles.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Selected Projects Section -->
     <section id="projects" class="py-24 bg-dark-900 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-coral text-sm font-semibold tracking-wider uppercase mb-3 block">Portfolio</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
-                    Selected Works & Proven Results
-                </h2>
-                <p class="text-slate-400 text-base sm:text-lg">
-                    Real-world products engineered to solve complex challenges, optimize workflows, and deliver measurable business growth.
-                </p>
-            </div>
-
-            <!-- Projects Grid -->
-            <div class="space-y-16">
-                <!-- Project 1: QuickCart -->
-                <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-coral/40 transition-all duration-300">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                        <div class="lg:col-span-6 space-y-6">
-                            <div class="flex items-center gap-3">
-                                <span class="px-3 py-1 rounded-full bg-coral/10 text-coral text-xs font-bold border border-coral/20">Featured App</span>
-                                <span class="text-xs text-slate-400"><i class="fa-solid fa-code text-accent mr-1"></i> Flutter / Node.js / UPI</span>
-                            </div>
-                            <h3 class="text-2xl sm:text-3xl font-bold text-white">QuickCart Retail Ecosystem</h3>
-                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                                A high-performance cross-platform retail app featuring integrated UPI payments, real-time Google Maps delivery tracking, and lightning-fast checkout flows.
-                            </p>
-                            <div class="bg-dark-950/60 rounded-xl p-4 border border-slate-800 space-y-2">
-                                <div class="text-xs font-semibold text-coral uppercase tracking-wider">Impact & Results</div>
-                                <p class="text-xs sm:text-sm text-slate-300">
-                                    <strong class="text-white">Problem:</strong> High cart abandonment and slow payment processing during peak hours.<br>
-                                    <strong class="text-white">Result:</strong> Cut development costs by 40% using Flutter, boosted checkout speed by 3x, and drove a 99.4% successful payment rate.
-                                </p>
-                            </div>
-                            <div class="flex flex-wrap gap-2 pt-2">
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">Flutter</span>
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">Dart</span>
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">UPI Gateway</span>
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">Google Maps SDK</span>
-                            </div>
-                        </div>
-                        <div class="lg:col-span-6">
-                            <div class="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl group">
-                                <img src="https://placehold.co/600x400/1E293B/FF6B6B?text=QuickCart+App+Preview" alt="QuickCart App Preview" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-60"></div>
-                                <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs font-semibold text-white">
-                                    <span class="px-3 py-1.5 rounded-lg bg-dark-900/80 backdrop-blur border border-slate-700">Cross-Platform Mobile App</span>
-                                    <a href="#contact" class="px-3 py-1.5 rounded-lg bg-coral text-white hover:bg-coral-light transition-colors">Inquire Similar <i class="fa-solid fa-arrow-right ml-1"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2: Samrique Money Manager -->
-                <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-coral/40 transition-all duration-300">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                        <div class="lg:col-span-6 order-2 lg:order-1">
-                            <div class="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl group">
-                                <img src="https://placehold.co/600x400/1E293B/38BDF8?text=Samrique+Money+Manager" alt="Samrique Money Manager Dashboard" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-60"></div>
-                                <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs font-semibold text-white">
-                                    <span class="px-3 py-1.5 rounded-lg bg-dark-900/80 backdrop-blur border border-slate-700">Personal Finance App</span>
-                                    <a href="#contact" class="px-3 py-1.5 rounded-lg bg-accent text-white hover:bg-accent-light transition-colors">Inquire Similar <i class="fa-solid fa-arrow-right ml-1"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="lg:col-span-6 order-1 lg:order-2 space-y-6">
-                            <div class="flex items-center gap-3">
-                                <span class="px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold border border-accent/20">Finance Solution</span>
-                                <span class="text-xs text-slate-400"><i class="fa-solid fa-code text-coral mr-1"></i> Flutter / Firebase / Analytics</span>
-                            </div>
-                            <h3 class="text-2xl sm:text-3xl font-bold text-white">Samrique Money Manager</h3>
-                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                                A modern personal finance experience built for cash-flow clarity, smarter budgeting, and real-time spending insights across everyday financial habits.
-                            </p>
-                            <div class="bg-dark-950/60 rounded-xl p-4 border border-slate-800 space-y-2">
-                                <div class="text-xs font-semibold text-accent uppercase tracking-wider">Impact & Results</div>
-                                <p class="text-xs sm:text-sm text-slate-300">
-                                    <strong class="text-white">Problem:</strong> Scattered expenses and poor visibility into recurring spending patterns.<br>
-                                    <strong class="text-white">Result:</strong> Created a unified budget dashboard that improves financial awareness, streamlines category tracking, and enables faster decision-making.
-                                </p>
-                            </div>
-                            <div class="flex flex-wrap gap-2 pt-2">
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">Flutter</span>
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">Firebase</span>
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">Analytics</span>
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">Smart Budgeting</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3: Zipi Bike Taxi App -->
-                <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-coral/40 transition-all duration-300">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                        <div class="lg:col-span-6 space-y-6">
-                            <div class="flex items-center gap-3">
-                                <span class="px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs font-bold border border-orange-500/20">On-Demand Mobility</span>
-                                <span class="text-xs text-slate-400"><i class="fa-solid fa-code text-accent mr-1"></i> Flutter / WebSockets / Firebase</span>
-                            </div>
-                            <h3 class="text-2xl sm:text-3xl font-bold text-white">Zipi Bike Taxi App</h3>
-                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                                Real-time ride-booking mobile application featuring live GPS tracking, dynamic fare calculation, driver-rider role management, and instant digital payments.
-                            </p>
-                            <div class="bg-dark-950/60 rounded-xl p-4 border border-slate-800 space-y-2">
-                                <div class="text-xs font-semibold text-orange-400 uppercase tracking-wider">Impact & Results</div>
-                                <p class="text-xs sm:text-sm text-slate-300">
-                                    <strong class="text-white">Problem:</strong> High latency in driver-rider matching and erratic GPS location updates in dense urban traffic.<br>
-                                    <strong class="text-white">Result:</strong> Achieved sub-second ride matching via WebSockets, delivered smooth 60fps map rendering, and onboarded 10k+ active riders smoothly.
-                                </p>
-                            </div>
-                            <div class="flex flex-wrap gap-2 pt-2">
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">Flutter</span>
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">WebSockets</span>
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">Geolocation</span>
-                                <span class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700">Node.js</span>
-                            </div>
-                        </div>
-                        <div class="lg:col-span-6">
-                            <div class="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl group">
-                                <img src="https://placehold.co/600x400/1E293B/F97316?text=Zipi+Bike+Taxi+App" alt="Zipi Bike Taxi App" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-60"></div>
-                                <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs font-semibold text-white">
-                                    <span class="px-3 py-1.5 rounded-lg bg-dark-900/80 backdrop-blur border border-slate-700">On-Demand Ride App</span>
-                                    <a href="#contact" class="px-3 py-1.5 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition-colors">Inquire Similar <i class="fa-solid fa-arrow-right ml-1"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span
+            class="text-coral text-sm font-semibold tracking-wider uppercase mb-3 block"
+            >Portfolio</span
+          >
+          <h2
+            class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4"
+          >
+            Selected Works & Proven Results
+          </h2>
+          <p class="text-slate-400 text-base sm:text-lg">
+            Real-world products engineered to solve complex challenges, optimize
+            workflows, and deliver measurable business growth.
+          </p>
         </div>
+
+        <!-- Projects Grid -->
+        <div class="space-y-16">
+          <!-- Project 1: QuickCart -->
+          <div
+            class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-coral/40 transition-all duration-300"
+          >
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div class="lg:col-span-6 space-y-6">
+                <div class="flex items-center gap-3">
+                  <span
+                    class="px-3 py-1 rounded-full bg-coral/10 text-coral text-xs font-bold border border-coral/20"
+                    >Featured App</span
+                  >
+                  <span class="text-xs text-slate-400"
+                    ><i class="fa-solid fa-code text-accent mr-1"></i> Flutter /
+                    Node.js / UPI</span
+                  >
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-bold text-white">
+                  QuickCart Retail Ecosystem
+                </h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  A high-performance cross-platform retail app featuring
+                  integrated UPI payments, real-time Google Maps delivery
+                  tracking, and lightning-fast checkout flows.
+                </p>
+                <div
+                  class="bg-dark-950/60 rounded-xl p-4 border border-slate-800 space-y-2"
+                >
+                  <div
+                    class="text-xs font-semibold text-coral uppercase tracking-wider"
+                  >
+                    Impact & Results
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-300">
+                    <strong class="text-white">Problem:</strong> High cart
+                    abandonment and slow payment processing during peak
+                    hours.<br />
+                    <strong class="text-white">Result:</strong> Cut development
+                    costs by 40% using Flutter, boosted checkout speed by 3x,
+                    and drove a 99.4% successful payment rate.
+                  </p>
+                </div>
+                <div class="flex flex-wrap gap-2 pt-2">
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >Flutter</span
+                  >
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >Dart</span
+                  >
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >UPI Gateway</span
+                  >
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >Google Maps SDK</span
+                  >
+                </div>
+              </div>
+              <div class="lg:col-span-6">
+                <div
+                  class="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl group"
+                >
+                  <img
+                    src="https://placehold.co/600x400/1E293B/FF6B6B?text=QuickCart+App+Preview"
+                    alt="QuickCart App Preview"
+                    class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-60"
+                  ></div>
+                  <div
+                    class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs font-semibold text-white"
+                  >
+                    <span
+                      class="px-3 py-1.5 rounded-lg bg-dark-900/80 backdrop-blur border border-slate-700"
+                      >Cross-Platform Mobile App</span
+                    >
+                    <a
+                      href="#contact"
+                      class="px-3 py-1.5 rounded-lg bg-coral text-white hover:bg-coral-light transition-colors"
+                      >Inquire Similar
+                      <i class="fa-solid fa-arrow-right ml-1"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: Samrique Money Manager -->
+          <div
+            class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-coral/40 transition-all duration-300"
+          >
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div class="lg:col-span-6 order-2 lg:order-1">
+                <div
+                  class="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl group"
+                >
+                  <img
+                    src="https://placehold.co/600x400/1E293B/38BDF8?text=Samrique+Money+Manager"
+                    alt="Samrique Money Manager Dashboard"
+                    class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-60"
+                  ></div>
+                  <div
+                    class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs font-semibold text-white"
+                  >
+                    <span
+                      class="px-3 py-1.5 rounded-lg bg-dark-900/80 backdrop-blur border border-slate-700"
+                      >Personal Finance App</span
+                    >
+                    <a
+                      href="#contact"
+                      class="px-3 py-1.5 rounded-lg bg-accent text-white hover:bg-accent-light transition-colors"
+                      >Inquire Similar
+                      <i class="fa-solid fa-arrow-right ml-1"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="lg:col-span-6 order-1 lg:order-2 space-y-6">
+                <div class="flex items-center gap-3">
+                  <span
+                    class="px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold border border-accent/20"
+                    >Finance Solution</span
+                  >
+                  <span class="text-xs text-slate-400"
+                    ><i class="fa-solid fa-code text-coral mr-1"></i> Flutter /
+                    Firebase / Analytics</span
+                  >
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-bold text-white">
+                  Samrique Money Manager
+                </h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  A modern personal finance experience built for cash-flow
+                  clarity, smarter budgeting, and real-time spending insights
+                  across everyday financial habits.
+                </p>
+                <div
+                  class="bg-dark-950/60 rounded-xl p-4 border border-slate-800 space-y-2"
+                >
+                  <div
+                    class="text-xs font-semibold text-accent uppercase tracking-wider"
+                  >
+                    Impact & Results
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-300">
+                    <strong class="text-white">Problem:</strong> Scattered
+                    expenses and poor visibility into recurring spending
+                    patterns.<br />
+                    <strong class="text-white">Result:</strong> Created a
+                    unified budget dashboard that improves financial awareness,
+                    streamlines category tracking, and enables faster
+                    decision-making.
+                  </p>
+                </div>
+                <div class="flex flex-wrap gap-2 pt-2">
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >Flutter</span
+                  >
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >Firebase</span
+                  >
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >Analytics</span
+                  >
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >Smart Budgeting</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: Zipi Bike Taxi App -->
+          <div
+            class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-coral/40 transition-all duration-300"
+          >
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div class="lg:col-span-6 space-y-6">
+                <div class="flex items-center gap-3">
+                  <span
+                    class="px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs font-bold border border-orange-500/20"
+                    >On-Demand Mobility</span
+                  >
+                  <span class="text-xs text-slate-400"
+                    ><i class="fa-solid fa-code text-accent mr-1"></i> Flutter /
+                    WebSockets / Firebase</span
+                  >
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-bold text-white">
+                  Zipi Bike Taxi App
+                </h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  Real-time ride-booking mobile application featuring live GPS
+                  tracking, dynamic fare calculation, driver-rider role
+                  management, and instant digital payments.
+                </p>
+                <div
+                  class="bg-dark-950/60 rounded-xl p-4 border border-slate-800 space-y-2"
+                >
+                  <div
+                    class="text-xs font-semibold text-orange-400 uppercase tracking-wider"
+                  >
+                    Impact & Results
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-300">
+                    <strong class="text-white">Problem:</strong> High latency in
+                    driver-rider matching and erratic GPS location updates in
+                    dense urban traffic.<br />
+                    <strong class="text-white">Result:</strong> Achieved
+                    sub-second ride matching via WebSockets, delivered smooth
+                    60fps map rendering, and onboarded 10k+ active riders
+                    smoothly.
+                  </p>
+                </div>
+                <div class="flex flex-wrap gap-2 pt-2">
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >Flutter</span
+                  >
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >WebSockets</span
+                  >
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >Geolocation</span
+                  >
+                  <span
+                    class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                    >Node.js</span
+                  >
+                </div>
+              </div>
+              <div class="lg:col-span-6">
+                <div
+                  class="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl group"
+                >
+                  <img
+                    src="https://placehold.co/600x400/1E293B/F97316?text=Zipi+Bike+Taxi+App"
+                    alt="Zipi Bike Taxi App"
+                    class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-60"
+                  ></div>
+                  <div
+                    class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs font-semibold text-white"
+                  >
+                    <span
+                      class="px-3 py-1.5 rounded-lg bg-dark-900/80 backdrop-blur border border-slate-700"
+                      >On-Demand Ride App</span
+                    >
+                    <a
+                      href="#contact"
+                      class="px-3 py-1.5 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition-colors"
+                      >Inquire Similar
+                      <i class="fa-solid fa-arrow-right ml-1"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- About / Brand Story Section -->
     <section id="about" class="py-24 bg-dark-950 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-5 space-y-6">
-                    <span class="text-coral text-sm font-semibold tracking-wider uppercase block">Brand Story</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                        Engineering Reliability & Passion for Mobile Excellence
-                    </h2>
-                    <p class="text-slate-300 text-base leading-relaxed">
-                        At <strong class="text-white">Samrique</strong>, we believe that great software bridges the gap between complex business challenges and effortless user experiences. Founded by mobile engineering specialists, we specialize in building robust, production-grade applications that scale seamlessly.
-                    </p>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        With deep expertise in <strong class="text-white">Flutter, Dart, Node.js, Clean Architecture, and secure payment APIs</strong>, we craft solutions that not only look breathtaking but perform flawlessly under heavy traffic.
-                    </p>
-                    <div class="flex items-center gap-6 pt-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center font-bold text-lg border border-coral/20">
-                                <i class="fa-solid fa-check"></i>
-                            </div>
-                            <span class="text-sm font-semibold text-white">Clean Architecture</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold text-lg border border-accent/20">
-                                <i class="fa-solid fa-shield-halved"></i>
-                            </div>
-                            <span class="text-sm font-semibold text-white">Enterprise Security</span>
-                        </div>
-                    </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-5 space-y-6">
+            <span
+              class="text-coral text-sm font-semibold tracking-wider uppercase block"
+              >Brand Story</span
+            >
+            <h2
+              class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight"
+            >
+              Engineering Reliability & Passion for Mobile Excellence
+            </h2>
+            <p class="text-slate-300 text-base leading-relaxed">
+              At <strong class="text-white">Samrique</strong>, we believe that
+              great software bridges the gap between complex business challenges
+              and effortless user experiences. Founded by mobile engineering
+              specialists, we specialize in building robust, production-grade
+              applications that scale seamlessly.
+            </p>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              With deep expertise in
+              <strong class="text-white"
+                >Flutter, Dart, Node.js, Clean Architecture, and secure payment
+                APIs</strong
+              >, we craft solutions that not only look breathtaking but perform
+              flawlessly under heavy traffic.
+            </p>
+            <div class="flex items-center gap-6 pt-4">
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center font-bold text-lg border border-coral/20"
+                >
+                  <i class="fa-solid fa-check"></i>
                 </div>
-
-                <div class="lg:col-span-7">
-                    <div class="glass-card rounded-3xl p-8 sm:p-10 border border-slate-800 space-y-6 shadow-2xl">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-layer-group text-coral"></i> Core Technical Stack
-                        </h3>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                            <div class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors">
-                                <i class="fa-brands fa-flutter text-3xl text-sky-400 mb-2"></i>
-                                <div class="text-sm font-bold text-white">Flutter & Dart</div>
-                                <div class="text-xs text-slate-400">Cross-Platform Apps</div>
-                            </div>
-                            <div class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors">
-                                <i class="fa-brands fa-node-js text-3xl text-green-500 mb-2"></i>
-                                <div class="text-sm font-bold text-white">Node.js / APIs</div>
-                                <div class="text-xs text-slate-400">Scalable Backends</div>
-                            </div>
-                            <div class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors">
-                                <i class="fa-solid fa-database text-3xl text-accent mb-2"></i>
-                                <div class="text-sm font-bold text-white">Databases</div>
-                                <div class="text-xs text-slate-400">PostgreSQL / Firebase</div>
-                            </div>
-                            <div class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors">
-                                <i class="fa-solid fa-credit-card text-3xl text-orange-400 mb-2"></i>
-                                <div class="text-sm font-bold text-white">Payments</div>
-                                <div class="text-xs text-slate-400">UPI & Stripe Gateways</div>
-                            </div>
-                            <div class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors">
-                                <i class="fa-solid fa-map-location-dot text-3xl text-purple-400 mb-2"></i>
-                                <div class="text-sm font-bold text-white">Maps & GPS</div>
-                                <div class="text-xs text-slate-400">Real-Time Tracking</div>
-                            </div>
-                            <div class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors">
-                                <i class="fa-solid fa-cloud text-3xl text-blue-400 mb-2"></i>
-                                <div class="text-sm font-bold text-white">Cloud & DevOps</div>
-                                <div class="text-xs text-slate-400">CI/CD & Deployment</div>
-                            </div>
-                        </div>
-                    </div>
+                <span class="text-sm font-semibold text-white"
+                  >Clean Architecture</span
+                >
+              </div>
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-10 h-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold text-lg border border-accent/20"
+                >
+                  <i class="fa-solid fa-shield-halved"></i>
                 </div>
+                <span class="text-sm font-semibold text-white"
+                  >Enterprise Security</span
+                >
+              </div>
             </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <div
+              class="glass-card rounded-3xl p-8 sm:p-10 border border-slate-800 space-y-6 shadow-2xl"
+            >
+              <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-layer-group text-coral"></i> Core
+                Technical Stack
+              </h3>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div
+                  class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+                >
+                  <i
+                    class="fa-brands fa-flutter text-3xl text-sky-400 mb-2"
+                  ></i>
+                  <div class="text-sm font-bold text-white">Flutter & Dart</div>
+                  <div class="text-xs text-slate-400">Cross-Platform Apps</div>
+                </div>
+                <div
+                  class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+                >
+                  <i
+                    class="fa-brands fa-node-js text-3xl text-green-500 mb-2"
+                  ></i>
+                  <div class="text-sm font-bold text-white">Node.js / APIs</div>
+                  <div class="text-xs text-slate-400">Scalable Backends</div>
+                </div>
+                <div
+                  class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+                >
+                  <i class="fa-solid fa-database text-3xl text-accent mb-2"></i>
+                  <div class="text-sm font-bold text-white">Databases</div>
+                  <div class="text-xs text-slate-400">
+                    PostgreSQL / Firebase
+                  </div>
+                </div>
+                <div
+                  class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+                >
+                  <i
+                    class="fa-solid fa-credit-card text-3xl text-orange-400 mb-2"
+                  ></i>
+                  <div class="text-sm font-bold text-white">Payments</div>
+                  <div class="text-xs text-slate-400">
+                    UPI & Stripe Gateways
+                  </div>
+                </div>
+                <div
+                  class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+                >
+                  <i
+                    class="fa-solid fa-map-location-dot text-3xl text-purple-400 mb-2"
+                  ></i>
+                  <div class="text-sm font-bold text-white">Maps & GPS</div>
+                  <div class="text-xs text-slate-400">Real-Time Tracking</div>
+                </div>
+                <div
+                  class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+                >
+                  <i class="fa-solid fa-cloud text-3xl text-blue-400 mb-2"></i>
+                  <div class="text-sm font-bold text-white">Cloud & DevOps</div>
+                  <div class="text-xs text-slate-400">CI/CD & Deployment</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Contact / Call to Action Section -->
     <section id="contact" class="py-24 bg-dark-900 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                <!-- Left Column: Info & Direct Channels -->
-                <div class="lg:col-span-5 space-y-8">
-                    <div>
-                        <span class="text-coral text-sm font-semibold tracking-wider uppercase mb-3 block">Get In Touch</span>
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
-                            Let's Build Something Extraordinary Together
-                        </h2>
-                        <p class="text-slate-300 text-base leading-relaxed">
-                            Have a project in mind or need expert consultation for your Flutter app or digital product? Reach out directly or drop us a message.
-                        </p>
-                    </div>
-
-                    <!-- Direct Channels -->
-                    <div class="space-y-4">
-                        <a href="mailto:samrique.in@gmail.com" class="glass-card p-4 rounded-2xl border border-slate-800 hover:border-coral/50 flex items-center gap-4 transition-all group">
-                            <div class="w-12 h-12 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-xl group-hover:bg-coral group-hover:text-white transition-colors">
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs text-slate-400 font-medium">Direct Email</div>
-                                <div class="text-sm font-bold text-white group-hover:text-coral transition-colors">samrique.in@gmail.com</div>
-                            </div>
-                        </a>
-
-                        <a href="https://wa.me/919597780343" target="_blank" rel="noopener noreferrer" class="glass-card p-4 rounded-2xl border border-slate-800 hover:border-coral/50 flex items-center gap-4 transition-all group">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                                <i class="fa-brands fa-whatsapp"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs text-slate-400 font-medium">WhatsApp Chat</div>
-                                <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">+91 95977 80343</div>
-                            </div>
-                        </a>
-
-                        <a href="tel:+919597780343" class="glass-card p-4 rounded-2xl border border-slate-800 hover:border-coral/50 flex items-center gap-4 transition-all group">
-                            <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl group-hover:bg-sky-500 group-hover:text-white transition-colors">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <div>
-                                <div class="text-xs text-slate-400 font-medium">Call Us</div>
-                                <div class="text-sm font-bold text-white group-hover:text-sky-400 transition-colors">+91 95977 80343</div>
-                            </div>
-                        </a>
-
-                        <div class="flex items-center gap-4 pt-2">
-                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl glass-card border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-coral/50 hover:bg-dark-800 transition-all text-xl">
-                                <i class="fa-brands fa-github"></i>
-                            </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl glass-card border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-coral/50 hover:bg-dark-800 transition-all text-xl">
-                                <i class="fa-brands fa-linkedin-in"></i>
-                            </a>
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl glass-card border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-coral/50 hover:bg-dark-800 transition-all text-xl">
-                                <i class="fa-brands fa-twitter"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column: Interactive Contact Form -->
-                <div class="lg:col-span-7">
-                    <div class="glass-card rounded-3xl p-8 sm:p-10 border border-slate-800 shadow-2xl relative">
-                        <form id="contact-form" class="space-y-6" onsubmit="handleFormSubmit(event)">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <div class="space-y-2">
-                                    <label for="name" class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Your Name</label>
-                                    <input type="text" id="name" required class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm" placeholder="John Doe">
-                                </div>
-                                <div class="space-y-2">
-                                    <label for="email" class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Email Address</label>
-                                    <input type="email" id="email" required class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm" placeholder="john@example.com">
-                                </div>
-                                <div class="space-y-2">
-                                    <label for="phone" class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Phone Number (Optional)</label>
-                                    <input type="tel" id="phone" name="phone" autocomplete="tel" class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm" placeholder="+91 98765 43210">
-                                </div>
-                            </div>
-
-                            <div class="space-y-2">
-                                <label for="service-select" class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Service Required</label>
-                                <select id="service-select" class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white focus:outline-none focus:border-coral transition-colors text-sm">
-                                    <option value="flutter">Flutter App Development</option>
-                                    <option value="upi">UPI & Payment Integration</option>
-                                    <option value="ecommerce">E-Commerce & Marketplace Solutions</option>
-                                    <option value="uiux">UI/UX & Brand Design</option>
-                                    <option value="other">General Consultation</option>
-                                </select>
-                            </div>
-
-                            <div class="space-y-2">
-                                <label for="message" class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Project Details / Message</label>
-                                <textarea id="message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm resize-none" placeholder="Tell us about your project goals and timeline..."></textarea>
-                            </div>
-
-                            <button type="submit" id="submit-btn" class="w-full py-4 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-bold text-base shadow-lg shadow-coral/25 hover:shadow-coral/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2">
-                                <span>Send Message</span>
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </button>
-                        </form>
-
-                        <!-- Success Message Box (Hidden by default) -->
-                        <div id="success-box" class="hidden absolute inset-0 glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center bg-dark-900/95 z-20">
-                            <div class="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-3xl mb-4 animate-bounce">
-                                <i class="fa-solid fa-check"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Message Sent Successfully!</h3>
-                            <p class="text-slate-300 text-sm max-w-sm mb-6">
-                                Thank you for reaching out to Samrique. We have received your inquiry and will get back to you within 24 hours.
-                            </p>
-                            <button onclick="resetForm()" class="px-6 py-2.5 rounded-xl bg-coral text-white font-semibold text-sm hover:bg-coral-light transition-colors">
-                                Send Another Message
-                            </button>
-                        </div>
-                    </div>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <!-- Left Column: Info & Direct Channels -->
+          <div class="lg:col-span-5 space-y-8">
+            <div>
+              <span
+                class="text-coral text-sm font-semibold tracking-wider uppercase mb-3 block"
+                >Get In Touch</span
+              >
+              <h2
+                class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4"
+              >
+                Let's Build Something Extraordinary Together
+              </h2>
+              <p class="text-slate-300 text-base leading-relaxed">
+                Have a project in mind or need expert consultation for your
+                Flutter app or digital product? Reach out directly or drop us a
+                message.
+              </p>
             </div>
+
+            <!-- Direct Channels -->
+            <div class="space-y-4">
+              <a
+                href="mailto:samrique@gmail.com"
+                class="glass-card p-4 rounded-2xl border border-slate-800 hover:border-coral/50 flex items-center gap-4 transition-all group"
+              >
+                <div
+                  class="w-12 h-12 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-xl group-hover:bg-coral group-hover:text-white transition-colors"
+                >
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400 font-medium">
+                    Direct Email
+                  </div>
+                  <div
+                    class="text-sm font-bold text-white group-hover:text-coral transition-colors"
+                  >
+                    samrique.in@gmail.com
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="https://wa.me/919876543210"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="glass-card p-4 rounded-2xl border border-slate-800 hover:border-coral/50 flex items-center gap-4 transition-all group"
+              >
+                <div
+                  class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl group-hover:bg-emerald-500 group-hover:text-white transition-colors"
+                >
+                  <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400 font-medium">
+                    WhatsApp Chat
+                  </div>
+                  <div
+                    class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors"
+                  >
+                    +91 95977 80343
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="tel:+919876543210"
+                class="glass-card p-4 rounded-2xl border border-slate-800 hover:border-coral/50 flex items-center gap-4 transition-all group"
+              >
+                <div
+                  class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl group-hover:bg-sky-500 group-hover:text-white transition-colors"
+                >
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <div class="text-xs text-slate-400 font-medium">Call Us</div>
+                  <div
+                    class="text-sm font-bold text-white group-hover:text-sky-400 transition-colors"
+                  >
+                    +91 95977 80343
+                  </div>
+                </div>
+              </a>
+
+              <div class="flex items-center gap-4 pt-2">
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-12 h-12 rounded-xl glass-card border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-coral/50 hover:bg-dark-800 transition-all text-xl"
+                >
+                  <i class="fa-brands fa-github"></i>
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-12 h-12 rounded-xl glass-card border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-coral/50 hover:bg-dark-800 transition-all text-xl"
+                >
+                  <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-12 h-12 rounded-xl glass-card border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-coral/50 hover:bg-dark-800 transition-all text-xl"
+                >
+                  <i class="fa-brands fa-twitter"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Contact Form -->
+          <div class="lg:col-span-7">
+            <div
+              class="glass-card rounded-3xl p-8 sm:p-10 border border-slate-800 shadow-2xl relative"
+            >
+              <form
+                id="contact-form"
+                class="space-y-6"
+                onsubmit="handleFormSubmit(event)"
+              >
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <label
+                      for="name"
+                      class="text-xs font-semibold text-slate-300 uppercase tracking-wider"
+                      >Your Name</label
+                    >
+                    <input
+                      type="text"
+                      id="name"
+                      required
+                      class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div class="space-y-2">
+                    <label
+                      for="email"
+                      class="text-xs font-semibold text-slate-300 uppercase tracking-wider"
+                      >Email Address</label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      required
+                      class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                  <div class="space-y-2">
+                    <label
+                      for="phone"
+                      class="text-xs font-semibold text-slate-300 uppercase tracking-wider"
+                      >Phone Number (Optional)</label
+                    >
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      autocomplete="tel"
+                      class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm"
+                      placeholder="+91 98765 43210"
+                    />
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label
+                    for="service-select"
+                    class="text-xs font-semibold text-slate-300 uppercase tracking-wider"
+                    >Service Required</label
+                  >
+                  <select
+                    id="service-select"
+                    class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white focus:outline-none focus:border-coral transition-colors text-sm"
+                  >
+                    <option value="flutter">Flutter App Development</option>
+                    <option value="upi">UPI & Payment Integration</option>
+                    <option value="ecommerce">
+                      E-Commerce & Marketplace Solutions
+                    </option>
+                    <option value="uiux">UI/UX & Brand Design</option>
+                    <option value="other">General Consultation</option>
+                  </select>
+                </div>
+
+                <div class="space-y-2">
+                  <label
+                    for="message"
+                    class="text-xs font-semibold text-slate-300 uppercase tracking-wider"
+                    >Project Details / Message</label
+                  >
+                  <textarea
+                    id="message"
+                    rows="4"
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm resize-none"
+                    placeholder="Tell us about your project goals and timeline..."
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  id="submit-btn"
+                  class="w-full py-4 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-bold text-base shadow-lg shadow-coral/25 hover:shadow-coral/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+                >
+                  <span>Send Message</span>
+                  <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </form>
+
+              <!-- Success Message Box (Hidden by default) -->
+              <div
+                id="success-box"
+                class="hidden absolute inset-0 glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center bg-dark-900/95 z-20"
+              >
+                <div
+                  class="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-3xl mb-4 animate-bounce"
+                >
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">
+                  Message Sent Successfully!
+                </h3>
+                <p class="text-slate-300 text-sm max-w-sm mb-6">
+                  Thank you for reaching out to Samrique. We have received your
+                  inquiry and will get back to you within 24 hours.
+                </p>
+                <button
+                  onclick="resetForm()"
+                  class="px-6 py-2.5 rounded-xl bg-coral text-white font-semibold text-sm hover:bg-coral-light transition-colors"
+                >
+                  Send Another Message
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-dark-950 border-t border-slate-800 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-coral to-accent flex items-center justify-center text-white font-extrabold text-sm">
-                    S
-                </div>
-                <span class="text-base font-bold text-white">Samrique — Flutter Development & Digital Solutions</span>
-            </div>
-            <p class="text-xs text-slate-500">
-                &copy; <span id="current-year">2026</span> Samrique. All rights reserved. Crafted with precision & performance.
-            </p>
-            <div class="flex items-center gap-6 text-sm text-slate-400">
-                <a href="#services" class="hover:text-coral transition-colors">Services</a>
-                <a href="#projects" class="hover:text-coral transition-colors">Projects</a>
-                <a href="#contact" class="hover:text-coral transition-colors">Contact</a>
-            </div>
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="w-8 h-8 rounded-lg bg-gradient-to-tr from-coral to-accent flex items-center justify-center text-white font-extrabold text-sm"
+          >
+            S
+          </div>
+          <span class="text-base font-bold text-white"
+            >Samrique — Flutter Development & Digital Solutions</span
+          >
         </div>
+        <p class="text-xs text-slate-500">
+          &copy; <span id="current-year">2026</span> Samrique. All rights
+          reserved. Crafted with precision & performance.
+        </p>
+        <div class="flex items-center gap-6 text-sm text-slate-400">
+          <a href="#services" class="hover:text-coral transition-colors"
+            >Services</a
+          >
+          <a href="#projects" class="hover:text-coral transition-colors"
+            >Projects</a
+          >
+          <a href="#contact" class="hover:text-coral transition-colors"
+            >Contact</a
+          >
+        </div>
+      </div>
     </footer>
 
     <!-- JavaScript for Mobile Menu and Form Handling -->
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Close mobile menu when clicking a link
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
         });
+      });
 
-        // Close mobile menu when clicking a link
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
+      // Current Year in Footer
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
 
-        // Current Year in Footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+      // Contact Form Submission Handler
+      function handleFormSubmit(event) {
+        event.preventDefault();
+        const submitBtn = document.getElementById("submit-btn");
+        const successBox = document.getElementById("success-box");
 
-        // Contact Form Submission Handler
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const submitBtn = document.getElementById('submit-btn');
-            const successBox = document.getElementById('success-box');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML =
+          '<i class="fa-solid fa-spinner animate-spin"></i> Sending...';
 
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Sending...';
+        // Simulate network request
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML =
+            '<span>Send Message</span> <i class="fa-solid fa-paper-plane"></i>';
+          successBox.classList.remove("hidden");
+        }, 1000);
+      }
 
-            // Simulate network request
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<span>Send Message</span> <i class="fa-solid fa-paper-plane"></i>';
-                successBox.classList.remove('hidden');
-            }, 1000);
-        }
-
-        // Reset Form
-        function resetForm() {
-            document.getElementById('contact-form').reset();
-            document.getElementById('success-box').classList.add('hidden');
-        }
+      // Reset Form
+      function resetForm() {
+        document.getElementById("contact-form").reset();
+        document.getElementById("success-box").classList.add("hidden");
+      }
     </script>
-</body>
+  </body>
 </html>
