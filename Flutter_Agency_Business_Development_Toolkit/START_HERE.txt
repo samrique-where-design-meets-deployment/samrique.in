@@ -1,0 +1,25 @@
+FLUTTER AGENCY BUSINESS DEVELOPMENT TOOLKIT
+
+Files:
+01_Agency_Website_Content.docx
+  Website positioning, homepage copy, services, process, about, SEO starter text and publishing checklist.
+
+02_Agency_Capability_Profile.pptx
+  Editable 10-slide company capability presentation. Replace placeholders and add verified case studies.
+
+03_Proposal_and_Quotation_Template.docx
+  Reusable scope, deliverables, milestones, pricing table, payment terms, assumptions, exclusions, warranty and approval template.
+
+04_Lead_Generation_CRM.xlsx
+  Lead tracker with dropdowns, status pipeline, follow-up dates and a basic dashboard. Includes one clearly marked sample row.
+
+05_Outreach_Email_Templates.docx
+  Templates for India, UAE, UK, USA, agency partnerships, follow-ups, LinkedIn and appropriate WhatsApp contact.
+
+BEFORE USING:
+- Replace all [bracketed] placeholders.
+- Remove the sample CRM row or replace it with a real lead.
+- Use only genuine client work, testimonials, metrics and credentials.
+- Have proposals reviewed for project-specific scope, tax, IP, privacy and contract terms.
+- Follow applicable direct-marketing, privacy and anti-spam rules in each target country.
+- Do not promise delivery dates or outcomes until requirements and dependencies are confirmed.
