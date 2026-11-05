@@ -1,8 +1,18 @@
-
+ng build --base-href=/samrique_website/
 cd dist/samrique-website/browser
 git init
 git checkout -b gh-pages
 git add .
+git commit -m "Deploy Angular app with correct base href"
+git remote add origin https://github.com/samrique-where-design-meets-deployment/samrique.in.git
+git push -u origin gh-pages --force
+
+
+npm run build:github-pages
+cd dist/samrique-website/browser
+git init
+git checkout -b gh-pages
+git add -A
 git commit -m "Deploy Angular app with correct base href"
 git remote add origin https://github.com/samrique-where-design-meets-deployment/samrique.in.git
 git push -u origin gh-pages --force
