@@ -1,0 +1,1923 @@
+@if (showMoneyManager) {
+<main class="product-page">
+  <header class="product-nav">
+    <a
+      href="/"
+      (click)="$event.preventDefault(); returnToProjects()"
+      aria-label="Samrique home"
+    >
+      <img src="./samrique-logo.png" alt="Samrique Logo" />
+    </a>
+    <a
+      class="product-nav-cta"
+      href="/#contact"
+      (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+      >Start a Project <i class="fa-solid fa-arrow-right"></i
+    ></a>
+  </header>
+
+  <section class="product-hero">
+    <div class="product-hero-copy">
+      <a
+        class="product-back"
+        href="/#projects"
+        (click)="$event.preventDefault(); returnToProjects()"
+        ><i class="fa-solid fa-arrow-left"></i> Back to projects</a
+      >
+      <span class="product-eyebrow"
+        ><i class="fa-solid fa-wallet"></i> Personal finance · Flutter app</span
+      >
+      <h1>Samrique<br /><span>Money Manager</span></h1>
+      <p>
+        Clear everyday finances, at your pace. Record transactions, organize
+        accounts, and understand where your money goes.
+      </p>
+      <div class="product-pills">
+        <span>Flutter</span><span>Dart</span><span>REST API</span
+        ><span>INR</span>
+      </div>
+      <a
+        class="product-primary"
+        href="/#contact"
+        (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+        >Discuss a similar product <i class="fa-solid fa-arrow-right"></i
+      ></a>
+    </div>
+    <figure class="product-hero-image">
+      <img
+        src="assets/images/samrique-money-manager.jpg"
+        alt="Samrique Money Manager showcase with the app’s transaction, account, and statistics screens"
+      />
+      <figcaption>
+        Money, made clear. A look inside Samrique Money Manager.
+      </figcaption>
+    </figure>
+  </section>
+
+  <nav class="product-toc" aria-label="On this page">
+    <a href="#product-overview">Overview</a
+    ><a href="#product-features">Features</a
+    ><a href="#product-technology">Technology</a
+    ><a href="#product-architecture">Architecture</a
+    ><a href="#product-setup">Setup</a
+    ><a href="#product-limitations">Limitations</a>
+  </nav>
+
+  <section id="product-overview" class="product-section product-overview">
+    <div>
+      <span class="product-kicker">The product</span>
+      <h2>Money management<br />that feels manageable.</h2>
+    </div>
+    <p>
+      Samrique Money Manager is a personal finance app for recording
+      transactions, organizing accounts, and understanding income and expenses.
+      Its Flutter interface brings together a monthly transaction view, account
+      overview, spending statistics, and CSV export.<br /><br />It is designed
+      for individuals who want a straightforward way to record day-to-day
+      finances, keep account balances organized, and review spending patterns.
+    </p>
+  </section>
+
+  <section id="product-features" class="product-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">Made for everyday clarity</span>
+      <h2>Core features</h2>
+      <p>Tools for tracking cash flow and seeing the bigger picture.</p>
+    </div>
+    <div class="product-feature-grid">
+      @for (feature of moneyManagerFeatures; track feature.title; let i =
+      $index) {
+      <article class="product-feature">
+        <span class="product-feature-number">0{{ i + 1 }}</span>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.detail }}</p>
+      </article>
+      }
+    </div>
+  </section>
+
+  <section id="product-technology" class="product-section product-tech-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">Built with a practical stack</span>
+      <h2>Technology stack</h2>
+    </div>
+    <div class="product-table-wrap">
+      <table class="product-table">
+        <tbody>
+          @for (item of moneyManagerStack; track item[0]) {
+          <tr>
+            <th scope="row">{{ item[0] }}</th>
+            <td>{{ item[1] }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section
+    id="product-architecture"
+    class="product-section product-architecture"
+  >
+    <div>
+      <span class="product-kicker">Under the hood</span>
+      <h2>Architecture<br />and data</h2>
+      <p>
+        The app is organized into screens (<code>lib/views</code>), GetX
+        controllers (<code>lib/controller</code>), data models
+        (<code>lib/models</code>), and API/export services
+        (<code>lib/services</code>).
+      </p>
+      <p>
+        Account, transaction, category, and statistics data are loaded from a
+        REST API. Theme selection and custom categories use
+        <code>shared_preferences</code>; transaction data is not stored locally
+        by this Flutter client.
+      </p>
+    </div>
+    <aside class="product-api-card">
+      <span class="product-api-icon"><i class="fa-solid fa-code"></i></span>
+      <h3>Connect your backend</h3>
+      <p>
+        Set the API base URL at build or run time with
+        <code>API_BASE_URL</code>.
+      </p>
+      <div class="product-code">
+        <code>--dart-define=API_BASE_URL=&lt;url&gt;</code>
+      </div>
+      <p>
+        Without a value, Android emulator builds use
+        <code>http://10.0.2.2:3000/api</code>; other platforms use
+        <code>http://localhost:3000/api</code>. A compatible backend must be
+        running and reachable.
+      </p>
+    </aside>
+  </section>
+
+  <section class="product-section product-endpoints">
+    <div class="product-section-heading">
+      <span class="product-kicker">REST API</span>
+      <h2>Client routes</h2>
+    </div>
+    <ul>
+      @for (route of moneyManagerRoutes; track route) {
+      <li><code>{{ route }}</code></li>
+      }
+    </ul>
+  </section>
+
+  <section id="product-setup" class="product-section product-setup">
+    <div class="product-section-heading">
+      <span class="product-kicker">Get started</span>
+      <h2>Project setup</h2>
+      <p>Prepare Flutter, connect a compatible backend, and run the client.</p>
+    </div>
+    <ol class="product-setup-list">
+      <li>
+        <span>01</span>
+        <div>
+          <h3>Install Flutter</h3>
+          <p>
+            Install the Flutter SDK and platform tools for your target device.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span>02</span>
+        <div>
+          <h3>Install dependencies</h3>
+          <pre><code>flutter pub get</code></pre>
+        </div>
+      </li>
+      <li>
+        <span>03</span>
+        <div>
+          <h3>Start the backend</h3>
+          <p>
+            Run a compatible backend on port <code>3000</code>, or set
+            <code>API_BASE_URL</code> to its API URL.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span>04</span>
+        <div>
+          <h3>Run the app</h3>
+          <pre><code>flutter run</code></pre>
+        </div>
+      </li>
+      <li>
+        <span>05</span>
+        <div>
+          <h3>Run the test suite</h3>
+          <pre><code>flutter test</code></pre>
+        </div>
+      </li>
+    </ol>
+    <aside class="product-windows-note">
+      <i class="fa-brands fa-windows"></i>
+      <div>
+        <h3>Android emulator on Windows</h3>
+        <p>
+          Run <code>start_pixel_7_pro_emulator.cmd</code> once to install the
+          background monitor that starts with Windows, launches the Pixel 7 Pro
+          emulator when needed, and keeps its window on the primary display.
+          Select the emulator in VS Code to run the app. To disable automatic
+          startup, remove <code>Keep Pixel 7 Pro Visible.lnk</code> from your
+          Windows Startup folder.
+        </p>
+      </div>
+    </aside>
+  </section>
+
+  <section id="product-limitations" class="product-section product-limitations">
+    <div>
+      <span class="product-kicker">A clear view of what’s included</span>
+      <h2>Current limitations</h2>
+    </div>
+    <ul>
+      <li>
+        Biometric lock and cloud backup are currently presentation-level
+        settings, not integrated security or backup services.
+      </li>
+      <li>
+        The attachment control is a placeholder and does not yet attach files.
+      </li>
+      <li>
+        Currency and language selectors do not currently localize all app data
+        or interface content.
+      </li>
+    </ul>
+  </section>
+
+  <footer class="product-footer">
+    <a href="/" (click)="$event.preventDefault(); returnToProjects()"
+      >← All projects</a
+    ><span
+      >© {{ currentYear }} Samrique · Crafted with precision &amp;
+      performance.</span
+    ><a
+      href="/#contact"
+      (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+      >Start a Project <i class="fa-solid fa-arrow-right"></i
+    ></a>
+  </footer>
+</main>
+} @else if (showMarketplace) {
+<main class="product-page marketplace-page">
+  <header class="product-nav">
+    <a
+      href="/"
+      (click)="$event.preventDefault(); returnToProjects()"
+      aria-label="Samrique home"
+      ><img src="./samrique-logo.png" alt="Samrique Logo"
+    /></a>
+    <a
+      class="product-nav-cta"
+      href="/#contact"
+      (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+      >Start a Project <i class="fa-solid fa-arrow-right"></i
+    ></a>
+  </header>
+  <section class="product-hero">
+    <div class="product-hero-copy">
+      <a
+        class="product-back"
+        href="/#projects"
+        (click)="$event.preventDefault(); returnToProjects()"
+        ><i class="fa-solid fa-arrow-left"></i> Back to projects</a
+      >
+      <span class="product-eyebrow"
+        ><i class="fa-solid fa-bag-shopping"></i> Digital marketplace · Flutter
+        app</span
+      >
+      <h1>Samrique E-<br /><span>Marketplace</span></h1>
+      <p>
+        A digital marketplace for discovering, buying, and selling templates, UI
+        kits, and creative assets, with dedicated experiences for buyers,
+        sellers, and administrators.
+      </p>
+      <div class="product-pills">
+        <span>Flutter</span><span>Provider</span><span>Razorpay</span
+        ><span>REST API</span>
+      </div>
+      <a
+        class="product-primary"
+        href="/#contact"
+        (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+        >Discuss a similar product <i class="fa-solid fa-arrow-right"></i
+      ></a>
+    </div>
+    <div
+      class="marketplace-showcase"
+      role="img"
+      aria-label="Samrique E- Marketplace preview showing digital product cards and marketplace navigation"
+    >
+      <div class="marketplace-window-bar">
+        <span></span><span></span><span></span
+        ><b>Samrique E- Marketplace <i class="fa-solid fa-bag-shopping"></i></b
+        ><small>Marketplace</small>
+      </div>
+      <div class="marketplace-preview-body">
+        <div class="marketplace-preview-head">
+          <div>
+            <small>CREATIVE MARKETPLACE</small>
+            <h2>Find your next<br />great idea.</h2>
+            <p>Digital assets, ready to make yours.</p>
+          </div>
+          <div class="marketplace-preview-bag">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+        </div>
+        <div class="marketplace-preview-categories">
+          <span>All</span><span>UI kits</span><span>Templates</span
+          ><span>Icons</span>
+        </div>
+        <div class="marketplace-preview-products">
+          <article>
+            <div class="marketplace-art marketplace-art-one">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <b>Studio UI Kit</b><small>Interface kits · ★ 4.9</small
+            ><strong>$24</strong>
+          </article>
+          <article>
+            <div class="marketplace-art marketplace-art-two">
+              <i class="fa-solid fa-pen-ruler"></i>
+            </div>
+            <b>Creator Pack</b><small>Design resources · ★ 4.8</small
+            ><strong>$18</strong>
+          </article>
+          <article>
+            <div class="marketplace-art marketplace-art-three">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <b>Webflow Launch</b><small>Website templates · ★ 5.0</small
+            ><strong>$32</strong>
+          </article>
+        </div>
+      </div>
+      <div class="marketplace-showcase-caption">
+        <span
+          ><i class="fa-solid fa-circle-check"></i> Buyer · Seller · Admin</span
+        ><span>Marketplace preview</span>
+      </div>
+    </div>
+  </section>
+  <nav class="product-toc" aria-label="On this page">
+    <a href="#product-overview">Overview</a
+    ><a href="#product-features">Features</a
+    ><a href="#product-technology">Technology</a
+    ><a href="#product-architecture">Project structure</a
+    ><a href="#product-setup">Setup</a
+    ><a href="#product-limitations">Configuration</a>
+  </nav>
+  <section id="product-overview" class="product-section product-overview">
+    <div>
+      <span class="product-kicker">The product</span>
+      <h2>One marketplace.<br />Three experiences.</h2>
+    </div>
+    <p>
+      Samrique E- Marketplace is a Flutter marketplace for discovering, buying,
+      and selling digital products such as templates and UI kits. Its buyer,
+      seller, and administrator experiences are backed by a Samrique REST
+      API.<br /><br />The app brings discovery, product evaluation, checkout,
+      delivery of purchased downloads, seller operations, and marketplace
+      moderation into one connected product.
+    </p>
+  </section>
+  <section id="product-features" class="product-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">Designed around every role</span>
+      <h2>Marketplace features</h2>
+      <p>
+        End-to-end workflows for shopping, selling, and platform operations.
+      </p>
+    </div>
+    <div class="product-feature-grid">
+      @for (feature of marketplaceFeatures; track feature.title; let i = $index)
+      {
+      <article class="product-feature">
+        <span class="product-feature-number">0{{ i + 1 }}</span>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.detail }}</p>
+      </article>
+      }
+    </div>
+  </section>
+  <section id="product-technology" class="product-section product-tech-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">A flexible cross-platform foundation</span>
+      <h2>Technology stack</h2>
+    </div>
+    <div class="product-table-wrap">
+      <table class="product-table">
+        <tbody>
+          @for (item of marketplaceStack; track item[0]) {
+          <tr>
+            <th scope="row">{{ item[0] }}</th>
+            <td>{{ item[1] }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="product-platform-note">
+      Platform projects are included for all six targets. Support for individual
+      integrations depends on each plugin’s platform compatibility and
+      configuration.
+    </p>
+  </section>
+  <section
+    id="product-architecture"
+    class="product-section product-architecture"
+  >
+    <div>
+      <span class="product-kicker">Organized for marketplace workflows</span>
+      <h2>Project structure</h2>
+      <p>
+        The Flutter app separates configuration, models, state, screens,
+        services, themes, shared utilities, and reusable UI into focused
+        directories.
+      </p>
+      <div class="marketplace-tree">
+        <code>lib/</code><code>├── config/</code><code>├── models/</code
+        ><code>├── providers/</code><code>├── screens/</code
+        ><code>├── services/</code><code>├── themes/</code
+        ><code>├── utils/</code><code>└── widgets/</code
+        ><code>assets/ · test/</code>
+      </div>
+    </div>
+    <aside class="product-api-card">
+      <span class="product-api-icon"><i class="fa-solid fa-server"></i></span>
+      <h3>Backend-connected by design</h3>
+      <p>
+        Marketplace data operations, authentication, order workflows, and
+        payment verification rely on the REST API. Configure the API host in
+        <code>lib/config/api_constants.dart</code> for the target environment,
+        and make sure it can be reached from the device or emulator.
+      </p>
+    </aside>
+  </section>
+  <section id="product-setup" class="product-section product-setup">
+    <div class="product-section-heading">
+      <span class="product-kicker">Get started</span>
+      <h2>Run the app</h2>
+      <p>
+        Prepare a Flutter environment, configure the API host, and start a
+        supported target.
+      </p>
+    </div>
+    <ol class="product-setup-list">
+      <li>
+        <span>01</span>
+        <div>
+          <h3>Install Flutter</h3>
+          <p>
+            Use a Flutter SDK with a Dart version that satisfies the constraint
+            in <code>pubspec.yaml</code>.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span>02</span>
+        <div>
+          <h3>Install dependencies</h3>
+          <pre><code>flutter pub get</code></pre>
+        </div>
+      </li>
+      <li>
+        <span>03</span>
+        <div>
+          <h3>Configure the backend</h3>
+          <p>
+            Set the API host in <code>lib/config/api_constants.dart</code>. The
+            chosen host must be reachable from your device or emulator.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span>04</span>
+        <div>
+          <h3>Run the app</h3>
+          <pre><code>flutter run</code></pre>
+        </div>
+      </li>
+      <li>
+        <span>05</span>
+        <div>
+          <h3>Run the test suite</h3>
+          <pre><code>flutter test</code></pre>
+        </div>
+      </li>
+    </ol>
+  </section>
+  <section id="product-limitations" class="product-section product-limitations">
+    <div>
+      <span class="product-kicker">Deployment notes</span>
+      <h2>Configuration</h2>
+    </div>
+    <ul>
+      <li>
+        Configure backend credentials and payment settings on the server. Do not
+        embed secrets in the app.
+      </li>
+      <li>
+        Firebase Cloud Messaging and local notifications require the
+        corresponding Firebase project and platform configuration.
+      </li>
+      <li>
+        Firebase Analytics is declared as a dependency; add app initialization
+        and event tracking if analytics is enabled for your deployment.
+      </li>
+      <li>
+        Individual plugin integrations depend on the target platform and the
+        plugin’s platform support.
+      </li>
+    </ul>
+  </section>
+  <footer class="product-footer">
+    <a href="/" (click)="$event.preventDefault(); returnToProjects()"
+      >← All projects</a
+    ><span
+      >© {{ currentYear }} Samrique · Crafted with precision &amp;
+      performance.</span
+    ><a
+      href="/#contact"
+      (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+      >Start a Project <i class="fa-solid fa-arrow-right"></i
+    ></a>
+  </footer>
+</main>
+} @else if (showMama) {
+<main class="product-page mama-page">
+  <header class="product-nav">
+    <a
+      href="/"
+      (click)="$event.preventDefault(); returnToProjects()"
+      aria-label="Samrique home"
+      ><img src="./samrique-logo.png" alt="Samrique Logo" /></a
+    ><a
+      class="product-nav-cta"
+      href="/#contact"
+      (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+      >Start a Project <i class="fa-solid fa-arrow-right"></i
+    ></a>
+  </header>
+  <section class="product-hero">
+    <div class="product-hero-copy">
+      <a
+        class="product-back"
+        href="/#projects"
+        (click)="$event.preventDefault(); returnToProjects()"
+        ><i class="fa-solid fa-arrow-left"></i> Back to projects</a
+      ><span class="product-eyebrow"
+        ><i class="fa-solid fa-heart"></i> Pregnancy wellness · Flutter
+        app</span
+      >
+      <h1>Samrique<br /><span>Mama</span></h1>
+      <p>
+        A calm, caring companion for pregnancy. Keep your week-by-week overview,
+        wellness habits, health logs, and prenatal appointments together in one
+        place.
+      </p>
+      <div class="product-pills">
+        <span>Flutter</span><span>Provider</span
+        ><span>Health &amp; wellness</span><span>Pregnancy tracker</span>
+      </div>
+      <a
+        class="product-primary"
+        href="/#contact"
+        (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+        >Discuss a similar product <i class="fa-solid fa-arrow-right"></i
+      ></a>
+    </div>
+    <div
+      class="mama-showcase"
+      role="img"
+      aria-label="Samrique Mama preview for pregnancy week 8, with a cherry size guide and daily log, kick counter, contractions, and size guide features"
+    >
+      <div class="mama-showcase-top">
+        <strong>🌸 Samrique Mama 🌸</strong><span>Trimester 1</span>
+      </div>
+      <div class="mama-showcase-main">
+        <div class="mama-phone">
+          <div class="mama-notch"></div>
+          <small>YOUR BABY AT</small><b>Week 8</b
+          ><span>🌱 Baby is the size of a cherry</span>
+          <div class="mama-progress"><i></i></div>
+        </div>
+        <div class="mama-cherry-wrap">
+          <h2>WEEK 8: The Cherry Guide!<br />Your Baby’s Milestones</h2>
+          <div class="mama-cherry">🍒</div>
+        </div>
+      </div>
+      <div class="mama-showcase-features">
+        <b>Key Features</b><span>💓 Daily Log</span><span>👆 Kick Counter</span
+        ><span>⏱️ Contractions</span><span>🍒 Size Guide</span>
+      </div>
+    </div>
+  </section>
+  <nav class="product-toc" aria-label="On this page">
+    <a href="#product-overview">Overview</a
+    ><a href="#product-features">Features</a
+    ><a href="#product-technology">Technology</a
+    ><a href="#product-architecture">Project structure</a
+    ><a href="#product-setup">Setup</a
+    ><a href="#product-limitations">Integration notes</a>
+  </nav>
+  <section id="product-overview" class="product-section product-overview">
+    <div>
+      <span class="product-kicker">The product</span>
+      <h2>Support for the<br />everyday journey.</h2>
+    </div>
+    <p>
+      Samrique Mama is a Flutter app that helps expectant mothers keep pregnancy
+      details, daily wellness habits, and prenatal appointments organized in one
+      place. It combines a due-date-based pregnancy overview with health and
+      wellness logs, account access, and a community-style discussion screen.<br /><br />The
+      pregnancy overview presents estimated week, trimester, days until the due
+      date, and an illustrative fruit-size comparison based on the due date on
+      the user profile.
+    </p>
+  </section>
+  <section id="product-features" class="product-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">A little more organized, day by day</span>
+      <h2>Product features</h2>
+      <p>Pregnancy details, wellness routines, and upcoming care in one app.</p>
+    </div>
+    <div class="product-feature-grid">
+      @for (feature of mamaFeatures; track feature.title; let i = $index) {
+      <article class="product-feature">
+        <span class="product-feature-number">0{{ i + 1 }}</span>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.detail }}</p>
+      </article>
+      }
+    </div>
+  </section>
+  <section id="product-technology" class="product-section product-tech-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">Built for mobile and beyond</span>
+      <h2>Technology stack</h2>
+    </div>
+    <div class="product-table-wrap">
+      <table class="product-table">
+        <tbody>
+          @for (item of mamaStack; track item[0]) {
+          <tr>
+            <th scope="row">{{ item[0] }}</th>
+            <td>{{ item[1] }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section
+    id="product-architecture"
+    class="product-section product-architecture"
+  >
+    <div>
+      <span class="product-kicker">A focused Flutter codebase</span>
+      <h2>Project structure</h2>
+      <div class="marketplace-tree mama-tree">
+        <code
+          >lib/screens/ — login, registration, home, health, wellness,
+          community, appointments</code
+        ><code
+          >lib/providers/ — authentication, health, wellness, appointment
+          state</code
+        ><code>lib/models/ — user, health, wellness, appointment models</code
+        ><code
+          >lib/services/api_service.dart — HTTP client and API
+          configuration</code
+        >
+      </div>
+    </div>
+    <aside class="product-api-card">
+      <span class="product-api-icon"><i class="fa-solid fa-link"></i></span>
+      <h3>Backend integration</h3>
+      <p>
+        The frontend sends JSON requests to the configured Samrique backend API.
+        Account access and API-backed health, wellness, and appointment records
+        require the backend; community discussions currently use local sample
+        data.
+      </p>
+    </aside>
+  </section>
+  <section class="product-section product-endpoints">
+    <div class="product-section-heading">
+      <span class="product-kicker">Authenticated REST API</span>
+      <h2>Backend endpoints</h2>
+    </div>
+    <ul>
+      @for (route of mamaRoutes; track route) {
+      <li><code>{{ route }}</code></li>
+      }
+    </ul>
+  </section>
+  <section id="product-setup" class="product-section product-setup">
+    <div class="product-section-heading">
+      <span class="product-kicker">Get started</span>
+      <h2>Run the app</h2>
+      <p>
+        Install Flutter, configure a reachable API host, and launch on a
+        supported device.
+      </p>
+    </div>
+    <ol class="product-setup-list">
+      <li>
+        <span>01</span>
+        <div>
+          <h3>Install Flutter</h3>
+          <p>Use a Flutter SDK with Dart 3 or later.</p>
+        </div>
+      </li>
+      <li>
+        <span>02</span>
+        <div>
+          <h3>Install dependencies</h3>
+          <pre><code>flutter pub get</code></pre>
+        </div>
+      </li>
+      <li>
+        <span>03</span>
+        <div>
+          <h3>Configure the backend</h3>
+          <p>
+            Set the API base URL in <code>lib/services/api_service.dart</code>.
+            Defaults are <code>http://127.0.0.1:5000/api</code> for web and
+            desktop, and <code>http://10.0.2.2:5000/api</code> for the Android
+            emulator. Update the host if the backend is elsewhere.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span>04</span>
+        <div>
+          <h3>Run the app</h3>
+          <pre><code>flutter run</code></pre>
+        </div>
+      </li>
+    </ol>
+  </section>
+  <section id="product-limitations" class="product-section product-limitations">
+    <div>
+      <span class="product-kicker">Designed for personal organization</span>
+      <h2>Important notes</h2>
+    </div>
+    <ul>
+      <li>
+        This app is for personal organization and tracking. It is not a
+        substitute for professional medical advice, diagnosis, or care.
+      </li>
+      <li>
+        Community content currently remains in the app and is not synchronized
+        with the backend.
+      </li>
+      <li>
+        <code>flutter_secure_storage</code> is declared as a dependency but is
+        not currently used by the authentication flow; the signed-in user and
+        authentication token are persisted with Shared Preferences.
+      </li>
+      <li>
+        Account access and API-backed records require a running backend
+        reachable from the chosen device or emulator.
+      </li>
+    </ul>
+  </section>
+  <footer class="product-footer">
+    <a href="/" (click)="$event.preventDefault(); returnToProjects()"
+      >← All projects</a
+    ><span>© {{ currentYear }} Samrique · Crafted with care.</span
+    ><a
+      href="/#contact"
+      (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+      >Start a Project <i class="fa-solid fa-arrow-right"></i
+    ></a>
+  </footer>
+</main>
+} @else {
+<!-- Navigation Bar -->
+<header
+  class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300"
+>
+  <div
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"
+  >
+    <!-- Brand Logo -->
+    <a href="#" class="flex items-center group" aria-label="Samrique home">
+      <img
+        src="samrique-logo.png"
+        alt="Samrique — Build Beyond Limits"
+        class="h-16 w-20 object-contain transition-transform group-hover:scale-105"
+      />
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav
+      class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300"
+    >
+      <a
+        (click)="closeMobileMenu()"
+        href="#services"
+        class="hover:text-coral transition-colors"
+        >Services</a
+      >
+      <a
+        (click)="closeMobileMenu()"
+        href="#projects"
+        class="hover:text-coral transition-colors"
+        >Projects</a
+      >
+      <a
+        (click)="closeMobileMenu()"
+        href="#about"
+        class="hover:text-coral transition-colors"
+        >About</a
+      >
+      <a
+        (click)="closeMobileMenu()"
+        href="#contact"
+        class="hover:text-coral transition-colors"
+        >Contact</a
+      >
+    </nav>
+
+    <!-- Action Button -->
+    <div class="hidden sm:flex items-center gap-4">
+      <a
+        (click)="closeMobileMenu()"
+        href="#contact"
+        class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-semibold text-sm shadow-lg shadow-coral/25 hover:shadow-coral/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+      >
+        Start a Project
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-btn"
+      (click)="toggleMobileMenu()"
+      [attr.aria-expanded]="mobileMenuOpen"
+      aria-controls="mobile-menu"
+      class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg focus:outline-none"
+    >
+      <i class="fa-solid fa-bars text-xl"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Drawer -->
+  <div
+    id="mobile-menu"
+    [class.hidden]="!mobileMenuOpen"
+    class="md:hidden glass-card border-t border-slate-800 px-4 pt-4 pb-6 space-y-3"
+  >
+    <a
+      (click)="closeMobileMenu()"
+      href="#services"
+      class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors"
+      >Services</a
+    >
+    <a
+      (click)="closeMobileMenu()"
+      href="#projects"
+      class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors"
+      >Projects</a
+    >
+    <a
+      (click)="closeMobileMenu()"
+      href="#about"
+      class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors"
+      >About</a
+    >
+    <a
+      (click)="closeMobileMenu()"
+      href="#contact"
+      class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-dark-800 hover:text-coral transition-colors"
+      >Contact</a
+    >
+    <div class="pt-2">
+      <a
+        (click)="closeMobileMenu()"
+        href="#contact"
+        class="block w-full text-center px-5 py-3 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-semibold text-sm shadow-lg shadow-coral/25"
+      >
+        Start a Project
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section
+  class="relative min-h-screen flex items-center justify-center pt-28 pb-20 hero-gradient overflow-hidden"
+>
+  <!-- Background Glow Orbs -->
+  <div
+    class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-coral/10 rounded-full blur-3xl pointer-events-none"
+  ></div>
+  <div
+    class="absolute bottom-10 right-10 w-80 h-80 bg-accent/10 rounded-full blur-3xl pointer-events-none"
+  ></div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <!-- Badge -->
+    <div
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-coral/30 text-coral text-xs font-semibold uppercase tracking-wider mb-8 animate-bounce duration-1000"
+    >
+      <i class="fa-solid fa-bolt text-accent"></i> Flutter Development & Digital
+      Solutions
+    </div>
+
+    <!-- Main Heading -->
+    <h1
+      class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight"
+    >
+      Crafting High-Performance
+      <span
+        class="bg-gradient-to-r from-coral via-accent to-orange-400 bg-clip-text text-transparent"
+        >Digital Products</span
+      >
+    </h1>
+
+    <!-- Value Proposition -->
+    <p
+      class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal"
+    >
+      Crafting high-performance cross-platform mobile apps, seamless payment
+      integrations, and scalable digital products engineered for growth.
+    </p>
+
+    <!-- Action Buttons -->
+    <div
+      class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+    >
+      <a
+        (click)="closeMobileMenu()"
+        href="#projects"
+        class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-bold text-base shadow-xl shadow-coral/30 hover:shadow-coral/50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3"
+      >
+        <span>View Projects</span>
+        <i class="fa-solid fa-arrow-down"></i>
+      </a>
+      <a
+        (click)="closeMobileMenu()"
+        href="#contact"
+        class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-white font-bold text-base border border-slate-700 hover:border-coral/50 hover:bg-dark-800 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3"
+      >
+        <span>Start a Project</span>
+        <i class="fa-solid fa-paper-plane text-coral"></i>
+      </a>
+    </div>
+
+    <!-- Stats / Trust Indicators -->
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto mt-20 pt-10 border-t border-slate-800/80"
+    >
+      <div class="text-center">
+        <div class="text-3xl font-extrabold text-white mb-1">40%</div>
+        <div class="text-xs text-slate-400 font-medium">
+          Cost Reduction in Cross-Platform Builds
+        </div>
+      </div>
+      <div class="text-center">
+        <div class="text-3xl font-extrabold text-white mb-1">99.9%</div>
+        <div class="text-xs text-slate-400 font-medium">
+          App Uptime & Smooth Performance
+        </div>
+      </div>
+      <div class="text-center col-span-2 md:col-span-1">
+        <div class="text-3xl font-extrabold text-white mb-1">100%</div>
+        <div class="text-xs text-slate-400 font-medium">
+          UPI & Secure Gateway Integration
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-24 bg-dark-950 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span
+        class="text-coral text-sm font-semibold tracking-wider uppercase mb-3 block"
+        >What We Do</span
+      >
+      <h2
+        class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4"
+      >
+        Engineering Excellence Across All Platforms
+      </h2>
+      <p class="text-slate-400 text-base sm:text-lg">
+        Comprehensive digital solutions tailored to elevate your business,
+        streamline user experiences, and accelerate time-to-market.
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Service 1 -->
+      <div
+        class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1"
+      >
+        <div
+          class="w-14 h-14 rounded-xl bg-coral/10 border border-coral/20 flex items-center justify-center text-coral text-2xl mb-6 group-hover:bg-coral group-hover:text-white transition-colors"
+        >
+          <i class="fa-solid fa-mobile-screen-button"></i>
+        </div>
+        <h3
+          class="text-xl font-bold text-white mb-3 group-hover:text-coral transition-colors"
+        >
+          Flutter App Development
+        </h3>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          High-performance cross-platform mobile applications for Android and
+          iOS engineered for speed, responsiveness, and fluid user experience.
+        </p>
+      </div>
+
+      <!-- Service 2 -->
+      <div
+        class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1"
+      >
+        <div
+          class="w-14 h-14 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-2xl mb-6 group-hover:bg-accent group-hover:text-white transition-colors"
+        >
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+        <h3
+          class="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors"
+        >
+          UPI & Payment Integration
+        </h3>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Seamless, secure payment gateway and wallet payout implementations for
+          frictionless user transactions and lightning-fast checkout flows.
+        </p>
+      </div>
+
+      <!-- Service 3 -->
+      <div
+        class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1"
+      >
+        <div
+          class="w-14 h-14 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 text-2xl mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors"
+        >
+          <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+        <h3
+          class="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors"
+        >
+          E-Commerce & Marketplace Solutions
+        </h3>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Feature-rich digital storefronts and multi-vendor platforms with
+          real-time tracking, secure checkout, and dynamic inventory management.
+        </p>
+      </div>
+
+      <!-- Service 4 -->
+      <div
+        class="glass-card rounded-2xl p-8 border border-slate-800 hover:border-coral/40 transition-all duration-300 group hover:-translate-y-1"
+      >
+        <div
+          class="w-14 h-14 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:bg-purple-500 group-hover:text-white transition-colors"
+        >
+          <i class="fa-solid fa-pen-nib"></i>
+        </div>
+        <h3
+          class="text-xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors"
+        >
+          UI/UX & Brand Design
+        </h3>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Custom digital brand identities, design systems, and intuitive user
+          interfaces crafted in Figma with conversion-first design principles.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Selected Projects Section -->
+<section id="projects" class="py-24 bg-dark-900 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span
+        class="text-coral text-sm font-semibold tracking-wider uppercase mb-3 block"
+        >Portfolio</span
+      >
+      <h2
+        class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4"
+      >
+        Selected Works & Proven Results
+      </h2>
+      <p class="text-slate-400 text-base sm:text-lg">
+        Real-world products engineered to solve complex challenges, optimize
+        workflows, and deliver measurable business growth.
+      </p>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="space-y-16">
+      <!-- Project 1: Samrique E- Marketplace -->
+      <div
+        class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-coral/40 transition-all duration-300"
+      >
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <div class="flex items-center gap-3">
+              <span
+                class="px-3 py-1 rounded-full bg-coral/10 text-coral text-xs font-bold border border-coral/20"
+                >Featured App</span
+              >
+              <span class="text-xs text-slate-400"
+                ><i class="fa-solid fa-code text-accent mr-1"></i> Flutter /
+                Node.js / UPI</span
+              >
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white">
+              <a
+                href="/products/samrique-e-marketplace"
+                (click)="$event.preventDefault(); openMarketplace()"
+                class="hover:text-coral transition-colors"
+                >Samrique E- Marketplace
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-base text-coral"
+                ></i
+              ></a>
+            </h3>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              A high-performance cross-platform retail app featuring integrated
+              UPI payments, real-time Google Maps delivery tracking, and
+              lightning-fast checkout flows.
+            </p>
+            <a
+              href="/products/samrique-e-marketplace"
+              (click)="$event.preventDefault(); openMarketplace()"
+              class="inline-flex items-center gap-2 text-sm font-bold text-accent hover:text-white transition-colors"
+              >Explore product details <i class="fa-solid fa-arrow-right"></i
+            ></a>
+            <div
+              class="bg-dark-950/60 rounded-xl p-4 border border-slate-800 space-y-2"
+            >
+              <div
+                class="text-xs font-semibold text-coral uppercase tracking-wider"
+              >
+                Impact & Results
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300">
+                <strong class="text-white">Problem:</strong> High cart
+                abandonment and slow payment processing during peak hours.<br />
+                <strong class="text-white">Result:</strong> Cut development
+                costs by 40% using Flutter, boosted checkout speed by 3x, and
+                drove a 99.4% successful payment rate.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Flutter</span
+              >
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Dart</span
+              >
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >UPI Gateway</span
+              >
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Google Maps SDK</span
+              >
+            </div>
+          </div>
+          <div class="lg:col-span-6">
+            <div
+              class="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl group"
+            >
+              <img
+                src="https://placehold.co/600x400/1E293B/FF6B6B?text=Samrique+E-Marketplace+Preview"
+                alt="Samrique E- Marketplace Preview"
+                class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-60 pointer-events-none"
+              ></div>
+              <div
+                class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs font-semibold text-white"
+              >
+                <span
+                  class="px-3 py-1.5 rounded-lg bg-dark-900/80 backdrop-blur border border-slate-700"
+                  >Cross-Platform Mobile App</span
+                >
+                <a
+                  (click)="closeMobileMenu()"
+                  href="#contact"
+                  class="px-3 py-1.5 rounded-lg bg-coral text-white hover:bg-coral-light transition-colors"
+                  >Inquire Similar <i class="fa-solid fa-arrow-right ml-1"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: Samrique Money Manager -->
+      <div
+        class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-coral/40 transition-all duration-300"
+      >
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 order-2 lg:order-1">
+            <div
+              class="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl group"
+            >
+              <img
+                src="assets/images/samrique-money-manager.jpg"
+                alt="Samrique Money Manager App Preview"
+                class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-60 pointer-events-none"
+              ></div>
+              <div
+                class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs font-semibold text-white"
+              >
+                <span
+                  class="px-3 py-1.5 rounded-lg bg-dark-900/80 backdrop-blur border border-slate-700"
+                  >Personal Finance App</span
+                >
+                <a
+                  (click)="closeMobileMenu()"
+                  href="#contact"
+                  class="px-3 py-1.5 rounded-lg bg-accent text-white hover:bg-accent-light transition-colors"
+                  >Inquire Similar <i class="fa-solid fa-arrow-right ml-1"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-6 order-1 lg:order-2 space-y-6">
+            <div class="flex items-center gap-3">
+              <span
+                class="px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold border border-accent/20"
+                >Finance Solution</span
+              >
+              <span class="text-xs text-slate-400"
+                ><i class="fa-solid fa-code text-coral mr-1"></i> Flutter /
+                Firebase / Analytics</span
+              >
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white">
+              <a
+                href="/products/money-manager"
+                (click)="$event.preventDefault(); openMoneyManager()"
+                class="hover:text-coral transition-colors"
+                >Samrique Money Manager
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-base text-coral"
+                ></i
+              ></a>
+            </h3>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              A modern personal finance experience built for cash-flow clarity,
+              smarter budgeting, and real-time spending insights across everyday
+              financial habits.
+            </p>
+            <a
+              href="/products/money-manager"
+              (click)="$event.preventDefault(); openMoneyManager()"
+              class="inline-flex items-center gap-2 text-sm font-bold text-accent hover:text-white transition-colors"
+              >Explore product details <i class="fa-solid fa-arrow-right"></i
+            ></a>
+            <div
+              class="bg-dark-950/60 rounded-xl p-4 border border-slate-800 space-y-2"
+            >
+              <div
+                class="text-xs font-semibold text-accent uppercase tracking-wider"
+              >
+                Impact & Results
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300">
+                <strong class="text-white">Problem:</strong> Scattered expenses
+                and poor visibility into recurring spending patterns.<br />
+                <strong class="text-white">Result:</strong> Created a unified
+                budget dashboard that improves financial awareness, streamlines
+                category tracking, and enables faster decision-making.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Flutter</span
+              >
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Firebase</span
+              >
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Analytics</span
+              >
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Smart Budgeting</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project: Samrique Mama Pregnancy Tracker -->
+      <div
+        class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-pink-400/40 transition-all duration-300"
+      >
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <div class="flex items-center gap-3">
+              <span
+                class="px-3 py-1 rounded-full bg-pink-400/10 text-pink-300 text-xs font-bold border border-pink-300/20"
+                >Pregnancy &amp; Wellness</span
+              ><span class="text-xs text-slate-400"
+                ><i class="fa-solid fa-code text-pink-300 mr-1"></i> Flutter /
+                Provider / REST API</span
+              >
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white">
+              <a
+                href="/products/samrique-mama"
+                (click)="$event.preventDefault(); openMama()"
+                class="hover:text-pink-300 transition-colors"
+                >Samrique Mama Pregnancy Tracker
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square text-base text-pink-300"
+                ></i
+              ></a>
+            </h3>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              A thoughtful pregnancy companion for week-by-week milestones,
+              daily health and wellness logs, kick counting, contractions,
+              prenatal visits, and community discussions.
+            </p>
+            <div
+              class="bg-dark-950/60 rounded-xl p-4 border border-pink-300/15 space-y-2"
+            >
+              <div
+                class="text-xs font-semibold text-pink-300 uppercase tracking-wider"
+              >
+                Impact &amp; Results
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300">
+                <strong class="text-white">Problem:</strong> Pregnancy details,
+                daily wellness habits, and prenatal appointments can be
+                difficult to keep organized together.<br /><strong
+                  class="text-white"
+                  >Result:</strong
+                >
+                Brought a due-date-based pregnancy overview, daily health and
+                wellness logs, kick and contraction tracking, appointments, and
+                community discussions into one app.
+              </p>
+            </div>
+            <a
+              href="/products/samrique-mama"
+              (click)="$event.preventDefault(); openMama()"
+              class="inline-flex items-center gap-2 text-sm font-bold text-pink-300 hover:text-white transition-colors"
+              >Explore product details <i class="fa-solid fa-arrow-right"></i
+            ></a>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Pregnancy overview</span
+              ><span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Daily wellness</span
+              ><span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Appointments</span
+              >
+            </div>
+          </div>
+          <div class="lg:col-span-6">
+            <a
+              href="/products/samrique-mama"
+              (click)="$event.preventDefault(); openMama()"
+              class="mama-card-preview"
+              aria-label="View Samrique Mama Pregnancy Tracker product details"
+              ><span class="mama-card-brand">🌸 Samrique Mama</span
+              ><span class="mama-card-trimester">Trimester 1</span>
+              <div class="mama-card-phone">
+                <small>YOUR BABY AT</small><strong>Week 8</strong
+                ><span>🌱 Baby is the size of a cherry</span><i></i><i></i>
+              </div>
+              <div class="mama-card-cherry">🍒</div>
+              <b>Pregnancy, thoughtfully tracked.</b></a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: Zipi Bike Taxi App -->
+      <div
+        class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-800 hover:border-coral/40 transition-all duration-300"
+      >
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <div class="flex items-center gap-3">
+              <span
+                class="px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs font-bold border border-orange-500/20"
+                >On-Demand Mobility</span
+              >
+              <span class="text-xs text-slate-400"
+                ><i class="fa-solid fa-code text-accent mr-1"></i> Flutter /
+                WebSockets / Firebase</span
+              >
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white">
+              Zipi Bike Taxi App
+            </h3>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Real-time ride-booking mobile application featuring live GPS
+              tracking, dynamic fare calculation, driver-rider role management,
+              and instant digital payments.
+            </p>
+            <div
+              class="bg-dark-950/60 rounded-xl p-4 border border-slate-800 space-y-2"
+            >
+              <div
+                class="text-xs font-semibold text-orange-400 uppercase tracking-wider"
+              >
+                Impact & Results
+              </div>
+              <p class="text-xs sm:text-sm text-slate-300">
+                <strong class="text-white">Problem:</strong> High latency in
+                driver-rider matching and erratic GPS location updates in dense
+                urban traffic.<br />
+                <strong class="text-white">Result:</strong> Achieved sub-second
+                ride matching via WebSockets, delivered smooth 60fps map
+                rendering, and onboarded 10k+ active riders smoothly.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Flutter</span
+              >
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >WebSockets</span
+              >
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Geolocation</span
+              >
+              <span
+                class="px-3 py-1 rounded-lg bg-dark-800 text-slate-300 text-xs font-medium border border-slate-700"
+                >Node.js</span
+              >
+            </div>
+          </div>
+          <div class="lg:col-span-6">
+            <div
+              class="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl group"
+            >
+              <img
+                src="https://placehold.co/600x400/1E293B/F97316?text=Zipi+Bike+Taxi+App"
+                alt="Zipi Bike Taxi App"
+                class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-dark-950/80 via-transparent to-transparent opacity-60 pointer-events-none"
+              ></div>
+              <div
+                class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs font-semibold text-white"
+              >
+                <span
+                  class="px-3 py-1.5 rounded-lg bg-dark-900/80 backdrop-blur border border-slate-700"
+                  >On-Demand Ride App</span
+                >
+                <a
+                  (click)="closeMobileMenu()"
+                  href="#contact"
+                  class="px-3 py-1.5 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition-colors"
+                  >Inquire Similar <i class="fa-solid fa-arrow-right ml-1"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About / Brand Story Section -->
+<section id="about" class="py-24 bg-dark-950 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-5 space-y-6">
+        <span
+          class="text-coral text-sm font-semibold tracking-wider uppercase block"
+          >Brand Story</span
+        >
+        <h2
+          class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight"
+        >
+          Engineering Reliability & Passion for Mobile Excellence
+        </h2>
+        <p class="text-slate-300 text-base leading-relaxed">
+          At <strong class="text-white">Samrique</strong>, we believe that great
+          software bridges the gap between complex business challenges and
+          effortless user experiences. Founded by mobile engineering
+          specialists, we specialize in building robust, production-grade
+          applications that scale seamlessly.
+        </p>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          With deep expertise in
+          <strong class="text-white"
+            >Flutter, Dart, Node.js, Clean Architecture, and secure payment
+            APIs</strong
+          >, we craft solutions that not only look breathtaking but perform
+          flawlessly under heavy traffic.
+        </p>
+        <div class="flex items-center gap-6 pt-4">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-xl bg-coral/10 text-coral flex items-center justify-center font-bold text-lg border border-coral/20"
+            >
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <span class="text-sm font-semibold text-white"
+              >Clean Architecture</span
+            >
+          </div>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center font-bold text-lg border border-accent/20"
+            >
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <span class="text-sm font-semibold text-white"
+              >Enterprise Security</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7">
+        <div
+          class="glass-card rounded-3xl p-8 sm:p-10 border border-slate-800 space-y-6 shadow-2xl"
+        >
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-layer-group text-coral"></i> Core Technical
+            Stack
+          </h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div
+              class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+            >
+              <i class="fa-brands fa-flutter text-3xl text-sky-400 mb-2"></i>
+              <div class="text-sm font-bold text-white">Flutter & Dart</div>
+              <div class="text-xs text-slate-400">Cross-Platform Apps</div>
+            </div>
+            <div
+              class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+            >
+              <i class="fa-brands fa-node-js text-3xl text-green-500 mb-2"></i>
+              <div class="text-sm font-bold text-white">Node.js / APIs</div>
+              <div class="text-xs text-slate-400">Scalable Backends</div>
+            </div>
+            <div
+              class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+            >
+              <i class="fa-solid fa-database text-3xl text-accent mb-2"></i>
+              <div class="text-sm font-bold text-white">Databases</div>
+              <div class="text-xs text-slate-400">PostgreSQL / Firebase</div>
+            </div>
+            <div
+              class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+            >
+              <i
+                class="fa-solid fa-credit-card text-3xl text-orange-400 mb-2"
+              ></i>
+              <div class="text-sm font-bold text-white">Payments</div>
+              <div class="text-xs text-slate-400">UPI & Stripe Gateways</div>
+            </div>
+            <div
+              class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+            >
+              <i
+                class="fa-solid fa-map-location-dot text-3xl text-purple-400 mb-2"
+              ></i>
+              <div class="text-sm font-bold text-white">Maps & GPS</div>
+              <div class="text-xs text-slate-400">Real-Time Tracking</div>
+            </div>
+            <div
+              class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center hover:border-coral/50 transition-colors"
+            >
+              <i class="fa-solid fa-cloud text-3xl text-blue-400 mb-2"></i>
+              <div class="text-sm font-bold text-white">Cloud & DevOps</div>
+              <div class="text-xs text-slate-400">CI/CD & Deployment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact / Call to Action Section -->
+<section id="contact" class="py-24 bg-dark-900 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <!-- Left Column: Info & Direct Channels -->
+      <div class="lg:col-span-5 space-y-8">
+        <div>
+          <span
+            class="text-coral text-sm font-semibold tracking-wider uppercase mb-3 block"
+            >Get In Touch</span
+          >
+          <h2
+            class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4"
+          >
+            Let's Build Something Extraordinary Together
+          </h2>
+          <p class="text-slate-300 text-base leading-relaxed">
+            Have a project in mind or need expert consultation for your Flutter
+            app or digital product? Reach out directly or drop us a message.
+          </p>
+        </div>
+
+        <!-- Direct Channels -->
+        <div class="space-y-4">
+          <a
+            href="mailto:samrique@gmail.com"
+            class="glass-card p-4 rounded-2xl border border-slate-800 hover:border-coral/50 flex items-center gap-4 transition-all group"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-coral/10 text-coral flex items-center justify-center text-xl group-hover:bg-coral group-hover:text-white transition-colors"
+            >
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 font-medium">Direct Email</div>
+              <div
+                class="text-sm font-bold text-white group-hover:text-coral transition-colors"
+              >
+                samrique@gmail.com
+              </div>
+            </div>
+          </a>
+
+          <a
+            href="https://wa.me/919597780343"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="glass-card p-4 rounded-2xl border border-slate-800 hover:border-coral/50 flex items-center gap-4 transition-all group"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl group-hover:bg-emerald-500 group-hover:text-white transition-colors"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 font-medium">
+                WhatsApp Chat
+              </div>
+              <div
+                class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors"
+              >
+                +91 9597780343
+              </div>
+            </div>
+          </a>
+
+          <a
+            href="tel:+919597780343"
+            class="glass-card p-4 rounded-2xl border border-slate-800 hover:border-coral/50 flex items-center gap-4 transition-all group"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl group-hover:bg-sky-500 group-hover:text-white transition-colors"
+            >
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 font-medium">Call Us</div>
+              <div
+                class="text-sm font-bold text-white group-hover:text-sky-400 transition-colors"
+              >
+                +91 9876543210
+              </div>
+            </div>
+          </a>
+
+          <div class="flex items-center gap-4 pt-2">
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 rounded-xl glass-card border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-coral/50 hover:bg-dark-800 transition-all text-xl"
+            >
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 rounded-xl glass-card border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-coral/50 hover:bg-dark-800 transition-all text-xl"
+            >
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 rounded-xl glass-card border border-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:border-coral/50 hover:bg-dark-800 transition-all text-xl"
+            >
+              <i class="fa-brands fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Contact Form -->
+      <div class="lg:col-span-7">
+        <div
+          class="glass-card rounded-3xl p-8 sm:p-10 border border-slate-800 shadow-2xl relative"
+        >
+          <form
+            id="contact-form"
+            #contactForm
+            class="space-y-6"
+            (submit)="submitContactForm($event, contactForm)"
+          >
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label
+                  for="name"
+                  class="text-xs font-semibold text-slate-300 uppercase tracking-wider"
+                  >Your Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div class="space-y-2">
+                <label
+                  for="email"
+                  class="text-xs font-semibold text-slate-300 uppercase tracking-wider"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div class="space-y-2">
+                <label
+                  for="phone"
+                  class="text-xs font-semibold text-slate-300 uppercase tracking-wider"
+                  >Phone Number (Optional)</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  autocomplete="tel"
+                  class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm"
+                  placeholder="+91 98765 43210"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label
+                for="service-select"
+                class="text-xs font-semibold text-slate-300 uppercase tracking-wider"
+                >Service Required</label
+              >
+              <select
+                id="service-select"
+                name="service"
+                class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white focus:outline-none focus:border-coral transition-colors text-sm"
+              >
+                <option value="flutter">Flutter App Development</option>
+                <option value="upi">UPI & Payment Integration</option>
+                <option value="ecommerce">
+                  E-Commerce & Marketplace Solutions
+                </option>
+                <option value="uiux">UI/UX & Brand Design</option>
+                <option value="other">General Consultation</option>
+              </select>
+            </div>
+
+            <div class="space-y-2">
+              <label
+                for="message"
+                class="text-xs font-semibold text-slate-300 uppercase tracking-wider"
+                >Project Details / Message</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                required
+                class="w-full px-4 py-3 rounded-xl bg-dark-950 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-coral transition-colors text-sm resize-none"
+                placeholder="Tell us about your project goals and timeline..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              id="submit-btn"
+              class="w-full py-4 rounded-xl bg-gradient-to-r from-coral to-accent text-white font-bold text-base shadow-lg shadow-coral/25 hover:shadow-coral/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+            >
+              <span>Open email app</span>
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </form>
+
+          <!-- Success Message Box (Hidden by default) -->
+          <div
+            id="success-box"
+            [hidden]="!submissionNoticeVisible"
+            class="absolute inset-0 glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center bg-dark-900/95 z-20"
+          >
+            <div
+              class="w-16 h-16 rounded-full bg-coral/10 border border-coral/30 text-coral flex items-center justify-center text-3xl mb-4"
+            >
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-2">
+              Your email app is ready
+            </h3>
+            <p class="text-slate-300 text-sm max-w-sm mb-6">
+              Your email app should open with your inquiry ready to send. The
+              message is not delivered until you send it from your email app.
+            </p>
+            <button
+              type="button"
+              (click)="resetContactForm(contactForm)"
+              class="px-6 py-2.5 rounded-xl bg-coral text-white font-semibold text-sm hover:bg-coral-light transition-colors"
+            >
+              Edit message
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark-950 border-t border-slate-800 py-12">
+  <div
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left"
+  >
+    <a href="#" aria-label="Samrique home" class="flex items-center">
+      <img
+        src="samrique-logo.png"
+        alt="Samrique — Build Beyond Limits"
+        class="h-20 w-24 object-contain"
+      />
+    </a>
+    <p class="text-xs text-slate-500">
+      &copy; <span>{{ currentYear }}</span> Samrique. All rights reserved.
+      Crafted with precision & performance.
+    </p>
+    <div class="flex items-center gap-6 text-sm text-slate-400">
+      <a
+        (click)="closeMobileMenu()"
+        href="#services"
+        class="hover:text-coral transition-colors"
+        >Services</a
+      >
+      <a
+        (click)="closeMobileMenu()"
+        href="#projects"
+        class="hover:text-coral transition-colors"
+        >Projects</a
+      >
+      <a
+        (click)="closeMobileMenu()"
+        href="#contact"
+        class="hover:text-coral transition-colors"
+        >Contact</a
+      >
+    </div>
+  </div>
+</footer>
+}
