@@ -9,10 +9,9 @@ git push -u origin gh-pages --force
 
 OR 
 
-npm run build:github-pages
-cd dist/samrique-website/browser
+npm.cmd run build:github-pages
 git init
-git checkout -b gh-pages
+git checkout -B gh-pages
 git add -A
 git commit -m "Deploy Angular app with correct base href"
 git remote add origin https://github.com/samrique-where-design-meets-deployment/samrique.in.git
