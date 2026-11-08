@@ -1,22 +1,53 @@
 @if (showMoneyManager) {
 <main class="product-page">
-  <header class="product-nav">
-    <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" aria-label="Samrique home">
-      <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits" />
-    </a>
-    <nav class="product-nav-links" aria-label="Product page sections">
-      <a href="#product-overview"
-        (click)="$event.preventDefault(); scrollToProductSection('product-overview')">Overview</a>
-      <a href="#product-features"
-        (click)="$event.preventDefault(); scrollToProductSection('product-features')">Features</a>
-      <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')">Screens
-        &amp; Previews</a>
-      <a href="#product-technology"
-        (click)="$event.preventDefault(); scrollToProductSection('product-technology')">Technology</a>
-    </nav>
-    <a class="product-nav-cta" [attr.href]="appPath('/#contact')"
-      (click)="$event.preventDefault(); inquireAboutMoneyManager()">Start a Project <i
-        class="fa-solid fa-arrow-right"></i></a>
+  <div class="top-progress" aria-hidden="true"><span id="top-progress-bar"></span></div>
+
+  <!-- Navigation Header (Matched with Home Screen) -->
+  <header class="product-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="mx-auto my-3 px-4 py-2.5 rounded-full flex items-center justify-between shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
+              class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md"
+          aria-label="Product page sections">
+          <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+          <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
+          <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+          <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
+        </nav>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-2">
+          <a [attr.href]="appPath('/#projects')" (click)="$event.preventDefault(); returnToProjects()"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
+            <span class="hidden sm:inline">Projects</span>
+          </a>
+          <button (click)="openBooking()"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Book Call
+          </button>
+          <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+            class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
+            <span>Start Project</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </header>
 
   <section class="product-hero">
@@ -171,27 +202,60 @@
 
   <footer class="product-footer"><a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">←
       All projects</a><span>© {{ currentYear }} Samrique · Crafted with precision &amp; performance.</span><a
-      [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()">Start a Project
-      <i class="fa-solid fa-arrow-right"></i></a></footer>
+      [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start a Project
+      <i class="fa-solid fa-arrow-right text-xs"></i></a></footer>
 </main>
 } @else if (showMarketplace) {
 <main class="product-page marketplace-page">
-  <header class="product-nav">
-    <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" aria-label="Samrique home"><img
-        src="samrique-logo.png" alt="Samrique — Build Beyond Limits" /></a>
-    <nav class="product-nav-links" aria-label="Product page sections">
-      <a href="#product-overview"
-        (click)="$event.preventDefault(); scrollToProductSection('product-overview')">Overview</a>
-      <a href="#product-features"
-        (click)="$event.preventDefault(); scrollToProductSection('product-features')">Features</a>
-      <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')">Screens
-        &amp; Previews</a>
-      <a href="#product-technology"
-        (click)="$event.preventDefault(); scrollToProductSection('product-technology')">Technology</a>
-    </nav>
-    <a class="product-nav-cta" [attr.href]="appPath('/#contact')"
-      (click)="$event.preventDefault(); inquireAboutMoneyManager()">Start a Project <i
-        class="fa-solid fa-arrow-right"></i></a>
+  <div class="top-progress" aria-hidden="true"><span id="top-progress-bar"></span></div>
+
+  <!-- Navigation Header (Matched with Home Screen) -->
+  <header class="product-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="mx-auto my-3 px-4 py-2.5 rounded-full flex items-center justify-between shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
+              class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md"
+          aria-label="Product page sections">
+          <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+          <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
+          <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+          <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
+        </nav>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-2">
+          <a [attr.href]="appPath('/#projects')" (click)="$event.preventDefault(); returnToProjects()"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
+            <span class="hidden sm:inline">Projects</span>
+          </a>
+          <button (click)="openBooking()"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Book Call
+          </button>
+          <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+            class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
+            <span>Start Project</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </header>
   <section class="product-hero">
     <div class="product-hero-copy">
@@ -340,23 +404,60 @@
   </section>
   <footer class="product-footer"><a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">←
       All projects</a><span>© {{ currentYear }} Samrique · Crafted with precision &amp; performance.</span><a
-      [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()">Start a Project
-      <i class="fa-solid fa-arrow-right"></i></a></footer>
+      [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start a Project
+      <i class="fa-solid fa-arrow-right text-xs"></i></a></footer>
 </main>
 } @else if (showMama) {
 <main class="product-page mama-page">
-  <header class="product-nav"><a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
-      aria-label="Samrique home"><img src="samrique-logo.png" alt="Samrique — Build Beyond Limits" /></a>
-    <nav class="product-nav-links" aria-label="Product page sections"><a href="#product-overview"
-        (click)="$event.preventDefault(); scrollToProductSection('product-overview')">Overview</a><a
-        href="#product-features"
-        (click)="$event.preventDefault(); scrollToProductSection('product-features')">Features</a><a
-        href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')">Screens
-        &amp; Previews</a><a href="#product-technology"
-        (click)="$event.preventDefault(); scrollToProductSection('product-technology')">Technology</a></nav><a
-      class="product-nav-cta" [attr.href]="appPath('/#contact')"
-      (click)="$event.preventDefault(); inquireAboutMoneyManager()">Start a Project <i
-        class="fa-solid fa-arrow-right"></i></a>
+  <div class="top-progress" aria-hidden="true"><span id="top-progress-bar"></span></div>
+
+  <!-- Navigation Header (Matched with Home Screen) -->
+  <header class="product-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="mx-auto my-3 px-4 py-2.5 rounded-full flex items-center justify-between shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
+              class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md"
+          aria-label="Product page sections">
+          <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+          <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
+          <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+          <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
+        </nav>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-2">
+          <a [attr.href]="appPath('/#projects')" (click)="$event.preventDefault(); returnToProjects()"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
+            <span class="hidden sm:inline">Projects</span>
+          </a>
+          <button (click)="openBooking()"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Book Call
+          </button>
+          <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+            class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
+            <span>Start Project</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </header>
   <section class="product-hero">
     <div class="product-hero-copy">
@@ -502,28 +603,60 @@
   </section>
   <footer class="product-footer"><a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">←
       All projects</a><span>© {{ currentYear }} Samrique · Crafted with care.</span><a
-      [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()">Start a Project
-      <i class="fa-solid fa-arrow-right"></i></a></footer>
+      [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start a Project
+      <i class="fa-solid fa-arrow-right text-xs"></i></a></footer>
 </main>
 } @else if (showZipi) {
 <main class="product-page zipi-page">
-  <header class="product-nav">
-    <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" aria-label="Samrique home">
-      <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits" />
-    </a>
-    <nav class="product-nav-links" aria-label="Product page sections">
-      <a href="#product-overview"
-        (click)="$event.preventDefault(); scrollToProductSection('product-overview')">Overview</a>
-      <a href="#product-features"
-        (click)="$event.preventDefault(); scrollToProductSection('product-features')">Features</a>
-      <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')">Screens
-        &amp; Previews</a>
-      <a href="#product-technology"
-        (click)="$event.preventDefault(); scrollToProductSection('product-technology')">Technology</a>
-    </nav>
-    <a class="product-nav-cta" [attr.href]="appPath('/#contact')"
-      (click)="$event.preventDefault(); inquireAboutMoneyManager()">Start a Project <i
-        class="fa-solid fa-arrow-right"></i></a>
+  <div class="top-progress" aria-hidden="true"><span id="top-progress-bar"></span></div>
+
+  <!-- Navigation Header (Matched with Home Screen) -->
+  <header class="product-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="mx-auto my-3 px-4 py-2.5 rounded-full flex items-center justify-between shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
+              class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md"
+          aria-label="Product page sections">
+          <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+          <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
+          <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+          <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
+        </nav>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-2">
+          <a [attr.href]="appPath('/#projects')" (click)="$event.preventDefault(); returnToProjects()"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
+            <span class="hidden sm:inline">Projects</span>
+          </a>
+          <button (click)="openBooking()"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Book Call
+          </button>
+          <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+            class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
+            <span>Start Project</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </header>
 
   <section class="product-hero">
@@ -540,7 +673,7 @@
       <div class="product-pills"><span>Flutter</span><span>GetX</span><span>Google Maps</span><span>Real-Time
           Dispatch</span><span>REST API</span></div>
       <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
-        <a class="product-primary" style="background:linear-gradient(110deg,#f97316,#ea580c);"
+        <a class="product-primary"
           [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()">
           Discuss a similar product <i class="fa-solid fa-arrow-right"></i>
         </a>
@@ -694,7 +827,8 @@
   <footer class="product-footer">
     <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">← All projects</a>
     <span>© {{ currentYear }} Samrique · Crafted with precision &amp; performance.</span>
-    <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()">Start a Project
+    <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start a Project
       <i class="fa-solid fa-arrow-right"></i></a>
   </footer>
 </main>
@@ -764,7 +898,7 @@
             Book Call
           </button>
           <a href="#contact"
-            class="relative inline-flex items-center gap-2 px-5 py-2 rounded-full bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold tracking-wide uppercase shadow-md shadow-teal-700/20 hover:scale-105 active:scale-95 transition-all duration-200">
+            class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
             <span>Start Project</span>
             <i class="fa-solid fa-arrow-right text-xs"></i>
           </a>
@@ -793,7 +927,7 @@
       <a href="#about" (click)="closeMobileMenu()"
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">About</a>
       <a href="#contact" (click)="closeMobileMenu()"
-        class="block px-3 py-2 rounded-lg text-sm font-bold text-teal-700 hover:bg-teal-50">Start Project</a>
+        class="btn-brand-gradient block text-center px-4 py-2.5 rounded-full text-sm font-bold text-white shadow-md my-2">Start Project</a>
       <button (click)="closeMobileMenu(); openBooking()"
         class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-emerald-700 hover:bg-emerald-50">
         Book 30-Min Discovery Call
@@ -827,7 +961,7 @@
       <!-- CTA Row -->
       <div class="flex flex-wrap items-center justify-center gap-4 pt-3">
         <a href="#contact"
-          class="px-7 py-3.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-bold text-sm shadow-lg shadow-teal-700/25 hover:shadow-teal-700/35 hover:-translate-y-0.5 active:translate-y-0 transition-all inline-flex items-center gap-2">
+          class="btn-brand-gradient px-8 py-3.5 rounded-full text-white font-extrabold text-sm uppercase tracking-wider shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all inline-flex items-center gap-2">
           <span>Start Project</span>
           <i class="fa-solid fa-arrow-right text-xs"></i>
         </a>
@@ -1074,7 +1208,7 @@
               <div>
                 <a [attr.href]="appPath('/products/samrique-e-marketplace')"
                   (click)="$event.preventDefault(); openMarketplace()"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-semibold text-xs shadow-md shadow-teal-700/20 transition-all">
+                  class="btn-brand-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-md transition-all">
                   <span>Explore Case Study &amp; Screens</span>
                   <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
@@ -1135,7 +1269,7 @@
               <div>
                 <a [attr.href]="appPath('/products/money-manager')"
                   (click)="$event.preventDefault(); openMoneyManager()"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-semibold text-xs shadow-md shadow-teal-700/20 transition-all">
+                  class="btn-brand-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-md transition-all">
                   <span>Explore Case Study &amp; Screens</span>
                   <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
@@ -1179,7 +1313,7 @@
               </div>
               <div>
                 <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-semibold text-xs shadow-md shadow-teal-700/20 transition-all">
+                  class="btn-brand-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-md transition-all">
                   <span>Explore Case Study &amp; Screens</span>
                   <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
@@ -1233,7 +1367,7 @@
               </div>
               <div>
                 <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-semibold text-xs shadow-md shadow-teal-700/20 transition-all">
+                  class="btn-brand-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-md transition-all">
                   <span>Explore Case Study &amp; Screens</span>
                   <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
@@ -1327,7 +1461,7 @@
           </p>
           <div>
             <button (click)="openBooking()"
-              class="px-8 py-4 rounded-xl bg-gradient-to-r from-teal-700 to-teal-600 hover:from-teal-800 hover:to-teal-700 text-white font-extrabold text-sm uppercase tracking-wider shadow-lg shadow-teal-700/25 hover:shadow-teal-700/35 hover:-translate-y-0.5 active:translate-y-0 transition-all inline-flex items-center gap-2">
+              class="btn-brand-gradient px-8 py-4 rounded-full text-white font-extrabold text-sm uppercase tracking-wider shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all inline-flex items-center gap-2">
               <span>START A CONVERSATION TODAY</span>
               <i class="fa-solid fa-arrow-right text-xs"></i>
             </button>

@@ -117,7 +117,7 @@ export class App implements AfterViewInit, OnDestroy {
             this.revealObserver?.unobserve(entry.target);
           }
         }
-      }, { threshold: 0.12 });
+      }, { threshold: 0.01, rootMargin: '100px 0px 100px 0px' });
       document.documentElement.classList.add('reveal-enabled');
       this.observeRevealElements();
     }
@@ -343,7 +343,7 @@ export class App implements AfterViewInit, OnDestroy {
 
   private refreshHomeVisibility(): void {
     const reveal = () => {
-      const hash = window.location.hash.replace('#', '') || 'projects';
+      const hash = window.location.hash.replace('#', '');
       if (hash) {
         const target = document.getElementById(hash);
         if (target) {
@@ -355,14 +355,9 @@ export class App implements AfterViewInit, OnDestroy {
         }
       }
 
-      document.querySelectorAll('.reveal-on-scroll:not(.is-visible)').forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight + 200) {
-          el.classList.add('is-visible');
-          this.revealObserver?.unobserve(el);
-        } else {
-          this.revealObserver?.observe(el);
-        }
+      document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+        el.classList.add('is-visible');
+        this.revealObserver?.unobserve(el);
       });
     };
 
