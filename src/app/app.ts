@@ -53,10 +53,10 @@ export class App implements AfterViewInit, OnDestroy {
     });
   });
 
-  protected showMoneyManager = this.routePath === '/products/money-manager';
+  protected showMoneyManager = ['/products/money-manager', '/products/samrique-money-manager'].includes(this.routePath);
   protected showMarketplace = ['/products/samrique-e-marketplace', '/products/quickcart'].includes(this.routePath);
-  protected showMama = this.routePath === '/products/samrique-mama';
-  protected showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app'].includes(this.routePath);
+  protected showMama = ['/products/samrique-mama', '/products/samrique-mama-pregnancy-tracker'].includes(this.routePath);
+  protected showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
 
   // Modal Lightbox state
   protected activeModalScreen: ProductScreen | null = null;
@@ -1117,10 +1117,10 @@ export class App implements AfterViewInit, OnDestroy {
 
   @HostListener('window:popstate')
   protected syncRoute(): void {
-    this.showMoneyManager = this.routePath === '/products/money-manager';
+    this.showMoneyManager = ['/products/money-manager', '/products/samrique-money-manager'].includes(this.routePath);
     this.showMarketplace = ['/products/samrique-e-marketplace', '/products/quickcart'].includes(this.routePath);
-    this.showMama = this.routePath === '/products/samrique-mama';
-    this.showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app'].includes(this.routePath);
+    this.showMama = ['/products/samrique-mama', '/products/samrique-mama-pregnancy-tracker'].includes(this.routePath);
+    this.showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
 

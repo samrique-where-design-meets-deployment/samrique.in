@@ -6,8 +6,8 @@
   <header class="product-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
-        class="mx-auto my-3 px-4 py-2.5 rounded-full flex items-center justify-between shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
-        <div class="flex items-center gap-3">
+        class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3 flex-shrink-0">
           <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
             <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
               class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
@@ -16,27 +16,27 @@
 
         <!-- Desktop Navigation -->
         <nav
-          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md"
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md mx-auto"
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
           <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
         </nav>
 
         <!-- Action Buttons -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-3 sm:gap-3.5 flex-shrink-0">
           <a [attr.href]="appPath('/#projects')" (click)="$event.preventDefault(); returnToProjects()"
             class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors">
             <i class="fa-solid fa-arrow-left text-xs"></i>
             <span class="hidden sm:inline">Projects</span>
           </a>
           <button (click)="openBooking()"
-            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Book Call
           </button>
@@ -71,7 +71,7 @@
       </div>
     </div>
     <figure class="product-hero-image" style="cursor: pointer;" (click)="scrollToProductSection('product-screens')">
-      <img src="assets/images/samrique_money_manager/samrique-money-manager-showcase.png" alt="Samrique Money Manager – Money, made clear" class="home-hero-img" />
+      <img src="assets/images/samrique_money_manager/samrique-money-manager-showcase.png" alt="Samrique Money Manager – Money, made clear" class="home-hero-img" loading="eager" fetchpriority="high" decoding="async" />
       <figcaption>Preview Screen: Money, made clear. A look inside Samrique Money Manager.</figcaption>
     </figure>
   </section>
@@ -214,8 +214,8 @@
   <header class="product-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
-        class="mx-auto my-3 px-4 py-2.5 rounded-full flex items-center justify-between shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
-        <div class="flex items-center gap-3">
+        class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3 flex-shrink-0">
           <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
             <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
               class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
@@ -224,27 +224,27 @@
 
         <!-- Desktop Navigation -->
         <nav
-          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md"
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md mx-auto"
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
           <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
         </nav>
 
         <!-- Action Buttons -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-3 sm:gap-3.5 flex-shrink-0">
           <a [attr.href]="appPath('/#projects')" (click)="$event.preventDefault(); returnToProjects()"
             class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors">
             <i class="fa-solid fa-arrow-left text-xs"></i>
             <span class="hidden sm:inline">Projects</span>
           </a>
           <button (click)="openBooking()"
-            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Book Call
           </button>
@@ -280,7 +280,7 @@
     </div>
     <figure class="product-hero-image" style="cursor: pointer;" (click)="scrollToProductSection('product-screens')">
       <img src="assets/images/samrique_e-%20marketplace/05_buyer_home_preview.png"
-        alt="Preview Screen: Samrique E-Marketplace Buyer Hub" />
+        alt="Preview Screen: Samrique E-Marketplace Buyer Hub" loading="eager" fetchpriority="high" decoding="async" />
       <figcaption>Preview Screen: Buyer Marketplace &amp; Digital Discovery Hub</figcaption>
     </figure>
   </section>
@@ -416,8 +416,8 @@
   <header class="product-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
-        class="mx-auto my-3 px-4 py-2.5 rounded-full flex items-center justify-between shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
-        <div class="flex items-center gap-3">
+        class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3 flex-shrink-0">
           <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
             <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
               class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
@@ -426,27 +426,27 @@
 
         <!-- Desktop Navigation -->
         <nav
-          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md"
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md mx-auto"
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
           <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
         </nav>
 
         <!-- Action Buttons -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-3 sm:gap-3.5 flex-shrink-0">
           <a [attr.href]="appPath('/#projects')" (click)="$event.preventDefault(); returnToProjects()"
             class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors">
             <i class="fa-solid fa-arrow-left text-xs"></i>
             <span class="hidden sm:inline">Projects</span>
           </a>
           <button (click)="openBooking()"
-            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Book Call
           </button>
@@ -482,7 +482,7 @@
     </div>
     <figure class="product-hero-image" style="cursor: pointer;" (click)="scrollToProductSection('product-screens')">
       <img src="assets/images/samrique_mama_pregnancy_tracker/04_pregnancy_overview_preview.png"
-        alt="Preview Screen: Samrique Mama Pregnancy Overview" />
+        alt="Preview Screen: Samrique Mama Pregnancy Overview" loading="eager" fetchpriority="high" decoding="async" />
       <figcaption>Preview Screen: Week 8 Pregnancy Overview, Baby Milestone &amp; Daily Vitals</figcaption>
     </figure>
   </section>
@@ -615,8 +615,8 @@
   <header class="product-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
-        class="mx-auto my-3 px-4 py-2.5 rounded-full flex items-center justify-between shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
-        <div class="flex items-center gap-3">
+        class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3 flex-shrink-0">
           <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
             <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
               class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
@@ -625,27 +625,27 @@
 
         <!-- Desktop Navigation -->
         <nav
-          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md"
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md mx-auto"
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
           <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
         </nav>
 
         <!-- Action Buttons -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-3 sm:gap-3.5 flex-shrink-0">
           <a [attr.href]="appPath('/#projects')" (click)="$event.preventDefault(); returnToProjects()"
             class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors">
             <i class="fa-solid fa-arrow-left text-xs"></i>
             <span class="hidden sm:inline">Projects</span>
           </a>
           <button (click)="openBooking()"
-            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Book Call
           </button>
@@ -685,7 +685,7 @@
     </div>
     <figure class="product-hero-image" style="cursor: pointer;" (click)="scrollToProductSection('product-screens')">
       <img src="assets/images/zipi_bike_taxi_app/10_rider_home_preview.png"
-        alt="Preview Screen: Zipi Bike Taxi Rider Map &amp; Booking" />
+        alt="Preview Screen: Zipi Bike Taxi Rider Map &amp; Booking" loading="eager" fetchpriority="high" decoding="async" />
       <figcaption>Preview Screen: Rider Live Map, Captain Radar &amp; Instant Ride Booking</figcaption>
     </figure>
   </section>
@@ -841,8 +841,8 @@
   <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
-        class="mx-auto my-3 px-4 py-2.5 rounded-full flex items-center justify-between shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
-        <div class="flex items-center gap-3">
+        class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3 flex-shrink-0">
           <a href="#" class="flex items-center gap-2 group">
             <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
               class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
@@ -851,7 +851,7 @@
 
         <!-- Desktop Navigation -->
         <nav
-          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md"
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md mx-auto"
           aria-label="Primary">
           <a href="#hero" (click)="scrollToSection('hero')"
             class="px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200"
@@ -891,9 +891,9 @@
         </nav>
 
         <!-- Action Button -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-3 sm:gap-3.5 flex-shrink-0">
           <button (click)="openBooking()"
-            class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Book Call
           </button>
@@ -1219,7 +1219,7 @@
                 class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-100 cursor-pointer group"
                 (click)="openMarketplace()">
                 <img src="assets/images/samrique_e-%20marketplace/05_buyer_home_preview.png"
-                  alt="Samrique E-Marketplace"
+                  alt="Samrique E-Marketplace" loading="lazy" decoding="async"
                   class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-300" />
               </div>
             </div>
@@ -1234,7 +1234,7 @@
               <div
                 class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-900 cursor-pointer group"
                 (click)="openMoneyManager()">
-                <img src="assets/images/samrique_money_manager/samrique-money-manager-showcase.png" alt="Samrique Money Manager"
+                <img src="assets/images/samrique_money_manager/samrique-money-manager-showcase.png" alt="Samrique Money Manager" loading="lazy" decoding="async"
                   class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-300" />
               </div>
             </div>
@@ -1324,7 +1324,7 @@
                 class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-100 cursor-pointer group"
                 (click)="openMama()">
                 <img src="assets/images/samrique_mama_pregnancy_tracker/04_pregnancy_overview_preview.png"
-                  alt="Samrique Mama Pregnancy Tracker"
+                  alt="Samrique Mama Pregnancy Tracker" loading="lazy" decoding="async"
                   class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-300" />
               </div>
             </div>
@@ -1377,7 +1377,7 @@
               <div
                 class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-900 cursor-pointer group"
                 (click)="openZipi()">
-                <img src="assets/images/zipi_bike_taxi_app/10_rider_home_preview.png" alt="Zipi Bike Taxi App"
+                <img src="assets/images/zipi_bike_taxi_app/10_rider_home_preview.png" alt="Zipi Bike Taxi App" loading="lazy" decoding="async"
                   class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-300" />
               </div>
             </div>
