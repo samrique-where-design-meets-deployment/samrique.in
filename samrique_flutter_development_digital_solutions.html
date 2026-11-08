@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samrique — Flutter Development & Digital Solutions</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            obsidian: '#070A10',
+            midnight: '#0D1322',
+            brand: {
+              DEFAULT: '#FF6B2B',
+              light: '#FF8F50',
+              dark: '#E04F10',
+              glow: 'rgba(255, 107, 43, 0.35)'
+            }
+          },
+          animation: {
+            'float-slow': 'float 7s ease-in-out infinite',
+            'float-delayed': 'float 8s ease-in-out 3.5s infinite',
+            'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
+            'gradient-x': 'gradientX 6s ease infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-14px) rotate(1.5deg)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.35', transform: 'scale(1)' },
+              '50%': { opacity: '0.65', transform: 'scale(1.06)' },
+            },
+            gradientX: {
+              '0%, 100%': { 'background-position': '0% 50%' },
+              '50%': { 'background-position': '100% 50%' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+    }
+
+    body {
+      background-color: #070A10;
+      color: #F8FAFC;
+      overflow-x: hidden;
+      selection-background-color: #FF6B2B;
+    }
+
+    /* Optional Scroll Snap Mode */
+    html.snap-enabled {
+      scroll-snap-type: y proximity;
+    }
+    html.snap-enabled .snap-section {
+      scroll-snap-align: start;
+      scroll-margin-top: 5rem;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070A10;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 9999px;
+      border: 2px solid #070A10;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FF6B2B;
+    }
+
+    /* Glassmorphism & Spotlight Cards */
+    .glass-card {
+      background: rgba(16, 23, 41, 0.65);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        550px circle at var(--card-mouse-x, -500px) var(--card-mouse-y, -500px),
+        rgba(255, 107, 43, 0.14),
+        transparent 40%
+      );
+      pointer-events: none;
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(255, 107, 43, 0.35);
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.7), 0 0 35px -10px rgba(255, 107, 43, 0.2);
+    }
+
+    /* Section Slide-On-Scroll Animations */
+    .reveal-slide-up {
+      opacity: 0;
+      transform: translateY(64px) scale(0.97);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-slide-left {
+      opacity: 0;
+      transform: translateX(-80px) scale(0.97);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-slide-right {
+      opacity: 0;
+      transform: translateX(80px) scale(0.97);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.9) translateY(35px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .is-visible {
+      opacity: 1 !important;
+      transform: translateX(0) translateY(0) scale(1) !important;
+    }
+
+    /* Delay utilities for staggered slide-in */
+    .delay-100 { transition-delay: 100ms; }
+    .delay-200 { transition-delay: 200ms; }
+    .delay-300 { transition-delay: 300ms; }
+    .delay-400 { transition-delay: 400ms; }
+
+    /* Animated Gradient Text */
+    .text-gradient-brand {
+      background: linear-gradient(90deg, #FF6B2B 0%, #FFA166 50%, #FF5533 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientX 5s ease infinite;
+    }
+
+    /* Subtle Grid Background */
+    .bg-grid-pattern {
+      background-size: 48px 48px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    }
+
+    /* Animated SVG Route Dash */
+    @keyframes dashMove {
+      to {
+        stroke-dashoffset: -40;
+      }
+    }
+    .animate-route {
+      stroke-dasharray: 6 6;
+      animation: dashMove 1.2s linear infinite;
+    }
+
+    /* 3D Tilt Wrapper */
+    .tilt-card {
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-brand selection:text-white relative">
+
+  <!-- Top Scroll Progress Bar -->
+  <div class="fixed top-0 left-0 right-0 h-1 z-[60] bg-slate-900/60">
+    <div id="topProgressBar" class="h-full w-0 bg-gradient-to-r from-brand via-amber-400 to-orange-500 shadow-[0_0_12px_#FF6B2B] transition-all duration-75"></div>
+  </div>
+
+  <!-- Ambient Background Radial Glows -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[520px] bg-brand/15 rounded-full blur-[150px] animate-pulse-glow"></div>
+    <div class="absolute top-[35%] -left-48 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[140px]"></div>
+    <div class="absolute top-[65%] -right-48 w-[550px] h-[550px] bg-brand/10 rounded-full blur-[150px]"></div>
+    <div class="absolute inset-0 bg-grid-pattern opacity-70"></div>
+  </div>
+
+  <!-- Right Floating Section Slide Navigator -->
+  <aside class="fixed right-5 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-center gap-3.5 bg-slate-950/70 backdrop-blur-xl border border-white/10 px-2.5 py-4 rounded-full shadow-2xl">
+    <button onclick="scrollToSection('hero')" data-nav-dot="hero" class="group relative flex items-center justify-center w-3 h-3 rounded-full bg-brand scale-125 transition-all duration-300" aria-label="Hero Section">
+      <span class="absolute right-7 px-2.5 py-1 rounded-md bg-slate-900/95 border border-white/10 text-[11px] font-medium text-white opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap shadow-lg">01. Hero</span>
+    </button>
+    <div class="w-[1px] h-3 bg-white/10"></div>
+    <button onclick="scrollToSection('services')" data-nav-dot="services" class="group relative flex items-center justify-center w-2.5 h-2.5 rounded-full bg-white/25 hover:bg-white/60 transition-all duration-300" aria-label="Services Section">
+      <span class="absolute right-7 px-2.5 py-1 rounded-md bg-slate-900/95 border border-white/10 text-[11px] font-medium text-white opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap shadow-lg">02. Services</span>
+    </button>
+    <div class="w-[1px] h-3 bg-white/10"></div>
+    <button onclick="scrollToSection('projects')" data-nav-dot="projects" class="group relative flex items-center justify-center w-2.5 h-2.5 rounded-full bg-white/25 hover:bg-white/60 transition-all duration-300" aria-label="Projects Section">
+      <span class="absolute right-7 px-2.5 py-1 rounded-md bg-slate-900/95 border border-white/10 text-[11px] font-medium text-white opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap shadow-lg">03. Selected Works</span>
+    </button>
+    <div class="w-[1px] h-3 bg-white/10"></div>
+    <button onclick="scrollToSection('stack')" data-nav-dot="stack" class="group relative flex items-center justify-center w-2.5 h-2.5 rounded-full bg-white/25 hover:bg-white/60 transition-all duration-300" aria-label="Tech Stack Section">
+      <span class="absolute right-7 px-2.5 py-1 rounded-md bg-slate-900/95 border border-white/10 text-[11px] font-medium text-white opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap shadow-lg">04. Tech Stack</span>
+    </button>
+    <div class="w-[1px] h-3 bg-white/10"></div>
+    <button onclick="scrollToSection('contact')" data-nav-dot="contact" class="group relative flex items-center justify-center w-2.5 h-2.5 rounded-full bg-white/25 hover:bg-white/60 transition-all duration-300" aria-label="Contact Section">
+      <span class="absolute right-7 px-2.5 py-1 rounded-md bg-slate-900/95 border border-white/10 text-[11px] font-medium text-white opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap shadow-lg">05. Let's Talk</span>
+    </button>
+  </aside>
+
+  <!-- Single Clean Sticky Glass Header -->
+  <header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-obsidian/75 backdrop-blur-xl border-b border-white/[0.07]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3 group focus:outline-none">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand via-orange-500 to-indigo-600 p-[1px] shadow-[0_0_25px_rgba(255,107,43,0.35)] group-hover:scale-105 transition-transform">
+          <div class="w-full h-full bg-obsidian rounded-[11px] flex items-center justify-center">
+            <span class="font-display font-extrabold text-xl bg-gradient-to-r from-brand to-amber-300 bg-clip-text text-transparent">S</span>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-bold text-lg tracking-tight text-white flex items-center gap-1.5">
+            Samrique
+            <span class="w-1.5 h-1.5 rounded-full bg-brand inline-block"></span>
+          </span>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400">Flutter & Digital Studio</span>
+        </div>
+      </a>
+
+      <!-- Center Navigation Links -->
+      <nav class="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/[0.07] rounded-full px-2 py-1.5">
+        <a href="#hero" data-nav-link="hero" class="nav-pill px-4 py-1.5 rounded-full text-xs font-medium text-white bg-white/10 transition-all">Overview</a>
+        <a href="#services" data-nav-link="services" class="nav-pill px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white transition-all">Services</a>
+        <a href="#projects" data-nav-link="projects" class="nav-pill px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white transition-all">Projects</a>
+        <a href="#stack" data-nav-link="stack" class="nav-pill px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white transition-all">Tech Stack</a>
+        <a href="#contact" data-nav-link="contact" class="nav-pill px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white transition-all">Contact</a>
+      </nav>
+
+      <!-- Right Controls: Slide Mode Toggle & CTA -->
+      <div class="flex items-center gap-3">
+        <button id="snapToggleBtn" onclick="toggleScrollSnap()" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-white/10 text-xs text-slate-300 hover:border-brand/50 hover:text-white transition-all" title="Toggle magnetic section scroll snapping">
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-brand"></i>
+          <span>Slide Snap: <strong id="snapStatusText" class="text-slate-400">OFF</strong></span>
+        </button>
+
+        <a href="#contact" class="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-brand to-orange-500 hover:from-orange-500 hover:to-brand shadow-[0_0_25px_rgba(255,107,43,0.4)] hover:shadow-[0_0_35px_rgba(255,107,43,0.65)] hover:-translate-y-0.5 transition-all">
+          <span>Start a Project</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main class="relative z-10 pt-20">
+
+    <!-- ==========================================
+         SECTION 1: HERO SECTION
+         ========================================== -->
+    <section id="hero" data-section="hero" class="snap-section min-h-[calc(100vh-5rem)] flex flex-col justify-center relative py-16 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      
+      <!-- Floating Decorative Interactive Mockup Cards (Desktop) -->
+      <div class="hidden xl:block absolute left-8 top-1/3 w-64 glass-card rounded-2xl p-4 animate-float-slow pointer-events-auto z-20 shadow-2xl border-white/15">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-[11px] font-mono text-brand flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            flutter_build.dart
+          </span>
+          <span class="text-[10px] bg-emerald-500/15 text-emerald-300 px-2 py-0.5 rounded-full font-mono">120 FPS</span>
+        </div>
+        <div class="space-y-2 text-xs font-mono text-slate-300 bg-slate-950/80 p-3 rounded-xl border border-white/5">
+          <div class="text-sky-400">class <span class="text-amber-300">SamriqueApp</span></div>
+          <div class="pl-3 text-slate-400">target: <span class="text-emerald-400">'iOS • Android • Web'</span></div>
+          <div class="pl-3 text-slate-400">engine: <span class="text-brand-light">'Impeller 3D'</span></div>
+        </div>
+        <div class="mt-3 flex items-center justify-between text-[11px] text-slate-400">
+          <span>Hot Reload</span>
+          <span class="text-white font-semibold">140ms ⚡</span>
+        </div>
+      </div>
+
+      <div class="hidden xl:block absolute right-10 top-1/4 w-64 glass-card rounded-2xl p-4 animate-float-delayed pointer-events-auto z-20 shadow-2xl border-white/15">
+        <div class="flex items-center gap-2.5 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-brand/20 border border-brand/40 flex items-center justify-center text-brand">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <div class="text-xs font-semibold text-white">Payment Gateway</div>
+            <div class="text-[10px] text-slate-400">UPI • Stripe • Razorpay</div>
+          </div>
+        </div>
+        <div class="w-full bg-slate-800/80 h-1.5 rounded-full overflow-hidden mb-2">
+          <div class="bg-gradient-to-r from-brand to-emerald-400 w-[98%] h-full rounded-full"></div>
+        </div>
+        <div class="flex justify-between text-[11px]">
+          <span class="text-slate-400">Transaction Success</span>
+          <span class="text-emerald-400 font-mono font-semibold">99.98%</span>
+        </div>
+      </div>
+
+      <div class="max-w-5xl mx-auto text-center relative z-10">
+        <!-- Availability Pill -->
+        <div class="reveal-slide-up is-visible inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-brand/10 border border-brand/30 text-brand-light text-xs font-medium mb-8 shadow-[0_0_25px_rgba(255,107,43,0.15)]">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
+          </span>
+          <span>FLUTTER & FULL-STACK DIGITAL ENGINEERING STUDIO</span>
+        </div>
+
+        <!-- Main Hero Title -->
+        <h1 class="reveal-slide-up delay-100 is-visible font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-white leading-[1.08] mb-6">
+          Crafting High-Performance <br class="hidden sm:inline" />
+          <span class="text-gradient-brand">Digital Products</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="reveal-slide-up delay-200 is-visible max-w-2xl mx-auto text-base sm:text-lg text-slate-300/90 font-normal leading-relaxed mb-10">
+          Crafting high-performance cross-platform mobile apps, seamless payment integrations, and scalable digital products engineered for velocity, reliability, and measurable business growth.
+        </p>
+
+        <!-- Hero Action Buttons -->
+        <div class="reveal-slide-up delay-300 is-visible flex flex-wrap items-center justify-center gap-4 mb-16">
+          <a href="#projects" class="group inline-flex items-center gap-2.5 px-7 py-4 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-brand to-orange-500 hover:from-orange-500 hover:to-brand shadow-[0_10px_30px_-5px_rgba(255,107,43,0.55)] hover:shadow-[0_15px_35px_-5px_rgba(255,107,43,0.75)] hover:-translate-y-0.5 transition-all">
+            <span>View Selected Works</span>
+            <i data-lucide="arrow-down-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform"></i>
+          </a>
+
+          <button onclick="openInteractiveSimulator()" class="group inline-flex items-center gap-2.5 px-7 py-4 rounded-xl font-semibold text-sm text-slate-200 bg-white/[0.04] hover:bg-white/[0.09] border border-white/15 hover:border-brand/40 transition-all hover:-translate-y-0.5">
+            <span class="w-6 h-6 rounded-full bg-brand/20 border border-brand/40 flex items-center justify-center text-brand group-hover:scale-110 transition-transform">
+              <i data-lucide="play" class="w-3 h-3 fill-current"></i>
+            </span>
+            <span>Interactive App Simulator</span>
+          </button>
+        </div>
+
+        <!-- Animated Metrics Bar -->
+        <div class="reveal-slide-up delay-400 is-visible grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto pt-8 border-t border-white/10">
+          <div class="glass-card rounded-2xl p-5 text-center group">
+            <div class="flex items-center justify-center gap-1 font-display font-extrabold text-3xl sm:text-4xl text-white mb-1 group-hover:text-brand-light transition-colors">
+              <span class="counter-value" data-target="40">40</span><span>%</span>
+            </div>
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Faster Time-to-Market</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 text-center group">
+            <div class="flex items-center justify-center gap-1 font-display font-extrabold text-3xl sm:text-4xl text-white mb-1 group-hover:text-brand-light transition-colors">
+              <span class="counter-value" data-target="99.9">99.9</span><span>%</span>
+            </div>
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Crash-Free App Sessions</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-5 text-center group">
+            <div class="flex items-center justify-center gap-1 font-display font-extrabold text-3xl sm:text-4xl text-white mb-1 group-hover:text-brand-light transition-colors">
+              <span class="counter-value" data-target="100">100</span><span>%</span>
+            </div>
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Client Satisfaction & Delivery</p>
+          </div>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="mt-12 flex flex-col items-center justify-center gap-2 opacity-75 hover:opacity-100 transition-opacity">
+          <a href="#services" class="flex flex-col items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-brand-light">
+            <span>SCROLL TO SLIDE SECTIONS</span>
+            <div class="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center p-1">
+              <div class="w-1 h-2 rounded-full bg-brand animate-bounce"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: SERVICES & CAPABILITIES
+         ========================================== -->
+    <section id="services" data-section="services" class="snap-section py-24 lg:py-32 px-4 sm:px-6 lg:px-8 relative border-t border-white/[0.05]">
+      <div class="max-w-7xl mx-auto">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16 reveal-slide-up">
+          <span class="text-xs font-mono uppercase tracking-[0.2em] text-brand font-semibold block mb-3">WHAT WE DO</span>
+          <h2 class="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight mb-4">
+            Engineering Excellence Across All Platforms
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+            End-to-end mobile and digital product engineering designed to accelerate launches, elevate user experiences, and scale effortlessly with your business.
+          </p>
+        </div>
+
+        <!-- 4 Interactive 3D-Tilt Service Cards (Sliding from Left & Right) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          
+          <!-- Service Card 1 -->
+          <div class="glass-card tilt-card rounded-3xl p-7 sm:p-9 reveal-slide-left group">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 rounded-2xl bg-brand/15 border border-brand/30 flex items-center justify-center text-brand shadow-[0_0_20px_rgba(255,107,43,0.2)] group-hover:scale-110 transition-transform">
+                <i data-lucide="smartphone" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-slate-400 bg-white/[0.04] border border-white/10 px-3 py-1 rounded-full">01 / MOBILE CORE</span>
+            </div>
+            <h3 class="font-display font-bold text-xl sm:text-2xl text-white mb-3 group-hover:text-brand-light transition-colors">
+              Flutter App Development
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+              High-performance cross-platform mobile applications for iOS and Android built from a single clean codebase with native 120Hz animations and offline-first architecture.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-4 border-t border-white/[0.07]">
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">Flutter 3.x</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">BLoC / Riverpod</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">Native MethodChannels</span>
+            </div>
+          </div>
+
+          <!-- Service Card 2 -->
+          <div class="glass-card tilt-card rounded-3xl p-7 sm:p-9 reveal-slide-right delay-100 group">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400 shadow-[0_0_20px_rgba(244,63,94,0.2)] group-hover:scale-110 transition-transform">
+                <i data-lucide="credit-card" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-slate-400 bg-white/[0.04] border border-white/10 px-3 py-1 rounded-full">02 / FINTECH & API</span>
+            </div>
+            <h3 class="font-display font-bold text-xl sm:text-2xl text-white mb-3 group-hover:text-rose-300 transition-colors">
+              UPI & Payment Integration
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+              Rock-solid payment gateway orchestration including UPI Intent flows, Razorpay, Stripe, subscription billing, automated webhooks, and encrypted ledger reconciliation.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-4 border-t border-white/[0.07]">
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">UPI AutoPay</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">Razorpay / Stripe</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">End-to-End Encryption</span>
+            </div>
+          </div>
+
+          <!-- Service Card 3 -->
+          <div class="glass-card tilt-card rounded-3xl p-7 sm:p-9 reveal-slide-left delay-200 group">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.2)] group-hover:scale-110 transition-transform">
+                <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-slate-400 bg-white/[0.04] border border-white/10 px-3 py-1 rounded-full">03 / COMMERCE</span>
+            </div>
+            <h3 class="font-display font-bold text-xl sm:text-2xl text-white mb-3 group-hover:text-amber-300 transition-colors">
+              E-Commerce & Marketplace Systems
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+              Full-featured multi-vendor storefronts, real-time inventory syncing, smart cart recovery, push notifications, and live delivery tracking engineered for high conversion.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-4 border-t border-white/[0.07]">
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">Multi-Vendor</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">Real-Time Sync</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">Order Telemetry</span>
+            </div>
+          </div>
+
+          <!-- Service Card 4 -->
+          <div class="glass-card tilt-card rounded-3xl p-7 sm:p-9 reveal-slide-right delay-300 group">
+            <div class="flex items-start justify-between mb-6">
+              <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 shadow-[0_0_20px_rgba(168,85,247,0.2)] group-hover:scale-110 transition-transform">
+                <i data-lucide="rocket" class="w-6 h-6"></i>
+              </div>
+              <span class="text-[11px] font-mono text-slate-400 bg-white/[0.04] border border-white/10 px-3 py-1 rounded-full">04 / ARCHITECTURE</span>
+            </div>
+            <h3 class="font-display font-bold text-xl sm:text-2xl text-white mb-3 group-hover:text-purple-300 transition-colors">
+              Custom Digital Solutions & Cloud Backends
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+              Tailored software ecosystems powered by Firebase, Supabase, and Node.js microservices—complete with automated CI/CD pipelines, Play Store & App Store deployment.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-4 border-t border-white/[0.07]">
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">Firebase & Supabase</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">REST / WebSockets</span>
+              <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/90 text-slate-300 border border-white/5">CI/CD Fastlane</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: SELECTED WORKS & PROVEN RESULTS
+         ========================================== -->
+    <section id="projects" data-section="projects" class="snap-section py-24 lg:py-32 px-4 sm:px-6 lg:px-8 relative border-t border-white/[0.05]">
+      <div class="max-w-7xl mx-auto">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-20 reveal-slide-up">
+          <span class="text-xs font-mono uppercase tracking-[0.2em] text-brand font-semibold block mb-3">PORTFOLIO</span>
+          <h2 class="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight mb-4">
+            Selected Works & Proven Results
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+            Each case study slides into view as you scroll. Interact directly with the live app previews on every card to test the user experience.
+          </p>
+        </div>
+
+        <!-- Project Cards Stack -->
+        <div class="space-y-20 lg:space-y-28">
+
+          <!-- =====================================
+               PROJECT 1: Samrique E-Marketplace
+               ===================================== -->
+          <article class="glass-card rounded-3xl p-6 sm:p-10 lg:p-12 reveal-slide-left border border-white/10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              <!-- Left Content (7 Cols) -->
+              <div class="lg:col-span-7 space-y-6">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="px-3 py-1 rounded-full text-xs font-mono font-medium bg-brand/15 text-brand-light border border-brand/30">Featured Case Study</span>
+                  <span class="text-xs font-mono text-slate-400">E-Commerce • iOS & Android</span>
+                </div>
+
+                <h3 class="font-display font-bold text-2xl sm:text-4xl text-white flex items-center gap-2">
+                  <span>Samrique E-Marketplace</span>
+                  <i data-lucide="arrow-up-right" class="w-6 h-6 text-brand"></i>
+                </h3>
+
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  A full-scale multi-vendor mobile commerce platform built with Flutter, featuring sub-second product search, dynamic flash-sale engines, real-time courier telemetry, and one-tap UPI checkout.
+                </p>
+
+                <!-- Challenge & Results Box -->
+                <div class="bg-slate-950/85 border border-white/10 rounded-2xl p-5 space-y-3">
+                  <div class="text-xs font-mono uppercase tracking-wider text-brand flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Challenge & Results</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    <strong class="text-white">Challenge:</strong> High cart abandonment and sluggish catalog rendering on budget devices.<br/>
+                    <strong class="text-emerald-400">Result:</strong> Re-engineered rendering pipeline with Sliver virtualization and instant UPI checkout, boosting checkout conversion by <strong class="text-white">38%</strong> and maintaining 60 FPS across 10,000+ SKUs.
+                  </p>
+                </div>
+
+                <!-- Tech Pills -->
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Flutter & Dart</span>
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Riverpod State</span>
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Razorpay & UPI</span>
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Firebase Cloud</span>
+                </div>
+              </div>
+
+              <!-- Right Interactive App Preview (5 Cols) -->
+              <div class="lg:col-span-5">
+                <div class="bg-gradient-to-br from-slate-900 via-slate-950 to-obsidian rounded-2xl p-5 border border-white/10 shadow-2xl relative overflow-hidden">
+                  <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                      <span class="text-xs font-mono text-slate-400 ml-2">Interactive Storefront Preview</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 bg-brand/20 border border-brand/40 text-brand-light px-2.5 py-1 rounded-full text-xs font-mono">
+                      <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+                      <span id="marketCartCount">2</span>
+                    </div>
+                  </div>
+
+                  <!-- Interactive Product Grid Inside Mockup -->
+                  <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-slate-900/90 border border-white/10 rounded-xl p-3 hover:border-brand/40 transition-all">
+                      <div class="h-20 rounded-lg bg-gradient-to-br from-orange-500/20 to-amber-500/10 flex items-center justify-center mb-2">
+                        <i data-lucide="headphones" class="w-8 h-8 text-brand-light"></i>
+                      </div>
+                      <div class="text-xs font-semibold text-white truncate">Sonic Pro ANC</div>
+                      <div class="flex items-center justify-between mt-2">
+                        <span class="text-xs font-mono text-brand-light font-bold">$149</span>
+                        <button onclick="addToMarketCart(this)" class="px-2 py-1 rounded-md bg-brand text-white text-[10px] font-semibold hover:bg-brand-light transition-colors">+ Add</button>
+                      </div>
+                    </div>
+
+                    <div class="bg-slate-900/90 border border-white/10 rounded-xl p-3 hover:border-brand/40 transition-all">
+                      <div class="h-20 rounded-lg bg-gradient-to-br from-indigo-500/20 to-purple-500/10 flex items-center justify-center mb-2">
+                        <i data-lucide="watch" class="w-8 h-8 text-indigo-400"></i>
+                      </div>
+                      <div class="text-xs font-semibold text-white truncate">Pulse Fit Ultra</div>
+                      <div class="flex items-center justify-between mt-2">
+                        <span class="text-xs font-mono text-brand-light font-bold">$199</span>
+                        <button onclick="addToMarketCart(this)" class="px-2 py-1 rounded-md bg-brand text-white text-[10px] font-semibold hover:bg-brand-light transition-colors">+ Add</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between bg-slate-900/95 border border-white/10 rounded-xl px-4 py-3">
+                    <div>
+                      <div class="text-[10px] text-slate-400 uppercase font-mono">Instant UPI Checkout</div>
+                      <div id="marketStatusText" class="text-xs font-semibold text-white">Ready for 1-Tap Payment</div>
+                    </div>
+                    <button onclick="simulateMarketCheckout()" class="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-brand to-orange-500 text-white text-xs font-semibold shadow-md hover:opacity-95 transition-opacity">
+                      Checkout →
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- =====================================
+               PROJECT 2: Samrique Money Manager
+               ===================================== -->
+          <article class="glass-card rounded-3xl p-6 sm:p-10 lg:p-12 reveal-slide-right border border-white/10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              <!-- Left Interactive Finance Preview (5 Cols on Desktop) -->
+              <div class="lg:col-span-5 order-2 lg:order-1">
+                <div class="bg-gradient-to-br from-[#0B1917] via-slate-950 to-obsidian rounded-2xl p-5 border border-emerald-500/25 shadow-2xl">
+                  <div class="flex items-center justify-between mb-4">
+                    <div>
+                      <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400">Money Made Clear</span>
+                      <h4 id="financeBalanceText" class="font-display font-bold text-2xl text-white">$24,850.00</h4>
+                    </div>
+                    <div class="flex gap-1 bg-slate-900 p-1 rounded-lg border border-white/10">
+                      <button onclick="switchFinanceTab('weekly')" id="finBtnWeekly" class="px-2.5 py-1 rounded text-[10px] font-mono bg-emerald-500 text-slate-950 font-bold transition-all">Week</button>
+                      <button onclick="switchFinanceTab('monthly')" id="finBtnMonthly" class="px-2.5 py-1 rounded text-[10px] font-mono text-slate-400 hover:text-white transition-all">Month</button>
+                    </div>
+                  </div>
+
+                  <!-- Interactive Animated Bar Chart -->
+                  <div class="h-32 flex items-end justify-between gap-2 pt-4 pb-2 px-2 bg-slate-950/70 rounded-xl border border-white/5 mb-4">
+                    <div class="flex-1 flex flex-col items-center gap-1">
+                      <div id="bar1" class="w-full bg-emerald-500/40 hover:bg-emerald-400 rounded-t-md transition-all duration-500" style="height: 45%"></div>
+                      <span class="text-[9px] font-mono text-slate-400">Mon</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-1">
+                      <div id="bar2" class="w-full bg-emerald-500/60 hover:bg-emerald-400 rounded-t-md transition-all duration-500" style="height: 70%"></div>
+                      <span class="text-[9px] font-mono text-slate-400">Tue</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-1">
+                      <div id="bar3" class="w-full bg-emerald-500/40 hover:bg-emerald-400 rounded-t-md transition-all duration-500" style="height: 35%"></div>
+                      <span class="text-[9px] font-mono text-slate-400">Wed</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-1">
+                      <div id="bar4" class="w-full bg-emerald-400 rounded-t-md shadow-[0_0_12px_rgba(52,211,153,0.5)] transition-all duration-500" style="height: 90%"></div>
+                      <span class="text-[9px] font-mono text-emerald-300">Thu</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-1">
+                      <div id="bar5" class="w-full bg-emerald-500/50 hover:bg-emerald-400 rounded-t-md transition-all duration-500" style="height: 60%"></div>
+                      <span class="text-[9px] font-mono text-slate-400">Fri</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-1">
+                      <div id="bar6" class="w-full bg-emerald-500/75 hover:bg-emerald-400 rounded-t-md transition-all duration-500" style="height: 80%"></div>
+                      <span class="text-[9px] font-mono text-slate-400">Sat</span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between text-xs bg-slate-900/90 px-3.5 py-2.5 rounded-xl border border-white/10">
+                    <span class="text-slate-300 flex items-center gap-1.5">
+                      <i data-lucide="trending-up" class="w-4 h-4 text-emerald-400"></i>
+                      Smart Savings Goal
+                    </span>
+                    <span id="financeSavingRate" class="font-mono font-semibold text-emerald-400">+18.4% vs last wk</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Content (7 Cols on Desktop) -->
+              <div class="lg:col-span-7 space-y-6 order-1 lg:order-2">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">Fintech & Analytics</span>
+                  <span class="text-xs font-mono text-slate-400">Offline-First • Biometric Lock</span>
+                </div>
+
+                <h3 class="font-display font-bold text-2xl sm:text-4xl text-white flex items-center gap-2">
+                  <span>Samrique Money Manager</span>
+                  <i data-lucide="arrow-up-right" class="w-6 h-6 text-emerald-400"></i>
+                </h3>
+
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  An intuitive personal finance, budgeting, and automated expense analytics companion app that empowers users to track cashflow effortlessly with interactive charts and zero-latency local SQLite/Isar storage.
+                </p>
+
+                <!-- Challenge & Results Box -->
+                <div class="bg-slate-950/85 border border-white/10 rounded-2xl p-5 space-y-3">
+                  <div class="text-xs font-mono uppercase tracking-wider text-emerald-400 flex items-center gap-2">
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i>
+                    <span>Challenge & Results</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    <strong class="text-white">Challenge:</strong> Users found traditional expense trackers tedious and slow to log daily transactions.<br/>
+                    <strong class="text-emerald-400">Result:</strong> Built a 2-tap smart categorization workflow with custom Flutter Canvas charts, achieving a <strong class="text-white">4.9★ rating</strong> and 3x higher 30-day user retention.
+                  </p>
+                </div>
+
+                <!-- Tech Pills -->
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Expense Tracking</span>
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Custom Canvas Charts</span>
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Isar Local DB</span>
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Biometric Auth</span>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- =====================================
+               PROJECT 3: Samrique Mama Pregnancy Tracker
+               ===================================== -->
+          <article class="glass-card rounded-3xl p-6 sm:p-10 lg:p-12 reveal-slide-left border border-white/10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              <!-- Left Content (7 Cols) -->
+              <div class="lg:col-span-7 space-y-6">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="px-3 py-1 rounded-full text-xs font-mono font-medium bg-pink-500/15 text-pink-300 border border-pink-500/30">HealthTech & Wellness</span>
+                  <span class="text-xs font-mono text-slate-400">Telehealth • Personalized Timeline</span>
+                </div>
+
+                <h3 class="font-display font-bold text-2xl sm:text-4xl text-white flex items-center gap-2">
+                  <span>Samrique Mama Pregnancy Tracker</span>
+                  <i data-lucide="arrow-up-right" class="w-6 h-6 text-pink-400"></i>
+                </h3>
+
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  A warm, medically guided pregnancy companion app offering week-by-week fetal growth visualizations, kick counters, symptom logs, and automated doctor appointment reminders for expecting mothers.
+                </p>
+
+                <!-- Challenge & Results Box -->
+                <div class="bg-slate-950/85 border border-white/10 rounded-2xl p-5 space-y-3">
+                  <div class="text-xs font-mono uppercase tracking-wider text-pink-400 flex items-center gap-2">
+                    <i data-lucide="heart-pulse" class="w-3.5 h-3.5"></i>
+                    <span>Challenge & Results</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    <strong class="text-white">Challenge:</strong> Delivering complex medical milestones in a calming, accessible interface with reliable notifications.<br/>
+                    <strong class="text-pink-400">Result:</strong> Engineered interactive 3D/SVG growth cards and localized push reminders, reaching <strong class="text-white">99.9% crash-free reliability</strong> and daily active engagement.
+                  </p>
+                </div>
+
+                <!-- Tech Pills -->
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Pregnancy Timeline</span>
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">HealthKit / Google Fit</span>
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Rive Animations</span>
+                </div>
+              </div>
+
+              <!-- Right Interactive Pregnancy Week Slider Preview (5 Cols) -->
+              <div class="lg:col-span-5">
+                <div class="bg-gradient-to-br from-[#2B0D21] via-[#190A18] to-obsidian rounded-2xl p-5 border border-pink-500/30 shadow-2xl">
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-semibold text-pink-300 flex items-center gap-1.5">
+                      <i data-lucide="heart" class="w-4 h-4 fill-pink-400 text-pink-400"></i>
+                      Samrique Mama
+                    </span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-pink-500/20 border border-pink-400/30 text-[10px] font-mono text-pink-200">Interactive Slider</span>
+                  </div>
+
+                  <!-- Dynamic Week Card -->
+                  <div class="bg-white/95 text-slate-900 rounded-xl p-4 mb-4 shadow-lg flex items-center justify-between">
+                    <div>
+                      <span id="mamaTrimesterBadge" class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-pink-100 text-pink-700 font-bold">1st Trimester</span>
+                      <h4 id="mamaWeekTitle" class="font-display font-extrabold text-2xl text-slate-900 mt-1">Week 8</h4>
+                      <p id="mamaSizeDesc" class="text-xs text-slate-600 mt-0.5">Baby is the size of a <strong class="text-pink-600">Sweet Cherry</strong></p>
+                      <div id="mamaStatsText" class="text-[11px] font-mono text-slate-500 mt-2">Length: 1.6 cm • Weight: 1g</div>
+                    </div>
+                    <div id="mamaEmojiBox" class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-100 to-amber-100 border border-pink-200 flex items-center justify-center text-3xl shadow-inner select-none">
+                      🍒
+                    </div>
+                  </div>
+
+                  <!-- Slider Control -->
+                  <div class="space-y-2">
+                    <div class="flex justify-between text-xs text-pink-200/80 font-mono">
+                      <span>Slide Pregnancy Week:</span>
+                      <span id="mamaSliderLabel" class="font-bold text-white">Week 8 / 40</span>
+                    </div>
+                    <input id="mamaWeekSlider" type="range" min="1" max="3" step="1" value="1" oninput="updateMamaWeek(this.value)" class="w-full accent-pink-500 cursor-pointer h-2 bg-slate-800 rounded-lg" />
+                    <div class="flex justify-between text-[10px] font-mono text-pink-300/60">
+                      <span>Week 8 (🍒)</span>
+                      <span>Week 20 (🥭)</span>
+                      <span>Week 36 (🍉)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- =====================================
+               PROJECT 4: Zipi Bike Taxi App
+               ===================================== -->
+          <article class="glass-card rounded-3xl p-6 sm:p-10 lg:p-12 reveal-slide-right border border-white/10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              <!-- Left Content (7 Cols) -->
+              <div class="lg:col-span-7 space-y-6">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="px-3 py-1 rounded-full text-xs font-mono font-medium bg-amber-500/15 text-amber-300 border border-amber-500/30">On-Demand Mobility</span>
+                  <span class="text-xs font-mono text-slate-400">Live GPS Telemetry • WebSockets</span>
+                </div>
+
+                <h3 class="font-display font-bold text-2xl sm:text-4xl text-white flex items-center gap-2">
+                  <span>Zipi Bike Taxi App</span>
+                  <i data-lucide="arrow-up-right" class="w-6 h-6 text-amber-400"></i>
+                </h3>
+
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  Real-time two-wheeler ride-hailing & hyper-local parcel delivery ecosystem featuring live driver GPS tracking, dynamic surge fare calculation, turn-by-turn navigation, and instant wallet payouts.
+                </p>
+
+                <!-- Challenge & Results Box -->
+                <div class="bg-slate-950/85 border border-white/10 rounded-2xl p-5 space-y-3">
+                  <div class="text-xs font-mono uppercase tracking-wider text-amber-400 flex items-center gap-2">
+                    <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+                    <span>Challenge & Results</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    <strong class="text-white">Challenge:</strong> High battery drain and laggy location pin updates on fluctuating 4G connections.<br/>
+                    <strong class="text-amber-400">Result:</strong> Implemented Kalman-filtered GPS socket streams and background isolate workers, cutting ride match time to <strong class="text-white">under 9 seconds</strong>.
+                  </p>
+                </div>
+
+                <!-- Tech Pills -->
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Google Maps SDK</span>
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Socket.IO Dispatch</span>
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Background Isolates</span>
+                  <span class="px-3 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-slate-300">Digital Wallet</span>
+                </div>
+              </div>
+
+              <!-- Right Interactive Live GPS Dispatch Preview (5 Cols) -->
+              <div class="lg:col-span-5">
+                <div class="bg-gradient-to-br from-slate-900 via-slate-950 to-obsidian rounded-2xl p-5 border border-amber-500/25 shadow-2xl">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="font-display font-bold text-sm text-amber-400 flex items-center gap-1.5">
+                      <i data-lucide="bike" class="w-4 h-4"></i>
+                      Zipi Bike Taxi Dispatch
+                    </span>
+                    <span id="zipiEtaBadge" class="text-[11px] font-mono bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-500/30">ETA: 2 mins</span>
+                  </div>
+
+                  <!-- Simulated Map Canvas with SVG Route -->
+                  <div class="relative h-40 rounded-xl bg-[#0B1220] border border-white/10 overflow-hidden mb-4 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-grid-pattern opacity-40"></div>
+                    <svg class="w-full h-full" viewBox="0 0 300 140" fill="none">
+                      <!-- Roads -->
+                      <path d="M 10 110 Q 90 30, 170 80 T 285 35" stroke="rgba(255,255,255,0.12)" stroke-width="8" stroke-linecap="round"/>
+                      <!-- Active Animated GPS Route -->
+                      <path d="M 25 105 Q 95 35, 170 80 T 275 38" stroke="#FF6B2B" stroke-width="3.5" stroke-linecap="round" class="animate-route"/>
+                      <!-- Pickup Pin -->
+                      <circle cx="25" cy="105" r="6" fill="#10B981" />
+                      <circle cx="25" cy="105" r="11" stroke="#10B981" stroke-opacity="0.4" stroke-width="2" />
+                      <!-- Dropoff Pin -->
+                      <circle cx="275" cy="38" r="6" fill="#FF6B2B" />
+                      <circle cx="275" cy="38" r="12" stroke="#FF6B2B" stroke-opacity="0.4" stroke-width="2" />
+                    </svg>
+                    <div class="absolute bottom-2 left-3 text-[10px] font-mono text-emerald-400 bg-slate-950/80 px-2 py-0.5 rounded">● Pickup: Tech Park</div>
+                    <div class="absolute top-2 right-3 text-[10px] font-mono text-brand-light bg-slate-950/80 px-2 py-0.5 rounded">● Drop: Metro Hub</div>
+                  </div>
+
+                  <div class="flex items-center justify-between bg-slate-900/95 border border-white/10 rounded-xl px-4 py-2.5">
+                    <div>
+                      <div class="text-[10px] font-mono text-slate-400">Fare Estimate • 4.2 km</div>
+                      <div id="zipiRideStatus" class="text-xs font-semibold text-white">₹49 • Captain Rahul (4.9★)</div>
+                    </div>
+                    <button onclick="simulateZipiDispatch()" class="px-3.5 py-1.5 rounded-lg bg-brand hover:bg-brand-light text-white text-xs font-semibold transition-colors">
+                      Ping Rider
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4: EVOLUTION & CORE TECHNICAL STACK
+         ========================================== -->
+    <section id="stack" data-section="stack" class="snap-section py-24 lg:py-32 px-4 sm:px-6 lg:px-8 relative border-t border-white/[0.05]">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          <!-- Left Column: Engineering Philosophy (5 Cols) -->
+          <div class="lg:col-span-5 space-y-6 reveal-slide-left">
+            <span class="text-xs font-mono uppercase tracking-[0.2em] text-brand font-semibold block">EVOLUTION & CRAFT</span>
+            <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight">
+              Engineering Reliability & Passion for Mobile Excellence
+            </h2>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              At <strong class="text-white">Samrique</strong>, we believe that great software bridges the gap between ambitious product vision and rock-solid engineering execution. By combining modern Flutter architecture with clean, modular codebases, we deliver mobile experiences that scale effortlessly.
+            </p>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              With deep expertise in <strong class="text-slate-200">real-time systems, fintech security, and custom UI motion design</strong>, every application is stress-tested for speed, accessibility, and long-term maintainability.
+            </p>
+
+            <div class="grid grid-cols-2 gap-4 pt-4">
+              <div class="glass-card rounded-2xl p-4 border border-white/10">
+                <div class="flex items-center gap-2 text-brand font-semibold text-sm mb-1">
+                  <i data-lucide="cpu" class="w-4 h-4"></i>
+                  <span>Clean Architecture</span>
+                </div>
+                <p class="text-xs text-slate-400">Domain-driven layers with 90%+ automated unit test coverage.</p>
+              </div>
+              <div class="glass-card rounded-2xl p-4 border border-white/10">
+                <div class="flex items-center gap-2 text-emerald-400 font-semibold text-sm mb-1">
+                  <i data-lucide="zap" class="w-4 h-4"></i>
+                  <span>Zero-Jank 120Hz</span>
+                </div>
+                <p class="text-xs text-slate-400">Impeller shader pre-compilation for silky-smooth transitions.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Core Technical Stack Bento (7 Cols) -->
+          <div class="lg:col-span-7 reveal-slide-right">
+            <div class="glass-card rounded-3xl p-6 sm:p-8 border border-white/10 relative">
+              
+              <!-- Header + Filter Pills -->
+              <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-white/10">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-3 h-3 rounded-full bg-brand shadow-[0_0_10px_#FF6B2B]"></span>
+                  <h3 class="font-display font-bold text-lg text-white">Core Technical Stack</h3>
+                </div>
+                <div class="flex flex-wrap gap-1.5">
+                  <button onclick="filterStack('all')" data-stack-btn="all" class="stack-filter-btn px-3 py-1 rounded-full text-xs font-mono bg-brand text-white transition-all">All</button>
+                  <button onclick="filterStack('mobile')" data-stack-btn="mobile" class="stack-filter-btn px-3 py-1 rounded-full text-xs font-mono bg-white/5 text-slate-300 hover:text-white transition-all">Mobile</button>
+                  <button onclick="filterStack('backend')" data-stack-btn="backend" class="stack-filter-btn px-3 py-1 rounded-full text-xs font-mono bg-white/5 text-slate-300 hover:text-white transition-all">Backend & Pay</button>
+                </div>
+              </div>
+
+              <!-- 6 Interactive Tech Cards -->
+              <div id="stackGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                
+                <!-- Stack Item 1 -->
+                <div data-stack-cat="mobile" class="stack-item bg-slate-950/80 hover:bg-slate-900 border border-white/10 hover:border-sky-400/50 rounded-2xl p-4 transition-all group cursor-pointer">
+                  <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-sky-400 mb-3 group-hover:scale-110 transition-transform">
+                    <i data-lucide="Smartphone" class="w-5 h-5"></i>
+                  </div>
+                  <div class="font-display font-bold text-sm text-white">Flutter & Dart</div>
+                  <div class="text-[11px] text-slate-400 mt-0.5 mb-3">Cross-Platform Core</div>
+                  <div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+                    <div class="bg-sky-400 h-full w-[98%]"></div>
+                  </div>
+                </div>
+
+                <!-- Stack Item 2 -->
+                <div data-stack-cat="mobile" class="stack-item bg-slate-950/80 hover:bg-slate-900 border border-white/10 hover:border-emerald-400/50 rounded-2xl p-4 transition-all group cursor-pointer">
+                  <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center text-emerald-400 mb-3 group-hover:scale-110 transition-transform">
+                    <i data-lucide="layers" class="w-5 h-5"></i>
+                  </div>
+                  <div class="font-display font-bold text-sm text-white">BLoC & Riverpod</div>
+                  <div class="text-[11px] text-slate-400 mt-0.5 mb-3">Reactive State Mgmt</div>
+                  <div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+                    <div class="bg-emerald-400 h-full w-[96%]"></div>
+                  </div>
+                </div>
+
+                <!-- Stack Item 3 -->
+                <div data-stack-cat="backend" class="stack-item bg-slate-950/80 hover:bg-slate-900 border border-white/10 hover:border-rose-400/50 rounded-2xl p-4 transition-all group cursor-pointer">
+                  <div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-400/30 flex items-center justify-center text-rose-400 mb-3 group-hover:scale-110 transition-transform">
+                    <i data-lucide="webhook" class="w-5 h-5"></i>
+                  </div>
+                  <div class="font-display font-bold text-sm text-white">REST & GraphQL</div>
+                  <div class="text-[11px] text-slate-400 mt-0.5 mb-3">Real-Time APIs & Sockets</div>
+                  <div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+                    <div class="bg-rose-400 h-full w-[95%]"></div>
+                  </div>
+                </div>
+
+                <!-- Stack Item 4 -->
+                <div data-stack-cat="backend" class="stack-item bg-slate-950/80 hover:bg-slate-900 border border-white/10 hover:border-brand/60 rounded-2xl p-4 transition-all group cursor-pointer">
+                  <div class="w-10 h-10 rounded-xl bg-brand/15 border border-brand/30 flex items-center justify-center text-brand mb-3 group-hover:scale-110 transition-transform">
+                    <i data-lucide="wallet" class="w-5 h-5"></i>
+                  </div>
+                  <div class="font-display font-bold text-sm text-white">Payments & UPI</div>
+                  <div class="text-[11px] text-slate-400 mt-0.5 mb-3">Razorpay • Stripe • SDKs</div>
+                  <div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+                    <div class="bg-brand h-full w-[99%]"></div>
+                  </div>
+                </div>
+
+                <!-- Stack Item 5 -->
+                <div data-stack-cat="mobile" class="stack-item bg-slate-950/80 hover:bg-slate-900 border border-white/10 hover:border-purple-400/50 rounded-2xl p-4 transition-all group cursor-pointer">
+                  <div class="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-400/30 flex items-center justify-center text-purple-400 mb-3 group-hover:scale-110 transition-transform">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                  </div>
+                  <div class="font-display font-bold text-sm text-white">Clean UI Motion</div>
+                  <div class="text-[11px] text-slate-400 mt-0.5 mb-3">Rive • Custom Painters</div>
+                  <div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+                    <div class="bg-purple-400 h-full w-[94%]"></div>
+                  </div>
+                </div>
+
+                <!-- Stack Item 6 -->
+                <div data-stack-cat="backend" class="stack-item bg-slate-950/80 hover:bg-slate-900 border border-white/10 hover:border-amber-400/50 rounded-2xl p-4 transition-all group cursor-pointer">
+                  <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center text-amber-400 mb-3 group-hover:scale-110 transition-transform">
+                    <i data-lucide="cloud" class="w-5 h-5"></i>
+                  </div>
+                  <div class="font-display font-bold text-sm text-white">Cloud & Firebase</div>
+                  <div class="text-[11px] text-slate-400 mt-0.5 mb-3">Supabase • CI/CD Pipelines</div>
+                  <div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+                    <div class="bg-amber-400 h-full w-[95%]"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: CONTACT & PROJECT BUILDER
+         ========================================== -->
+    <section id="contact" data-section="contact" class="snap-section py-24 lg:py-32 px-4 sm:px-6 lg:px-8 relative border-t border-white/[0.05]">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left Column: Direct Contact Channels (5 Cols) -->
+          <div class="lg:col-span-5 space-y-6 reveal-slide-left">
+            <span class="text-xs font-mono uppercase tracking-[0.2em] text-brand font-semibold block">GET IN TOUCH</span>
+            <h2 class="font-display font-bold text-3xl sm:text-5xl text-white tracking-tight leading-tight">
+              Let's Build Something Extraordinary Together
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+              Have a mobile app concept, marketplace upgrade, or fintech integration in mind? Reach out directly or configure your project brief in seconds.
+            </p>
+
+            <!-- Interactive Copyable Contact Cards -->
+            <div class="space-y-3 pt-2">
+              <button onclick="copyContactInfo('hello@samrique.dev', 'Email address copied!')" class="w-full glass-card rounded-2xl p-4 flex items-center justify-between text-left group hover:border-brand/50 transition-all">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-brand/15 border border-brand/30 flex items-center justify-center text-brand">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-[11px] font-mono text-slate-400">Direct Email (Click to Copy)</div>
+                    <div class="text-sm font-semibold text-white group-hover:text-brand-light transition-colors">hello@samrique.dev</div>
+                  </div>
+                </div>
+                <i data-lucide="copy" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors"></i>
+              </button>
+
+              <button onclick="copyContactInfo('+91 98765 43210', 'WhatsApp number copied!')" class="w-full glass-card rounded-2xl p-4 flex items-center justify-between text-left group hover:border-emerald-500/50 transition-all">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-[11px] font-mono text-slate-400">WhatsApp Instant Chat</div>
+                    <div class="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">+91 98765 43210</div>
+                  </div>
+                </div>
+                <i data-lucide="copy" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors"></i>
+              </button>
+
+              <button onclick="copyContactInfo('cal.com/samrique/discovery', 'Booking link copied!')" class="w-full glass-card rounded-2xl p-4 flex items-center justify-between text-left group hover:border-sky-500/50 transition-all">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400">
+                    <i data-lucide="phone-call" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <div class="text-[11px] font-mono text-slate-400">Discovery Call</div>
+                    <div class="text-sm font-semibold text-white group-hover:text-sky-300 transition-colors">Schedule 20-Min Architecture Call</div>
+                  </div>
+                </div>
+                <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-white transition-colors"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Project Brief & Ready Card (7 Cols) -->
+          <div class="lg:col-span-7 reveal-slide-right">
+            <div class="glass-card rounded-3xl p-7 sm:p-10 border border-brand/30 shadow-[0_0_60px_-15px_rgba(255,107,43,0.25)] relative overflow-hidden">
+              
+              <!-- State 1: Interactive Configurator Form -->
+              <div id="projectFormView" class="space-y-6">
+                <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                  <div>
+                    <h3 class="font-display font-bold text-xl text-white">Interactive Project Launcher</h3>
+                    <p class="text-xs text-slate-400">Select your scope and generate an instant project brief.</p>
+                  </div>
+                  <span class="px-3 py-1 rounded-full bg-brand/15 border border-brand/30 text-brand-light text-xs font-mono">Reply &lt; 4 hrs</span>
+                </div>
+
+                <!-- Scope Selector Pills -->
+                <div>
+                  <label class="block text-xs font-mono uppercase text-slate-400 mb-2.5">1. Select Platform / Scope</label>
+                  <div class="flex flex-wrap gap-2" id="scopePills">
+                    <button type="button" onclick="toggleScopePill(this)" class="scope-pill active px-3.5 py-2 rounded-xl text-xs font-semibold bg-brand text-white border border-brand transition-all">Flutter Mobile App</button>
+                    <button type="button" onclick="toggleScopePill(this)" class="scope-pill px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-white/10 hover:border-brand/40 transition-all">UPI / Payment Gateway</button>
+                    <button type="button" onclick="toggleScopePill(this)" class="scope-pill px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-white/10 hover:border-brand/40 transition-all">E-Marketplace</button>
+                    <button type="button" onclick="toggleScopePill(this)" class="scope-pill px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-white/10 hover:border-brand/40 transition-all">UI/UX Redesign</button>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1.5">Your Name</label>
+                    <input id="clientNameInput" type="text" placeholder="Alex Morgan" class="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-white/10 text-sm text-white focus:outline-none focus:border-brand transition-colors" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1.5">Work Email</label>
+                    <input id="clientEmailInput" type="email" placeholder="alex@company.com" class="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-white/10 text-sm text-white focus:outline-none focus:border-brand transition-colors" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono text-slate-400 mb-1.5">Project Vision or Goals</label>
+                  <textarea id="clientNotesInput" rows="3" placeholder="Tell us about your app timeline, target users, or key features..." class="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-white/10 text-sm text-white focus:outline-none focus:border-brand transition-colors"></textarea>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                  <button type="button" onclick="switchToReadyView()" class="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-brand to-orange-500 hover:from-orange-500 hover:to-brand shadow-[0_10px_25px_-5px_rgba(255,107,43,0.5)] transition-all">
+                    <span>Prepare Project Brief</span>
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- State 2: "Your email app / project is ready" Card (Matching the user's screenshot!) -->
+              <div id="projectReadyView" class="hidden py-10 px-4 text-center space-y-5">
+                <div class="w-16 h-16 rounded-2xl bg-brand/20 border border-brand/40 flex items-center justify-center text-brand mx-auto shadow-[0_0_30px_rgba(255,107,43,0.35)]">
+                  <i data-lucide="mail-check" class="w-8 h-8"></i>
+                </div>
+                <h3 class="font-display font-bold text-2xl sm:text-3xl text-white">
+                  Your project brief is ready!
+                </h3>
+                <p id="readySummaryText" class="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+                  We've formatted your custom Flutter & Digital Product inquiry so you can launch your email client or copy the brief in one click.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  <a id="mailtoLinkBtn" href="mailto:hello@samrique.dev?subject=New%20Flutter%20Project%20Inquiry" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-xs sm:text-sm text-white bg-gradient-to-r from-brand to-orange-500 shadow-[0_0_25px_rgba(255,107,43,0.45)] hover:opacity-95 transition-all">
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                    <span>Launch Email App</span>
+                  </a>
+                  <button type="button" onclick="resetProjectForm()" class="px-5 py-3 rounded-xl text-xs sm:text-sm font-medium text-slate-300 bg-white/5 hover:bg-white/10 border border-white/10 transition-all">
+                    Edit Details
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/[0.07] bg-obsidian/90 py-10 px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand to-orange-500 flex items-center justify-center font-display font-bold text-sm text-white">S</div>
+        <span class="font-display font-bold text-white text-sm">Samrique Digital Solutions</span>
+      </div>
+      <p class="text-xs text-slate-500 text-center">
+        © 2026 Samrique Studio. Engineered with passion for high-performance Flutter & Digital Products.
+      </p>
+      <div class="flex items-center gap-5 text-xs text-slate-400">
+        <a href="#services" class="hover:text-white transition-colors">Services</a>
+        <a href="#projects" class="hover:text-white transition-colors">Works</a>
+        <a href="#stack" class="hover:text-white transition-colors">Stack</a>
+        <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive App Simulator Modal -->
+  <div id="simulatorModal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/80 backdrop-blur-md p-4">
+    <div class="glass-card max-w-lg w-full rounded-3xl p-6 sm:p-8 border border-brand/40 shadow-2xl relative">
+      <button onclick="closeInteractiveSimulator()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-slate-300 hover:text-white transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+      <div class="flex items-center gap-2 text-xs font-mono text-brand mb-2">
+        <span class="w-2 h-2 rounded-full bg-brand animate-ping"></span>
+        <span>SAMRIQUE LIVE FLUTTER BENCHMARK</span>
+      </div>
+      <h3 class="font-display font-bold text-2xl text-white mb-2">120Hz Interactive Frame Telemetry</h3>
+      <p class="text-xs sm:text-sm text-slate-400 mb-6">
+        Test how our custom Flutter architectures handle state transitions, payment handshakes, and frame rendering in real time.
+      </p>
+      <div class="bg-slate-950 rounded-2xl p-4 border border-white/10 space-y-3 mb-6 font-mono text-xs">
+        <div class="flex justify-between">
+          <span class="text-slate-400">Impeller Frame Raster Time:</span>
+          <span class="text-emerald-400 font-bold">2.1 ms (120 FPS)</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">API Cold-Start Latency:</span>
+          <span class="text-sky-400 font-bold">38 ms</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Memory Footprint:</span>
+          <span class="text-amber-300 font-bold">42 MB Optimal</span>
+        </div>
+      </div>
+      <div class="flex justify-end gap-3">
+        <button onclick="closeInteractiveSimulator()" class="px-5 py-2.5 rounded-xl bg-white/10 text-xs font-semibold text-white hover:bg-white/15">Close</button>
+        <a href="#projects" onclick="closeInteractiveSimulator()" class="px-5 py-2.5 rounded-xl bg-brand text-xs font-semibold text-white hover:bg-brand-light">Explore Live Case Studies →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotice" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[80] pointer-events-none opacity-0 translate-y-4 transition-all duration-300 bg-slate-900/95 border border-brand/50 text-white px-5 py-3 rounded-full shadow-2xl flex items-center gap-2.5 text-xs font-medium">
+    <span class="w-2 h-2 rounded-full bg-brand"></span>
+    <span id="toastMessageText">Action completed</span>
+  </div>
+
+  <!-- Application JavaScript -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // 1. Toast Notification Helper (No alert() used anywhere)
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toastNotice');
+      const text = document.getElementById('toastMessageText');
+      text.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2800);
+    }
+
+    // 2. Scroll-Triggered Slide-In Observer for Each Section & Card
+    const revealElements = document.querySelectorAll(
+      '.reveal-slide-up, .reveal-slide-left, .reveal-slide-right, .reveal-scale'
+    );
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else if (entry.boundingClientRect.top > 0) {
+          // Re-animate smoothly when scrolling back down
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, {
+      threshold: 0.14,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+
+    // 3. Active Section Tracking (Updates Top Nav Pills & Right Slide Dots)
+    const sections = document.querySelectorAll('section[data-section]');
+    const navDots = document.querySelectorAll('[data-nav-dot]');
+    const navLinks = document.querySelectorAll('[data-nav-link]');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const activeId = entry.target.getAttribute('data-section');
+
+          // Update right progress dots
+          navDots.forEach((dot) => {
+            if (dot.getAttribute('data-nav-dot') === activeId) {
+              dot.className = 'group relative flex items-center justify-center w-3.5 h-3.5 rounded-full bg-brand scale-125 shadow-[0_0_12px_#FF6B2B] transition-all duration-300';
+            } else {
+              dot.className = 'group relative flex items-center justify-center w-2.5 h-2.5 rounded-full bg-white/25 hover:bg-white/60 transition-all duration-300';
+            }
+          });
+
+          // Update top navbar active pill
+          navLinks.forEach((link) => {
+            if (link.getAttribute('data-nav-link') === activeId) {
+              link.classList.add('bg-white/10', 'text-white');
+              link.classList.remove('text-slate-300');
+            } else {
+              link.classList.remove('bg-white/10', 'text-white');
+              link.classList.add('text-slate-300');
+            }
+          });
+        }
+      });
+    }, { threshold: 0.35 });
+
+    sections.forEach((sec) => sectionObserver.observe(sec));
+
+    function scrollToSection(id) {
+      const target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // 4. Top Scroll Progress Bar
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById('topProgressBar').style.width = `${progress}%`;
+    }, { passive: true });
+
+    // 5. Toggle Magnetic Scroll Snap
+    let snapEnabled = false;
+    function toggleScrollSnap() {
+      snapEnabled = !snapEnabled;
+      const htmlEl = document.documentElement;
+      const statusText = document.getElementById('snapStatusText');
+      if (snapEnabled) {
+        htmlEl.classList.add('snap-enabled');
+        statusText.textContent = 'ON';
+        statusText.className = 'text-brand font-bold';
+        showToast('Magnetic Section Slide Snap: ON');
+      } else {
+        htmlEl.classList.remove('snap-enabled');
+        statusText.textContent = 'OFF';
+        statusText.className = 'text-slate-400';
+        showToast('Smooth Free Scroll Mode: ON');
+      }
+    }
+
+    // 6. Interactive Spotlight & Subtle 3D Tilt on Glass Cards
+    document.querySelectorAll('.glass-card').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--card-mouse-x', `${x}px`);
+        card.style.setProperty('--card-mouse-y', `${y}px`);
+
+        if (card.classList.contains('tilt-card') && window.innerWidth >= 1024) {
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -3.5;
+          const rotateY = ((x - centerX) / centerX) * 3.5;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        }
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (card.classList.contains('tilt-card')) {
+          card.style.transform = '';
+        }
+      });
+    });
+
+    // 7. Interactive Portfolio Mockup 1: E-Marketplace
+    let marketCart = 2;
+    function addToMarketCart(btn) {
+      marketCart++;
+      document.getElementById('marketCartCount').textContent = marketCart;
+      const origText = btn.textContent;
+      btn.textContent = 'Added ✓';
+      btn.classList.add('bg-emerald-500');
+      showToast('Item added to Samrique E-Marketplace cart!');
+      setTimeout(() => {
+        btn.textContent = origText;
+        btn.classList.remove('bg-emerald-500');
+      }, 1000);
+    }
+
+    function simulateMarketCheckout() {
+      const status = document.getElementById('marketStatusText');
+      status.textContent = 'Processing UPI Intent... ⚡';
+      status.classList.add('text-brand-light');
+      setTimeout(() => {
+        status.textContent = `Order Confirmed (${marketCart} items) ✓`;
+        status.classList.remove('text-brand-light');
+        status.classList.add('text-emerald-400');
+        showToast('Simulated 1-Tap UPI Checkout completed in 320ms!');
+      }, 650);
+    }
+
+    // 8. Interactive Portfolio Mockup 2: Money Manager
+    function switchFinanceTab(mode) {
+      const btnWeek = document.getElementById('finBtnWeekly');
+      const btnMonth = document.getElementById('finBtnMonthly');
+      const balance = document.getElementById('financeBalanceText');
+      const rate = document.getElementById('financeSavingRate');
+      const heights = mode === 'weekly'
+        ? ['45%', '70%', '35%', '90%', '60%', '80%']
+        : ['65%', '85%', '55%', '95%', '78%', '92%'];
+
+      if (mode === 'weekly') {
+        btnWeek.className = 'px-2.5 py-1 rounded text-[10px] font-mono bg-emerald-500 text-slate-950 font-bold transition-all';
+        btnMonth.className = 'px-2.5 py-1 rounded text-[10px] font-mono text-slate-400 hover:text-white transition-all';
+        balance.textContent = '$24,850.00';
+        rate.textContent = '+18.4% vs last wk';
+      } else {
+        btnMonth.className = 'px-2.5 py-1 rounded text-[10px] font-mono bg-emerald-500 text-slate-950 font-bold transition-all';
+        btnWeek.className = 'px-2.5 py-1 rounded text-[10px] font-mono text-slate-400 hover:text-white transition-all';
+        balance.textContent = '$98,420.00';
+        rate.textContent = '+27.9% vs last mo';
+      }
+
+      heights.forEach((h, idx) => {
+        const bar = document.getElementById(`bar${idx + 1}`);
+        if (bar) bar.style.height = h;
+      });
+    }
+
+    // 9. Interactive Portfolio Mockup 3: Samrique Mama Pregnancy Tracker
+    const mamaMilestones = {
+      1: {
+        trimester: '1st Trimester',
+        week: 'Week 8',
+        fruit: 'Sweet Cherry',
+        stats: 'Length: 1.6 cm • Weight: 1g',
+        emoji: '🍒',
+        label: 'Week 8 / 40'
+      },
+      2: {
+        trimester: '2nd Trimester',
+        week: 'Week 20',
+        fruit: 'Ripe Mango',
+        stats: 'Length: 25.6 cm • Weight: 300g',
+        emoji: '🥭',
+        label: 'Week 20 / 40'
+      },
+      3: {
+        trimester: '3rd Trimester',
+        week: 'Week 36',
+        fruit: 'Watermelon',
+        stats: 'Length: 47.4 cm • Weight: 2.6kg',
+        emoji: '🍉',
+        label: 'Week 36 / 40'
+      }
+    };
+
+    function updateMamaWeek(stepVal) {
+      const data = mamaMilestones[stepVal] || mamaMilestones[1];
+      document.getElementById('mamaTrimesterBadge').textContent = data.trimester;
+      document.getElementById('mamaWeekTitle').textContent = data.week;
+      document.getElementById('mamaSizeDesc').innerHTML = `Baby is the size of a <strong class="text-pink-600">${data.fruit}</strong>`;
+      document.getElementById('mamaStatsText').textContent = data.stats;
+      document.getElementById('mamaEmojiBox').textContent = data.emoji;
+      document.getElementById('mamaSliderLabel').textContent = data.label;
+    }
+
+    // 10. Interactive Portfolio Mockup 4: Zipi Bike Taxi
+    function simulateZipiDispatch() {
+      const badge = document.getElementById('zipiEtaBadge');
+      const status = document.getElementById('zipiRideStatus');
+      badge.textContent = 'ETA: Arriving Now';
+      badge.className = 'text-[11px] font-mono bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-500/40';
+      status.textContent = 'Captain Rahul is at Pickup Point ✓';
+      showToast('Live WebSocket GPS pinged Captain Rahul!');
+    }
+
+    // 11. Core Tech Stack Filter
+    function filterStack(category) {
+      const items = document.querySelectorAll('.stack-item');
+      const buttons = document.querySelectorAll('.stack-filter-btn');
+
+      buttons.forEach((btn) => {
+        if (btn.getAttribute('data-stack-btn') === category) {
+          btn.className = 'stack-filter-btn px-3 py-1 rounded-full text-xs font-mono bg-brand text-white transition-all';
+        } else {
+          btn.className = 'stack-filter-btn px-3 py-1 rounded-full text-xs font-mono bg-white/5 text-slate-300 hover:text-white transition-all';
+        }
+      });
+
+      items.forEach((item) => {
+        const itemCat = item.getAttribute('data-stack-cat');
+        if (category === 'all' || itemCat === category) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    // 12. Clipboard Helper for Contact Section
+    function copyContactInfo(value, successMsg) {
+      const tempInput = document.createElement('textarea');
+      tempInput.value = value;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast(successMsg);
+    }
+
+    // 13. Interactive Project Configurator
+    function toggleScopePill(btn) {
+      btn.classList.toggle('active');
+      if (btn.classList.contains('active')) {
+        btn.className = 'scope-pill active px-3.5 py-2 rounded-xl text-xs font-semibold bg-brand text-white border border-brand transition-all';
+      } else {
+        btn.className = 'scope-pill px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900/90 text-slate-300 border border-white/10 hover:border-brand/40 transition-all';
+      }
+    }
+
+    function switchToReadyView() {
+      const name = document.getElementById('clientNameInput').value.trim() || 'Partner';
+      const activeScopes = Array.from(document.querySelectorAll('.scope-pill.active')).map(el => el.textContent.trim());
+      const scopeText = activeScopes.length ? activeScopes.join(', ') : 'Flutter Digital Product';
+
+      document.getElementById('readySummaryText').textContent =
+        `Thanks ${name}! Your project brief for (${scopeText}) is ready. Click below to launch your email client with everything pre-filled.`;
+
+      const subject = encodeURIComponent(`Project Inquiry: ${scopeText} — ${name}`);
+      const notes = encodeURIComponent(document.getElementById('clientNotesInput').value.trim() || 'Looking to discuss a new Flutter project.');
+      document.getElementById('mailtoLinkBtn').href = `mailto:hello@samrique.dev?subject=${subject}&body=${notes}`;
+
+      document.getElementById('projectFormView').classList.add('hidden');
+      document.getElementById('projectReadyView').classList.remove('hidden');
+      showToast('Project brief generated!');
+    }
+
+    function resetProjectForm() {
+      document.getElementById('projectReadyView').classList.add('hidden');
+      document.getElementById('projectFormView').classList.remove('hidden');
+    }
+
+    // 14. Simulator Modal Controls
+    function openInteractiveSimulator() {
+      const modal = document.getElementById('simulatorModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+    function closeInteractiveSimulator() {
+      const modal = document.getElementById('simulatorModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  </script>
+</body>
+</html>

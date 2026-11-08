@@ -2,17 +2,32 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
-    <title>Samrique — Flutter Development &amp; Digital Solutions</title>
+    <title>Samrique | Mobile Apps &amp; Digital Product Studio</title>
     <meta
       name="description"
-      content="Samrique builds high-performance Flutter apps, payment integrations, and scalable digital products."
+      content="Samrique shapes and builds mobile apps and digital products, from clear user journeys and interface design to Flutter engineering and integrations."
     />
     <base href="/" />
+    <script>
+      (() => {
+        const params = new URLSearchParams(window.location.search);
+        const path = params.get('__ghp_path');
+        if (path === null) return;
+
+        const base = new URL(document.querySelector('base').href);
+        const target = new URL(path.replace(/^\/+/, ''), base);
+        if (!target.pathname.startsWith(base.pathname)) return;
+
+        const search = params.get('__ghp_search') || '';
+        const hash = params.get('__ghp_hash') || '';
+        window.history.replaceState(null, '', `${target.pathname}${search}${hash}`);
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
     <link
@@ -25,9 +40,11 @@
         theme: {
           extend: {
             colors: {
+              obsidian: "#070A10",
+              midnight: "#0D1322",
               dark: {
-                950: "#070B14",
-                900: "#0F172A",
+                950: "#070A10",
+                900: "#0D1322",
                 800: "#1E293B",
                 700: "#334155",
               },
@@ -37,12 +54,15 @@
                 dark: "#E05252",
               },
               coral: {
-                DEFAULT: "#F97316",
-                light: "#FB923C",
+                DEFAULT: "#FF6B2B",
+                light: "#FF8F50",
+                dark: "#E04F10",
               },
             },
             fontFamily: {
               sans: ["Inter", "sans-serif"],
+              display: ["Plus Jakarta Sans", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
             },
           },
         },
@@ -50,7 +70,7 @@
     </script>
   </head>
   <body
-    class="bg-dark-900 text-slate-100 antialiased selection:bg-coral selection:text-white"
+    class="bg-[#F8FAFC] text-slate-900 antialiased selection:bg-teal-600 selection:text-white"
   >
     <app-root></app-root>
   </body>

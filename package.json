@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:github-pages": "ng build --base-href=/samrique.in/",
+    "deploy": "ng build --base-href=/samrique.in/ && ngh --dir=dist/samrique-website/browser --repo=https://github.com/samrique-where-design-meets-deployment/samrique.in.git",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
