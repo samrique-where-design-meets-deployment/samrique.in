@@ -18,7 +18,7 @@ npm run build
 ```
 
 The portfolio contact form validates the entered details and opens a prefilled
-email to `samrique@gmail.com`. It does not send or store messages on a server;
+email to `samrique.in@gmail.com`. It does not send or store messages on a server;
 the visitor must send the email from their email application.
 
 Deploy the contents of `dist/samrique-website/browser/` after a production
