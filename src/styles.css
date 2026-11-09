@@ -207,18 +207,24 @@ h4 {
   font-family: "Plus Jakarta Sans", "Inter", sans-serif;
 }
 
-.reveal-enabled .reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(36px) scale(0.985);
+.reveal-on-scroll {
+  opacity: 1;
+  transform: translateY(0);
   transition:
-    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-enabled .reveal-on-scroll {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .reveal-enabled .reveal-on-scroll.is-visible,
 :target .reveal-on-scroll,
 #projects:target .reveal-on-scroll,
-#hero .reveal-on-scroll {
+#hero .reveal-on-scroll,
+section .reveal-on-scroll {
   opacity: 1 !important;
   transform: translateY(0) scale(1) !important;
 }
@@ -590,7 +596,7 @@ a:focus-visible {
   min-height: 44px;
   margin-top: 14px;
   border: none;
-  border-radius: 12px;
+  border-radius: 9999px;
   background: linear-gradient(110deg, #f36d75, #13bfae);
   color: white;
   font-size: 13px;
@@ -687,22 +693,22 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 14px;
-  padding: 0 28px;
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 12px;
-  background: linear-gradient(110deg, #ff7a20, #ff725f);
+  padding: 0 32px;
+  border: none;
+  border-radius: 9999px;
+  background: linear-gradient(110deg, #f36d75, #13bfae);
   color: #fff;
   font-size: .9rem;
   font-weight: 850;
   letter-spacing: .07em;
   text-transform: uppercase;
-  box-shadow: 0 12px 30px rgba(255, 114, 95, .22);
+  box-shadow: 0 8px 24px rgba(243, 109, 117, .28);
   transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .consultation-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 38px rgba(255, 114, 95, .32);
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 14px 34px rgba(19, 191, 174, .35);
 }
 
 .consultation-steps {
@@ -907,7 +913,7 @@ a:focus-visible {
   --brand-teal: #13bfae;
   --brand-navy: #29264f;
   min-height: 100vh;
-  overflow: clip;
+  overflow-x: clip;
   background: #f5f6fa;
   color: #202638;
 }
@@ -1018,6 +1024,31 @@ a:focus-visible {
 
 .site-home .bg-gradient-to-r {
   background-image: linear-gradient(110deg, #f36d75, #13bfae);
+}
+
+/* Universal Brand Gradient Button */
+.btn-brand-gradient {
+  background: linear-gradient(110deg, #f36d75, #13bfae) !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  box-shadow: 0 4px 16px rgba(243, 109, 117, 0.28) !important;
+  border: none !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
+}
+
+.btn-brand-gradient:hover {
+  transform: translateY(-1.5px) scale(1.02) !important;
+  box-shadow: 0 8px 24px rgba(19, 191, 174, 0.35) !important;
+  filter: brightness(1.05) !important;
+  color: #ffffff !important;
+}
+
+.btn-brand-gradient:active {
+  transform: translateY(0) scale(0.98) !important;
 }
 
 .site-home .bg-coral,
@@ -1400,10 +1431,11 @@ a:focus-visible {
 .booking-fallback a { color: #d75662; }
 
 .booking-submit {
+  border-radius: 9999px;
   background: linear-gradient(110deg, #f36d75, #13bfae);
-  box-shadow: 0 8px 24px rgba(19, 155, 143, .18);
+  box-shadow: 0 8px 24px rgba(243, 109, 117, .25);
 }
-.booking-submit:hover { box-shadow: 0 12px 30px rgba(19, 155, 143, .25); }
+.booking-submit:hover { box-shadow: 0 12px 30px rgba(19, 191, 174, .35); }
 
 @media (max-width: 980px) {
   .booking-calendar { border-color: #e5e9f1; }
@@ -1415,27 +1447,19 @@ a:focus-visible {
 }
 
 .product-page {
-  height: 100dvh;
+  min-height: 100vh;
   overflow-x: hidden;
-  overflow-y: auto;
   scroll-behavior: smooth;
   scroll-padding-top: 96px;
-  scroll-snap-type: y proximity;
 }
 
-.product-page .product-hero,
+.product-page .product-hero {
+  min-height: auto;
+}
+
 .product-page .product-section {
-  min-height: calc(100svh - 96px);
-  scroll-snap-align: start;
-}
-
-.product-page .product-hero,
-.product-page .product-overview { align-content: center; }
-
-.product-page .product-section:not(.product-overview) {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  min-height: auto;
+  scroll-margin-top: 96px;
 }
 
 .product-page .product-tech-section {

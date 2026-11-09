@@ -1,66 +1,21 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
-    <meta charset="utf-8"/>
-    <title>Samrique | Mobile Apps &amp; Digital Product Studio</title>
-    <meta name="description" content="Samrique shapes and builds mobile apps and digital products, from clear user journeys and interface design to Flutter engineering and integrations."/>
-    <base href="/samrique.in/"/>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
     <script>
       (() => {
-        const params = new URLSearchParams(window.location.search);
-        const path = params.get('__ghp_path');
-        if (path === null) return;
-
-        const base = new URL(document.querySelector('base').href);
-        const target = new URL(path.replace(/^\/+/, ''), base);
-        if (!target.pathname.startsWith(base.pathname)) return;
-
-        const search = params.get('__ghp_search') || '';
-        const hash = params.get('__ghp_hash') || '';
-        window.history.replaceState(null, '', `${target.pathname}${search}${hash}`);
+        const isProjectRepo = window.location.pathname.startsWith('/samrique.in');
+        const basePath = isProjectRepo ? '/samrique.in/' : '/';
+        const path = window.location.pathname.slice(basePath.length);
+        const params = new URLSearchParams({
+          __ghp_path: path,
+          __ghp_search: window.location.search,
+          __ghp_hash: window.location.hash,
+        });
+        window.location.replace(`${basePath}?${params.toString()}`);
       })();
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              obsidian: "#070A10",
-              midnight: "#0D1322",
-              dark: {
-                950: "#070A10",
-                900: "#0D1322",
-                800: "#1E293B",
-                700: "#334155",
-              },
-              accent: {
-                DEFAULT: "#FF6B6B",
-                light: "#FF8E8E",
-                dark: "#E05252",
-              },
-              coral: {
-                DEFAULT: "#FF6B2B",
-                light: "#FF8F50",
-                dark: "#E04F10",
-              },
-            },
-            fontFamily: {
-              sans: ["Inter", "sans-serif"],
-              display: ["Plus Jakarta Sans", "sans-serif"],
-              mono: ["JetBrains Mono", "monospace"],
-            },
-          },
-        },
-      };
-    </script>
-  <link rel="stylesheet" href="styles-JREPXQLZ.css"></head>
-  <body class="bg-[#F8FAFC] text-slate-900 antialiased selection:bg-teal-600 selection:text-white">
-    <app-root></app-root>
-  <script src="main-MGPPZCQM.js" type="module"></script></body>
+  </head>
+  <body></body>
 </html>
