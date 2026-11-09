@@ -8,7 +8,8 @@
       <div
         class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
         <div class="flex items-center gap-3 flex-shrink-0">
-          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            class="flex items-center gap-2 group" aria-label="Samrique home">
             <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
               class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
           </a>
@@ -23,7 +24,8 @@
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
-            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens
+            &amp; Previews</a>
           <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
         </nav>
@@ -71,7 +73,9 @@
       </div>
     </div>
     <figure class="product-hero-image" style="cursor: pointer;" (click)="scrollToProductSection('product-screens')">
-      <img src="assets/images/samrique_money_manager/samrique-money-manager-showcase.png" alt="Samrique Money Manager – Money, made clear" class="home-hero-img" loading="eager" fetchpriority="high" decoding="async" />
+      <img src="assets/images/samrique_money_manager/samrique-money-manager-showcase.png"
+        alt="Samrique Money Manager – Money, made clear" class="home-hero-img" loading="eager" fetchpriority="high"
+        decoding="async" />
       <figcaption>Preview Screen: Money, made clear. A look inside Samrique Money Manager.</figcaption>
     </figure>
   </section>
@@ -115,72 +119,61 @@
 
   <!-- Mobile Screens & Previews Section -->
   <section id="product-screens" class="product-screens-section">
-    <div class="product-section-heading">
-      <span class="product-kicker">Interactive App Showcase</span>
-      <h2>Mobile Screens &amp; Previews</h2>
-      <p>Explore each page of mobile screen with presentation previews and authentic application assets.</p>
-    </div>
+    <div class="wrap">
+      <span class="eyebrow">Personal Finance Showcase</span>
+      <h2>Mobile screens, <span>end to end</span></h2>
+      <p class="lead">Explore 8 polished screens across daily transaction tracking, multi-account portfolios, spending
+        analytics, and report export.</p>
+      <div class="stats">
+        <div><b>8</b><small>Screens</small></div>
+        <div><b>5</b><small>Modules</small></div>
+        <div><b>Flutter</b><small>Cross-platform</small></div>
+      </div>
 
-    <div class="screen-filters">
-      <button type="button" class="screen-filter-btn" [class.active]="moneyManagerCategory === 'All'"
-        (click)="moneyManagerCategory = 'All'">All Screens ({{ moneyManagerScreens.length }})</button>
-      <button type="button" class="screen-filter-btn" [class.active]="moneyManagerCategory === 'Transactions'"
-        (click)="moneyManagerCategory = 'Transactions'">Transactions</button>
-      <button type="button" class="screen-filter-btn" [class.active]="moneyManagerCategory === 'Accounts'"
-        (click)="moneyManagerCategory = 'Accounts'">Accounts</button>
-      <button type="button" class="screen-filter-btn" [class.active]="moneyManagerCategory === 'Insights'"
-        (click)="moneyManagerCategory = 'Insights'">Insights</button>
-      <button type="button" class="screen-filter-btn" [class.active]="moneyManagerCategory === 'Settings'"
-        (click)="moneyManagerCategory = 'Settings'">Settings</button>
-      <button type="button" class="screen-filter-btn" [class.active]="moneyManagerCategory === 'Onboarding'"
-        (click)="moneyManagerCategory = 'Onboarding'">Onboarding</button>
-    </div>
+      <div class="filters" role="tablist">
+        <button type="button" class="pill" [class.on]="moneyManagerCategory === 'All'"
+          (click)="moneyManagerCategory = 'All'">All<i>({{ moneyManagerScreens.length }})</i></button>
+        <button type="button" class="pill" [class.on]="moneyManagerCategory === 'Transactions'"
+          (click)="moneyManagerCategory = 'Transactions'">Transactions<i>({{ getCategoryCount(moneyManagerScreens,
+            'Transactions') }})</i></button>
+        <button type="button" class="pill" [class.on]="moneyManagerCategory === 'Accounts'"
+          (click)="moneyManagerCategory = 'Accounts'">Accounts<i>({{ getCategoryCount(moneyManagerScreens, 'Accounts')
+            }})</i></button>
+        <button type="button" class="pill" [class.on]="moneyManagerCategory === 'Insights'"
+          (click)="moneyManagerCategory = 'Insights'">Insights<i>({{ getCategoryCount(moneyManagerScreens, 'Insights')
+            }})</i></button>
+        <button type="button" class="pill" [class.on]="moneyManagerCategory === 'Settings'"
+          (click)="moneyManagerCategory = 'Settings'">Settings<i>({{ getCategoryCount(moneyManagerScreens, 'Settings')
+            }})</i></button>
+        <button type="button" class="pill" [class.on]="moneyManagerCategory === 'Onboarding'"
+          (click)="moneyManagerCategory = 'Onboarding'">Onboarding<i>({{ getCategoryCount(moneyManagerScreens,
+            'Onboarding') }})</i></button>
+      </div>
 
-    <div class="product-screens-grid">
-      @for (screen of filterScreens(moneyManagerScreens, moneyManagerCategory); track screen.id) {
-      <article class="screen-card">
-        <div class="screen-card-top">
-          <div class="screen-card-badge-wrap">
-            <span class="screen-category-pill">{{ screen.category }}</span>
-            <span class="screen-number-pill">Screen {{ screen.screenNumber }}</span>
-          </div>
-          <div class="screen-card-toggle">
-            <button type="button" class="screen-toggle-btn" [class.active]="getCardView(screen.id) === 'preview'"
-              (click)="toggleCardView(screen.id, 'preview')" title="Showcase Mockup">Mockup</button>
-            <button type="button" class="screen-toggle-btn" [class.active]="getCardView(screen.id) === 'asset'"
-              (click)="toggleCardView(screen.id, 'asset')" title="Direct Mobile Screen">Screen</button>
-          </div>
-        </div>
-
-        <div class="screen-media-container" [class.device-mode]="getCardView(screen.id) === 'asset'"
-          (click)="openScreenModal(screen, getCardView(screen.id))">
-          @if (getCardView(screen.id) === 'preview') {
-          <div class="screen-slide-wrap">
-            <img [src]="screen.previewImage" [alt]="'Preview Screen: ' + screen.name" loading="lazy" />
-            <span class="screen-media-zoom-hint"><i class="fa-solid fa-expand"></i> Inspect Details</span>
-          </div>
-          } @else {
-          <div class="screen-device-mockup">
-            <div class="screen-phone-chassis">
-              <div class="screen-phone-notch"></div>
-              <img [src]="screen.assetImage" [alt]="'Mobile Screen Asset: ' + screen.name" loading="lazy" />
+      <div class="grid">
+        @for (screen of filterScreens(moneyManagerScreens, moneyManagerCategory); track screen.id) {
+        <article class="card" [style.--c]="getCategoryColor(screen.category)" (click)="openScreenModal(screen, 'asset')"
+          (keydown.enter)="openScreenModal(screen, 'asset')" tabindex="0" role="button" [attr.aria-label]="screen.name">
+          <div class="stage">
+            <span class="num">SCREEN {{ screen.screenNumber }}</span>
+            <span class="badge">{{ screen.category }}</span>
+            <div class="phone">
+              <img [src]="screen.assetImage || screen.previewImage" [alt]="screen.name" class="phone-screen-img"
+                loading="lazy" />
             </div>
-            <span class="screen-media-zoom-hint"><i class="fa-solid fa-expand"></i> Inspect Details</span>
           </div>
-          }
-        </div>
-
-        <div class="screen-card-body">
-          <h3 class="screen-title">{{ screen.name }}</h3>
-          <p class="screen-desc">{{ screen.description }}</p>
-          <div class="screen-card-tags">
-            @for (tag of screen.tags; track tag) {
-            <span class="screen-tag-pill">{{ tag }}</span>
-            }
+          <div class="body">
+            <h3>{{ screen.name }}</h3>
+            <p>{{ screen.description }}</p>
+            <div class="tags">
+              @for (tag of screen.tags; track tag) {
+              <span>{{ tag }}</span>
+              }
+            </div>
           </div>
-        </div>
-      </article>
-      }
+        </article>
+        }
+      </div>
     </div>
   </section>
 
@@ -203,7 +196,8 @@
   <footer class="product-footer"><a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">←
       All projects</a><span>© {{ currentYear }} Samrique · Crafted with precision &amp; performance.</span><a
       [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
-      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start a Project
+      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start
+      a Project
       <i class="fa-solid fa-arrow-right text-xs"></i></a></footer>
 </main>
 } @else if (showMarketplace) {
@@ -216,7 +210,8 @@
       <div
         class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
         <div class="flex items-center gap-3 flex-shrink-0">
-          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            class="flex items-center gap-2 group" aria-label="Samrique home">
             <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
               class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
           </a>
@@ -231,7 +226,8 @@
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
-            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens
+            &amp; Previews</a>
           <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
         </nav>
@@ -313,78 +309,67 @@
       <article class="product-feature"><span class="product-feature-number">0{{ i + 1 }}</span>
         <h3>{{ feature.title }}</h3>
         <p>{{ feature.detail }}</p>
-      </article> }</div>
+      </article> }
+    </div>
   </section>
 
   <!-- Mobile Screens & Previews Section -->
   <section id="product-screens" class="product-screens-section">
-    <div class="product-section-heading">
-      <span class="product-kicker">Multi-Role Marketplace Showcase</span>
-      <h2>Mobile Screens &amp; Previews</h2>
-      <p>Explore 18 end-to-end mobile screens across Buyer discovery, Seller management, Platform Administration, and
-        Authentication.</p>
-    </div>
+    <div class="wrap">
+      <span class="eyebrow">Multi-role marketplace showcase</span>
+      <h2>Mobile screens, <span>end to end</span></h2>
+      <p class="lead">Explore 18 polished screens across buyer discovery, seller management, platform administration and
+        authentication.</p>
+      <div class="stats">
+        <div><b>18</b><small>Screens</small></div>
+        <div><b>4</b><small>User roles</small></div>
+        <div><b>Flutter</b><small>Cross-platform</small></div>
+      </div>
 
-    <div class="screen-filters">
-      <button type="button" class="screen-filter-btn" [class.active]="marketplaceCategory === 'All'"
-        (click)="marketplaceCategory = 'All'">All Screens ({{ marketplaceScreens.length }})</button>
-      <button type="button" class="screen-filter-btn" [class.active]="marketplaceCategory === 'Buyer'"
-        (click)="marketplaceCategory = 'Buyer'">Buyer Hub</button>
-      <button type="button" class="screen-filter-btn" [class.active]="marketplaceCategory === 'Seller'"
-        (click)="marketplaceCategory = 'Seller'">Seller Portal</button>
-      <button type="button" class="screen-filter-btn" [class.active]="marketplaceCategory === 'Admin'"
-        (click)="marketplaceCategory = 'Admin'">Admin &amp; KYC</button>
-      <button type="button" class="screen-filter-btn" [class.active]="marketplaceCategory === 'Authentication'"
-        (click)="marketplaceCategory = 'Authentication'">Authentication</button>
-      <button type="button" class="screen-filter-btn" [class.active]="marketplaceCategory === 'Onboarding'"
-        (click)="marketplaceCategory = 'Onboarding'">Onboarding</button>
-    </div>
+      <div class="filters" role="tablist">
+        <button type="button" class="pill" [class.on]="marketplaceCategory === 'All'"
+          (click)="marketplaceCategory = 'All'">All<i>({{ marketplaceScreens.length }})</i></button>
+        <button type="button" class="pill" [class.on]="marketplaceCategory === 'Buyer'"
+          (click)="marketplaceCategory = 'Buyer'">Buyer<i>({{ getCategoryCount(marketplaceScreens, 'Buyer')
+            }})</i></button>
+        <button type="button" class="pill" [class.on]="marketplaceCategory === 'Seller'"
+          (click)="marketplaceCategory = 'Seller'">Seller<i>({{ getCategoryCount(marketplaceScreens, 'Seller')
+            }})</i></button>
+        <button type="button" class="pill" [class.on]="marketplaceCategory === 'Admin'"
+          (click)="marketplaceCategory = 'Admin'">Admin<i>({{ getCategoryCount(marketplaceScreens, 'Admin')
+            }})</i></button>
+        <button type="button" class="pill" [class.on]="marketplaceCategory === 'Authentication'"
+          (click)="marketplaceCategory = 'Authentication'">Authentication<i>({{ getCategoryCount(marketplaceScreens,
+            'Authentication') }})</i></button>
+        <button type="button" class="pill" [class.on]="marketplaceCategory === 'Onboarding'"
+          (click)="marketplaceCategory = 'Onboarding'">Onboarding<i>({{ getCategoryCount(marketplaceScreens,
+            'Onboarding') }})</i></button>
+      </div>
 
-    <div class="product-screens-grid">
-      @for (screen of filterScreens(marketplaceScreens, marketplaceCategory); track screen.id) {
-      <article class="screen-card">
-        <div class="screen-card-top">
-          <div class="screen-card-badge-wrap">
-            <span class="screen-category-pill">{{ screen.category }}</span>
-            <span class="screen-number-pill">Screen {{ screen.screenNumber }}</span>
-          </div>
-          <div class="screen-card-toggle">
-            <button type="button" class="screen-toggle-btn" [class.active]="getCardView(screen.id) === 'preview'"
-              (click)="toggleCardView(screen.id, 'preview')" title="Showcase Mockup">Mockup</button>
-            <button type="button" class="screen-toggle-btn" [class.active]="getCardView(screen.id) === 'asset'"
-              (click)="toggleCardView(screen.id, 'asset')" title="Direct Mobile Screen">Screen</button>
-          </div>
-        </div>
-
-        <div class="screen-media-container" [class.device-mode]="getCardView(screen.id) === 'asset'"
-          (click)="openScreenModal(screen, getCardView(screen.id))">
-          @if (getCardView(screen.id) === 'preview') {
-          <div class="screen-slide-wrap">
-            <img [src]="screen.previewImage" [alt]="'Preview Screen: ' + screen.name" loading="lazy" />
-            <span class="screen-media-zoom-hint"><i class="fa-solid fa-expand"></i> Inspect Details</span>
-          </div>
-          } @else {
-          <div class="screen-device-mockup">
-            <div class="screen-phone-chassis">
-              <div class="screen-phone-notch"></div>
-              <img [src]="screen.assetImage" [alt]="'Mobile Screen Asset: ' + screen.name" loading="lazy" />
+      <div class="grid">
+        @for (screen of filterScreens(marketplaceScreens, marketplaceCategory); track screen.id) {
+        <article class="card" [style.--c]="getCategoryColor(screen.category)" (click)="openScreenModal(screen, 'asset')"
+          (keydown.enter)="openScreenModal(screen, 'asset')" tabindex="0" role="button" [attr.aria-label]="screen.name">
+          <div class="stage">
+            <span class="num">SCREEN {{ screen.screenNumber }}</span>
+            <span class="badge">{{ screen.category }}</span>
+            <div class="phone">
+              <img [src]="screen.assetImage || screen.previewImage" [alt]="screen.name" class="phone-screen-img"
+                loading="lazy" />
             </div>
-            <span class="screen-media-zoom-hint"><i class="fa-solid fa-expand"></i> Inspect Details</span>
           </div>
-          }
-        </div>
-
-        <div class="screen-card-body">
-          <h3 class="screen-title">{{ screen.name }}</h3>
-          <p class="screen-desc">{{ screen.description }}</p>
-          <div class="screen-card-tags">
-            @for (tag of screen.tags; track tag) {
-            <span class="screen-tag-pill">{{ tag }}</span>
-            }
+          <div class="body">
+            <h3>{{ screen.name }}</h3>
+            <p>{{ screen.description }}</p>
+            <div class="tags">
+              @for (tag of screen.tags; track tag) {
+              <span>{{ tag }}</span>
+              }
+            </div>
           </div>
-        </div>
-      </article>
-      }
+        </article>
+        }
+      </div>
     </div>
   </section>
   <section id="product-technology" class="product-section product-tech-section">
@@ -405,7 +390,8 @@
   <footer class="product-footer"><a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">←
       All projects</a><span>© {{ currentYear }} Samrique · Crafted with precision &amp; performance.</span><a
       [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
-      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start a Project
+      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start
+      a Project
       <i class="fa-solid fa-arrow-right text-xs"></i></a></footer>
 </main>
 } @else if (showMama) {
@@ -418,7 +404,8 @@
       <div
         class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
         <div class="flex items-center gap-3 flex-shrink-0">
-          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            class="flex items-center gap-2 group" aria-label="Samrique home">
             <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
               class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
           </a>
@@ -433,7 +420,8 @@
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
-            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens
+            &amp; Previews</a>
           <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
         </nav>
@@ -521,71 +509,56 @@
 
   <!-- Mobile Screens & Previews Section -->
   <section id="product-screens" class="product-screens-section">
-    <div class="product-section-heading">
-      <span class="product-kicker">Maternal Health Experience</span>
-      <h2>Mobile Screens &amp; Previews</h2>
-      <p>Explore 11 mobile screens covering weekly progression, daily health vitals, contractions timer, and community
-        discussions.</p>
-    </div>
+    <div class="wrap">
+      <span class="eyebrow">Maternal health experience</span>
+      <h2>Mobile screens, <span>end to end</span></h2>
+      <p class="lead">Explore 11 polished screens covering weekly progression, daily health vitals, contractions timer,
+        and community discussions.</p>
+      <div class="stats">
+        <div><b>11</b><small>Screens</small></div>
+        <div><b>4</b><small>Care pillars</small></div>
+        <div><b>Flutter</b><small>Cross-platform</small></div>
+      </div>
 
-    <div class="screen-filters">
-      <button type="button" class="screen-filter-btn" [class.active]="mamaCategory === 'All'"
-        (click)="mamaCategory = 'All'">All Screens ({{ mamaScreens.length }})</button>
-      <button type="button" class="screen-filter-btn" [class.active]="mamaCategory === 'Daily Vitals'"
-        (click)="mamaCategory = 'Daily Vitals'">Daily Vitals</button>
-      <button type="button" class="screen-filter-btn" [class.active]="mamaCategory === 'Wellness'"
-        (click)="mamaCategory = 'Wellness'">Wellness</button>
-      <button type="button" class="screen-filter-btn" [class.active]="mamaCategory === 'Care'"
-        (click)="mamaCategory = 'Care'">Care &amp; Community</button>
-      <button type="button" class="screen-filter-btn" [class.active]="mamaCategory === 'Onboarding'"
-        (click)="mamaCategory = 'Onboarding'">Onboarding</button>
-    </div>
+      <div class="filters" role="tablist">
+        <button type="button" class="pill" [class.on]="mamaCategory === 'All'" (click)="mamaCategory = 'All'">All<i>({{
+            mamaScreens.length }})</i></button>
+        <button type="button" class="pill" [class.on]="mamaCategory === 'Daily Vitals'"
+          (click)="mamaCategory = 'Daily Vitals'">Daily Vitals<i>({{ getCategoryCount(mamaScreens, 'Daily Vitals')
+            }})</i></button>
+        <button type="button" class="pill" [class.on]="mamaCategory === 'Wellness'"
+          (click)="mamaCategory = 'Wellness'">Wellness<i>({{ getCategoryCount(mamaScreens, 'Wellness') }})</i></button>
+        <button type="button" class="pill" [class.on]="mamaCategory === 'Care'"
+          (click)="mamaCategory = 'Care'">Care<i>({{ getCategoryCount(mamaScreens, 'Care') }})</i></button>
+        <button type="button" class="pill" [class.on]="mamaCategory === 'Onboarding'"
+          (click)="mamaCategory = 'Onboarding'">Onboarding<i>({{ getCategoryCount(mamaScreens, 'Onboarding')
+            }})</i></button>
+      </div>
 
-    <div class="product-screens-grid">
-      @for (screen of filterScreens(mamaScreens, mamaCategory); track screen.id) {
-      <article class="screen-card">
-        <div class="screen-card-top">
-          <div class="screen-card-badge-wrap">
-            <span class="screen-category-pill">{{ screen.category }}</span>
-            <span class="screen-number-pill">Screen {{ screen.screenNumber }}</span>
-          </div>
-          <div class="screen-card-toggle">
-            <button type="button" class="screen-toggle-btn" [class.active]="getCardView(screen.id) === 'preview'"
-              (click)="toggleCardView(screen.id, 'preview')" title="Showcase Mockup">Mockup</button>
-            <button type="button" class="screen-toggle-btn" [class.active]="getCardView(screen.id) === 'asset'"
-              (click)="toggleCardView(screen.id, 'asset')" title="Direct Mobile Screen">Screen</button>
-          </div>
-        </div>
-
-        <div class="screen-media-container" [class.device-mode]="getCardView(screen.id) === 'asset'"
-          (click)="openScreenModal(screen, getCardView(screen.id))">
-          @if (getCardView(screen.id) === 'preview') {
-          <div class="screen-slide-wrap">
-            <img [src]="screen.previewImage" [alt]="'Preview Screen: ' + screen.name" loading="lazy" />
-            <span class="screen-media-zoom-hint"><i class="fa-solid fa-expand"></i> Inspect Details</span>
-          </div>
-          } @else {
-          <div class="screen-device-mockup">
-            <div class="screen-phone-chassis">
-              <div class="screen-phone-notch"></div>
-              <img [src]="screen.assetImage" [alt]="'Mobile Screen Asset: ' + screen.name" loading="lazy" />
+      <div class="grid">
+        @for (screen of filterScreens(mamaScreens, mamaCategory); track screen.id) {
+        <article class="card" [style.--c]="getCategoryColor(screen.category)" (click)="openScreenModal(screen, 'asset')"
+          (keydown.enter)="openScreenModal(screen, 'asset')" tabindex="0" role="button" [attr.aria-label]="screen.name">
+          <div class="stage">
+            <span class="num">SCREEN {{ screen.screenNumber }}</span>
+            <span class="badge">{{ screen.category }}</span>
+            <div class="phone">
+              <img [src]="screen.assetImage || screen.previewImage" [alt]="screen.name" class="phone-screen-img"
+                loading="lazy" />
             </div>
-            <span class="screen-media-zoom-hint"><i class="fa-solid fa-expand"></i> Inspect Details</span>
           </div>
-          }
-        </div>
-
-        <div class="screen-card-body">
-          <h3 class="screen-title">{{ screen.name }}</h3>
-          <p class="screen-desc">{{ screen.description }}</p>
-          <div class="screen-card-tags">
-            @for (tag of screen.tags; track tag) {
-            <span class="screen-tag-pill">{{ tag }}</span>
-            }
+          <div class="body">
+            <h3>{{ screen.name }}</h3>
+            <p>{{ screen.description }}</p>
+            <div class="tags">
+              @for (tag of screen.tags; track tag) {
+              <span>{{ tag }}</span>
+              }
+            </div>
           </div>
-        </div>
-      </article>
-      }
+        </article>
+        }
+      </div>
     </div>
   </section>
   <section id="product-technology" class="product-section product-tech-section">
@@ -604,7 +577,8 @@
   <footer class="product-footer"><a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">←
       All projects</a><span>© {{ currentYear }} Samrique · Crafted with care.</span><a
       [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
-      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start a Project
+      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start
+      a Project
       <i class="fa-solid fa-arrow-right text-xs"></i></a></footer>
 </main>
 } @else if (showZipi) {
@@ -617,7 +591,8 @@
       <div
         class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
         <div class="flex items-center gap-3 flex-shrink-0">
-          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" class="flex items-center gap-2 group" aria-label="Samrique home">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            class="flex items-center gap-2 group" aria-label="Samrique home">
             <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
               class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
           </a>
@@ -632,7 +607,8 @@
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
-            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens &amp; Previews</a>
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens
+            &amp; Previews</a>
           <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
         </nav>
@@ -673,8 +649,8 @@
       <div class="product-pills"><span>Flutter</span><span>GetX</span><span>Google Maps</span><span>Real-Time
           Dispatch</span><span>REST API</span></div>
       <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
-        <a class="product-primary"
-          [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()">
+        <a class="product-primary" [attr.href]="appPath('/#contact')"
+          (click)="$event.preventDefault(); inquireAboutMoneyManager()">
           Discuss a similar product <i class="fa-solid fa-arrow-right"></i>
         </a>
         <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -685,7 +661,8 @@
     </div>
     <figure class="product-hero-image" style="cursor: pointer;" (click)="scrollToProductSection('product-screens')">
       <img src="assets/images/zipi_bike_taxi_app/10_rider_home_preview.png"
-        alt="Preview Screen: Zipi Bike Taxi Rider Map &amp; Booking" loading="eager" fetchpriority="high" decoding="async" />
+        alt="Preview Screen: Zipi Bike Taxi Rider Map &amp; Booking" loading="eager" fetchpriority="high"
+        decoding="async" />
       <figcaption>Preview Screen: Rider Live Map, Captain Radar &amp; Instant Ride Booking</figcaption>
     </figure>
   </section>
@@ -732,76 +709,61 @@
 
   <!-- Mobile Screens & Previews Section -->
   <section id="product-screens" class="product-screens-section">
-    <div class="product-section-heading">
-      <span class="product-kicker">On-Demand Transit Showcase</span>
-      <h2>Mobile Screens &amp; Previews</h2>
-      <p>Explore 22 mobile screens across Rider booking, Captain fleet management, compliance verification, and ride
-        billing.</p>
-    </div>
+    <div class="wrap">
+      <span class="eyebrow">On-demand transit showcase</span>
+      <h2>Mobile screens, <span>end to end</span></h2>
+      <p class="lead">Explore 22 polished screens across rider booking, captain fleet management, compliance
+        verification, and ride billing.</p>
+      <div class="stats">
+        <div><b>22</b><small>Screens</small></div>
+        <div><b>6</b><small>Operational flows</small></div>
+        <div><b>Flutter</b><small>Cross-platform</small></div>
+      </div>
 
-    <div class="screen-filters">
-      <button type="button" class="screen-filter-btn" [class.active]="zipiCategory === 'All'"
-        (click)="zipiCategory = 'All'">All Screens ({{ zipiScreens.length }})</button>
-      <button type="button" class="screen-filter-btn" [class.active]="zipiCategory === 'Transit'"
-        (click)="zipiCategory = 'Transit'">Rider &amp; Transit</button>
-      <button type="button" class="screen-filter-btn" [class.active]="zipiCategory === 'Captain'"
-        (click)="zipiCategory = 'Captain'">Captain Partner</button>
-      <button type="button" class="screen-filter-btn" [class.active]="zipiCategory === 'Authentication'"
-        (click)="zipiCategory = 'Authentication'">Authentication</button>
-      <button type="button" class="screen-filter-btn" [class.active]="zipiCategory === 'Compliance'"
-        (click)="zipiCategory = 'Compliance'">KYC &amp; Compliance</button>
-      <button type="button" class="screen-filter-btn" [class.active]="zipiCategory === 'Profile'"
-        (click)="zipiCategory = 'Profile'">Profile &amp; Settings</button>
-      <button type="button" class="screen-filter-btn" [class.active]="zipiCategory === 'Onboarding'"
-        (click)="zipiCategory = 'Onboarding'">Onboarding</button>
-    </div>
+      <div class="filters" role="tablist">
+        <button type="button" class="pill" [class.on]="zipiCategory === 'All'" (click)="zipiCategory = 'All'">All<i>({{
+            zipiScreens.length }})</i></button>
+        <button type="button" class="pill" [class.on]="zipiCategory === 'Transit'"
+          (click)="zipiCategory = 'Transit'">Transit<i>({{ getCategoryCount(zipiScreens, 'Transit') }})</i></button>
+        <button type="button" class="pill" [class.on]="zipiCategory === 'Captain'"
+          (click)="zipiCategory = 'Captain'">Captain<i>({{ getCategoryCount(zipiScreens, 'Captain') }})</i></button>
+        <button type="button" class="pill" [class.on]="zipiCategory === 'Authentication'"
+          (click)="zipiCategory = 'Authentication'">Authentication<i>({{ getCategoryCount(zipiScreens, 'Authentication')
+            }})</i></button>
+        <button type="button" class="pill" [class.on]="zipiCategory === 'Compliance'"
+          (click)="zipiCategory = 'Compliance'">Compliance<i>({{ getCategoryCount(zipiScreens, 'Compliance')
+            }})</i></button>
+        <button type="button" class="pill" [class.on]="zipiCategory === 'Profile'"
+          (click)="zipiCategory = 'Profile'">Profile<i>({{ getCategoryCount(zipiScreens, 'Profile') }})</i></button>
+        <button type="button" class="pill" [class.on]="zipiCategory === 'Onboarding'"
+          (click)="zipiCategory = 'Onboarding'">Onboarding<i>({{ getCategoryCount(zipiScreens, 'Onboarding')
+            }})</i></button>
+      </div>
 
-    <div class="product-screens-grid">
-      @for (screen of filterScreens(zipiScreens, zipiCategory); track screen.id) {
-      <article class="screen-card">
-        <div class="screen-card-top">
-          <div class="screen-card-badge-wrap">
-            <span class="screen-category-pill" style="color:#f97316; background:#fff7ed; border-color:#fed7aa;">{{
-              screen.category }}</span>
-            <span class="screen-number-pill">Screen {{ screen.screenNumber }}</span>
-          </div>
-          <div class="screen-card-toggle">
-            <button type="button" class="screen-toggle-btn" [class.active]="getCardView(screen.id) === 'preview'"
-              (click)="toggleCardView(screen.id, 'preview')" title="Showcase Mockup">Mockup</button>
-            <button type="button" class="screen-toggle-btn" [class.active]="getCardView(screen.id) === 'asset'"
-              (click)="toggleCardView(screen.id, 'asset')" title="Direct Mobile Screen">Screen</button>
-          </div>
-        </div>
-
-        <div class="screen-media-container" [class.device-mode]="getCardView(screen.id) === 'asset'"
-          (click)="openScreenModal(screen, getCardView(screen.id))">
-          @if (getCardView(screen.id) === 'preview') {
-          <div class="screen-slide-wrap">
-            <img [src]="screen.previewImage" [alt]="'Preview Screen: ' + screen.name" loading="lazy" />
-            <span class="screen-media-zoom-hint"><i class="fa-solid fa-expand"></i> Inspect Details</span>
-          </div>
-          } @else {
-          <div class="screen-device-mockup">
-            <div class="screen-phone-chassis">
-              <div class="screen-phone-notch"></div>
-              <img [src]="screen.assetImage" [alt]="'Mobile Screen Asset: ' + screen.name" loading="lazy" />
+      <div class="grid">
+        @for (screen of filterScreens(zipiScreens, zipiCategory); track screen.id) {
+        <article class="card" [style.--c]="getCategoryColor(screen.category)" (click)="openScreenModal(screen, 'asset')"
+          (keydown.enter)="openScreenModal(screen, 'asset')" tabindex="0" role="button" [attr.aria-label]="screen.name">
+          <div class="stage">
+            <span class="num">SCREEN {{ screen.screenNumber }}</span>
+            <span class="badge">{{ screen.category }}</span>
+            <div class="phone">
+              <img [src]="screen.assetImage || screen.previewImage" [alt]="screen.name" class="phone-screen-img"
+                loading="lazy" />
             </div>
-            <span class="screen-media-zoom-hint"><i class="fa-solid fa-expand"></i> Inspect Details</span>
           </div>
-          }
-        </div>
-
-        <div class="screen-card-body">
-          <h3 class="screen-title">{{ screen.name }}</h3>
-          <p class="screen-desc">{{ screen.description }}</p>
-          <div class="screen-card-tags">
-            @for (tag of screen.tags; track tag) {
-            <span class="screen-tag-pill">{{ tag }}</span>
-            }
+          <div class="body">
+            <h3>{{ screen.name }}</h3>
+            <p>{{ screen.description }}</p>
+            <div class="tags">
+              @for (tag of screen.tags; track tag) {
+              <span>{{ tag }}</span>
+              }
+            </div>
           </div>
-        </div>
-      </article>
-      }
+        </article>
+        }
+      </div>
     </div>
   </section>
 
@@ -828,7 +790,8 @@
     <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">← All projects</a>
     <span>© {{ currentYear }} Samrique · Crafted with precision &amp; performance.</span>
     <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
-      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start a Project
+      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start
+      a Project
       <i class="fa-solid fa-arrow-right"></i></a>
   </footer>
 </main>
@@ -927,7 +890,8 @@
       <a href="#about" (click)="closeMobileMenu()"
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">About</a>
       <a href="#contact" (click)="closeMobileMenu()"
-        class="btn-brand-gradient block text-center px-4 py-2.5 rounded-full text-sm font-bold text-white shadow-md my-2">Start Project</a>
+        class="btn-brand-gradient block text-center px-4 py-2.5 rounded-full text-sm font-bold text-white shadow-md my-2">Start
+        Project</a>
       <button (click)="closeMobileMenu(); openBooking()"
         class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-emerald-700 hover:bg-emerald-50">
         Book 30-Min Discovery Call
@@ -1174,8 +1138,8 @@
         <!-- Project 1: Samrique E- Marketplace -->
         <div
           class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-6 space-y-5">
+          <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-6 lg:col-span-6 space-y-5">
               <span
                 class="inline-block px-3 py-1 rounded-full bg-rose-50 text-rose-600 border border-rose-100 text-xs font-bold">
                 Digital Commerce
@@ -1214,7 +1178,7 @@
                 </a>
               </div>
             </div>
-            <div class="lg:col-span-6">
+            <div class="md:col-span-6 lg:col-span-6">
               <div
                 class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-100 cursor-pointer group"
                 (click)="openMarketplace()">
@@ -1229,16 +1193,17 @@
         <!-- Project 2: Samrique Money Manager (Alternating: Mockup on Left!) -->
         <div
           class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-6 order-2 lg:order-1">
+          <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-6 lg:col-span-6 order-2 md:order-1 lg:order-1">
               <div
                 class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-900 cursor-pointer group"
                 (click)="openMoneyManager()">
-                <img src="assets/images/samrique_money_manager/samrique-money-manager-showcase.png" alt="Samrique Money Manager" loading="lazy" decoding="async"
+                <img src="assets/images/samrique_money_manager/samrique-money-manager-showcase.png"
+                  alt="Samrique Money Manager" loading="lazy" decoding="async"
                   class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-300" />
               </div>
             </div>
-            <div class="lg:col-span-6 space-y-5 order-1 lg:order-2">
+            <div class="md:col-span-6 lg:col-span-6 space-y-5 order-1 md:order-2 lg:order-2">
               <span
                 class="inline-block px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 text-xs font-bold">
                 Personal Finance
@@ -1281,8 +1246,8 @@
         <!-- Project 3: Samrique Mama Pregnancy Tracker -->
         <div
           class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-6 space-y-5">
+          <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-6 lg:col-span-6 space-y-5">
               <span
                 class="inline-block px-3 py-1 rounded-full bg-pink-50 text-pink-700 border border-pink-100 text-xs font-bold">
                 Pregnancy &amp; Wellness
@@ -1319,7 +1284,7 @@
                 </a>
               </div>
             </div>
-            <div class="lg:col-span-6">
+            <div class="md:col-span-6 lg:col-span-6">
               <div
                 class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-100 cursor-pointer group"
                 (click)="openMama()">
@@ -1334,8 +1299,8 @@
         <!-- Project 4: Zipi Bike Taxi App -->
         <div
           class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-6 space-y-5">
+          <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-6 lg:col-span-6 space-y-5">
               <span
                 class="inline-block px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-100 text-xs font-bold">
                 On-Demand Mobility
@@ -1373,11 +1338,12 @@
                 </a>
               </div>
             </div>
-            <div class="lg:col-span-6">
+            <div class="md:col-span-6 lg:col-span-6">
               <div
                 class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-900 cursor-pointer group"
                 (click)="openZipi()">
-                <img src="assets/images/zipi_bike_taxi_app/10_rider_home_preview.png" alt="Zipi Bike Taxi App" loading="lazy" decoding="async"
+                <img src="assets/images/zipi_bike_taxi_app/10_rider_home_preview.png" alt="Zipi Bike Taxi App"
+                  loading="lazy" decoding="async"
                   class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-300" />
               </div>
             </div>
@@ -1749,79 +1715,35 @@
 
 <!-- Interactive Screen Lightbox Modal -->
 @if (activeModalScreen) {
-<div class="screen-modal-overlay" (click)="closeScreenModal()">
-  <div class="screen-modal-container" (click)="$event.stopPropagation()">
-    <div class="screen-modal-header">
-      <div class="screen-modal-header-info">
-        <span class="screen-modal-category-badge">{{ activeModalScreen.category }}</span>
-        <h3>
-          {{ activeModalScreen.name }}
-          <span class="screen-modal-num-badge">Screen {{ activeModalScreen.screenNumber }}</span>
-        </h3>
-      </div>
-      <div class="screen-modal-header-actions">
-        <div class="screen-modal-pager">
-          <button type="button" class="screen-modal-nav-btn" (click)="prevModalScreen()"
-            title="Previous Screen (Left Arrow)">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          <button type="button" class="screen-modal-nav-btn" (click)="nextModalScreen()"
-            title="Next Screen (Right Arrow)">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
+<div class="modal open" id="modal" role="dialog" aria-modal="true" (click)="closeScreenModal()">
+  <div class="panel" [style.--c]="getCategoryColor(activeModalScreen.category)" (click)="$event.stopPropagation()">
+    <button type="button" class="x" (click)="closeScreenModal()" aria-label="Close">×</button>
+    <div class="stage">
+      <span class="num">SCREEN {{ activeModalScreen.screenNumber }}</span>
+      <span class="badge">{{ activeModalScreen.category }}</span>
+      <div class="phone full-screen-phone">
+        <div class="phone-screen-scroll">
+          <img [src]="activeModalScreen.assetImage" [alt]="activeModalScreen.name" class="phone-screen-img" />
         </div>
-        <button type="button" class="screen-modal-close" (click)="closeScreenModal()" aria-label="Close dialog"
-          title="Close (Esc)">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
       </div>
     </div>
-
-    <div class="screen-modal-body">
-      <div class="screen-modal-stage">
-        <div class="screen-modal-image-wrap">
-          @if (modalViewMode === 'preview') {
-          <div class="modal-slide-view">
-            <img [src]="activeModalScreen.previewImage" [alt]="'Showcase View: ' + activeModalScreen.name" />
-          </div>
-          } @else {
-          <div class="modal-device-frame">
-            <div class="modal-device-notch"></div>
-            <img [src]="activeModalScreen.assetImage" [alt]="'Mobile UI Screen: ' + activeModalScreen.name" />
-          </div>
-          }
-        </div>
-
-        <div class="screen-modal-stage-controls">
-          <button type="button" class="screen-modal-mode-btn" [class.active]="modalViewMode === 'preview'"
-            (click)="setModalViewMode('preview')">
-            <i class="fa-solid fa-display"></i> Showcase Mockup
-          </button>
-          <button type="button" class="screen-modal-mode-btn" [class.active]="modalViewMode === 'asset'"
-            (click)="setModalViewMode('asset')">
-            <i class="fa-solid fa-mobile-screen"></i> Mobile UI Screen
-          </button>
-        </div>
+    <div class="info">
+      <div class="info-top">
+        <span [style.color]="getCategoryColor(activeModalScreen.category)"
+          style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em">
+          {{ activeModalScreen.category }} Flow
+        </span>
       </div>
-
-      <div class="screen-modal-sidebar">
-        <div class="screen-modal-sidebar-section">
-          <span class="screen-modal-meta-label">Screen Overview</span>
-          <p class="screen-modal-desc">{{ activeModalScreen.description }}</p>
-        </div>
-
-        <div class="screen-modal-sidebar-section">
-          <span class="screen-modal-meta-label">Key Highlights</span>
-          <div class="screen-card-tags" style="margin-top:8px;">
-            @for (tag of activeModalScreen.tags; track tag) {
-            <span class="screen-tag-pill">{{ tag }}</span>
-            }
-          </div>
-        </div>
-
-        <div class="screen-modal-footer-hint">
-          <span>Use <kbd>←</kbd> <kbd>→</kbd> to navigate · <kbd>Esc</kbd> to close</span>
-        </div>
+      <h2>{{ activeModalScreen.name }}</h2>
+      <p>{{ activeModalScreen.description }}</p>
+      <div class="tags" style="margin-top:6px">
+        @for (tag of activeModalScreen.tags; track tag) {
+        <span>{{ tag }}</span>
+        }
+      </div>
+      <div class="nav">
+        <button type="button" (click)="prevModalScreen()">← Previous</button>
+        <button type="button" class="p" (click)="nextModalScreen()">Next →</button>
       </div>
     </div>
   </div>

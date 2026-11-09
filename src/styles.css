@@ -5,6 +5,16 @@
   --brand: #e85f69;
   --brand-glow: rgba(232, 95, 105, 0.25);
   --brand-teal: #0d9488;
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #5b6478;
+  --line: #e5e8f0;
+  --stage: #0b1220;
+  --coral: #ec6a6f;
+  --teal: #17b3a3;
+  --grad: linear-gradient(135deg, #ec6a6f, #17b3a3);
+  --shadow: 0 1px 2px rgba(15, 23, 42, .05), 0 12px 32px -12px rgba(15, 23, 42, .15);
 }
 
 html {

@@ -346,291 +346,296 @@ header.product-nav {
   --product-coral: #f97316;
 }
 
-/* --- Mobile Screens & Previews Showcase Section --- */
+/* --- Screens & Previews Reference Design (Matches User Specification) --- */
+:host,
+:root,
+.product-screens-section,
+.modal {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #5b6478;
+  --line: #e5e8f0;
+  --stage: #0b1220;
+  --coral: #ec6a6f;
+  --teal: #17b3a3;
+  --grad: linear-gradient(135deg, #ec6a6f, #17b3a3);
+  --shadow: 0 1px 2px rgba(15, 23, 42, .05), 0 12px 32px -12px rgba(15, 23, 42, .15);
+}
+
 .product-screens-section {
   max-width: 1240px;
-  margin: auto;
-  padding: 82px 28px;
-  scroll-margin-top: 80px;
+  margin: 0 auto;
+  padding: 64px 24px 80px;
+  scroll-margin-top: 100px;
 }
 
-.screen-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 28px 0 36px;
+.product-screens-section .wrap {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.screen-filter-btn {
-  padding: 9px 18px;
-  border-radius: 999px;
-  border: 1px solid var(--product-line);
-  background: #ffffff;
-  color: #4a5568;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.screen-filter-btn:hover {
-  border-color: var(--product-coral);
-  color: var(--product-coral);
-}
-
-.screen-filter-btn.active {
-  background: var(--product-coral);
-  border-color: var(--product-coral);
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(232, 95, 105, 0.3);
-}
-
-.product-screens-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 28px;
-}
-
-.screen-card {
-  border: 1px solid #e2e8f0;
-  border-radius: 20px;
-  background: #ffffff;
-  overflow: hidden;
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
-}
-
-.screen-card:hover {
-  transform: translateY(-5px);
-  border-color: #cbd5e1;
-  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12);
-}
-
-.screen-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 18px;
-  border-bottom: 1px solid #f1f5f9;
-  background: #ffffff;
-}
-
-.screen-card-badge-wrap {
-  display: flex;
+.product-screens-section .eyebrow {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-}
-
-.screen-category-pill {
-  display: inline-flex;
-  align-items: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  color: #0d9488;
-  background: #f0fdfa;
-  border: 1px solid #ccfbf1;
-  padding: 3px 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--coral);
+}
+.product-screens-section .eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--grad);
+  border-radius: 2px;
+}
+
+.product-screens-section h1,
+.product-screens-section h2 {
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  margin: 14px 0 12px;
+  font-weight: 800;
+  color: var(--text);
+}
+.product-screens-section h1 span,
+.product-screens-section h2 span {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+}
+
+.product-screens-section .lead {
+  color: var(--muted);
+  font-size: 17px;
+  max-width: 640px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.product-screens-section .stats {
+  display: flex;
+  gap: 28px;
+  margin: 28px 0 36px;
+  flex-wrap: wrap;
+}
+.product-screens-section .stats b {
+  display: block;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+.product-screens-section .stats small {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.product-screens-section .filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+  margin-bottom: 24px;
+  scrollbar-width: none;
+}
+.product-screens-section .filters::-webkit-scrollbar {
+  display: none;
+}
+
+.product-screens-section .pill {
+  flex: none;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  font: 600 14px Inter, system-ui, sans-serif;
+  padding: 10px 18px;
   border-radius: 999px;
-  letter-spacing: 0.03em;
-}
-
-.screen-number-pill {
-  font-size: 11px;
-  font-weight: 700;
-  color: #64748b;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  padding: 3px 8px;
-  border-radius: 999px;
-}
-
-.screen-card-toggle {
-  display: flex;
-  background: #f1f5f9;
-  border-radius: 8px;
-  padding: 2px;
-  gap: 2px;
-  border: 1px solid #e2e8f0;
-}
-
-.screen-toggle-btn {
-  padding: 4px 9px;
-  border: none;
-  background: transparent;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #64748b;
   cursor: pointer;
-  transition: all 0.16s ease;
+  transition: all .2s ease;
+  text-decoration: none;
+}
+.product-screens-section .pill:hover {
+  border-color: var(--coral);
+}
+.product-screens-section .pill.on {
+  background: var(--grad);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 8px 20px -8px rgba(236, 106, 111, .7);
+}
+.product-screens-section .pill i {
+  font-style: normal;
+  opacity: .75;
+  margin-left: 4px;
+  font-weight: 500;
 }
 
-.screen-toggle-btn.active {
-  background: #ffffff;
-  color: #0f172a;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  font-weight: 750;
+.product-screens-section .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
 }
 
-.screen-media-container {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #090e17;
+.product-screens-section .card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 22px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  box-shadow: var(--shadow);
   cursor: pointer;
-  transition: background 0.25s ease;
-}
-
-.screen-media-container.device-mode {
-  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #090e17 100%);
-  padding: 12px;
-}
-
-.screen-slide-wrap {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.screen-slide-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.35s ease;
-}
-
-.screen-card:hover .screen-slide-wrap img {
-  transform: scale(1.03);
-}
-
-/* Realistic Smartphone Mockup in Card */
-.screen-device-mockup {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.screen-phone-chassis {
-  position: relative;
-  height: 94%;
-  aspect-ratio: 9 / 19.5;
-  background: #000000;
-  border-radius: 20px;
-  border: 3.5px solid #334155;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
-  overflow: hidden;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease;
+  text-align: left;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+}
+.product-screens-section .card:hover {
+  transform: translateY(-6px);
+  border-color: var(--c);
+  box-shadow: 0 16px 40px -12px rgba(15, 23, 42, .18);
+}
+.product-screens-section .card:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 3px;
 }
 
-.screen-card:hover .screen-phone-chassis {
-  transform: scale(1.04);
+.product-screens-section .stage,
+.modal .stage {
+  position: relative;
+  height: 300px;
+  background: radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--c) 28%, var(--stage)), var(--stage) 70%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
 }
 
-.screen-phone-notch {
+.product-screens-section .num,
+.modal .num {
   position: absolute;
-  top: 4px;
+  top: 14px;
+  left: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: #fff;
+  background: rgba(255, 255, 255, .12);
+  backdrop-filter: blur(6px);
+  padding: 5px 10px;
+  border-radius: 999px;
+  z-index: 6;
+}
+
+.product-screens-section .badge,
+.modal .badge {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--c);
+  padding: 5px 12px;
+  border-radius: 999px;
+  z-index: 6;
+  text-transform: capitalize;
+}
+
+.product-screens-section .phone,
+.modal .phone {
+  width: 156px;
+  height: 268px;
+  background: #0f172a;
+  border: 6px solid #1c2333;
+  border-bottom: 0;
+  border-radius: 26px 26px 0 0;
+  padding: 0;
+  transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 -10px 40px -10px color-mix(in srgb, var(--c) 70%, transparent);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+.product-screens-section .card:hover .phone {
+  transform: translateY(-10px);
+}
+.product-screens-section .phone::before,
+.modal .phone::before {
+  content: "";
+  position: absolute;
+  top: 5px;
   left: 50%;
   transform: translateX(-50%);
-  width: 28%;
-  height: 5px;
-  background: #1e293b;
-  border-radius: 999px;
-  z-index: 10;
+  width: 44px;
+  height: 8px;
+  border-radius: 8px;
+  background: #1c2333;
+  z-index: 5;
 }
 
-.screen-phone-chassis img {
+.product-screens-section .phone-screen-img,
+.modal .phone-screen-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: top center;
+  display: block;
 }
 
-.screen-media-zoom-hint {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  padding: 5px 11px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(8px);
-  color: #ffffff;
-  font-size: 11px;
-  font-weight: 600;
-  opacity: 0;
-  transform: translateY(4px);
-  transition: all 0.2s ease;
-  pointer-events: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.screen-media-container:hover .screen-media-zoom-hint {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.screen-card-body {
-  padding: 20px 22px 18px;
+.product-screens-section .body {
+  padding: 22px 24px 24px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
   flex: 1;
 }
-
-.screen-title {
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: -0.015em;
-  color: #0f172a;
-  margin: 0 0 8px;
+.product-screens-section .body h3 {
+  margin: 0;
+  font-size: 19px;
+  letter-spacing: -.01em;
+  font-weight: 750;
+  color: var(--text);
   line-height: 1.35;
 }
-
-.screen-desc {
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: #64748b;
-  margin: 0 0 16px;
+.product-screens-section .body p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
   flex: 1;
 }
 
-.screen-card-tags {
+.product-screens-section .tags,
+.modal .tags {
   display: flex;
+  gap: 8px;
   flex-wrap: wrap;
-  gap: 6px;
   margin-top: auto;
+  padding-top: 10px;
 }
-
-.screen-tag-pill {
-  padding: 4px 9px;
-  border-radius: 6px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  color: #475569;
-  font-size: 11px;
+.product-screens-section .tags span,
+.modal .tags span {
+  font-size: 12px;
   font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--c) 12%, var(--surface));
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--c) 25%, var(--line));
 }
 
-.screen-card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 14px;
-  border-top: 1px solid #f1f5f9;
-}
-
+/* Screen Inspect Action used in hero explore button */
 .screen-inspect-action {
   display: inline-flex;
   align-items: center;
@@ -645,7 +650,6 @@ header.product-nav {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
 .screen-inspect-action:hover {
   background: linear-gradient(110deg, #f36d75, #13bfae);
   border-color: transparent;
@@ -654,28 +658,25 @@ header.product-nav {
   transform: translateY(-1px);
 }
 
-.screen-asset-indicator {
-  font-size: 11px;
-  color: #94a3b8;
-  font-weight: 600;
-}
-
-/* --- Interactive Lightbox Modal --- */
+/* Modal from Reference Code */
 body.modal-open {
   overflow: hidden;
 }
 
-.screen-modal-overlay {
+.modal {
   position: fixed;
   inset: 0;
-  z-index: 99999;
-  background: rgba(8, 12, 20, 0.88);
-  backdrop-filter: blur(14px);
-  display: flex;
+  background: rgba(5, 8, 16, .76);
+  backdrop-filter: blur(8px);
+  display: none;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  animation: fadeInModal 0.22s ease-out;
+  padding: 20px;
+  z-index: 99999;
+  animation: fadeInModal 0.2s ease-out;
+}
+.modal.open {
+  display: flex;
 }
 
 @keyframes fadeInModal {
@@ -683,353 +684,217 @@ body.modal-open {
   to { opacity: 1; }
 }
 
-.screen-modal-container {
+.modal .panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  max-width: 900px;
   width: 100%;
-  max-width: 1240px;
-  max-height: 92vh;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  overflow: hidden;
+  max-height: calc(100vh - 40px);
+  position: relative;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.45);
+}
+
+.modal .panel .stage {
+  height: 100%;
+  min-height: 540px;
+  padding: 40px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal .panel .stage .phone.full-screen-phone {
+  width: 248px;
+  height: 526px;
+  max-height: calc(100vh - 120px);
+  border: 7px solid #1c2333;
+  border-radius: 36px;
+  background: #0f172a;
+  box-shadow: 0 10px 40px -10px color-mix(in srgb, var(--c) 80%, transparent), 0 20px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: #0d131f;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 24px;
-  box-shadow: 0 35px 90px -10px rgba(0, 0, 0, 0.85);
-  overflow: hidden;
 }
 
-.screen-modal-header {
+.modal .panel .stage .phone.full-screen-phone::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 9px;
+  border-radius: 9px;
+  background: #1c2333;
+  z-index: 10;
+}
+
+.modal .panel .stage .phone.full-screen-phone::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.modal .phone-screen-scroll {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  border-radius: 28px;
+}
+.modal .phone-screen-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.modal .phone-screen-scroll .phone-screen-img {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  display: block;
+}
+
+.modal .panel .info {
+  padding: 36px 32px;
   display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.modal .info-top {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: #0f1624;
-}
-
-.screen-modal-header-info {
-  display: flex;
-  align-items: center;
   gap: 12px;
   flex-wrap: wrap;
 }
 
-.screen-modal-category-badge {
-  font-size: 11px;
-  font-weight: 800;
-  color: #2dd4bf;
-  background: rgba(45, 212, 191, 0.12);
-  border: 1px solid rgba(45, 212, 191, 0.25);
-  padding: 3px 10px;
-  border-radius: 999px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.screen-modal-header h3 {
-  font-size: 17px;
-  font-weight: 800;
-  color: #ffffff;
-  margin: 0;
+.modal-view-mode-bar {
   display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.screen-modal-num-badge {
-  font-size: 12px;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #cbd5e1;
-  font-weight: 700;
-}
-
-.screen-modal-header-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.screen-modal-pager {
-  display: flex;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.06);
+  gap: 3px;
+  background: var(--bg);
   padding: 3px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  border: 1px solid var(--line);
 }
 
-.screen-modal-nav-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+.modal-view-mode-bar button {
+  padding: 4px 10px;
+  border-radius: 6px;
   border: none;
   background: transparent;
-  color: #cbd5e1;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
   cursor: pointer;
-  transition: all 0.16s ease;
+  transition: all .16s ease;
 }
 
-.screen-modal-nav-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+.modal-view-mode-bar button.on,
+.modal-view-mode-bar button.active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.screen-modal-close {
+.modal .panel h2 {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: -.02em;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.modal .panel p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.modal .nav {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.modal .nav button {
+  flex: 1;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+  font: 600 14px Inter, system-ui, sans-serif;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.modal .nav button:hover {
+  border-color: var(--coral);
+}
+.modal .nav button.p {
+  background: var(--grad);
+  color: #fff;
+  border: 0;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(236, 106, 111, .35);
+}
+
+.modal .x {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: rgba(255, 255, 255, .18);
+  backdrop-filter: blur(6px);
+  border: 0;
+  color: #fff;
   width: 36px;
   height: 36px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  color: #cbd5e1;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 50%;
+  font-size: 22px;
   cursor: pointer;
-  transition: all 0.18s ease;
-}
-
-.screen-modal-close:hover {
-  background: rgba(239, 68, 68, 0.2);
-  border-color: rgba(239, 68, 68, 0.4);
-  color: #ef4444;
-}
-
-.screen-modal-body {
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  overflow: hidden;
-  flex: 1;
-  min-height: 0;
-}
-
-.screen-modal-stage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  background: radial-gradient(ellipse at 50% 50%, #161e31 0%, #070a12 100%);
-  overflow: hidden;
-  position: relative;
-}
-
-.screen-modal-image-wrap {
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-}
-
-.modal-slide-view {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-slide-view img {
-  max-width: 100%;
-  max-height: 64vh;
-  object-fit: contain;
-  border-radius: 14px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
-}
-
-/* Realistic Smartphone Device in Modal */
-.modal-device-frame {
-  position: relative;
-  max-height: 66vh;
-  aspect-ratio: 9 / 19.5;
-  background: #000000;
-  border-radius: 36px;
-  border: 7px solid #334155;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-device-notch {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 32%;
-  height: 8px;
-  background: #1e293b;
-  border-radius: 999px;
+  transition: background 0.2s;
   z-index: 10;
+  line-height: 1;
+}
+.modal .x:hover {
+  background: rgba(255, 255, 255, .32);
 }
 
-.modal-device-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-}
-
-.screen-modal-stage-controls {
-  margin-top: 18px;
-  display: flex;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 4px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.screen-modal-mode-btn {
-  padding: 8px 20px;
-  border-radius: 999px;
-  border: none;
-  background: transparent;
-  color: #94a3b8;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.screen-modal-mode-btn.active {
-  background: #ffffff;
-  color: #0f172a;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  font-weight: 800;
-}
-
-.screen-modal-sidebar {
-  padding: 26px;
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-  background: #0d131f;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  overflow-y: auto;
-}
-
-.screen-modal-sidebar-section {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.screen-modal-meta-label {
-  display: block;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #38bdf8;
-}
-
-.screen-modal-desc {
-  color: #e2e8f0;
-  font-size: 13.5px;
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* Commercial Value & Sales Action Box */
-.screen-modal-sales-box {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.6));
-  border: 1px solid rgba(56, 189, 248, 0.22);
-  border-radius: 16px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
-
-.screen-modal-sales-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 800;
-  color: #38bdf8;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.screen-modal-sales-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  font-size: 12px;
-  color: #cbd5e1;
-  font-weight: 500;
-}
-
-.screen-modal-sales-list li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.screen-modal-cta-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 12px 18px;
-  border-radius: 9999px;
-  background: linear-gradient(110deg, #f36d75, #13bfae);
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 800;
-  text-decoration: none;
-  box-shadow: 0 4px 16px rgba(243, 109, 117, 0.3);
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.screen-modal-cta-btn:hover {
-  background: linear-gradient(110deg, #f36d75, #13bfae);
-  transform: translateY(-1.5px) scale(1.02);
-  box-shadow: 0 8px 22px rgba(19, 191, 174, 0.4);
-  filter: brightness(1.05);
-  color: #ffffff;
-}
-
-.screen-modal-footer-hint {
-  margin-top: auto;
-  font-size: 11px;
-  color: #64748b;
-  text-align: center;
-}
-
-.screen-modal-footer-hint kbd {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: #cbd5e1;
-  font-size: 11px;
-}
-
-@media (max-width: 900px) {
-  .screen-modal-body {
+@media (max-width: 760px) {
+  .modal .panel {
     grid-template-columns: 1fr;
-    overflow-y: auto;
+    max-height: calc(100vh - 30px);
   }
-  .screen-modal-sidebar {
-    border-left: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  .modal .panel .stage {
+    min-height: 400px;
+    padding: 36px 16px 20px;
+  }
+  .modal .panel .stage .phone.full-screen-phone {
+    width: 200px;
+    height: 420px;
+  }
+  .product-screens-section .wrap {
+    padding: 44px 18px 60px;
   }
 }
 

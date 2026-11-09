@@ -427,6 +427,33 @@ export class App implements AfterViewInit, OnDestroy {
     return screens.filter((s) => s.category.toLowerCase() === category.toLowerCase());
   }
 
+  protected getCategoryColor(category: string): string {
+    const map: Record<string, string> = {
+      'onboarding': '#8b5cf6',
+      'authentication': '#17b3a3',
+      'buyer': '#3b82f6',
+      'seller': '#f59e0b',
+      'admin': '#ec6a6f',
+      'transactions': '#10b981',
+      'accounts': '#6366f1',
+      'insights': '#ec4899',
+      'settings': '#64748b',
+      'daily vitals': '#f43f5e',
+      'wellness': '#a855f7',
+      'care': '#06b6d4',
+      'transit': '#f97316',
+      'captain': '#eab308',
+      'compliance': '#ef4444',
+      'profile': '#8b5cf6',
+    };
+    return map[category?.toLowerCase()] || '#17b3a3';
+  }
+
+  protected getCategoryCount(screens: ProductScreen[], category: string): number {
+    if (category === 'All') return screens.length;
+    return screens.filter((s) => s.category.toLowerCase() === category.toLowerCase()).length;
+  }
+
   // --- Features & Stack Data ---
   protected readonly moneyManagerFeatures = [
     { title: 'Transaction tracking', detail: 'Record and edit income, expenses, and transfers between accounts. Each transaction can include an amount, category, account, date and time, plus optional notes or tags.' },
