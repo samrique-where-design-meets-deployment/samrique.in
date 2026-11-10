@@ -193,12 +193,42 @@
     </div>
   </section>
 
-  <footer class="product-footer"><a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">←
-      All projects</a><span>© {{ currentYear }} Samrique · Crafted with precision &amp; performance.</span><a
-      [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
-      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start
-      a Project
-      <i class="fa-solid fa-arrow-right text-xs"></i></a></footer>
+  <footer class="product-footer product-footer-rich reveal-on-scroll">
+  <div class="product-footer-inner">
+    <div class="product-footer-columns">
+      <div class="product-footer-brand">
+        <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" aria-label="Samrique home">
+          <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
+        </a>
+        <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+      </div>
+      <div class="product-footer-column">
+        <h2>Projects</h2>
+        <a [attr.href]="appPath('/products/samrique-e-marketplace')" (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
+        <a [attr.href]="appPath('/products/money-manager')" (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
+        <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique Mama Tracker</a>
+        <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike Taxi App</a>
+      </div>
+      <div class="product-footer-column">
+        <h2>Capabilities</h2>
+        <span>Flutter Multi-Platform</span>
+        <span>UI &amp; Frontend Innovation</span>
+        <span>Payment Systems &amp; Wallets</span>
+        <span>Real-Time GPS &amp; Dispatch</span>
+      </div>
+      <div class="product-footer-column product-footer-company">
+        <h2>Company</h2>
+        <a href="mailto:samrique@gmail.com">samrique@gmail.com</a>
+        <span>Available for global sprints</span>
+        <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+      </div>
+    </div>
+    <div class="product-footer-bottom">
+      <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+      <span>Crafted with precision &amp; performance.</span>
+    </div>
+  </div>
+</footer>
 </main>
 } @else if (showMarketplace) {
 <main class="product-page marketplace-page">
@@ -387,12 +417,42 @@
     <p class="product-platform-note">Platform projects are included for all six targets. Support for individual
       integrations depends on each plugin’s platform compatibility and configuration.</p>
   </section>
-  <footer class="product-footer"><a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">←
-      All projects</a><span>© {{ currentYear }} Samrique · Crafted with precision &amp; performance.</span><a
-      [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
-      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start
-      a Project
-      <i class="fa-solid fa-arrow-right text-xs"></i></a></footer>
+  <footer class="product-footer product-footer-rich reveal-on-scroll">
+  <div class="product-footer-inner">
+    <div class="product-footer-columns">
+      <div class="product-footer-brand">
+        <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" aria-label="Samrique home">
+          <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
+        </a>
+        <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+      </div>
+      <div class="product-footer-column">
+        <h2>Projects</h2>
+        <a [attr.href]="appPath('/products/samrique-e-marketplace')" (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
+        <a [attr.href]="appPath('/products/money-manager')" (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
+        <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique Mama Tracker</a>
+        <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike Taxi App</a>
+      </div>
+      <div class="product-footer-column">
+        <h2>Capabilities</h2>
+        <span>Flutter Multi-Platform</span>
+        <span>UI &amp; Frontend Innovation</span>
+        <span>Payment Systems &amp; Wallets</span>
+        <span>Real-Time GPS &amp; Dispatch</span>
+      </div>
+      <div class="product-footer-column product-footer-company">
+        <h2>Company</h2>
+        <a href="mailto:samrique@gmail.com">samrique@gmail.com</a>
+        <span>Available for global sprints</span>
+        <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+      </div>
+    </div>
+    <div class="product-footer-bottom">
+      <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+      <span>Crafted with precision &amp; performance.</span>
+    </div>
+  </div>
+</footer>
 </main>
 } @else if (showMama) {
 <main class="product-page mama-page">
@@ -574,12 +634,42 @@
       </table>
     </div>
   </section>
-  <footer class="product-footer"><a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">←
-      All projects</a><span>© {{ currentYear }} Samrique · Crafted with care.</span><a
-      [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
-      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start
-      a Project
-      <i class="fa-solid fa-arrow-right text-xs"></i></a></footer>
+  <footer class="product-footer product-footer-rich reveal-on-scroll">
+  <div class="product-footer-inner">
+    <div class="product-footer-columns">
+      <div class="product-footer-brand">
+        <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" aria-label="Samrique home">
+          <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
+        </a>
+        <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+      </div>
+      <div class="product-footer-column">
+        <h2>Projects</h2>
+        <a [attr.href]="appPath('/products/samrique-e-marketplace')" (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
+        <a [attr.href]="appPath('/products/money-manager')" (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
+        <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique Mama Tracker</a>
+        <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike Taxi App</a>
+      </div>
+      <div class="product-footer-column">
+        <h2>Capabilities</h2>
+        <span>Flutter Multi-Platform</span>
+        <span>UI &amp; Frontend Innovation</span>
+        <span>Payment Systems &amp; Wallets</span>
+        <span>Real-Time GPS &amp; Dispatch</span>
+      </div>
+      <div class="product-footer-column product-footer-company">
+        <h2>Company</h2>
+        <a href="mailto:samrique@gmail.com">samrique@gmail.com</a>
+        <span>Available for global sprints</span>
+        <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+      </div>
+    </div>
+    <div class="product-footer-bottom">
+      <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+      <span>Crafted with precision &amp; performance.</span>
+    </div>
+  </div>
+</footer>
 </main>
 } @else if (showZipi) {
 <main class="product-page zipi-page">
@@ -786,14 +876,42 @@
     </div>
   </section>
 
-  <footer class="product-footer">
-    <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()">← All projects</a>
-    <span>© {{ currentYear }} Samrique · Crafted with precision &amp; performance.</span>
-    <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
-      class="btn-brand-gradient inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-wider">Start
-      a Project
-      <i class="fa-solid fa-arrow-right"></i></a>
-  </footer>
+  <footer class="product-footer product-footer-rich reveal-on-scroll">
+  <div class="product-footer-inner">
+    <div class="product-footer-columns">
+      <div class="product-footer-brand">
+        <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" aria-label="Samrique home">
+          <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
+        </a>
+        <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+      </div>
+      <div class="product-footer-column">
+        <h2>Projects</h2>
+        <a [attr.href]="appPath('/products/samrique-e-marketplace')" (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
+        <a [attr.href]="appPath('/products/money-manager')" (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
+        <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique Mama Tracker</a>
+        <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike Taxi App</a>
+      </div>
+      <div class="product-footer-column">
+        <h2>Capabilities</h2>
+        <span>Flutter Multi-Platform</span>
+        <span>UI &amp; Frontend Innovation</span>
+        <span>Payment Systems &amp; Wallets</span>
+        <span>Real-Time GPS &amp; Dispatch</span>
+      </div>
+      <div class="product-footer-column product-footer-company">
+        <h2>Company</h2>
+        <a href="mailto:samrique@gmail.com">samrique@gmail.com</a>
+        <span>Available for global sprints</span>
+        <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+      </div>
+    </div>
+    <div class="product-footer-bottom">
+      <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+      <span>Crafted with precision &amp; performance.</span>
+    </div>
+  </div>
+</footer>
 </main>
 } @else {
 <div class="site-home">
@@ -953,167 +1071,137 @@
   </section>
 
   <!-- Services Section -->
-  <section id="services" class="py-20 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3 reveal-on-scroll">
-        <span class="text-xs font-extrabold text-rose-600 tracking-widest uppercase">
-          What we do &amp; how we do it
-        </span>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
-          Digital products, made useful.
-        </h2>
-        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-          Branding, interfaces, and engineering came together to deliver cohesive experiences across platforms — without
-          unnecessary abstraction or bloat.
-        </p>
+  <section id="services" class="services-section relative">
+    <div class="services-wrap">
+      <div class="services-heading reveal-on-scroll">
+        <div>
+          <span class="services-kicker">From first sketch to launch</span>
+          <h2>Thoughtful tech.<br /><span>Made for real life.</span></h2>
+        </div>
+        <p>We turn ambitious ideas into useful digital products with clear thinking, careful design, and dependable engineering.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
-        <!-- Service Card 1 -->
-        <div
-          class="bg-white rounded-2xl p-7 sm:p-8 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 reveal-on-scroll">
-          <div
-            class="w-12 h-12 rounded-xl bg-rose-50 text-rose-500 border border-rose-100 flex items-center justify-center text-xl mb-5">
-            <i class="fa-solid fa-mobile-screen"></i>
+      <div class="services-grid">
+        <article class="service-showcase-card reveal-on-scroll">
+          <div class="service-visual service-visual-mvp" aria-hidden="true">
+            <div class="visual-caption"><span>01 / STARTUP &amp; MVP</span></div>
+            <div class="launch-board">
+              <div class="launch-board-top"><span><i></i><i></i><i></i></span><small>PRODUCT SNAPSHOT</small></div>
+              <div class="launch-board-content"><div><small>YOUR NEXT BIG IDEA</small><b>Start with<br />the essential.</b><span class="launch-button">Build your MVP <i class="fa-solid fa-arrow-right"></i></span></div><div class="launch-orbit"><i class="fa-solid fa-rocket"></i><span></span></div></div>
+              <div class="launch-board-foot"><span>Idea</span><i></i><span>First users</span><i></i><b>Launch</b></div>
+            </div>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">
-            Flutter App Development
-          </h3>
-          <p class="text-slate-600 text-sm leading-relaxed mb-4">
-            Pixel-perfect cross-platform applications with native performance across iOS, Android, web, and desktop
-            using a single codebase.
-          </p>
-          <div class="flex flex-wrap gap-2 text-xs font-semibold text-slate-500">
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">iOS &amp; Android</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">Material 3 &amp; Cupertino</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">Clean Architecture</span>
+          <div class="service-card-copy">
+            <span class="service-card-index">01 — LAUNCH WITH CLARITY</span>
+            <h3>Startup &amp; MVP Development</h3>
+            <p>Test your idea with a focused, market-ready product built around what matters most.</p>
           </div>
-        </div>
+        </article>
 
-        <!-- Service Card 2 -->
-        <div
-          class="bg-white rounded-2xl p-7 sm:p-8 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 reveal-on-scroll">
-          <div
-            class="w-12 h-12 rounded-xl bg-sky-50 text-sky-500 border border-sky-100 flex items-center justify-center text-xl mb-5">
-            <i class="fa-solid fa-layer-group"></i>
+        <article class="service-showcase-card reveal-on-scroll">
+          <div class="service-visual service-visual-cycle" aria-hidden="true">
+            <div class="visual-caption"><span>02 / FULL-CYCLE BUILD</span></div>
+            <div class="cycle-board">
+              <div class="cycle-orbit"><span class="cycle-node cycle-node-one"><i class="fa-solid fa-lightbulb"></i></span><span class="cycle-node cycle-node-two"><i class="fa-solid fa-pen-ruler"></i></span><span class="cycle-node cycle-node-three"><i class="fa-solid fa-code"></i></span><span class="cycle-node cycle-node-four"><i class="fa-solid fa-rocket"></i></span><div class="cycle-center"><i class="fa-solid fa-cubes-stacked"></i><b>One team.<br />End to end.</b></div></div>
+              <span class="cycle-label cycle-label-one">Discover</span><span class="cycle-label cycle-label-two">Design</span><span class="cycle-label cycle-label-three">Develop</span><span class="cycle-label cycle-label-four">Deliver</span>
+            </div>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">
-            UI &amp; Frontend Innovation
-          </h3>
-          <p class="text-slate-600 text-sm leading-relaxed mb-4">
-            Modern interfaces built on responsive design systems with micro-interactions, accessibility, and fluid 60fps
-            animations.
-          </p>
-          <div class="flex flex-wrap gap-2 text-xs font-semibold text-slate-500">
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">Design Systems</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">Fluid Micro-Animations</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">Figma to Code</span>
+          <div class="service-card-copy">
+            <span class="service-card-index">02 — FROM IDEA TO APP</span>
+            <h3>Full-Cycle Development</h3>
+            <p>One collaborative team takes your product through design, development, QA, and release.</p>
           </div>
-        </div>
+        </article>
 
-        <!-- Service Card 3 -->
-        <div
-          class="bg-white rounded-2xl p-7 sm:p-8 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 reveal-on-scroll">
-          <div
-            class="w-12 h-12 rounded-xl bg-amber-50 text-amber-500 border border-amber-100 flex items-center justify-center text-xl mb-5">
-            <i class="fa-solid fa-cart-shopping"></i>
+        <article class="service-showcase-card reveal-on-scroll">
+          <div class="service-visual service-visual-custom" aria-hidden="true">
+            <div class="visual-caption"><span>03 / BUILT AROUND YOU</span></div>
+            <div class="custom-scene"><div class="custom-glow"></div><div class="custom-window"><div class="custom-window-top"><span></span><span></span><span></span><b>WORKFLOW BUILDER</b></div><div class="workflow-row"><i class="fa-solid fa-bag-shopping"></i><span><b>New order</b><small>When a customer checks out</small></span><i class="fa-solid fa-ellipsis"></i></div><div class="workflow-connector"></div><div class="workflow-row workflow-row-result"><i class="fa-solid fa-wand-magic-sparkles"></i><span><b>Your process, automated</b><small>Configured for the way you work</small></span><i class="fa-solid fa-check"></i></div></div><span class="custom-orbit custom-orbit-one"></span><span class="custom-orbit custom-orbit-two"></span></div>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">
-            E-Commerce &amp; Platform Solutions
-          </h3>
-          <p class="text-slate-600 text-sm leading-relaxed mb-4">
-            Complete digital marketplace systems integrating product catalogs, carts, payment gateways, and multi-role
-            operations.
-          </p>
-          <div class="flex flex-wrap gap-2 text-xs font-semibold text-slate-500">
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">Razorpay &amp; Stripe</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">Seller Wallets</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">KYC Moderation</span>
+          <div class="service-card-copy">
+            <span class="service-card-index">03 — PURPOSE-BUILT SOFTWARE</span>
+            <h3>Custom Solutions</h3>
+            <p>Purpose-built applications and workflows shaped around your business and your customers.</p>
           </div>
-        </div>
-
-        <!-- Service Card 4 -->
-        <div
-          class="bg-white rounded-2xl p-7 sm:p-8 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 reveal-on-scroll">
-          <div
-            class="w-12 h-12 rounded-xl bg-purple-50 text-purple-500 border border-purple-100 flex items-center justify-center text-xl mb-5">
-            <i class="fa-solid fa-palette"></i>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">
-            Web &amp; Brand Design
-          </h3>
-          <p class="text-slate-600 text-sm leading-relaxed mb-4">
-            Cohesive digital identity systems and high-converting marketing experiences designed to elevate brand
-            authority.
-          </p>
-          <div class="flex flex-wrap gap-2 text-xs font-semibold text-slate-500">
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">Identity Systems</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">Conversion Landing</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200">Product UX</span>
-          </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
-
   <!-- Process Section -->
-  <section id="how-it-works" class="py-20 bg-slate-50/60 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3 reveal-on-scroll">
-        <span class="text-xs font-extrabold text-rose-600 tracking-widest uppercase">
-          A light, agile process that works
-        </span>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
-          Good work starts with good questions.
-        </h2>
-        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-          From goal discovery to post-launch maintenance, we organize every sprint around real user feedback and
-          measurable business goals.
-        </p>
+  <section id="how-it-works" class="process-section relative">
+    <div class="process-wrap">
+      <div class="process-heading reveal-on-scroll">
+        <div>
+          <span class="process-kicker">How it works</span>
+          <h2>A clear path from idea<br /><span>to launch.</span></h2>
+        </div>
+        <p>A simple, collaborative process takes your product from the first conversation through launch, with clear milestones at every step.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
-        <!-- Step 1 -->
-        <div
-          class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 reveal-on-scroll">
-          <div
-            class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 border border-rose-100 font-extrabold text-sm flex items-center justify-center mb-5">
-            01
+      <div class="process-grid">
+        <article class="process-card reveal-on-scroll">
+          <div class="process-visual process-visual-discover" aria-hidden="true">
+            <div class="step-label">• Step 01</div>
+            <div class="discovery-visual"><span class="discovery-path"></span><i class="fa-regular fa-calendar"></i><i class="fa-solid fa-video discovery-active"></i><i class="fa-regular fa-comment"></i><i class="fa-regular fa-envelope"></i><span class="discovery-dot"></span></div>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Discover &amp; Map</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
-            Understand user journeys, map technical constraints, define core feature priorities, and establish clear
-            delivery milestones.
-          </p>
-        </div>
+          <div class="process-card-copy">
+            <span class="process-card-index">01 — ALIGN ON THE GOAL</span>
+            <h3>Discovery Call</h3>
+            <p>We learn your vision and requirements to define a clear project strategy.</p>
+          </div>
+        </article>
 
-        <!-- Step 2 -->
-        <div
-          class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 reveal-on-scroll">
-          <div
-            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 border border-teal-100 font-extrabold text-sm flex items-center justify-center mb-5">
-            02
+        <article class="process-card reveal-on-scroll">
+          <div class="process-visual process-visual-design" aria-hidden="true">
+            <div class="step-label">• Step 02</div>
+            <div class="step-phone"><span></span><b>Design preview</b><i class="fa-solid fa-circle-user"></i><div class="step-phone-lines"><i></i><i></i></div><div class="step-phone-options"><i class="fa-solid fa-list"></i><i class="fa-solid fa-heart"></i><i class="fa-solid fa-bell"></i><i class="fa-solid fa-star"></i></div><div class="step-phone-lines"><i></i><i></i></div></div>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Prototype &amp; Design</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
-            High-fidelity interactive UI wireframes, design systems, and clickable prototypes tested against real-world
-            user flows before code.
-          </p>
-        </div>
+          <div class="process-card-copy">
+            <span class="process-card-index">02 — SHAPE THE EXPERIENCE</span>
+            <h3>Design</h3>
+            <p>We begin by understanding your vision and goals to craft the right strategy.</p>
+          </div>
+        </article>
 
-        <!-- Step 3 -->
-        <div
-          class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 reveal-on-scroll">
-          <div
-            class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 font-extrabold text-sm flex items-center justify-center mb-5">
-            03
+        <article class="process-card reveal-on-scroll">
+          <div class="process-visual process-visual-code" aria-hidden="true">
+            <div class="step-label">• Step 03</div>
+            <div class="step-code-window"><div class="step-code-top"><i></i><i></i><i></i></div><code><span>function</span> optimize(event) &#123;<br />&nbsp; const x = event.clientX;<br />&nbsp; const y = event.clientY;<br />&nbsp; cursor.<b>updatePosition</b>(x, y);<br />&#125;</code></div>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Engineer &amp; Launch</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
-            Production-ready Flutter engineering, automated test suites, App Store &amp; Google Play publishing, and
-            warranty support.
-          </p>
-        </div>
+          <div class="process-card-copy">
+            <span class="process-card-index">03 — BUILD FOR THE REAL WORLD</span>
+            <h3>Development</h3>
+            <p>Our developers turn your designs into clean, scalable code built for the future.</p>
+          </div>
+        </article>
+
+        <article class="process-card reveal-on-scroll">
+          <div class="process-visual process-visual-testing" aria-hidden="true">
+            <div class="step-label">• Step 04</div>
+            <div class="test-gauge"><div class="gauge-arc"></div><div class="gauge-ticks"></div><span class="gauge-needle"></span><i></i><b>QUALITY CHECK</b></div>
+          </div>
+          <div class="process-card-copy">
+            <span class="process-card-index">04 — CHECK EVERY DETAIL</span>
+            <h3>Testing</h3>
+            <p>Rigorous testing ensures your app is bug-free, responsive, and seamless across devices.</p>
+          </div>
+        </article>
+
+        <article class="process-card reveal-on-scroll">
+          <div class="process-visual process-visual-deploy" aria-hidden="true">
+            <div class="step-label">• Step 05</div>
+            <div class="rocket-scene"><span class="rocket-cloud rocket-cloud-left"></span><span class="rocket-cloud rocket-cloud-right"></span><span class="rocket-cloud rocket-cloud-bottom"></span><i class="fa-solid fa-rocket"></i><span class="rocket-trail"></span></div>
+          </div>
+          <div class="process-card-copy">
+            <span class="process-card-index">05 — READY FOR TAKEOFF</span>
+            <h3>Deployment</h3>
+            <p>We prepare your product for release and help it reach the people who need it.</p>
+          </div>
+        </article>
+
+        <article class="process-cta-card reveal-on-scroll">
+          <div class="process-cta-content"><span class="process-cta-kicker">YOUR IDEA, IN MOTION</span><h3>Let’s transform your idea into reality.</h3><button type="button" (click)="openBooking()">Book a free consultation <i class="fa-solid fa-arrow-right"></i></button><span class="process-cta-orbit process-cta-orbit-one"></span><span class="process-cta-orbit process-cta-orbit-two"></span></div>
+        </article>
       </div>
     </div>
   </section>
@@ -1354,60 +1442,52 @@
   </section>
 
   <!-- About / Why Samrique Section -->
-  <section id="about" class="py-20 bg-slate-50/60 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3 reveal-on-scroll">
-        <span class="text-xs font-extrabold text-rose-600 tracking-widest uppercase">
-          Why Samrique
-        </span>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
-          A unified partner from concept to code.
-        </h2>
-        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-          We help founders and product teams ship polished Flutter software without agency overhead.
-        </p>
+  <section id="about" class="why-section relative">
+    <div class="why-wrap">
+      <div class="why-heading reveal-on-scroll">
+        <div>
+          <span class="why-kicker">Why Samrique</span>
+          <h2>A unified partner from<br /><span>concept to code.</span></h2>
+        </div>
+        <p>We help founders and product teams ship polished Flutter software without agency overhead.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
-        <!-- Card 1 -->
-        <div
-          class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 reveal-on-scroll">
-          <div
-            class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 border border-sky-100 flex items-center justify-center text-xl mb-5">
-            <i class="fa-solid fa-users"></i>
+      <div class="why-grid">
+        <article class="why-card reveal-on-scroll">
+          <div class="why-visual why-visual-team" aria-hidden="true">
+            <div class="why-visual-caption">SMALL TEAM. FULL ATTENTION.</div>
+            <div class="team-scene"><div class="team-orbit team-orbit-a"></div><div class="team-orbit team-orbit-b"></div><span class="team-avatar team-avatar-one"><i class="fa-solid fa-user"></i></span><span class="team-avatar team-avatar-two"><i class="fa-solid fa-pen-ruler"></i></span><span class="team-avatar team-avatar-three"><i class="fa-solid fa-code"></i></span><div class="team-core"><i class="fa-solid fa-people-group"></i><b>Direct collaboration</b></div><span class="team-tag">DESIGN</span><span class="team-tag team-tag-build">BUILD</span></div>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Just-Right-Size Teamwork</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
-            Direct access to senior Flutter engineers and designers without layers of account management or red tape.
-          </p>
-        </div>
+          <div class="why-card-copy">
+            <span class="why-card-index">01 — THE RIGHT PEOPLE, CLOSE BY</span>
+            <h3>Just-Right-Size Teamwork</h3>
+            <p>Direct access to senior Flutter engineers and designers without layers of account management or red tape.</p>
+          </div>
+        </article>
 
-        <!-- Card 2 -->
-        <div
-          class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 reveal-on-scroll">
-          <div
-            class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 border border-teal-100 flex items-center justify-center text-xl mb-5">
-            <i class="fa-solid fa-code"></i>
+        <article class="why-card reveal-on-scroll">
+          <div class="why-visual why-visual-engineering" aria-hidden="true">
+            <div class="why-visual-caption">CRAFTED FOR PRODUCTION.</div>
+            <div class="engineering-scene"><div class="engineering-window"><div class="engineering-window-top"><i></i><i></i><i></i><span>app_architecture.dart</span></div><div class="engineering-code"><span>class</span> ProductApp &#123;<br /><i>  </i><span>final</span> modules = clean;<br /><i>  </i><span>final</span> tests = <b>passing</b>;<br /><i>  </i><span>return</span> smoothFrames;<br />&#125;</div><div class="engineering-status"><span><i class="fa-solid fa-check"></i> CI passing</span><span>60 FPS</span></div></div><div class="engineering-badge"><strong>98%</strong><small>TEST COVERAGE</small></div></div>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Production-Grade Engineering</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
-            Clean modular Flutter architecture, high automated test coverage, predictable state management, and smooth
-            60fps performance.
-          </p>
-        </div>
+          <div class="why-card-copy">
+            <span class="why-card-index">02 — QUALITY BUILT IN</span>
+            <h3>Production-Grade Engineering</h3>
+            <p>Clean modular Flutter architecture, high automated test coverage, predictable state management, and smooth 60fps performance.</p>
+          </div>
+        </article>
 
-        <!-- Card 3 -->
-        <div
-          class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 hover:-translate-y-1 transition-all duration-300 reveal-on-scroll">
-          <div
-            class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center text-xl mb-5">
-            <i class="fa-solid fa-comments"></i>
+        <article class="why-card reveal-on-scroll">
+          <div class="why-visual why-visual-communication" aria-hidden="true">
+            <div class="why-visual-caption">NO SURPRISES. JUST PROGRESS.</div>
+            <div class="communication-scene"><div class="chat-card chat-card-one"><span class="chat-avatar chat-avatar-rose"><i class="fa-solid fa-user"></i></span><div><b>Weekly check-in</b><small>Here’s what shipped this week</small></div><i class="fa-solid fa-check"></i></div><div class="chat-card chat-card-two"><span class="chat-avatar chat-avatar-violet"><i class="fa-solid fa-lightbulb"></i></span><div><b>Prototype ready</b><small>Review the new user flow</small></div></div><div class="sprint-progress"><div><span>SPRINT PROGRESS</span><b>On track</b></div><i><span></span></i><small>Milestone 2 of 3</small></div></div>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Straightforward Communication</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
-            Transparent weekly sprints, tangible milestone demonstrations, and rapid feedback loops.
-          </p>
-        </div>
+          <div class="why-card-copy">
+            <span class="why-card-index">03 — CLEAR, CONSISTENT UPDATES</span>
+            <h3>Straightforward Communication</h3>
+            <p>Transparent weekly sprints, tangible milestone demonstrations, and rapid feedback loops.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>

@@ -341,6 +341,10 @@ export class App implements AfterViewInit, OnDestroy {
     });
   }
 
+  private scheduleRevealObservation(): void {
+    window.requestAnimationFrame(() => this.observeRevealElements());
+  }
+
   private refreshHomeVisibility(): void {
     const reveal = () => {
       const hash = window.location.hash.replace('#', '');
@@ -1155,6 +1159,7 @@ export class App implements AfterViewInit, OnDestroy {
       this.refreshHomeVisibility();
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' });
+      this.scheduleRevealObservation();
     }
   }
 
@@ -1169,6 +1174,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
   }
 
   protected openMarketplace(): void {
@@ -1182,6 +1188,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
   }
 
   protected openMama(): void {
@@ -1195,6 +1202,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
   }
 
   protected openZipi(): void {
@@ -1208,6 +1216,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
   }
 
   protected scrollToProductSection(sectionId: string): void {

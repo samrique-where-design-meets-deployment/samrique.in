@@ -330,6 +330,47 @@ header.product-nav {
 .product-footer a { color: #273143; }
 .product-footer a:hover { color: #e85f69; }
 
+footer.product-footer-rich {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  border-top: 1px solid #e1e5ed;
+  color: #647084;
+  background:
+    radial-gradient(ellipse at 52% 0%, #fcebed 0, #fcebed60 25%, transparent 54%),
+    radial-gradient(ellipse at 8% 25%, #e7f8f4 0, transparent 40%),
+    #fff;
+}
+footer.product-footer-rich::before {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(#dce4ef30 1px, transparent 1px), linear-gradient(90deg, #dce4ef30 1px, transparent 1px);
+  background-size: 48px 48px;
+  content: "";
+  pointer-events: none;
+}
+.product-footer-inner { position: relative; width: min(100% - 40px, 1220px); margin: 0 auto; }
+.product-footer-columns { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 48px; padding: 58px 0 46px; }
+.product-footer-brand img { display: block; width: 96px; height: auto; object-fit: contain; }
+.product-footer-brand p { max-width: 250px; margin: 15px 0 0; color: #69768b; font-size: 12px; line-height: 1.7; }
+.product-footer-column { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; color: #69768b; font-size: 12px; line-height: 1.45; }
+.product-footer-column h2 { margin: 0 0 2px; color: #172033; font-size: 14px; font-weight: 800; }
+.product-footer-column a { color: #69768b; font-weight: 500; text-decoration: none; transition: color .2s ease; }
+.product-footer-column a:hover { color: #109b8f; }
+.product-footer-column button { padding: 0; border: 0; color: #078f85; background: transparent; cursor: pointer; font: inherit; font-weight: 800; text-align: left; }
+.product-footer-column button:hover { color: #e85f69; }
+.product-footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding: 22px 0 27px; border-top: 1px solid #e1e5ed; color: #778398; font-size: 12px; }
+@media (max-width: 760px) {
+  .product-footer-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 28px; padding: 42px 0 34px; }
+}
+@media (max-width: 480px) {
+  .product-footer-inner { width: min(100% - 32px, 1220px); }
+  .product-footer-columns { grid-template-columns: 1fr 1fr; gap: 28px 18px; }
+  .product-footer-brand { grid-column: 1 / -1; }
+  .product-footer-bottom { flex-direction: column; gap: 8px; padding: 18px 0 22px; }
+}
+
 .marketplace-page,
 .product-page.mama-page,
 .product-page.zipi-page {
