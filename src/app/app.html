@@ -1085,10 +1085,39 @@
         <article class="service-showcase-card reveal-on-scroll">
           <div class="service-visual service-visual-mvp" aria-hidden="true">
             <div class="visual-caption"><span>01 / STARTUP &amp; MVP</span></div>
+            <div class="mvp-stars">
+              <span class="star star-1">✦</span>
+              <span class="star star-2">✦</span>
+              <span class="star star-3">✦</span>
+              <span class="star star-4">✦</span>
+            </div>
             <div class="launch-board">
               <div class="launch-board-top"><span><i></i><i></i><i></i></span><small>PRODUCT SNAPSHOT</small></div>
-              <div class="launch-board-content"><div><small>YOUR NEXT BIG IDEA</small><b>Start with<br />the essential.</b><span class="launch-button">Build your MVP <i class="fa-solid fa-arrow-right"></i></span></div><div class="launch-orbit"><i class="fa-solid fa-rocket"></i><span></span></div></div>
-              <div class="launch-board-foot"><span>Idea</span><i></i><span>First users</span><i></i><b>Launch</b></div>
+              <div class="launch-board-content">
+                <div>
+                  <small>YOUR NEXT BIG IDEA</small>
+                  <b>Start with<br />the essential.</b>
+                  <button type="button" class="launch-button" (click)="openBooking()">
+                    Build your MVP <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </div>
+                <div class="rocket-orbit-stage">
+                  <div class="orbit-ring-3d">
+                    <span class="orbit-particle"></span>
+                  </div>
+                  <div class="rocket-wrapper">
+                    <i class="fa-solid fa-rocket rocket-body"></i>
+                    <span class="rocket-flame"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="launch-board-foot">
+                <span>MVP</span>
+                <i></i>
+                <span>First users</span>
+                <i></i>
+                <b class="milestone-launch">Launch</b>
+              </div>
             </div>
           </div>
           <div class="service-card-copy">
@@ -1102,8 +1131,36 @@
           <div class="service-visual service-visual-cycle" aria-hidden="true">
             <div class="visual-caption"><span>02 / FULL-CYCLE BUILD</span></div>
             <div class="cycle-board">
-              <div class="cycle-orbit"><span class="cycle-node cycle-node-one"><i class="fa-solid fa-lightbulb"></i></span><span class="cycle-node cycle-node-two"><i class="fa-solid fa-pen-ruler"></i></span><span class="cycle-node cycle-node-three"><i class="fa-solid fa-code"></i></span><span class="cycle-node cycle-node-four"><i class="fa-solid fa-rocket"></i></span><div class="cycle-center"><i class="fa-solid fa-cubes-stacked"></i><b>One team.<br />End to end.</b></div></div>
-              <span class="cycle-label cycle-label-one">Discover</span><span class="cycle-label cycle-label-two">Design</span><span class="cycle-label cycle-label-three">Develop</span><span class="cycle-label cycle-label-four">Deliver</span>
+              <div class="cycle-orbit-system">
+                <div class="orbit-ring orbit-ring-outer"></div>
+                <div class="orbit-ring orbit-ring-mid"></div>
+                <div class="orbit-ring orbit-ring-inner"></div>
+                <div class="radar-beam"></div>
+                <div class="cycle-center hub-breathing">
+                  <i class="fa-solid fa-cubes-stacked"></i>
+                  <b>One team.<br />End to end.</b>
+                </div>
+                <div class="cycle-node cycle-node-north">
+                  <i class="fa-solid fa-lightbulb"></i>
+                  <span class="node-pulse-ring"></span>
+                </div>
+                <div class="cycle-node cycle-node-east">
+                  <i class="fa-solid fa-pen-ruler"></i>
+                  <span class="node-pulse-ring"></span>
+                </div>
+                <div class="cycle-node cycle-node-south">
+                  <i class="fa-solid fa-code"></i>
+                  <span class="node-pulse-ring"></span>
+                </div>
+                <div class="cycle-node cycle-node-west">
+                  <i class="fa-solid fa-rocket"></i>
+                  <span class="node-pulse-ring"></span>
+                </div>
+              </div>
+              <span class="cycle-label cycle-label-north">Discover</span>
+              <span class="cycle-label cycle-label-east">Design</span>
+              <span class="cycle-label cycle-label-south">Develop</span>
+              <span class="cycle-label cycle-label-west">Deliver</span>
             </div>
           </div>
           <div class="service-card-copy">
@@ -1116,7 +1173,34 @@
         <article class="service-showcase-card reveal-on-scroll">
           <div class="service-visual service-visual-custom" aria-hidden="true">
             <div class="visual-caption"><span>03 / BUILT AROUND YOU</span></div>
-            <div class="custom-scene"><div class="custom-glow"></div><div class="custom-window"><div class="custom-window-top"><span></span><span></span><span></span><b>WORKFLOW BUILDER</b></div><div class="workflow-row"><i class="fa-solid fa-bag-shopping"></i><span><b>New order</b><small>When a customer checks out</small></span><i class="fa-solid fa-ellipsis"></i></div><div class="workflow-connector"></div><div class="workflow-row workflow-row-result"><i class="fa-solid fa-wand-magic-sparkles"></i><span><b>Your process, automated</b><small>Configured for the way you work</small></span><i class="fa-solid fa-check"></i></div></div><span class="custom-orbit custom-orbit-one"></span><span class="custom-orbit custom-orbit-two"></span></div>
+            <div class="custom-scene">
+              <svg class="curve-art-bg" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M-20 60 Q 60 10, 150 90 T 320 50" stroke="rgba(53, 164, 127, 0.28)" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+                <path d="M-10 130 Q 80 180, 180 120 T 310 160" stroke="rgba(16, 185, 129, 0.22)" stroke-width="2.5" fill="none"/>
+              </svg>
+              <div class="custom-glow"></div>
+              <div class="custom-window">
+                <div class="custom-window-top"><span></span><span></span><span></span><b>WORKFLOW BUILDER</b></div>
+                <div class="workflow-row workflow-trigger">
+                  <i class="fa-solid fa-bag-shopping"></i>
+                  <span><b>New order</b><small>When a customer checks out</small></span>
+                  <i class="fa-solid fa-ellipsis trigger-indicator"></i>
+                </div>
+                <div class="workflow-connector-track">
+                  <span class="energy-packet"></span>
+                </div>
+                <div class="workflow-row workflow-row-result">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                  <span><b>Your process, automated</b><small>Configured for the way you work</small></span>
+                  <div class="check-glow-badge">
+                    <i class="fa-solid fa-check"></i>
+                    <span class="check-pulse-ring"></span>
+                  </div>
+                </div>
+              </div>
+              <span class="custom-orbit custom-orbit-one"></span>
+              <span class="custom-orbit custom-orbit-two"></span>
+            </div>
           </div>
           <div class="service-card-copy">
             <span class="service-card-index">03 — PURPOSE-BUILT SOFTWARE</span>
