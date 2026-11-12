@@ -2196,15 +2196,74 @@ a:focus-visible {
   .why-visual { height: 236px; }
   .why-card-copy { min-height: 0; padding: 21px; }
 }
-/* Five-step delivery flow with a consultation card in the final grid slot. */
+/* Five-step delivery flow with distinct progressive pastel colorways and radiant consultation CTA */
 .process-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .process-card { border-radius: 18px; }
 .process-visual { height: 178px; }
-.process-visual-discover { background: #fff; }
-.process-visual-design { background: #fff; }
-.process-visual-code { background: #fff; }
-.process-visual-testing { background: #fff; }
-.process-visual-deploy { background: #fff; }
+
+/* Step 01: Discovery Call — Soft Coral & Blush */
+.process-visual-discover {
+  background: radial-gradient(ellipse at 80% 25%, #fff 0, #ffffff95 20%, transparent 45%),
+              linear-gradient(145deg, #ffeae6, #ffd5dc 58%, #f8c0ca);
+}
+.process-card:nth-child(1) .step-label { color: #e3505c; }
+.process-card:nth-child(1) .discovery-visual > i.discovery-active {
+  border-color: #ec6a6f;
+  color: #ec6a6f;
+  box-shadow: 0 0 0 3px #ffe3e6;
+  animation: discoveryActivePulse 2.5s ease-in-out infinite;
+}
+
+/* Step 02: Design — Soft Lavender & Periwinkle */
+.process-visual-design {
+  background: radial-gradient(ellipse at 15% 85%, #d8e2ff 0, transparent 40%),
+              linear-gradient(145deg, #f0f3ff, #dce4ff 62%, #cbd7fb);
+}
+.process-card:nth-child(2) .step-label { color: #5d74e8; }
+.process-card:nth-child(2) .step-phone { border-color: #b9c7f7; }
+.process-card:nth-child(2) .step-phone > .fa-circle-user { color: #5d74e8; }
+.process-card:nth-child(2) .step-phone-options i { color: #5d74e8; border-color: #d1dcff; }
+.process-card:nth-child(2) .step-phone-options i:hover { background: #eef2ff; }
+
+/* Step 03: Development — Soft Sky Blue & Cobalt */
+.process-visual-code {
+  background: radial-gradient(ellipse at 85% 15%, #fff 0, #ffffff90 20%, transparent 45%),
+              linear-gradient(145deg, #e0f4fe, #c4e9fd 62%, #a8dcfb);
+}
+.process-card:nth-child(3) .step-label { color: #0284c7; }
+.process-card:nth-child(3) .step-code-window { border-color: #bae6fd; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.1); }
+.process-card:nth-child(3) .step-code-top { background: #f0f9ff; border-bottom: 1px solid #e0f2fe; }
+.process-card:nth-child(3) .step-code-window code span { color: #0284c7; }
+.process-card:nth-child(3) .step-code-window code b { color: #2563eb; }
+.process-card:nth-child(3) .step-code-window code b::after { color: #0284c7; }
+
+/* Step 04: Testing — Soft Amber & Warm Sunset Gold */
+.process-visual-testing {
+  background: radial-gradient(ellipse at 20% 80%, #fef3c7 0, transparent 40%),
+              linear-gradient(145deg, #fffbeb, #fee2b3 60%, #fed7aa);
+}
+.process-card:nth-child(4) .step-label { color: #d97706; }
+.process-card:nth-child(4) .gauge-arc {
+  border-color: #fde68a;
+  background: repeating-conic-gradient(from 270deg at 50% 100%, #f59e0b 0deg 1deg, transparent 1deg 5deg);
+}
+.process-card:nth-child(4) .gauge-needle { background: #d97706; }
+.process-card:nth-child(4) .test-gauge > i {
+  background: #f59e0b;
+  box-shadow: 0 0 0 6px #fef3c7;
+}
+
+/* Step 05: Deployment — Soft Mint & Emerald Teal */
+.process-visual-deploy {
+  background: radial-gradient(ellipse at 88% 20%, #fff 0, #ffffff90 22%, transparent 44%),
+              linear-gradient(145deg, #e6f9f3, #c8f2e4 62%, #a7ebd4);
+}
+.process-card:nth-child(5) .step-label { color: #059669; }
+.process-card:nth-child(5) .rocket-scene > .fa-rocket {
+  color: #059669;
+  filter: drop-shadow(0 5px 8px rgba(5, 150, 105, 0.35));
+}
+.process-card:nth-child(5) .rocket-trail { border-color: #6ee7b7; }
 .step-label { position: absolute; z-index: 2; top: 14px; left: 14px; color: #6681ec; font-size: .56rem; font-weight: 700; letter-spacing: .025em; }
 .process-card-copy { min-height: 124px; padding: 15px 16px 18px; }
 .process-card-index { margin-bottom: 8px; font-size: .52rem; }
@@ -2360,27 +2419,24 @@ a:focus-visible {
   .process-cta-card { min-height: 250px; }
 }
 
-/* Keep the process artwork inside the site's coral and teal brand palette. */
-.process-visual-discover { background: linear-gradient(145deg, #fff9f8, #fff0ee 65%, #fce5e2); }
-.process-visual-design { background: linear-gradient(145deg, #f4fbfa, #e6f7f2 65%, #d9f1e9); }
-.process-visual-code { background: linear-gradient(145deg, #f8fafc, #f0f4f8 65%, #e8eef3); }
-.process-visual-testing { background: linear-gradient(145deg, #fff9f8, #fff1ec 65%, #fce7df); }
-.process-visual-deploy { background: linear-gradient(145deg, #f4fbfa, #e6f7f2 65%, #d9f1e9); }
-.step-label { color: #e85f69; }
-.discovery-visual > i.discovery-active { border-color: #13bfae; color: #0d9d8e; box-shadow: 0 0 0 3px #e2f8f3; }
-.step-phone { border-color: #b9c9c5; }
-.step-phone > .fa-circle-user { color: #13a995; }
-.step-phone-options i { color: #0e9f91; }
-.step-code-window code span { color: #df6670; }
-.step-code-window code b { color: #079c89; }
-.gauge-arc { background: repeating-conic-gradient(from 270deg at 50% 100%, #e8878d 0deg 1deg, transparent 1deg 5deg); }
-.gauge-needle { background: #13a995; }
-.test-gauge > i { background: #e8878d; }
-.rocket-scene > .fa-rocket { color: #13a995; }
-.rocket-trail { border-color: #8bcfc1; }
-.process-cta-card { border-color: #e78387; background: linear-gradient(120deg, #f36d75 0%, #e8797f 40%, #13bfae 100%); box-shadow: 0 8px 25px #e85f692e; }
-.process-cta-content button { border-radius: 9999px; color: #fff; background: linear-gradient(110deg, #f36d75, #13bfae); box-shadow: 0 6px 18px #14203330; }
-.process-cta-content button:hover { background: linear-gradient(110deg, #e85f69, #0fae9e); }
+/* Process CTA Card styling */
+.process-cta-card {
+  border-color: #f1737e;
+  background: linear-gradient(130deg, #f43f5e 0%, #e11d48 30%, #0d9488 100%);
+  box-shadow: 0 10px 28px rgba(244, 63, 94, 0.28);
+}
+.process-cta-content button {
+  border-radius: 9999px;
+  color: #fff;
+  background: linear-gradient(110deg, #f43f5e, #0d9488);
+  box-shadow: 0 6px 18px rgba(20, 32, 51, 0.25);
+  cursor: pointer;
+}
+.process-cta-content button:hover {
+  background: linear-gradient(110deg, #e11d48, #0f766e);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(20, 32, 51, 0.35);
+}
 
 /* Extend the same soft surfaces and light card borders across the full homepage. */
 .site-home #hero {
