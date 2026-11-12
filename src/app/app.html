@@ -194,41 +194,46 @@
   </section>
 
   <footer class="product-footer product-footer-rich reveal-on-scroll">
-  <div class="product-footer-inner">
-    <div class="product-footer-columns">
-      <div class="product-footer-brand">
-        <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" aria-label="Samrique home">
-          <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
-        </a>
-        <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+    <div class="product-footer-inner">
+      <div class="product-footer-columns">
+        <div class="product-footer-brand">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
+          </a>
+          <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+        </div>
+        <div class="product-footer-column">
+          <h2>Projects</h2>
+          <a [attr.href]="appPath('/products/samrique-e-marketplace')"
+            (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
+          <a [attr.href]="appPath('/products/money-manager')"
+            (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
+          <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique
+            Mama Tracker</a>
+          <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
+            Taxi App</a>
+        </div>
+        <div class="product-footer-column">
+          <h2>Capabilities</h2>
+          <span>Flutter Multi-Platform</span>
+          <span>UI &amp; Frontend Innovation</span>
+          <span>Payment Systems &amp; Wallets</span>
+          <span>Real-Time GPS &amp; Dispatch</span>
+        </div>
+        <div class="product-footer-column product-footer-company">
+          <h2>Company</h2>
+          <a href="mailto:samrique.in@gmail.com">samrique.in@gmail.com</a>
+          <span>Available for global sprints</span>
+          <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+        </div>
       </div>
-      <div class="product-footer-column">
-        <h2>Projects</h2>
-        <a [attr.href]="appPath('/products/samrique-e-marketplace')" (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
-        <a [attr.href]="appPath('/products/money-manager')" (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
-        <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique Mama Tracker</a>
-        <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike Taxi App</a>
-      </div>
-      <div class="product-footer-column">
-        <h2>Capabilities</h2>
-        <span>Flutter Multi-Platform</span>
-        <span>UI &amp; Frontend Innovation</span>
-        <span>Payment Systems &amp; Wallets</span>
-        <span>Real-Time GPS &amp; Dispatch</span>
-      </div>
-      <div class="product-footer-column product-footer-company">
-        <h2>Company</h2>
-        <a href="mailto:samrique@gmail.com">samrique@gmail.com</a>
-        <span>Available for global sprints</span>
-        <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+      <div class="product-footer-bottom">
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+        <span>Crafted with precision &amp; performance.</span>
       </div>
     </div>
-    <div class="product-footer-bottom">
-      <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
-      <span>Crafted with precision &amp; performance.</span>
-    </div>
-  </div>
-</footer>
+  </footer>
 </main>
 } @else if (showMarketplace) {
 <main class="product-page marketplace-page">
@@ -418,41 +423,46 @@
       integrations depends on each plugin’s platform compatibility and configuration.</p>
   </section>
   <footer class="product-footer product-footer-rich reveal-on-scroll">
-  <div class="product-footer-inner">
-    <div class="product-footer-columns">
-      <div class="product-footer-brand">
-        <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" aria-label="Samrique home">
-          <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
-        </a>
-        <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+    <div class="product-footer-inner">
+      <div class="product-footer-columns">
+        <div class="product-footer-brand">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
+          </a>
+          <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+        </div>
+        <div class="product-footer-column">
+          <h2>Projects</h2>
+          <a [attr.href]="appPath('/products/samrique-e-marketplace')"
+            (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
+          <a [attr.href]="appPath('/products/money-manager')"
+            (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
+          <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique
+            Mama Tracker</a>
+          <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
+            Taxi App</a>
+        </div>
+        <div class="product-footer-column">
+          <h2>Capabilities</h2>
+          <span>Flutter Multi-Platform</span>
+          <span>UI &amp; Frontend Innovation</span>
+          <span>Payment Systems &amp; Wallets</span>
+          <span>Real-Time GPS &amp; Dispatch</span>
+        </div>
+        <div class="product-footer-column product-footer-company">
+          <h2>Company</h2>
+          <a href="mailto:samrique.in@gmail.com">samrique.in@gmail.com</a>
+          <span>Available for global sprints</span>
+          <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+        </div>
       </div>
-      <div class="product-footer-column">
-        <h2>Projects</h2>
-        <a [attr.href]="appPath('/products/samrique-e-marketplace')" (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
-        <a [attr.href]="appPath('/products/money-manager')" (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
-        <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique Mama Tracker</a>
-        <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike Taxi App</a>
-      </div>
-      <div class="product-footer-column">
-        <h2>Capabilities</h2>
-        <span>Flutter Multi-Platform</span>
-        <span>UI &amp; Frontend Innovation</span>
-        <span>Payment Systems &amp; Wallets</span>
-        <span>Real-Time GPS &amp; Dispatch</span>
-      </div>
-      <div class="product-footer-column product-footer-company">
-        <h2>Company</h2>
-        <a href="mailto:samrique@gmail.com">samrique@gmail.com</a>
-        <span>Available for global sprints</span>
-        <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+      <div class="product-footer-bottom">
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+        <span>Crafted with precision &amp; performance.</span>
       </div>
     </div>
-    <div class="product-footer-bottom">
-      <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
-      <span>Crafted with precision &amp; performance.</span>
-    </div>
-  </div>
-</footer>
+  </footer>
 </main>
 } @else if (showMama) {
 <main class="product-page mama-page">
@@ -635,41 +645,46 @@
     </div>
   </section>
   <footer class="product-footer product-footer-rich reveal-on-scroll">
-  <div class="product-footer-inner">
-    <div class="product-footer-columns">
-      <div class="product-footer-brand">
-        <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" aria-label="Samrique home">
-          <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
-        </a>
-        <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+    <div class="product-footer-inner">
+      <div class="product-footer-columns">
+        <div class="product-footer-brand">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
+          </a>
+          <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+        </div>
+        <div class="product-footer-column">
+          <h2>Projects</h2>
+          <a [attr.href]="appPath('/products/samrique-e-marketplace')"
+            (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
+          <a [attr.href]="appPath('/products/money-manager')"
+            (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
+          <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique
+            Mama Tracker</a>
+          <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
+            Taxi App</a>
+        </div>
+        <div class="product-footer-column">
+          <h2>Capabilities</h2>
+          <span>Flutter Multi-Platform</span>
+          <span>UI &amp; Frontend Innovation</span>
+          <span>Payment Systems &amp; Wallets</span>
+          <span>Real-Time GPS &amp; Dispatch</span>
+        </div>
+        <div class="product-footer-column product-footer-company">
+          <h2>Company</h2>
+          <a href="mailto:samrique.in@gmail.com">samrique.in@gmail.com</a>
+          <span>Available for global sprints</span>
+          <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+        </div>
       </div>
-      <div class="product-footer-column">
-        <h2>Projects</h2>
-        <a [attr.href]="appPath('/products/samrique-e-marketplace')" (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
-        <a [attr.href]="appPath('/products/money-manager')" (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
-        <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique Mama Tracker</a>
-        <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike Taxi App</a>
-      </div>
-      <div class="product-footer-column">
-        <h2>Capabilities</h2>
-        <span>Flutter Multi-Platform</span>
-        <span>UI &amp; Frontend Innovation</span>
-        <span>Payment Systems &amp; Wallets</span>
-        <span>Real-Time GPS &amp; Dispatch</span>
-      </div>
-      <div class="product-footer-column product-footer-company">
-        <h2>Company</h2>
-        <a href="mailto:samrique@gmail.com">samrique@gmail.com</a>
-        <span>Available for global sprints</span>
-        <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+      <div class="product-footer-bottom">
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+        <span>Crafted with precision &amp; performance.</span>
       </div>
     </div>
-    <div class="product-footer-bottom">
-      <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
-      <span>Crafted with precision &amp; performance.</span>
-    </div>
-  </div>
-</footer>
+  </footer>
 </main>
 } @else if (showZipi) {
 <main class="product-page zipi-page">
@@ -877,41 +892,46 @@
   </section>
 
   <footer class="product-footer product-footer-rich reveal-on-scroll">
-  <div class="product-footer-inner">
-    <div class="product-footer-columns">
-      <div class="product-footer-brand">
-        <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()" aria-label="Samrique home">
-          <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
-        </a>
-        <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+    <div class="product-footer-inner">
+      <div class="product-footer-columns">
+        <div class="product-footer-brand">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique - Build Beyond Limits" />
+          </a>
+          <p>Bespoke Flutter app development, mobile architecture, and digital product solutions.</p>
+        </div>
+        <div class="product-footer-column">
+          <h2>Projects</h2>
+          <a [attr.href]="appPath('/products/samrique-e-marketplace')"
+            (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
+          <a [attr.href]="appPath('/products/money-manager')"
+            (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
+          <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique
+            Mama Tracker</a>
+          <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
+            Taxi App</a>
+        </div>
+        <div class="product-footer-column">
+          <h2>Capabilities</h2>
+          <span>Flutter Multi-Platform</span>
+          <span>UI &amp; Frontend Innovation</span>
+          <span>Payment Systems &amp; Wallets</span>
+          <span>Real-Time GPS &amp; Dispatch</span>
+        </div>
+        <div class="product-footer-column product-footer-company">
+          <h2>Company</h2>
+          <a href="mailto:samrique.in@gmail.com">samrique.in@gmail.com</a>
+          <span>Available for global sprints</span>
+          <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+        </div>
       </div>
-      <div class="product-footer-column">
-        <h2>Projects</h2>
-        <a [attr.href]="appPath('/products/samrique-e-marketplace')" (click)="$event.preventDefault(); openMarketplace()">Samrique E - Marketplace</a>
-        <a [attr.href]="appPath('/products/money-manager')" (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
-        <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique Mama Tracker</a>
-        <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike Taxi App</a>
-      </div>
-      <div class="product-footer-column">
-        <h2>Capabilities</h2>
-        <span>Flutter Multi-Platform</span>
-        <span>UI &amp; Frontend Innovation</span>
-        <span>Payment Systems &amp; Wallets</span>
-        <span>Real-Time GPS &amp; Dispatch</span>
-      </div>
-      <div class="product-footer-column product-footer-company">
-        <h2>Company</h2>
-        <a href="mailto:samrique@gmail.com">samrique@gmail.com</a>
-        <span>Available for global sprints</span>
-        <button type="button" (click)="openBooking()">Schedule Discovery Call</button>
+      <div class="product-footer-bottom">
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+        <span>Crafted with precision &amp; performance.</span>
       </div>
     </div>
-    <div class="product-footer-bottom">
-      <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
-      <span>Crafted with precision &amp; performance.</span>
-    </div>
-  </div>
-</footer>
+  </footer>
 </main>
 } @else {
 <div class="site-home">
@@ -1078,7 +1098,8 @@
           <span class="services-kicker">From first sketch to launch</span>
           <h2>Thoughtful tech.<br /><span>Made for real life.</span></h2>
         </div>
-        <p>We turn ambitious ideas into useful digital products with clear thinking, careful design, and dependable engineering.</p>
+        <p>We turn ambitious ideas into useful digital products with clear thinking, careful design, and dependable
+          engineering.</p>
       </div>
 
       <div class="services-grid">
@@ -1175,8 +1196,10 @@
             <div class="visual-caption"><span>03 / BUILT AROUND YOU</span></div>
             <div class="custom-scene">
               <svg class="curve-art-bg" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M-20 60 Q 60 10, 150 90 T 320 50" stroke="rgba(53, 164, 127, 0.28)" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
-                <path d="M-10 130 Q 80 180, 180 120 T 310 160" stroke="rgba(16, 185, 129, 0.22)" stroke-width="2.5" fill="none"/>
+                <path d="M-20 60 Q 60 10, 150 90 T 320 50" stroke="rgba(53, 164, 127, 0.28)" stroke-width="2"
+                  stroke-dasharray="4 4" fill="none" />
+                <path d="M-10 130 Q 80 180, 180 120 T 310 160" stroke="rgba(16, 185, 129, 0.22)" stroke-width="2.5"
+                  fill="none" />
               </svg>
               <div class="custom-glow"></div>
               <div class="custom-window">
@@ -1219,14 +1242,17 @@
           <span class="process-kicker">How it works</span>
           <h2>A clear path from idea<br /><span>to launch.</span></h2>
         </div>
-        <p>A simple, collaborative process takes your product from the first conversation through launch, with clear milestones at every step.</p>
+        <p>A simple, collaborative process takes your product from the first conversation through launch, with clear
+          milestones at every step.</p>
       </div>
 
       <div class="process-grid">
         <article class="process-card reveal-on-scroll">
           <div class="process-visual process-visual-discover" aria-hidden="true">
             <div class="step-label">• Step 01</div>
-            <div class="discovery-visual"><span class="discovery-path"></span><i class="fa-regular fa-calendar"></i><i class="fa-solid fa-video discovery-active"></i><i class="fa-regular fa-comment"></i><i class="fa-regular fa-envelope"></i><span class="discovery-dot"></span></div>
+            <div class="discovery-visual"><span class="discovery-path"></span><i class="fa-regular fa-calendar"></i><i
+                class="fa-solid fa-video discovery-active"></i><i class="fa-regular fa-comment"></i><i
+                class="fa-regular fa-envelope"></i><span class="discovery-dot"></span></div>
           </div>
           <div class="process-card-copy">
             <span class="process-card-index">01 — ALIGN ON THE GOAL</span>
@@ -1238,7 +1264,12 @@
         <article class="process-card reveal-on-scroll">
           <div class="process-visual process-visual-design" aria-hidden="true">
             <div class="step-label">• Step 02</div>
-            <div class="step-phone"><span></span><b>Design preview</b><i class="fa-solid fa-circle-user"></i><div class="step-phone-lines"><i></i><i></i></div><div class="step-phone-options"><i class="fa-solid fa-list"></i><i class="fa-solid fa-heart"></i><i class="fa-solid fa-bell"></i><i class="fa-solid fa-star"></i></div><div class="step-phone-lines"><i></i><i></i></div></div>
+            <div class="step-phone"><span></span><b>Design preview</b><i class="fa-solid fa-circle-user"></i>
+              <div class="step-phone-lines"><i></i><i></i></div>
+              <div class="step-phone-options"><i class="fa-solid fa-list"></i><i class="fa-solid fa-heart"></i><i
+                  class="fa-solid fa-bell"></i><i class="fa-solid fa-star"></i></div>
+              <div class="step-phone-lines"><i></i><i></i></div>
+            </div>
           </div>
           <div class="process-card-copy">
             <span class="process-card-index">02 — SHAPE THE EXPERIENCE</span>
@@ -1250,7 +1281,10 @@
         <article class="process-card reveal-on-scroll">
           <div class="process-visual process-visual-code" aria-hidden="true">
             <div class="step-label">• Step 03</div>
-            <div class="step-code-window"><div class="step-code-top"><i></i><i></i><i></i></div><code><span>function</span> optimize(event) &#123;<br />&nbsp; const x = event.clientX;<br />&nbsp; const y = event.clientY;<br />&nbsp; cursor.<b>updatePosition</b>(x, y);<br />&#125;</code></div>
+            <div class="step-code-window">
+              <div class="step-code-top"><i></i><i></i><i></i></div>
+              <code><span>function</span> optimize(event) &#123;<br />&nbsp; const x = event.clientX;<br />&nbsp; const y = event.clientY;<br />&nbsp; cursor.<b>updatePosition</b>(x, y);<br />&#125;</code>
+            </div>
           </div>
           <div class="process-card-copy">
             <span class="process-card-index">03 — BUILD FOR THE REAL WORLD</span>
@@ -1262,7 +1296,10 @@
         <article class="process-card reveal-on-scroll">
           <div class="process-visual process-visual-testing" aria-hidden="true">
             <div class="step-label">• Step 04</div>
-            <div class="test-gauge"><div class="gauge-arc"></div><div class="gauge-ticks"></div><span class="gauge-needle"></span><i></i><b>QUALITY CHECK</b></div>
+            <div class="test-gauge">
+              <div class="gauge-arc"></div>
+              <div class="gauge-ticks"></div><span class="gauge-needle"></span><i></i><b>QUALITY CHECK</b>
+            </div>
           </div>
           <div class="process-card-copy">
             <span class="process-card-index">04 — CHECK EVERY DETAIL</span>
@@ -1274,7 +1311,9 @@
         <article class="process-card reveal-on-scroll">
           <div class="process-visual process-visual-deploy" aria-hidden="true">
             <div class="step-label">• Step 05</div>
-            <div class="rocket-scene"><span class="rocket-cloud rocket-cloud-left"></span><span class="rocket-cloud rocket-cloud-right"></span><span class="rocket-cloud rocket-cloud-bottom"></span><i class="fa-solid fa-rocket"></i><span class="rocket-trail"></span></div>
+            <div class="rocket-scene"><span class="rocket-cloud rocket-cloud-left"></span><span
+                class="rocket-cloud rocket-cloud-right"></span><span class="rocket-cloud rocket-cloud-bottom"></span><i
+                class="fa-solid fa-rocket"></i><span class="rocket-trail"></span></div>
           </div>
           <div class="process-card-copy">
             <span class="process-card-index">05 — READY FOR TAKEOFF</span>
@@ -1284,7 +1323,12 @@
         </article>
 
         <article class="process-cta-card reveal-on-scroll">
-          <div class="process-cta-content"><span class="process-cta-kicker">YOUR IDEA, IN MOTION</span><h3>Let’s transform your idea into reality.</h3><button type="button" (click)="openBooking()">Book a free consultation <i class="fa-solid fa-arrow-right"></i></button><span class="process-cta-orbit process-cta-orbit-one"></span><span class="process-cta-orbit process-cta-orbit-two"></span></div>
+          <div class="process-cta-content"><span class="process-cta-kicker">YOUR IDEA, IN MOTION</span>
+            <h3>Let’s transform your idea into reality.</h3><button type="button" (click)="openBooking()">Book a free
+              consultation <i class="fa-solid fa-arrow-right"></i></button><span
+              class="process-cta-orbit process-cta-orbit-one"></span><span
+              class="process-cta-orbit process-cta-orbit-two"></span>
+          </div>
         </article>
       </div>
     </div>
@@ -1540,31 +1584,65 @@
         <article class="why-card reveal-on-scroll">
           <div class="why-visual why-visual-team" aria-hidden="true">
             <div class="why-visual-caption">SMALL TEAM. FULL ATTENTION.</div>
-            <div class="team-scene"><div class="team-orbit team-orbit-a"></div><div class="team-orbit team-orbit-b"></div><span class="team-avatar team-avatar-one"><i class="fa-solid fa-user"></i></span><span class="team-avatar team-avatar-two"><i class="fa-solid fa-pen-ruler"></i></span><span class="team-avatar team-avatar-three"><i class="fa-solid fa-code"></i></span><div class="team-core"><i class="fa-solid fa-people-group"></i><b>Direct collaboration</b></div><span class="team-tag">DESIGN</span><span class="team-tag team-tag-build">BUILD</span></div>
+            <div class="team-scene">
+              <div class="team-orbit team-orbit-a"></div>
+              <div class="team-orbit team-orbit-b"></div><span class="team-avatar team-avatar-one"><i
+                  class="fa-solid fa-user"></i></span><span class="team-avatar team-avatar-two"><i
+                  class="fa-solid fa-pen-ruler"></i></span><span class="team-avatar team-avatar-three"><i
+                  class="fa-solid fa-code"></i></span>
+              <div class="team-core"><i class="fa-solid fa-people-group"></i><b>Direct collaboration</b></div><span
+                class="team-tag">DESIGN</span><span class="team-tag team-tag-build">BUILD</span>
+            </div>
           </div>
           <div class="why-card-copy">
             <span class="why-card-index">01 — THE RIGHT PEOPLE, CLOSE BY</span>
             <h3>Just-Right-Size Teamwork</h3>
-            <p>Direct access to senior Flutter engineers and designers without layers of account management or red tape.</p>
+            <p>Direct access to senior Flutter engineers and designers without layers of account management or red tape.
+            </p>
           </div>
         </article>
 
         <article class="why-card reveal-on-scroll">
           <div class="why-visual why-visual-engineering" aria-hidden="true">
             <div class="why-visual-caption">CRAFTED FOR PRODUCTION.</div>
-            <div class="engineering-scene"><div class="engineering-window"><div class="engineering-window-top"><i></i><i></i><i></i><span>app_architecture.dart</span></div><div class="engineering-code"><span>class</span> ProductApp &#123;<br /><i>  </i><span>final</span> modules = clean;<br /><i>  </i><span>final</span> tests = <b>passing</b>;<br /><i>  </i><span>return</span> smoothFrames;<br />&#125;</div><div class="engineering-status"><span><i class="fa-solid fa-check"></i> CI passing</span><span>60 FPS</span></div></div><div class="engineering-badge"><strong>98%</strong><small>TEST COVERAGE</small></div></div>
+            <div class="engineering-scene">
+              <div class="engineering-window">
+                <div class="engineering-window-top"><i></i><i></i><i></i><span>app_architecture.dart</span></div>
+                <div class="engineering-code"><span>class</span> ProductApp &#123;<br /><i> </i><span>final</span>
+                  modules = clean;<br /><i> </i><span>final</span> tests = <b>passing</b>;<br /><i>
+                  </i><span>return</span> smoothFrames;<br />&#125;</div>
+                <div class="engineering-status"><span><i class="fa-solid fa-check"></i> CI passing</span><span>60
+                    FPS</span></div>
+              </div>
+              <div class="engineering-badge"><strong>98%</strong><small>TEST COVERAGE</small></div>
+            </div>
           </div>
           <div class="why-card-copy">
             <span class="why-card-index">02 — QUALITY BUILT IN</span>
             <h3>Production-Grade Engineering</h3>
-            <p>Clean modular Flutter architecture, high automated test coverage, predictable state management, and smooth 60fps performance.</p>
+            <p>Clean modular Flutter architecture, high automated test coverage, predictable state management, and
+              smooth 60fps performance.</p>
           </div>
         </article>
 
         <article class="why-card reveal-on-scroll">
           <div class="why-visual why-visual-communication" aria-hidden="true">
             <div class="why-visual-caption">NO SURPRISES. JUST PROGRESS.</div>
-            <div class="communication-scene"><div class="chat-card chat-card-one"><span class="chat-avatar chat-avatar-rose"><i class="fa-solid fa-user"></i></span><div><b>Weekly check-in</b><small>Here’s what shipped this week</small></div><i class="fa-solid fa-check"></i></div><div class="chat-card chat-card-two"><span class="chat-avatar chat-avatar-violet"><i class="fa-solid fa-lightbulb"></i></span><div><b>Prototype ready</b><small>Review the new user flow</small></div></div><div class="sprint-progress"><div><span>SPRINT PROGRESS</span><b>On track</b></div><i><span></span></i><small>Milestone 2 of 3</small></div></div>
+            <div class="communication-scene">
+              <div class="chat-card chat-card-one"><span class="chat-avatar chat-avatar-rose"><i
+                    class="fa-solid fa-user"></i></span>
+                <div><b>Weekly check-in</b><small>Here’s what shipped this week</small></div><i
+                  class="fa-solid fa-check"></i>
+              </div>
+              <div class="chat-card chat-card-two"><span class="chat-avatar chat-avatar-violet"><i
+                    class="fa-solid fa-lightbulb"></i></span>
+                <div><b>Prototype ready</b><small>Review the new user flow</small></div>
+              </div>
+              <div class="sprint-progress">
+                <div><span>SPRINT PROGRESS</span><b>On track</b></div><i><span></span></i><small>Milestone 2 of
+                  3</small>
+              </div>
+            </div>
           </div>
           <div class="why-card-copy">
             <span class="why-card-index">03 — CLEAR, CONSISTENT UPDATES</span>
