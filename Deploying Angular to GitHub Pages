@@ -10,9 +10,16 @@ git push -u origin gh-pages --force
 OR 
 
 npm.cmd run build:github-pages
+cd dist/samrique-website/browser
 git init
 git checkout -B gh-pages
 git add -A
 git commit -m "Deploy Angular app with correct base href"
 git remote add origin https://github.com/samrique-where-design-meets-deployment/samrique.in.git
 git push -u origin gh-pages --force
+
+
+To Run
+
+cmd.exe /c "npx ng serve --port 4200"
+
