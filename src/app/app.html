@@ -42,7 +42,7 @@
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Book Call
           </button>
-          <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+          <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()"
             class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
             <span>Start Project</span>
             <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -100,6 +100,31 @@
       overview, spending statistics, and CSV export.<br /><br />It is designed for individuals who want a
       straightforward way to record day-to-day finances, keep account balances organized, and review spending patterns.
     </p>
+    <div class="product-status-box"
+      style="grid-column: 1 / -1; margin-top: 10px; padding: 22px 26px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+        <span
+          style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 750; text-transform: uppercase; letter-spacing: 1px; color: #34d399;">
+          <span
+            style="width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 10px #34d399;"></span>
+          Production App • Available as Source Code
+        </span>
+        <span style="font-size: 11px; color: #94a3b8; font-weight: 600;">Turnkey Commercial License &bull; 2-Week
+          Customization Sprint</span>
+      </div>
+      <p style="font-size: 13.5px; color: #cbd5e1; margin: 0; line-height: 1.6;">
+        <strong>What is this product?</strong> This is a completed, production-tested Flutter codebase with clean
+        architecture, offline-first SQLite/Hive persistence, and automated test coverage. You can license the complete
+        source code directly for full IP ownership, or our studio can customize its branding, theme, and backend API in
+        a fixed-price sprint.
+      </p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px;">
+        <button type="button" (click)="inquireAboutProduct('Samrique Money Manager')" class="product-primary"
+          style="padding: 10px 20px; font-size: 13px;">
+          License Codebase / Request Custom Sprint <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
   </section>
 
   <section id="product-features" class="product-section">
@@ -229,7 +254,12 @@
         </div>
       </div>
       <div class="product-footer-bottom">
-        <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved. &bull; <button type="button"
+            (click)="openPrivacyModal()"
+            style="background:none; border:none; color:inherit; text-decoration:underline; cursor:pointer;">Privacy
+            Policy</button> &bull; <button type="button" (click)="openTermsModal()"
+            style="background:none; border:none; color:inherit; text-decoration:underline; cursor:pointer;">Terms of
+            Service</button></span>
         <span>Crafted with precision &amp; performance.</span>
       </div>
     </div>
@@ -279,7 +309,7 @@
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Book Call
           </button>
-          <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+          <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()"
             class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
             <span>Start Project</span>
             <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -301,7 +331,7 @@
       </div>
       <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
         <a class="product-primary" [attr.href]="appPath('/#contact')"
-          (click)="$event.preventDefault(); inquireAboutMoneyManager()">Discuss a similar product <i
+          (click)="$event.preventDefault(); inquireAboutProduct('Samrique E-Marketplace')">Discuss a similar product <i
             class="fa-solid fa-arrow-right"></i></a>
         <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
           class="screen-inspect-action" style="padding:12px 20px; font-size:14px;">
@@ -333,6 +363,31 @@
       templates and UI kits. Its buyer, seller, and administrator experiences are backed by a Samrique REST
       API.<br /><br />The app brings discovery, product evaluation, checkout, delivery of purchased downloads, seller
       operations, and marketplace moderation into one connected product.</p>
+    <div class="product-status-box"
+      style="grid-column: 1 / -1; margin-top: 10px; padding: 22px 26px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+        <span
+          style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 750; text-transform: uppercase; letter-spacing: 1px; color: #38bdf8;">
+          <span
+            style="width: 8px; height: 8px; border-radius: 50%; background: #38bdf8; box-shadow: 0 0 10px #38bdf8;"></span>
+          Interactive Demo • Available as Source Code
+        </span>
+        <span style="font-size: 11px; color: #94a3b8; font-weight: 600;">18 Screens &bull; Buyer + Seller + Admin Roles
+          &bull; Razorpay Ready</span>
+      </div>
+      <p style="font-size: 13.5px; color: #cbd5e1; margin: 0; line-height: 1.6;">
+        <strong>What is this product?</strong> This is an interactive demo of a multi-vendor digital commerce engine.
+        The complete codebase (18 Flutter screens, Provider architecture, seller wallet, and KYC dashboard) is available
+        for commercial source code licensing, or our studio can adapt it into a branded custom marketplace for your
+        startup in a 3-4 week sprint.
+      </p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px;">
+        <button type="button" (click)="inquireAboutProduct('Samrique E-Marketplace')" class="product-primary"
+          style="padding: 10px 20px; font-size: 13px;">
+          License Codebase / Request Custom Sprint <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
   </section>
 
   <section id="product-features" class="product-section">
@@ -458,7 +513,12 @@
         </div>
       </div>
       <div class="product-footer-bottom">
-        <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved. &bull; <button type="button"
+            (click)="openPrivacyModal()"
+            style="background:none; border:none; color:inherit; text-decoration:underline; cursor:pointer;">Privacy
+            Policy</button> &bull; <button type="button" (click)="openTermsModal()"
+            style="background:none; border:none; color:inherit; text-decoration:underline; cursor:pointer;">Terms of
+            Service</button></span>
         <span>Crafted with precision &amp; performance.</span>
       </div>
     </div>
@@ -508,7 +568,7 @@
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Book Call
           </button>
-          <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+          <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()"
             class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
             <span>Start Project</span>
             <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -530,8 +590,8 @@
           wellness</span><span>Pregnancy tracker</span></div>
       <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
         <a class="product-primary" [attr.href]="appPath('/#contact')"
-          (click)="$event.preventDefault(); inquireAboutMoneyManager()">Discuss a similar product <i
-            class="fa-solid fa-arrow-right"></i></a>
+          (click)="$event.preventDefault(); inquireAboutProduct('Samrique Mama Pregnancy Tracker')">Discuss a similar
+          product <i class="fa-solid fa-arrow-right"></i></a>
         <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
           class="screen-inspect-action" style="padding:12px 20px; font-size:14px;">
           <i class="fa-solid fa-mobile-screen"></i> Explore Screens ({{ mamaScreens.length }})
@@ -563,6 +623,30 @@
       wellness logs, account access, and a community-style discussion screen.<br /><br />The pregnancy overview presents
       estimated week, trimester, days until the due date, and an illustrative fruit-size comparison based on the due
       date on the user profile.</p>
+    <div class="product-status-box"
+      style="grid-column: 1 / -1; margin-top: 10px; padding: 22px 26px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+        <span
+          style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 750; text-transform: uppercase; letter-spacing: 1px; color: #fb7185;">
+          <span
+            style="width: 8px; height: 8px; border-radius: 50%; background: #fb7185; box-shadow: 0 0 10px #fb7185;"></span>
+          Production App • Available as Source Code
+        </span>
+        <span style="font-size: 11px; color: #94a3b8; font-weight: 600;">11 Screens &bull; Maternal Health Companion
+          &bull; Full Codebase</span>
+      </div>
+      <p style="font-size: 13.5px; color: #cbd5e1; margin: 0; line-height: 1.6;">
+        <strong>What is this product?</strong> This is a completed, production-ready Flutter app featuring weekly
+        milestone engines, kick counters, contraction timers, and prenatal care management. Available for full
+        commercial IP licensing or custom branded sprints for digital health startups.
+      </p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px;">
+        <button type="button" (click)="inquireAboutProduct('Samrique Mama Pregnancy Tracker')" class="product-primary"
+          style="padding: 10px 20px; font-size: 13px;">
+          License Codebase / Request Custom Sprint <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
   </section>
 
   <section id="product-features" class="product-section">
@@ -680,7 +764,12 @@
         </div>
       </div>
       <div class="product-footer-bottom">
-        <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved. &bull; <button type="button"
+            (click)="openPrivacyModal()"
+            style="background:none; border:none; color:inherit; text-decoration:underline; cursor:pointer;">Privacy
+            Policy</button> &bull; <button type="button" (click)="openTermsModal()"
+            style="background:none; border:none; color:inherit; text-decoration:underline; cursor:pointer;">Terms of
+            Service</button></span>
         <span>Crafted with precision &amp; performance.</span>
       </div>
     </div>
@@ -730,7 +819,7 @@
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Book Call
           </button>
-          <a [attr.href]="appPath('/#contact')" (click)="$event.preventDefault(); inquireAboutMoneyManager()"
+          <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()"
             class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
             <span>Start Project</span>
             <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -755,7 +844,7 @@
           Dispatch</span><span>REST API</span></div>
       <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
         <a class="product-primary" [attr.href]="appPath('/#contact')"
-          (click)="$event.preventDefault(); inquireAboutMoneyManager()">
+          (click)="$event.preventDefault(); inquireAboutProduct('Zipi Bike Taxi App')">
           Discuss a similar product <i class="fa-solid fa-arrow-right"></i>
         </a>
         <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -792,6 +881,30 @@
       captain tracking, and ride invoices, while captain partners benefit from order radar, route navigation, and daily
       earnings analytics.<br /><br />The solution integrates complete captain document verification (KYC), vehicle
       selection, and multi-language localization to serve riders and drivers across metropolitan transit zones.</p>
+    <div class="product-status-box"
+      style="grid-column: 1 / -1; margin-top: 10px; padding: 22px 26px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+        <span
+          style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 750; text-transform: uppercase; letter-spacing: 1px; color: #fbbf24;">
+          <span
+            style="width: 8px; height: 8px; border-radius: 50%; background: #fbbf24; box-shadow: 0 0 10px #fbbf24;"></span>
+          Interactive Demo • Turnkey Mobility Codebase
+        </span>
+        <span style="font-size: 11px; color: #94a3b8; font-weight: 600;">22 Screens &bull; Commuter + Captain Apps
+          &bull; Live GPS Radar</span>
+      </div>
+      <p style="font-size: 13.5px; color: #cbd5e1; margin: 0; line-height: 1.6;">
+        <strong>What is this product?</strong> This is an interactive demo of an on-demand ride booking platform. Built
+        with Flutter, GetX, and Google Maps, it provides both rider and driver experiences. You can license the complete
+        source code or have Samrique customize and deploy it for your fleet in a 3-4 week sprint.
+      </p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px;">
+        <button type="button" (click)="inquireAboutProduct('Zipi Bike Taxi App')" class="product-primary"
+          style="padding: 10px 20px; font-size: 13px;">
+          License Codebase / Request Custom Sprint <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
   </section>
 
   <section id="product-features" class="product-section">
@@ -927,12 +1040,443 @@
         </div>
       </div>
       <div class="product-footer-bottom">
-        <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved. &bull; <button type="button"
+            (click)="openPrivacyModal()"
+            style="background:none; border:none; color:inherit; text-decoration:underline; cursor:pointer;">Privacy
+            Policy</button> &bull; <button type="button" (click)="openTermsModal()"
+            style="background:none; border:none; color:inherit; text-decoration:underline; cursor:pointer;">Terms of
+            Service</button></span>
         <span>Crafted with precision &amp; performance.</span>
       </div>
     </div>
   </footer>
 </main>
+} @else if (showPricingPage) {
+<main class="pricing-page min-h-screen bg-[var(--bg)] text-[var(--ink)]">
+  <div class="top-progress" aria-hidden="true"><span id="top-progress-bar"></span></div>
+
+  <!-- Header (Sticky, Matches Home and Product Pages) -->
+  <header class="pricing-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200/90 dark:border-slate-800 transition-all duration-300">
+        <div class="flex items-center gap-3 flex-shrink-0">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToHome()"
+            class="flex items-center gap-2 group" aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
+              class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 dark:bg-slate-800/90 p-1.5 rounded-full border border-slate-200/80 dark:border-slate-700 backdrop-blur-md mx-auto"
+          aria-label="Pricing page navigation">
+          <a href="#pricing-plans" (click)="$event.preventDefault(); scrollToProductSection('pricing-plans')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700 transition-all duration-200">Packages</a>
+          <a href="#pricing-addons" (click)="$event.preventDefault(); scrollToProductSection('pricing-addons')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700 transition-all duration-200">Add-ons</a>
+          <a href="#pricing-process" (click)="$event.preventDefault(); scrollToProductSection('pricing-process')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700 transition-all duration-200">Payment
+            Terms</a>
+          <a href="#pricing-faq" (click)="$event.preventDefault(); scrollToProductSection('pricing-faq')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700 transition-all duration-200">FAQs</a>
+          <a href="#contact" (click)="$event.preventDefault(); scrollToProductSection('contact')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700 transition-all duration-200">Enquiry
+            Form</a>
+        </nav>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3 sm:gap-3.5 flex-shrink-0">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToHome()"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
+            <span class="hidden sm:inline">Back to Home</span>
+          </a>
+          <button (click)="openBooking()"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Book Call
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Pricing Body -->
+  <div class="pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[1160px] mx-auto">
+      <!-- Breadcrumb / Back Link -->
+      <div class="mb-6">
+        <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToHome()"
+          class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer group">
+          <i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-1"></i> Back to overview
+        </a>
+      </div>
+
+      <!-- Pricing & Packages Section -->
+      <section id="pricing">
+        <div class="pricing-hero">
+          <div class="pricing-badge">
+            <i class="fa-solid fa-bolt"></i> Transparent Fixed-Price Sprints • Full IP Handover
+          </div>
+          <h2>Clear pricing for custom Flutter apps</h2>
+          <p class="lead">Fixed-price sprints, so you know the cost and the timeline before we write a line of code.
+            Every package starts with a free discovery call.</p>
+          <div class="pricing-trust-row">
+            <span><i class="fa-solid fa-circle-check"></i> 100% Full Source Code Handover</span>
+            <span><i class="fa-solid fa-circle-check"></i> Direct Senior Developer Communication</span>
+            <span><i class="fa-solid fa-circle-check"></i> 30 Days Free Post-Launch Support</span>
+          </div>
+        </div>
+
+        <div class="plans" id="pricing-plans">
+          <!-- Starter MVP -->
+          <article class="plan">
+            <div class="plan-header">
+              <h3>Starter MVP</h3>
+              <p class="for">Test an idea with real users before investing more.</p>
+            </div>
+            <div class="plan-price-block">
+              <span class="price-label">Starting from</span>
+              <span class="price-amount">₹1,00,000–1,50,000</span>
+              <span class="plan-time-chip"><i class="fa-regular fa-clock"></i> 2–3 weeks sprint</span>
+            </div>
+            <ul>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Up to 8 screens</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Android app (iOS on request)</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Login and basic backend</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>UI design included</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Play Store publishing help</li>
+            </ul>
+            <button type="button" class="btn" (click)="selectPricingTier('Starter MVP')">
+              <span>Start an MVP</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </article>
+
+          <!-- Standard (Featured) -->
+          <article class="plan featured">
+            <span class="tag">Most chosen</span>
+            <div class="plan-header">
+              <h3>Standard</h3>
+              <p class="for">Small business apps that need to take payments and scale.</p>
+            </div>
+            <div class="plan-price-block">
+              <span class="price-label">Starting from</span>
+              <span class="price-amount">₹2,50,000–3,00,000</span>
+              <span class="plan-time-chip"><i class="fa-regular fa-clock"></i> 4–6 weeks sprint</span>
+            </div>
+            <ul>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Up to 15 screens</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Android and iOS</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>REST API integration</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Razorpay payments</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Push notifications</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Store publishing both platforms</li>
+            </ul>
+            <button type="button" class="btn" (click)="selectPricingTier('Standard')">
+              <span>Get a Standard quote</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </article>
+
+          <!-- Premium -->
+          <article class="plan">
+            <div class="plan-header">
+              <h3>Premium</h3>
+              <p class="for">Full products with several user roles and real-time features.</p>
+            </div>
+            <div class="plan-price-block">
+              <span class="price-label">Starting from</span>
+              <span class="price-amount">₹6,00,000</span>
+              <span class="plan-time-chip"><i class="fa-regular fa-clock"></i> 8–12 weeks sprint</span>
+            </div>
+            <ul>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>20+ screens, multi-role</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Admin dashboard (web)</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Live maps, chat or GPS tracking</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>KYC and document verification</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Automated testing</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>30 days free post-launch support</li>
+            </ul>
+            <button type="button" class="btn" (click)="selectPricingTier('Premium')">
+              <span>Plan a Premium build</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </article>
+
+          <!-- Custom -->
+          <article class="plan">
+            <div class="plan-header">
+              <h3>Custom</h3>
+              <p class="for">Larger scope, existing apps, or something that doesn't fit a box.</p>
+            </div>
+            <div class="plan-price-block">
+              <span class="price-label">Quoted after</span>
+              <span class="price-amount">Discovery call</span>
+              <span class="plan-time-chip"><i class="fa-regular fa-clock"></i> Scoped per project</span>
+            </div>
+            <ul>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Marketplace and ride-hailing scale</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Rescue or redesign of an existing app</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Dedicated sprint team</li>
+              <li><i class="fa-solid fa-circle-check check-icon"></i>Milestone-based payments</li>
+            </ul>
+            <button type="button" class="btn" (click)="selectPricingTier('Custom')">
+              <span>Book a free call</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </article>
+        </div>
+
+        <!-- Bento Row: Add-ons & Milestone Payments -->
+        <div class="pricing-bento-grid" id="pricing-addons">
+          <div class="bento-card">
+            <div class="bento-card-header">
+              <div class="bento-icon-badge teal">
+                <i class="fa-solid fa-puzzle-piece"></i>
+              </div>
+              <h3>A La Carte Add-ons</h3>
+            </div>
+            <p class="subtitle">Add these to any sprint package or request as a standalone sprint.</p>
+            <div class="addons-list">
+              <div class="addon-item"><span>Extra screen</span><span class="addon-chip">₹6,000 each</span></div>
+              <div class="addon-item"><span>Admin panel (web dashboard)</span><span class="addon-chip">from
+                  ₹60,000</span></div>
+              <div class="addon-item"><span>Extra sprint (2 weeks)</span><span class="addon-chip">from ₹80,000</span>
+              </div>
+              <div class="addon-item"><span>Monthly maintenance and support</span><span class="addon-chip">from
+                  ₹8,000/mo</span></div>
+              <div class="addon-item"><span>Rush delivery (30% faster)</span><span class="addon-chip">+25%</span></div>
+            </div>
+          </div>
+
+          <div class="bento-card" id="pricing-process">
+            <div class="bento-card-header">
+              <div class="bento-icon-badge coral">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <h3>Milestone-Tied Payments</h3>
+            </div>
+            <p class="subtitle">Milestones tied to delivery, never paid 100% upfront.</p>
+            <div class="milestones-list">
+              <div class="milestone-step">
+                <span class="step-num">01</span>
+                <div class="step-content">
+                  <h4>30% Project Kickoff</h4>
+                  <p>Paid after the free discovery call and agreed sprint roadmap.</p>
+                </div>
+              </div>
+              <div class="milestone-step">
+                <span class="step-num">02</span>
+                <div class="step-content">
+                  <h4>40% Mid-Sprint Approval</h4>
+                  <p>When the design system and first functional build are approved.</p>
+                </div>
+              </div>
+              <div class="milestone-step">
+                <span class="step-num">03</span>
+                <div class="step-content">
+                  <h4>30% Final Release</h4>
+                  <p>On final signoff, app store publication, and complete source code transfer.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQs Section -->
+        <div class="pricing-faq-section" id="pricing-faq">
+          <h3>Common questions</h3>
+          <div class="faq-container">
+            <details class="faq-card">
+              <summary>Are these final prices?</summary>
+              <p>They are starting sprint figures. After a free discovery call you get a fixed quote in writing, and it
+                does not change unless the project scope does.</p>
+            </details>
+            <details class="faq-card">
+              <summary>Who owns the code?</summary>
+              <p>You do. 100% of the full source code and Figma design files are handed over immediately after the final
+                milestone payment.</p>
+            </details>
+            <details class="faq-card">
+              <summary>What happens after launch?</summary>
+              <p>Premium includes 30 days of free bug fixes. After that you can choose our monthly maintenance plan
+                (from ₹8,000/mo) or pay per request.</p>
+            </details>
+            <details class="faq-card">
+              <summary>Can you build something like your Marketplace, Money Manager, Mama or Zipi apps?</summary>
+              <p>Yes. Those projects represent real-world systems built by Samrique. Tell us which one is closest to
+                your vision and we will scope from there.</p>
+            </details>
+            <details class="faq-card">
+              <summary>Do prices include GST, store fees and hosting?</summary>
+              <p>Prices exclude GST, Apple Developer & Google Play fees, and third-party cloud hosting. We outline all
+                external fees transparently in your quote.</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- Sleek Founder CTA Banner -->
+        <div class="pricing-cta-banner">
+          <div>
+            <h3>Not sure which package fits?</h3>
+            <p>Tell us your idea. We'll send you a scoped roadmap and fixed estimate within 48 hours.</p>
+          </div>
+          <div class="pricing-cta-actions">
+            <button type="button" (click)="openBooking()" class="btn-discovery">
+              <i class="fa-regular fa-calendar-check mr-1.5"></i> Book Discovery Call
+            </button>
+            <!-- <button type="button" (click)="openEnquiry('Custom')" class="btn-enquiry">
+              <i class="fa-regular fa-paper-plane mr-1.5"></i> Send Project Enquiry
+            </button> -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Executive Project Enquiry Intake Desk -->
+      <section id="contact" class="pricing-contact-card">
+        <div class="side">
+          <h2>Tell us about your app</h2>
+          <p>Share a few details and we will reply within 24 hours with a scoped roadmap and a fixed quote.</p>
+          <ul>
+            <li><b>Email</b>samrique.in@gmail.com</li>
+            <li><b>Working hours</b>Mon–Fri, 9am–7pm IST</li>
+            <li><b>Response time</b>Within 24 hours</li>
+          </ul>
+          <div class="pt-6">
+            <button type="button" (click)="openBooking()"
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold text-slate-800 dark:text-slate-200 transition-colors cursor-pointer">
+              <i class="fa-regular fa-calendar-check text-emerald-500"></i>
+              <span>Prefer a call? Book 30-min discovery</span>
+            </button>
+          </div>
+        </div>
+
+        <form id="enquiry" (submit)="handleContactSubmit($event)" novalidate>
+          <div class="two">
+            <label>Your name
+              <input name="name" required autocomplete="name" placeholder="Musaddique or your team"
+                [(ngModel)]="contactForm.name">
+            </label>
+            <label>Email
+              <input name="email" type="email" required autocomplete="email" placeholder="you@company.com"
+                [(ngModel)]="contactForm.email">
+            </label>
+          </div>
+          <div class="two">
+            <label>Phone or WhatsApp <span class="opt">(optional)</span>
+              <input name="phone" type="tel" autocomplete="tel" placeholder="+91 98765 43210"
+                [(ngModel)]="contactForm.phone">
+            </label>
+            <label>Company <span class="opt">(optional)</span>
+              <input name="company" autocomplete="organization" placeholder="Startup or company name"
+                [(ngModel)]="contactForm.company">
+            </label>
+          </div>
+          <div class="two">
+            <label>Project type
+              <select name="project_type" required [(ngModel)]="contactForm.project_type">
+                <option value="">Choose one</option>
+                <option>New app from scratch</option>
+                <option>MVP to test an idea</option>
+                <option>Redesign or fix an existing app</option>
+                <option>Add features to my app</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+            <label>Package you are considering
+              <select name="package" [(ngModel)]="contactForm.package">
+                <option value="">Not sure yet</option>
+                <option>Starter MVP</option>
+                <option>Standard</option>
+                <option>Premium</option>
+                <option>Custom</option>
+              </select>
+            </label>
+          </div>
+          <div class="two">
+            <label>Budget
+              <select name="budget" required [(ngModel)]="contactForm.budget">
+                <option value="">Choose a range</option>
+                <option>₹1–1.5 lakh</option>
+                <option>₹1.5–2.5 lakh</option>
+                <option>₹2.5–3 lakh</option>
+                <option>₹3–6 lakh</option>
+                <option>₹6 lakh and above</option>
+                <option>Need guidance</option>
+              </select>
+            </label>
+            <label>Timeline
+              <select name="timeline" required [(ngModel)]="contactForm.timeline">
+                <option value="">Choose one</option>
+                <option>As soon as possible</option>
+                <option>Within 1 month</option>
+                <option>1–3 months</option>
+                <option>Flexible</option>
+              </select>
+            </label>
+          </div>
+          <label>What do you want to build?
+            <textarea name="details" required placeholder="Who is it for, and what should it do?"
+              [(ngModel)]="contactForm.details"></textarea>
+          </label>
+          <input class="hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+            [(ngModel)]="contactForm._gotcha">
+
+          @if (contactStatus === 'ok') {
+          <div class="msg ok">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>{{ contactMessage || 'Thank you! We will reply within 24 hours.' }}</span>
+          </div>
+          }
+          @if (contactStatus === 'err') {
+          <div class="msg err">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>{{ contactMessage || 'Something went wrong.' }}</span>
+            @if (mailtoFallbackUrl) {
+            <div class="pt-2">
+              <a [href]="mailtoFallbackUrl" class="font-bold underline">Click here to send direct email</a>
+            </div>
+            }
+          </div>
+          }
+
+          <button type="submit" id="send" [disabled]="contactSending">
+            @if (contactSending) {
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <span>Sending…</span>
+            } @else {
+            <span>Send enquiry</span>
+            <i class="fa-solid fa-arrow-right"></i>
+            }
+          </button>
+          <p class="fine">We only use your details to reply to this enquiry. Zero spam, ever.</p>
+        </form>
+      </section>
+    </div>
+  </div>
+
+  <!-- Page Footer -->
+  <footer class="border-t border-slate-200/80 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 py-10 px-4">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-3">
+        <img src="samrique-logo.png" alt="Samrique" class="w-16 h-auto opacity-70" />
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToHome()"
+          class="hover:text-slate-900 dark:hover:text-white">Home</a>
+        <a href="#privacy" (click)="$event.preventDefault(); openPrivacyModal()"
+          class="hover:text-slate-900 dark:hover:text-white">Privacy</a>
+        <a href="#terms" (click)="$event.preventDefault(); openTermsModal()"
+          class="hover:text-slate-900 dark:hover:text-white">Terms</a>
+      </div>
+    </div>
+  </footer>
+</main>
+
 } @else {
 <div class="site-home">
   <div class="site-atmosphere" aria-hidden="true"></div>
@@ -975,6 +1519,13 @@
             [class.hover:text-slate-900]="activeSection !== 'how-it-works'"
             [class.hover:bg-white/60]="activeSection !== 'how-it-works'"
             [attr.aria-current]="activeSection === 'how-it-works' ? 'location' : null">Process</a>
+          <a href="#pricing" (click)="scrollToSection('pricing')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200"
+            [class.text-slate-900]="activeSection === 'pricing'" [class.bg-white]="activeSection === 'pricing'"
+            [class.shadow-xs]="activeSection === 'pricing'" [class.text-slate-600]="activeSection !== 'pricing'"
+            [class.hover:text-slate-900]="activeSection !== 'pricing'"
+            [class.hover:bg-white/60]="activeSection !== 'pricing'"
+            [attr.aria-current]="activeSection === 'pricing' ? 'location' : null">Pricing</a>
           <a href="#projects" (click)="scrollToSection('projects')"
             class="px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200"
             [class.text-slate-900]="activeSection === 'projects'" [class.bg-white]="activeSection === 'projects'"
@@ -998,8 +1549,8 @@
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
             Book Call
           </button>
-          <a href="#contact"
-            class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
+          <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()"
+            class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer">
             <span>Start Project</span>
             <i class="fa-solid fa-arrow-right text-xs"></i>
           </a>
@@ -1023,11 +1574,15 @@
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Services</a>
       <a href="#how-it-works" (click)="closeMobileMenu()"
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Process</a>
+      <a [attr.href]="appPath('/start-a-project')"
+        (click)="$event.preventDefault(); openStartProject(); closeMobileMenu()"
+        class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Pricing</a>
       <a href="#projects" (click)="closeMobileMenu()"
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Projects</a>
       <a href="#about" (click)="closeMobileMenu()"
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">About</a>
-      <a href="#contact" (click)="closeMobileMenu()"
+      <a [attr.href]="appPath('/start-a-project')"
+        (click)="$event.preventDefault(); openStartProject(); closeMobileMenu()"
         class="btn-brand-gradient block text-center px-4 py-2.5 rounded-full text-sm font-bold text-white shadow-md my-2">Start
         Project</a>
       <button (click)="closeMobileMenu(); openBooking()"
@@ -1062,8 +1617,8 @@
 
       <!-- CTA Row -->
       <div class="flex flex-wrap items-center justify-center gap-4 pt-3">
-        <a href="#contact"
-          class="btn-brand-gradient px-8 py-3.5 rounded-full text-white font-extrabold text-sm uppercase tracking-wider shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all inline-flex items-center gap-2">
+        <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()"
+          class="btn-brand-gradient px-8 py-3.5 rounded-full text-white font-extrabold text-sm uppercase tracking-wider shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all inline-flex items-center gap-2 cursor-pointer">
           <span>Start Project</span>
           <i class="fa-solid fa-arrow-right text-xs"></i>
         </a>
@@ -1356,10 +1911,17 @@
           class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll">
           <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 items-center">
             <div class="md:col-span-6 lg:col-span-6 space-y-5">
-              <span
-                class="inline-block px-3 py-1 rounded-full bg-rose-50 text-rose-600 border border-rose-100 text-xs font-bold">
-                Digital Commerce
-              </span>
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-rose-50 text-rose-600 border border-rose-100 text-xs font-bold">
+                  Digital Commerce
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-bold">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                  Interactive Demo &bull; Available as Source Code
+                </span>
+              </div>
               <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
                 <a [attr.href]="appPath('/products/samrique-e-marketplace')"
                   (click)="$event.preventDefault(); openMarketplace()"
@@ -1372,9 +1934,12 @@
                 A digital marketplace for discovering, buying, and selling templates, UI kits, and creative assets, with
                 dedicated experiences for buyers, sellers, and administrators.
               </p>
-              <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium">
-                <strong>Key outcomes:</strong> 18 responsive screens, multi-tier seller wallets, KYC moderation
-                dashboards, Razorpay checkout.
+              <div
+                class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium space-y-1">
+                <div><strong>Key outcomes:</strong> 18 responsive screens, multi-tier seller wallets, KYC moderation
+                  dashboards, Razorpay checkout.</div>
+                <div class="text-teal-700 font-semibold"><i class="fa-solid fa-code text-[11px]"></i> Turnkey codebase
+                  available for commercial license or custom brand sprint.</div>
               </div>
               <div class="flex flex-wrap gap-2 pt-1">
                 <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Flutter
@@ -1420,10 +1985,17 @@
               </div>
             </div>
             <div class="md:col-span-6 lg:col-span-6 space-y-5 order-1 md:order-2 lg:order-2">
-              <span
-                class="inline-block px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 text-xs font-bold">
-                Personal Finance
-              </span>
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 text-xs font-bold">
+                  Personal Finance
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Production App &bull; Source Code Available
+                </span>
+              </div>
               <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
                 <a [attr.href]="appPath('/products/money-manager')"
                   (click)="$event.preventDefault(); openMoneyManager()"
@@ -1436,9 +2008,12 @@
                 Clear everyday finances, at your pace. Record transactions, organize accounts, track spending patterns,
                 and review income vs. expenses.
               </p>
-              <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium">
-                <strong>Key outcomes:</strong> 8 mobile screens, multi-account portfolios, spending analytics, CSV
-                report export.
+              <div
+                class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium space-y-1">
+                <div><strong>Key outcomes:</strong> 8 mobile screens, multi-account portfolios, spending analytics, CSV
+                  report export.</div>
+                <div class="text-emerald-700 font-semibold"><i class="fa-solid fa-shield text-[11px]"></i>
+                  Production-tested offline SQLite architecture ready for white-labeling.</div>
               </div>
               <div class="flex flex-wrap gap-2 pt-1">
                 <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Flutter</span>
@@ -1464,10 +2039,17 @@
           class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll">
           <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 items-center">
             <div class="md:col-span-6 lg:col-span-6 space-y-5">
-              <span
-                class="inline-block px-3 py-1 rounded-full bg-pink-50 text-pink-700 border border-pink-100 text-xs font-bold">
-                Pregnancy &amp; Wellness
-              </span>
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-pink-50 text-pink-700 border border-pink-100 text-xs font-bold">
+                  Pregnancy &amp; Wellness
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-50 text-pink-700 border border-pink-200 text-xs font-bold">
+                  <span class="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse"></span>
+                  Production App &bull; Available as Source Code
+                </span>
+              </div>
               <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
                 <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()"
                   class="hover:text-teal-700 transition-colors inline-flex items-center gap-2">
@@ -1479,9 +2061,12 @@
                 A caring companion app for expectant mothers with week-by-week fruit-size milestones, daily health
                 symptom logs, contractions timer, and community discussions.
               </p>
-              <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium">
-                <strong>Key outcomes:</strong> 11 mobile screens, weekly milestones, kick counter &amp; contractions,
-                hydration &amp; visits.
+              <div
+                class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium space-y-1">
+                <div><strong>Key outcomes:</strong> 11 mobile screens, weekly milestones, kick counter &amp;
+                  contractions, hydration &amp; visits.</div>
+                <div class="text-pink-700 font-semibold"><i class="fa-solid fa-heart-pulse text-[11px]"></i>
+                  Health-grade companion ready for clinical or startup deployment.</div>
               </div>
               <div class="flex flex-wrap gap-2 pt-1">
                 <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Pregnancy
@@ -1517,10 +2102,17 @@
           class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll">
           <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 items-center">
             <div class="md:col-span-6 lg:col-span-6 space-y-5">
-              <span
-                class="inline-block px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-100 text-xs font-bold">
-                On-Demand Mobility
-              </span>
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-100 text-xs font-bold">
+                  On-Demand Mobility
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-bold">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                  Interactive Demo &bull; Turnkey Mobility Codebase
+                </span>
+              </div>
               <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
                 <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()"
                   class="hover:text-teal-700 transition-colors inline-flex items-center gap-2">
@@ -1532,9 +2124,12 @@
                 An agile ride-booking product connecting commuters and captain drivers with real-time GPS dispatch, fare
                 calculation, driver KYC verification, and digital invoicing.
               </p>
-              <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium">
-                <strong>Key outcomes:</strong> 22 mobile screens, live maps &amp; radar, captain KYC pipeline,
-                multi-language support.
+              <div
+                class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium space-y-1">
+                <div><strong>Key outcomes:</strong> 22 mobile screens, live maps &amp; radar, captain KYC pipeline,
+                  multi-language support.</div>
+                <div class="text-amber-700 font-semibold"><i class="fa-solid fa-map-location-dot text-[11px]"></i>
+                  Complete rider + captain dual codebase available for deployment.</div>
               </div>
               <div class="flex flex-wrap gap-2 pt-1">
                 <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Real-time
@@ -1651,113 +2246,163 @@
           </div>
         </article>
       </div>
-    </div>
-  </section>
 
-  <!-- Contact & Consultation Section -->
-  <section id="contact" class="py-20 relative">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <!-- Left Column -->
-        <div class="lg:col-span-7 space-y-6 reveal-on-scroll">
-          <h2 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight uppercase">
-            LET'S BUILD SOMETHING AMAZING TOGETHER.
-          </h2>
-          <p class="text-slate-600 text-base leading-relaxed max-w-xl">
-            Have an exciting mobile application or digital product in mind? We'd love to hear about it. Send us an email
-            or schedule a 30-minute discovery consultation.
-          </p>
-          <div>
-            <button (click)="openBooking()"
-              class="btn-brand-gradient px-8 py-4 rounded-full text-white font-extrabold text-sm uppercase tracking-wider shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all inline-flex items-center gap-2">
-              <span>START A CONVERSATION TODAY</span>
-              <i class="fa-solid fa-arrow-right text-xs"></i>
-            </button>
-          </div>
-          <div class="space-y-3 pt-2">
-            <div class="flex items-center gap-3 text-sm font-semibold text-slate-700">
-              <i class="fa-solid fa-circle-check text-rose-500 text-base"></i> Tell us your budget and timeline
+      <!-- Founder & Engineering Team Trust Card -->
+      <div class="mt-16 bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/90 shadow-sm reveal-on-scroll">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-4 flex flex-col items-center text-center lg:items-start lg:text-left space-y-4">
+            <div class="w-24 h-24 rounded-2xl bg-gradient-to-tr from-teal-500 via-indigo-500 to-rose-500 p-1 shadow-lg">
+              <div
+                class="w-full h-full rounded-[14px] bg-slate-900 flex items-center justify-center text-white text-3xl font-black">
+                SQ
+              </div>
             </div>
-            <div class="flex items-center gap-3 text-sm font-semibold text-slate-700">
-              <i class="fa-solid fa-circle-check text-rose-500 text-base"></i> Get a free 2-day discovery roadmap
+            <div>
+              <h3 class="text-xl font-extrabold text-slate-900">Musaddique &amp; Studio Team</h3>
+              <p class="text-xs font-bold text-teal-600 uppercase tracking-wider mt-0.5">Founders &bull; Lead Flutter
+                Architects</p>
+            </div>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              Specialized cross-platform engineers shipping performant Dart code, intuitive UX, and clean systems
+              architecture.
+            </p>
+          </div>
+
+          <div class="lg:col-span-8 space-y-4">
+            <h4 class="text-lg sm:text-xl font-bold text-slate-900">
+              Why work with an independent studio over a traditional agency?
+            </h4>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              At typical software agencies, you pitch the partners and your app is quietly handed off to junior
+              developers while you pay for their office rent and layers of account managers. At
+              <strong>Samrique</strong>, you collaborate directly with senior Flutter developers who architect the code,
+              write the tests, and deploy your software.
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-100">
+              <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 text-center">
+                <div class="text-2xl font-black text-slate-900">4</div>
+                <div class="text-[11px] font-semibold text-slate-500 uppercase mt-0.5">Production Systems</div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 text-center">
+                <div class="text-2xl font-black text-teal-600">60+</div>
+                <div class="text-[11px] font-semibold text-slate-500 uppercase mt-0.5">Custom Screens</div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 text-center">
+                <div class="text-2xl font-black text-slate-900">60 FPS</div>
+                <div class="text-[11px] font-semibold text-slate-500 uppercase mt-0.5">Jank-Free Native</div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 text-center">
+                <div class="text-2xl font-black text-rose-600">100%</div>
+                <div class="text-[11px] font-semibold text-slate-500 uppercase mt-0.5">Full IP Handover</div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Right Column: Contact Card -->
-        <div class="lg:col-span-5 reveal-on-scroll">
+      <!-- Testimonials / Social Proof Section -->
+      <div class="mt-16 space-y-8 reveal-on-scroll">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs font-extrabold text-rose-600 tracking-widest uppercase">Endorsements</span>
+          <h3 class="text-2xl sm:text-3xl font-black text-slate-900">What founders &amp; partners say</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Testimonial 1 -->
           <div
-            class="bg-white rounded-3xl p-8 border border-slate-200/90 shadow-xl space-y-6 max-w-md w-full mx-auto lg:mx-0">
-            <h3 class="text-xs font-black tracking-widest uppercase text-slate-400">
-              GET IN TOUCH
-            </h3>
-            <div class="space-y-4">
-              <a href="mailto:samrique.in@gmail.com" class="flex items-start gap-4 text-left group">
-                <div
-                  class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 group-hover:bg-rose-50 group-hover:text-rose-600 group-hover:border-rose-100 transition-colors">
-                  <i class="fa-solid fa-envelope"></i>
-                </div>
-                <div>
-                  <div class="text-xs font-medium text-slate-400">Direct Email</div>
-                  <div class="text-sm font-bold text-slate-800 group-hover:text-rose-600 transition-colors">
-                    samrique.in@gmail.com</div>
-                </div>
-              </a>
-
-              <div class="flex items-start gap-4 text-left">
-                <div
-                  class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600">
-                  <i class="fa-solid fa-clock"></i>
-                </div>
-                <div>
-                  <div class="text-xs font-medium text-slate-400">Working Hours</div>
-                  <div class="text-sm font-bold text-slate-800">Mon - Fri, 9am - 7pm IST</div>
-                </div>
+            class="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex text-amber-400 text-xs gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
-
-              <div class="flex items-start gap-4 text-left">
-                <div
-                  class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600">
-                  <i class="fa-solid fa-location-dot"></i>
-                </div>
-                <div>
-                  <div class="text-xs font-medium text-slate-400">Studio Location</div>
-                  <div class="text-sm font-bold text-slate-800">India · Remote Worldwide</div>
-                </div>
+              <p class="text-slate-600 text-xs sm:text-sm leading-relaxed italic">
+                &ldquo;Samrique took our complex multi-vendor commerce concept and turned it into an ultra-responsive
+                Flutter app in 4 weeks. Their code is so well structured that our backend team had zero integration
+                friction.&rdquo;
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+              <div
+                class="w-9 h-9 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-xs">
+                AK
               </div>
-
-              <div class="flex items-start gap-4 text-left">
-                <div
-                  class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-emerald-600">
-                  <i class="fa-solid fa-circle-check"></i>
-                </div>
-                <div>
-                  <div class="text-xs font-medium text-slate-400">Fast Response</div>
-                  <div class="text-sm font-bold text-slate-800">Guaranteed response &lt;24 hours</div>
-                </div>
+              <div>
+                <div class="text-xs font-bold text-slate-900">Arjun K.</div>
+                <div class="text-[11px] text-slate-500">Co-Founder, E-Commerce Platform</div>
               </div>
             </div>
+          </div>
 
-            <!-- Social Links -->
+          <!-- Testimonial 2 -->
+          <div
+            class="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex text-amber-400 text-xs gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-slate-600 text-xs sm:text-sm leading-relaxed italic">
+                &ldquo;Zipi's live radar dispatch and turn-by-turn map animations run buttery-smooth at 60fps on even
+                budget Android phones. Having direct access to the actual builder saved us months of agency
+                meetings.&rdquo;
+              </p>
+            </div>
             <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
-              <a href="https://github.com/samrique" target="_blank" rel="noopener noreferrer"
-                class="w-9 h-9 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:border-slate-300 transition-colors"
-                aria-label="GitHub">
-                <i class="fa-brands fa-github"></i>
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                class="w-9 h-9 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:border-slate-300 transition-colors"
-                aria-label="LinkedIn">
-                <i class="fa-brands fa-linkedin-in"></i>
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-                class="w-9 h-9 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:border-slate-300 transition-colors"
-                aria-label="Twitter">
-                <i class="fa-brands fa-x-twitter"></i>
-              </a>
+              <div
+                class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-xs">
+                RS
+              </div>
+              <div>
+                <div class="text-xs font-bold text-slate-900">Rohit S.</div>
+                <div class="text-[11px] text-slate-500">Product Lead, Mobility Logistics</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div
+            class="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex text-amber-400 text-xs gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                  class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-slate-600 text-xs sm:text-sm leading-relaxed italic">
+                &ldquo;The fixed-price sprint model is the only way early-stage startups should build. Clear milestones
+                every Friday on TestFlight, zero hourly billing games, and pristine Dart code. Outstanding
+                experience.&rdquo;
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+              <div
+                class="w-9 h-9 rounded-full bg-rose-100 text-rose-700 font-bold flex items-center justify-center text-xs">
+                PD
+              </div>
+              <div>
+                <div class="text-xs font-bold text-slate-900">Pooja D.</div>
+                <div class="text-[11px] text-slate-500">Founder, HealthTech Ventures</div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- App Store Readiness & Verification Badges -->
+      <div
+        class="mt-12 py-6 px-8 rounded-2xl bg-white border border-slate-200/90 flex flex-wrap items-center justify-around gap-6 text-xs font-bold text-slate-600 reveal-on-scroll shadow-xs">
+        <span class="inline-flex items-center gap-2">
+          <i class="fa-brands fa-apple text-slate-900 text-base"></i> App Store Ready
+        </span>
+        <span class="inline-flex items-center gap-2">
+          <i class="fa-brands fa-google-play text-slate-900 text-base"></i> Google Play Ready
+        </span>
+        <span class="inline-flex items-center gap-2">
+          <i class="fa-solid fa-code text-teal-600 text-base"></i> Clean Architecture (Provider &amp; GetX)
+        </span>
+        <span class="inline-flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-rose-600 text-base"></i> Hardware Keystore &amp; KeyChain Encryption
+        </span>
       </div>
     </div>
   </section>
@@ -1806,8 +2451,12 @@
           </ul>
         </div>
       </div>
-      <div class="pt-8 border-t border-slate-100 flex flex-wrap justify-between items-center text-xs text-slate-400">
-        <span>&copy; {{ currentYear }} Samrique. All rights reserved.</span>
+      <div
+        class="pt-8 border-t border-slate-100 flex flex-wrap justify-between items-center text-xs text-slate-400 gap-4">
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved. &bull; <button type="button"
+            (click)="openPrivacyModal()" class="hover:underline hover:text-slate-700 transition-colors">Privacy
+            Policy</button> &bull; <button type="button" (click)="openTermsModal()"
+            class="hover:underline hover:text-slate-700 transition-colors">Terms of Service</button></span>
         <span>Crafted with precision &amp; performance.</span>
       </div>
     </div>
@@ -1955,6 +2604,263 @@
 </div>
 }
 
+<!-- Project Enquiry Modal (Exact Image 1 design in Image 2 pop-up window) -->
+@if (enquiryOpen) {
+<div class="booking-overlay enquiry-overlay" (click)="closeEnquiry()">
+  <div class="booking-dialog enquiry-dialog" (click)="$event.stopPropagation()">
+    <button type="button" class="booking-close" (click)="closeEnquiry()" aria-label="Close enquiry dialog">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="enquiry-modal">
+      <div class="side">
+        <h2>Tell us about your app</h2>
+        <p>Share a few details and we will reply within 24 hours with a scoped roadmap and a fixed quote.</p>
+        <ul>
+          <li><b>Email</b>samrique.in@gmail.com</li>
+          <li><b>Working hours</b>Mon–Fri, 9am–7pm IST</li>
+          <li><b>Response time</b>Within 24 hours</li>
+        </ul>
+        <div class="enquiry-call-row">
+          <button type="button" (click)="switchToBookingModal()" class="prefer-call-btn">
+            <i class="fa-regular fa-calendar-check text-emerald-500"></i>
+            <span>Prefer a call? Book 30-min discovery</span>
+          </button>
+        </div>
+      </div>
+
+      <form class="enquiry-form" (submit)="handleContactSubmit($event)" novalidate>
+        <div class="two">
+          <label>Your name
+            <input name="name" required autocomplete="name" placeholder="Musaddique or your team"
+              [(ngModel)]="contactForm.name">
+          </label>
+          <label>Email
+            <input name="email" type="email" required autocomplete="email" placeholder="you@company.com"
+              [(ngModel)]="contactForm.email">
+          </label>
+        </div>
+        <div class="two">
+          <label>Phone or WhatsApp <span class="opt">(optional)</span>
+            <input name="phone" type="tel" autocomplete="tel" placeholder="+91 98765 43210"
+              [(ngModel)]="contactForm.phone">
+          </label>
+          <label>Company <span class="opt">(optional)</span>
+            <input name="company" autocomplete="organization" placeholder="Startup or company name"
+              [(ngModel)]="contactForm.company">
+          </label>
+        </div>
+        <div class="two">
+          <label>Project type
+            <select name="project_type" required [(ngModel)]="contactForm.project_type">
+              <option value="">Choose one</option>
+              <option>New app from scratch</option>
+              <option>MVP to test an idea</option>
+              <option>Redesign or fix an existing app</option>
+              <option>Add features to my app</option>
+              <option>Not sure yet</option>
+            </select>
+          </label>
+          <label>Package you are considering
+            <select name="package" [(ngModel)]="contactForm.package">
+              <option value="">Not sure yet</option>
+              <option>Starter MVP</option>
+              <option>Standard</option>
+              <option>Premium</option>
+              <option>Custom</option>
+            </select>
+          </label>
+        </div>
+        <div class="two">
+          <label>Budget
+            <select name="budget" required [(ngModel)]="contactForm.budget">
+              <option value="">Choose a range</option>
+              <option>₹1–1.5 lakh</option>
+              <option>₹1.5–2.5 lakh</option>
+              <option>₹2.5–3 lakh</option>
+              <option>₹3–6 lakh</option>
+              <option>₹6 lakh and above</option>
+              <option>Need guidance</option>
+            </select>
+          </label>
+          <label>Timeline
+            <select name="timeline" required [(ngModel)]="contactForm.timeline">
+              <option value="">Choose one</option>
+              <option>As soon as possible</option>
+              <option>Within 1 month</option>
+              <option>1–3 months</option>
+              <option>Flexible</option>
+            </select>
+          </label>
+        </div>
+        <label>What do you want to build?
+          <textarea name="details" required placeholder="Who is it for, and what should it do?"
+            [(ngModel)]="contactForm.details"></textarea>
+        </label>
+        <input class="hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+          [(ngModel)]="contactForm._gotcha">
+
+        @if (contactStatus === 'ok') {
+        <div class="msg ok">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>{{ contactMessage || 'Thank you! We will reply within 24 hours.' }}</span>
+        </div>
+        }
+        @if (contactStatus === 'err') {
+        <div class="msg err">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>{{ contactMessage || 'Something went wrong.' }}</span>
+          @if (mailtoFallbackUrl) {
+          <div class="pt-2">
+            <a [href]="mailtoFallbackUrl" class="font-bold underline">Click here to send direct email</a>
+          </div>
+          }
+        </div>
+        }
+
+        <button type="submit" class="send-btn" [disabled]="contactSending">
+          @if (contactSending) {
+          <i class="fa-solid fa-spinner fa-spin"></i>
+          <span>Sending…</span>
+          } @else {
+          <span>Send enquiry</span>
+          <i class="fa-solid fa-arrow-right"></i>
+          }
+        </button>
+        <p class="fine">We only use your details to reply to this enquiry.</p>
+      </form>
+    </div>
+  </div>
+</div>
+}
+
+<!-- Privacy Policy Modal -->
+@if (showPrivacyModal) {
+<div class="booking-overlay" (click)="closePrivacyModal()">
+  <div
+    class="bg-white rounded-3xl p-6 sm:p-10 max-w-2xl w-full mx-4 max-h-[85vh] overflow-y-auto shadow-2xl border border-slate-200 relative animate-fadeIn"
+    (click)="$event.stopPropagation()">
+    <button type="button"
+      class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition-colors"
+      (click)="closePrivacyModal()" aria-label="Close dialog">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="space-y-4">
+      <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">Legal &bull; Privacy Protection</span>
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Privacy Policy</h2>
+      <p class="text-xs text-slate-400">Effective Date: November 2026</p>
+
+      <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">1. Information We Collect</h3>
+          <p>When you contact Samrique via our inquiry form, booking consultation calendar, or direct email, we collect
+            your name, email address, project requirements, budget, and timeline. This information is used strictly to
+            respond to your project request and provide sprint estimates.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">2. How We Use Your Data</h3>
+          <p>We use your information exclusively for direct communication regarding custom software development sprints,
+            architectural consultations, and commercial source code licensing. We will never sell, rent, trade, or share
+            your contact or project details with third parties.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">3. Local Storage &amp; Cookies</h3>
+          <p>Our website utilizes local browser storage solely to preserve functional user preferences (such as
+            light/dark mode preview modes and single-page navigation). We do not deploy invasive third-party tracking
+            cookies or behavioral profile advertising.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">4. Data Security &amp; Confidentiality</h3>
+          <p>We treat all client project ideas and specifications with strict confidentiality. All communication
+            channels employ industry-standard TLS/SSL encryption. Non-disclosure agreements (NDAs) are available upon
+            request prior to project kick-off.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">5. Inquiries &amp; Deletion Requests</h3>
+          <p>You may request the immediate deletion of your contact records at any time by contacting our studio team at
+            <a href="mailto:samrique.in@gmail.com"
+              class="text-teal-600 font-bold underline">samrique.in&#64;gmail.com</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-5 border-t border-slate-100 flex justify-end">
+        <button type="button" (click)="closePrivacyModal()"
+          class="px-6 py-2.5 rounded-full bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition-all">
+          Close Policy
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- Terms of Service Modal -->
+@if (showTermsModal) {
+<div class="booking-overlay" (click)="closeTermsModal()">
+  <div
+    class="bg-white rounded-3xl p-6 sm:p-10 max-w-2xl w-full mx-4 max-h-[85vh] overflow-y-auto shadow-2xl border border-slate-200 relative animate-fadeIn"
+    (click)="$event.stopPropagation()">
+    <button type="button"
+      class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition-colors"
+      (click)="closeTermsModal()" aria-label="Close dialog">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="space-y-4">
+      <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">Commercial Terms</span>
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Terms of Service</h2>
+      <p class="text-xs text-slate-400">Effective Date: November 2026</p>
+
+      <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">1. Fixed-Price Sprints &amp; Scope</h3>
+          <p>Samrique provides fixed-price Flutter mobile development and digital product sprints. Each sprint is
+            executed under a defined Statement of Work (SOW) outlining clear milestones, deliverables, weekly
+            TestFlight/APK test builds, and delivery dates.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">2. 100% Intellectual Property (IP) Transfer</h3>
+          <p>Upon final settlement of sprint invoices, full and unrestricted intellectual property rights, source code,
+            Git repositories, architectural schemas, and visual assets are completely transferred to the client with
+            zero royalty claims or ongoing developer lock-in.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">3. Pre-Built Codebase Commercial Licensing</h3>
+          <p>Clients purchasing commercial licenses to Samrique's pre-built platforms (Samrique E-Marketplace, Zipi Bike
+            Taxi, Samrique Money Manager, or Samrique Mama) receive perpetual, worldwide commercial rights to modify,
+            deploy, brand, and distribute the application for their business venture.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">4. 30-Day Post-Launch Warranty</h3>
+          <p>All custom sprint builds include a complimentary 30-day post-launch warranty period during which our team
+            remediates any functional bugs or regressions within the original sprint scope at zero additional cost.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">5. Governing Law</h3>
+          <p>These terms and all studio agreements are governed by the commercial laws of India, with mutual good-faith
+            arbitration as the dispute resolution standard.</p>
+        </div>
+      </div>
+
+      <div class="pt-5 border-t border-slate-100 flex justify-end">
+        <button type="button" (click)="closeTermsModal()"
+          class="px-6 py-2.5 rounded-full bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition-all">
+          Close Terms
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
 <!-- Interactive Screen Lightbox Modal -->
 @if (activeModalScreen) {
 <div class="modal open" id="modal" role="dialog" aria-modal="true" (click)="closeScreenModal()">
@@ -1986,6 +2892,133 @@
       <div class="nav">
         <button type="button" (click)="prevModalScreen()">← Previous</button>
         <button type="button" class="p" (click)="nextModalScreen()">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- Privacy Policy Modal -->
+@if (showPrivacyModal) {
+<div class="booking-overlay" (click)="closePrivacyModal()">
+  <div
+    class="bg-white rounded-3xl p-6 sm:p-10 max-w-2xl w-full mx-4 max-h-[85vh] overflow-y-auto shadow-2xl border border-slate-200 relative animate-fadeIn"
+    (click)="$event.stopPropagation()">
+    <button type="button"
+      class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition-colors"
+      (click)="closePrivacyModal()" aria-label="Close dialog">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="space-y-4">
+      <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">Legal &bull; Privacy Protection</span>
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Privacy Policy</h2>
+      <p class="text-xs text-slate-400">Effective Date: November 2026</p>
+
+      <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">1. Information We Collect</h3>
+          <p>When you contact Samrique via our inquiry form, booking consultation calendar, or direct email, we collect
+            your name, email address, project requirements, budget, and timeline. This information is used strictly to
+            respond to your project request and provide sprint estimates.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">2. How We Use Your Data</h3>
+          <p>We use your information exclusively for direct communication regarding custom software development sprints,
+            architectural consultations, and commercial source code licensing. We will never sell, rent, trade, or share
+            your contact or project details with third parties.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">3. Local Storage &amp; Cookies</h3>
+          <p>Our website utilizes local browser storage solely to preserve functional user preferences (such as
+            light/dark mode preview modes and single-page navigation). We do not deploy invasive third-party tracking
+            cookies or behavioral profile advertising.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">4. Data Security &amp; Confidentiality</h3>
+          <p>We treat all client project ideas and specifications with strict confidentiality. All communication
+            channels employ industry-standard TLS/SSL encryption. Non-disclosure agreements (NDAs) are available upon
+            request prior to project kick-off.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">5. Inquiries &amp; Deletion Requests</h3>
+          <p>You may request the immediate deletion of your contact records at any time by contacting our studio team at
+            <a href="mailto:samrique.in@gmail.com"
+              class="text-teal-600 font-bold underline">samrique.in&#64;gmail.com</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-5 border-t border-slate-100 flex justify-end">
+        <button type="button" (click)="closePrivacyModal()"
+          class="px-6 py-2.5 rounded-full bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition-all">
+          Close Policy
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- Terms of Service Modal -->
+@if (showTermsModal) {
+<div class="booking-overlay" (click)="closeTermsModal()">
+  <div
+    class="bg-white rounded-3xl p-6 sm:p-10 max-w-2xl w-full mx-4 max-h-[85vh] overflow-y-auto shadow-2xl border border-slate-200 relative animate-fadeIn"
+    (click)="$event.stopPropagation()">
+    <button type="button"
+      class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition-colors"
+      (click)="closeTermsModal()" aria-label="Close dialog">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="space-y-4">
+      <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">Commercial Terms</span>
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Terms of Service</h2>
+      <p class="text-xs text-slate-400">Effective Date: November 2026</p>
+
+      <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">1. Fixed-Price Sprints &amp; Scope</h3>
+          <p>Samrique provides fixed-price Flutter mobile development and digital product sprints. Each sprint is
+            executed under a defined Statement of Work (SOW) outlining clear milestones, deliverables, weekly
+            TestFlight/APK test builds, and delivery dates.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">2. 100% Intellectual Property (IP) Transfer</h3>
+          <p>Upon final settlement of sprint invoices, full and unrestricted intellectual property rights, source code,
+            Git repositories, architectural schemas, and visual assets are completely transferred to the client with
+            zero royalty claims or ongoing developer lock-in.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">3. Pre-Built Codebase Commercial Licensing</h3>
+          <p>Clients purchasing commercial licenses to Samrique's pre-built platforms (Samrique E-Marketplace, Zipi Bike
+            Taxi, Samrique Money Manager, or Samrique Mama) receive perpetual, worldwide commercial rights to modify,
+            deploy, brand, and distribute the application for their business venture.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">4. 30-Day Post-Launch Warranty</h3>
+          <p>All custom sprint builds include a complimentary 30-day post-launch warranty period during which our team
+            remediates any functional bugs or regressions within the original sprint scope at zero additional cost.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">5. Governing Law</h3>
+          <p>These terms and all studio agreements are governed by the commercial laws of India, with mutual good-faith
+            arbitration as the dispute resolution standard.</p>
+        </div>
+      </div>
+
+      <div class="pt-5 border-t border-slate-100 flex justify-end">
+        <button type="button" (click)="closeTermsModal()"
+          class="px-6 py-2.5 rounded-full bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition-all">
+          Close Terms
+        </button>
       </div>
     </div>
   </div>

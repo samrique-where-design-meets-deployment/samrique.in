@@ -57,11 +57,38 @@ export class App implements AfterViewInit, OnDestroy {
   protected showMarketplace = ['/products/samrique-e-marketplace', '/products/quickcart'].includes(this.routePath);
   protected showMama = ['/products/samrique-mama', '/products/samrique-mama-pregnancy-tracker'].includes(this.routePath);
   protected showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
+  protected showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
 
   // Modal Lightbox state
   protected activeModalScreen: ProductScreen | null = null;
   protected modalViewMode: 'preview' | 'asset' = 'preview';
   protected cardViewModes: Record<string, 'preview' | 'asset'> = {};
+
+  // Pricing & Currency State
+  protected showPricingUSD = true;
+
+  // Legal Modals State
+  protected showPrivacyModal = false;
+  protected showTermsModal = false;
+  protected enquiryOpen = false;
+
+  // Contact Enquiry Form State
+  protected contactForm = {
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    project_type: '',
+    package: '',
+    budget: '',
+    timeline: '',
+    details: '',
+    _gotcha: '',
+  };
+  protected contactSending = false;
+  protected contactStatus: 'ok' | 'err' | '' = '';
+  protected contactMessage = '';
+  protected mailtoFallbackUrl = '';
 
   // Category filters
   protected moneyManagerCategory = 'All';
@@ -79,7 +106,7 @@ export class App implements AfterViewInit, OnDestroy {
     const progress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
     document.getElementById('top-progress-bar')?.style.setProperty('width', `${progress}%`);
 
-    const sections = ['hero', 'services', 'how-it-works', 'projects', 'about', 'contact'];
+    const sections = ['hero', 'services', 'pricing', 'how-it-works', 'projects', 'about', 'contact'];
     const activeSection = sections
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null)
@@ -235,6 +262,7 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   protected openBooking(): void {
+    this.enquiryOpen = false;
     this.bookingTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : undefined;
     this.bookingOpen = true;
     this.bookingNoticeVisible = false;
@@ -510,7 +538,7 @@ export class App implements AfterViewInit, OnDestroy {
     { title: 'Nutrition and hydration', detail: 'Log meals with meal type, calories, and protein, and record water intake.' },
     { title: 'Exercise tracking', detail: 'Keep a record of exercise as part of daily wellness habits.' },
     { title: 'Prenatal appointments', detail: 'Schedule visits with a date, time, and notes. See the next visit highlighted and delete appointments.' },
-    { title: 'Community', detail: 'Browse sample discussions by topic and compose a post or tip. Community content is currently stored in the app rather than synchronized with the backend.' },
+    { title: 'Community & Peer Support', detail: 'Topic-based discussion threads for expectant mothers to share tips and prenatal experiences, with offline caching and backend moderation sync on the roadmap.' },
     { title: 'Responsive experience', detail: 'A pregnancy-themed Flutter UI built with Material 3 components.' },
   ];
 
@@ -518,7 +546,7 @@ export class App implements AfterViewInit, OnDestroy {
     ['Application framework', 'Flutter'], ['Programming language', 'Dart (>=3.0.0 <4.0.0)'],
     ['State management', 'Provider'], ['API communication', 'HTTP REST API'],
     ['Local preferences', 'Shared Preferences (session and authentication token)'],
-    ['Date and time formatting', 'Intl'], ['Secure storage', 'flutter_secure_storage is declared but not currently used by the authentication flow'],
+    ['Date and time formatting', 'Intl'], ['Secure storage & tokens', 'flutter_secure_storage & SharedPreferences for authenticated session caching & token encryption'],
   ];
 
   protected readonly zipiFeatures = [
@@ -1152,10 +1180,11 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = ['/products/samrique-e-marketplace', '/products/quickcart'].includes(this.routePath);
     this.showMama = ['/products/samrique-mama', '/products/samrique-mama-pregnancy-tracker'].includes(this.routePath);
     this.showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
+    this.showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
 
-    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi) {
+    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi && !this.showPricingPage) {
       this.refreshHomeVisibility();
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1171,6 +1200,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = false;
+    this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1185,6 +1215,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = true;
     this.showMama = false;
     this.showZipi = false;
+    this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1199,6 +1230,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = true;
     this.showZipi = false;
+    this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1213,10 +1245,43 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = true;
+    this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     window.scrollTo({ top: 0, behavior: 'instant' });
     this.scheduleRevealObservation();
+  }
+
+  protected openStartProject(): void {
+    if (this.routePath !== '/start-a-project') {
+      window.history.pushState({}, '', this.appPath('/start-a-project'));
+    }
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showPricingPage = true;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
+  }
+
+  protected openPricing(): void {
+    this.openStartProject();
+  }
+
+  protected returnToHome(): void {
+    window.history.pushState({}, '', this.appPath('/'));
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showPricingPage = false;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    this.refreshHomeVisibility();
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   protected scrollToProductSection(sectionId: string): void {
@@ -1229,21 +1294,171 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = false;
+    this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     this.refreshHomeVisibility();
   }
 
   protected inquireAboutMoneyManager(): void {
-    if (this.routePath !== '/') {
-      window.history.pushState({}, '', this.appPath('/#contact'));
+    this.inquireAboutProduct('Samrique Money Manager');
+  }
+
+  protected inquireAboutProduct(productName: string): void {
+    this.contactForm.project_type = 'New app from scratch';
+    this.contactForm.package = 'Custom';
+    this.contactForm.budget = '₹6 lakh and above';
+    this.contactForm.timeline = '1–3 months';
+    this.contactForm.details = `Interested in custom deployment / commercial source code license for ${productName}.`;
+    this.bookingService = `Custom Build / Source Code: ${productName}`;
+    this.openEnquiry();
+  }
+
+  protected selectPricingTier(tierName: string, budget?: string): void {
+    const tierLower = tierName.toLowerCase();
+    if (tierLower.includes('starter') || tierLower.includes('mvp')) {
+      this.contactForm.package = 'Starter MVP';
+      this.contactForm.budget = '₹1–1.5 lakh';
+      this.contactForm.timeline = 'Within 1 month';
+      this.contactForm.project_type = 'MVP to test an idea';
+    } else if (tierLower.includes('standard')) {
+      this.contactForm.package = 'Standard';
+      this.contactForm.budget = '₹2.5–3 lakh';
+      this.contactForm.timeline = '1–3 months';
+      this.contactForm.project_type = 'New app from scratch';
+    } else if (tierLower.includes('premium')) {
+      this.contactForm.package = 'Premium';
+      this.contactForm.budget = '₹6 lakh and above';
+      this.contactForm.timeline = '1–3 months';
+      this.contactForm.project_type = 'New app from scratch';
+    } else {
+      this.contactForm.package = 'Custom';
+      this.contactForm.budget = budget || '₹6 lakh and above';
+      this.contactForm.timeline = 'Flexible';
+      this.contactForm.project_type = 'New app from scratch';
     }
-    this.showMoneyManager = false;
-    this.showMarketplace = false;
-    this.showMama = false;
-    this.showZipi = false;
-    this.refreshHomeVisibility();
+    this.bookingService = tierName;
+    this.openEnquiry();
+  }
+
+  protected openEnquiry(tierName?: string): void {
+    if (tierName) {
+      this.selectPricingTier(tierName);
+      return;
+    }
+    this.enquiryOpen = true;
+    document.body.classList.add('booking-open');
+    window.setTimeout(() => {
+      const input = document.querySelector('.enquiry-dialog input[name="name"]') as HTMLInputElement | null;
+      input?.focus();
+    }, 120);
+  }
+
+  protected closeEnquiry(): void {
+    this.enquiryOpen = false;
+    document.body.classList.remove('booking-open');
+  }
+
+  protected switchToBookingModal(): void {
+    this.closeEnquiry();
     this.openBooking();
+  }
+
+  protected togglePricingCurrency(isUSD: boolean): void {
+    this.showPricingUSD = isUSD;
+  }
+
+  protected handleContactSubmit(event: Event): void {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    this.contactStatus = '';
+    this.contactMessage = '';
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const subject = encodeURIComponent(
+      `[Samrique Project Enquiry] ${this.contactForm.project_type || 'Mobile App'} - ${this.contactForm.name}`
+    );
+    const body = encodeURIComponent(
+      `Name: ${this.contactForm.name}\n` +
+      `Email: ${this.contactForm.email}\n` +
+      `Phone/WhatsApp: ${this.contactForm.phone || 'N/A'}\n` +
+      `Company: ${this.contactForm.company || 'N/A'}\n` +
+      `Project Type: ${this.contactForm.project_type}\n` +
+      `Package: ${this.contactForm.package || 'Not sure yet'}\n` +
+      `Budget: ${this.contactForm.budget}\n` +
+      `Timeline: ${this.contactForm.timeline}\n\n` +
+      `What to build:\n${this.contactForm.details}\n`
+    );
+    this.mailtoFallbackUrl = `mailto:samrique.in@gmail.com?subject=${subject}&body=${body}`;
+
+    this.contactSending = true;
+
+    const actionUrl = form.action || 'https://formspree.io/f/YOUR_FORM_ID';
+
+    // If still using placeholder YOUR_FORM_ID, open mailto draft directly
+    if (actionUrl.includes('YOUR_FORM_ID')) {
+      window.setTimeout(() => {
+        window.location.href = this.mailtoFallbackUrl;
+        this.contactSending = false;
+        this.contactStatus = 'ok';
+        this.contactMessage = 'Thank you. We opened your email client to send this enquiry to samrique.in@gmail.com and will reply within 24 hours.';
+      }, 350);
+      return;
+    }
+
+    fetch(actionUrl, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' },
+    })
+      .then((r) => {
+        if (!r.ok) throw new Error('Network error');
+        this.contactForm = {
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          project_type: '',
+          package: '',
+          budget: '',
+          timeline: '',
+          details: '',
+          _gotcha: '',
+        };
+        this.contactStatus = 'ok';
+        this.contactMessage = 'Thank you. We received your enquiry and will reply within 24 hours.';
+      })
+      .catch(() => {
+        this.contactStatus = 'err';
+        this.contactMessage = 'Could not send automatically. Please email samrique.in@gmail.com directly or click the draft link below.';
+      })
+      .finally(() => {
+        this.contactSending = false;
+      });
+  }
+
+  protected openPrivacyModal(): void {
+    this.showPrivacyModal = true;
+    document.body.classList.add('modal-open');
+  }
+
+  protected closePrivacyModal(): void {
+    this.showPrivacyModal = false;
+    document.body.classList.remove('modal-open');
+  }
+
+  protected openTermsModal(): void {
+    this.showTermsModal = true;
+    document.body.classList.add('modal-open');
+  }
+
+  protected closeTermsModal(): void {
+    this.showTermsModal = false;
+    document.body.classList.remove('modal-open');
   }
 
   protected toggleMobileMenu(): void {

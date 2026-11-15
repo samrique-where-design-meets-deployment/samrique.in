@@ -2,21 +2,118 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
-    <title>Samrique | Mobile Apps &amp; Digital Product Studio</title>
+    <title>Samrique | Flutter App Studio — From Sketch to Launch</title>
     <meta
       name="description"
-      content="Samrique shapes and builds mobile apps and digital products, from clear user journeys and interface design to Flutter engineering and integrations."
+      content="Samrique is a boutique Flutter mobile studio taking ambitious app ideas from sketch to launch. Transparent fixed-price sprints, clean Dart architecture, and full source code ownership."
     />
+    <meta
+      name="keywords"
+      content="Flutter studio, mobile app development, Flutter developer, Dart 3, iOS app developer, Android app developer, MVP sprint, fixed price app development, Flutter agency, cross-platform apps, Samrique"
+    />
+    <meta name="author" content="Samrique Flutter Studio" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://samrique.in/" />
+
+    <!-- Favicons and App Icons -->
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <meta name="theme-color" content="#f8fafc" />
-    <meta property="og:title" content="Samrique | Mobile Apps &amp; Digital Product Studio" />
-    <meta property="og:description" content="Samrique shapes and builds mobile apps and digital products, from clear user journeys and interface design to Flutter engineering and integrations." />
+    <link rel="icon" type="image/png" sizes="32x32" href="samrique-logo.png" />
+    <link rel="apple-touch-icon" href="samrique-logo.png" />
+    <meta name="theme-color" content="#090D16" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="samrique-logo.png" />
+    <meta property="og:url" content="https://samrique.in/" />
+    <meta property="og:site_name" content="Samrique" />
+    <meta property="og:title" content="Samrique | Flutter App Studio — From Sketch to Launch" />
+    <meta
+      property="og:description"
+      content="Bespoke Flutter app development & digital products. 4 production systems engineered: Marketplace, Ride-Booking, Money Manager & Pregnancy Tracker. Fixed-price sprints."
+    />
+    <meta property="og:image" content="https://samrique.in/og-image.png" />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="900" />
+    <meta property="og:image:alt" content="Samrique Flutter Studio — 4 Products Built From Sketch to Launch" />
+
+    <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Samrique | Mobile Apps &amp; Digital Product Studio" />
-    <meta name="twitter:description" content="Bespoke Flutter Development &amp; Digital Products." />
-    <meta name="twitter:image" content="samrique-logo.png" />
+    <meta name="twitter:url" content="https://samrique.in/" />
+    <meta name="twitter:title" content="Samrique | Flutter App Studio — From Sketch to Launch" />
+    <meta
+      name="twitter:description"
+      content="Bespoke Flutter app development. 4 production apps shipped. Fixed-price sprints with zero agency overhead."
+    />
+    <meta name="twitter:image" content="https://samrique.in/og-image.png" />
+
+    <!-- Schema.org JSON-LD Structured Data for Rich Search Results -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://samrique.in/#organization",
+            "name": "Samrique",
+            "url": "https://samrique.in/",
+            "logo": "https://samrique.in/samrique-logo.png",
+            "image": "https://samrique.in/og-image.png",
+            "description": "Bespoke Flutter mobile app development studio taking digital products from sketch to launch with fixed-price sprints.",
+            "email": "samrique.in@gmail.com",
+            "priceRange": "₹1,00,000 - ₹6,00,000+",
+            "currenciesAccepted": "USD, INR",
+            "paymentAccepted": "Wire, Credit Card, Razorpay, Stripe",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "IN"
+            },
+            "sameAs": [
+              "https://github.com/samrique-where-design-meets-deployment"
+            ]
+          },
+          {
+            "@type": "ItemList",
+            "name": "Featured Flutter Products & Systems",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Samrique E-Marketplace",
+                "description": "18-screen multi-vendor digital commerce app with Razorpay & KYC."
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Zipi Bike Taxi App",
+                "description": "22-screen on-demand mobility platform with live GPS radar dispatch."
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Samrique Money Manager",
+                "description": "Offline-first personal finance tracker with analytics and CSV export."
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "Samrique Mama Pregnancy Tracker",
+                "description": "Maternal companion with week-by-week milestones and vitals log."
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
+    <!-- Google Analytics (GA4) Tracking Snippet -->
+    <!-- Replace G-XXXXXXXXXX with your Google Analytics 4 Measurement ID when available -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true });
+    </script>
+
     <base href="/" />
     <script>
       (() => {
@@ -37,7 +134,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
     <link
