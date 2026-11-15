@@ -106,7 +106,7 @@ export class App implements AfterViewInit, OnDestroy {
     const progress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
     document.getElementById('top-progress-bar')?.style.setProperty('width', `${progress}%`);
 
-    const sections = ['hero', 'services', 'pricing', 'how-it-works', 'projects', 'about', 'contact'];
+    const sections = ['hero', 'services', 'how-it-works', 'projects', 'about'];
     const activeSection = sections
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null)

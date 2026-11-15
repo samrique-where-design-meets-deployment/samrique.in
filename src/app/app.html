@@ -1052,14 +1052,14 @@
   </footer>
 </main>
 } @else if (showPricingPage) {
-<main class="pricing-page min-h-screen bg-[var(--bg)] text-[var(--ink)]">
+<main class="pricing-page min-h-screen">
   <div class="top-progress" aria-hidden="true"><span id="top-progress-bar"></span></div>
 
   <!-- Header (Sticky, Matches Home and Product Pages) -->
   <header class="pricing-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
-        class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200/90 dark:border-slate-800 transition-all duration-300">
+        class="pricing-nav-bar mx-auto my-3 px-4 sm:px-6 py-2 rounded-full flex items-center justify-between gap-2 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200/90 dark:border-slate-800 transition-all duration-300">
         <div class="flex items-center gap-3 flex-shrink-0">
           <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToHome()"
             class="flex items-center gap-2 group" aria-label="Samrique home">
@@ -1069,9 +1069,7 @@
         </div>
 
         <!-- Desktop Navigation -->
-        <nav
-          class="hidden md:flex items-center gap-1 bg-slate-100/90 dark:bg-slate-800/90 p-1.5 rounded-full border border-slate-200/80 dark:border-slate-700 backdrop-blur-md mx-auto"
-          aria-label="Pricing page navigation">
+        <nav class="pricing-desktop-nav hidden md:flex items-center gap-1 bg-slate-100/90 dark:bg-slate-800/90 p-1.5 rounded-full border border-slate-200/80 dark:border-slate-700 backdrop-blur-md mx-auto" aria-label="Pricing page navigation">
           <a href="#pricing-plans" (click)="$event.preventDefault(); scrollToProductSection('pricing-plans')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-700 transition-all duration-200">Packages</a>
           <a href="#pricing-addons" (click)="$event.preventDefault(); scrollToProductSection('pricing-addons')"
@@ -1091,7 +1089,7 @@
           <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToHome()"
             class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
             <i class="fa-solid fa-arrow-left text-xs"></i>
-            <span class="hidden sm:inline">Back to Home</span>
+            <span class="pricing-back-text hidden sm:inline">Home</span>
           </a>
           <button (click)="openBooking()"
             class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 transition-colors">
@@ -1519,13 +1517,6 @@
             [class.hover:text-slate-900]="activeSection !== 'how-it-works'"
             [class.hover:bg-white/60]="activeSection !== 'how-it-works'"
             [attr.aria-current]="activeSection === 'how-it-works' ? 'location' : null">Process</a>
-          <a href="#pricing" (click)="scrollToSection('pricing')"
-            class="px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200"
-            [class.text-slate-900]="activeSection === 'pricing'" [class.bg-white]="activeSection === 'pricing'"
-            [class.shadow-xs]="activeSection === 'pricing'" [class.text-slate-600]="activeSection !== 'pricing'"
-            [class.hover:text-slate-900]="activeSection !== 'pricing'"
-            [class.hover:bg-white/60]="activeSection !== 'pricing'"
-            [attr.aria-current]="activeSection === 'pricing' ? 'location' : null">Pricing</a>
           <a href="#projects" (click)="scrollToSection('projects')"
             class="px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200"
             [class.text-slate-900]="activeSection === 'projects'" [class.bg-white]="activeSection === 'projects'"
@@ -1574,9 +1565,6 @@
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Services</a>
       <a href="#how-it-works" (click)="closeMobileMenu()"
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Process</a>
-      <a [attr.href]="appPath('/start-a-project')"
-        (click)="$event.preventDefault(); openStartProject(); closeMobileMenu()"
-        class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Pricing</a>
       <a href="#projects" (click)="closeMobileMenu()"
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Projects</a>
       <a href="#about" (click)="closeMobileMenu()"
