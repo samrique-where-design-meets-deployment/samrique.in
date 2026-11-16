@@ -499,11 +499,15 @@ export class App implements AfterViewInit, OnDestroy {
   ];
 
   protected readonly moneyManagerStack = [
-    ['Application framework', 'Flutter'], ['Programming language', 'Dart (SDK >=3.0.0 <4.0.0)'],
-    ['State management and navigation', 'GetX'], ['Backend communication', 'REST API using http'],
-    ['Local preferences', 'shared_preferences'], ['Currency and date formatting', 'intl'],
+    ['Application framework', 'Flutter'],
+    ['Programming language', 'Dart (SDK >=3.0.0 <4.0.0)'],
+    ['State management and navigation', 'GetX'],
+    ['Local database & persistence', 'SQLite (sqflite) offline ledger & SharedPreferences'],
+    ['Backend communication', 'REST API using http'],
+    ['Currency and date formatting', 'intl'],
     ['CSV creation and saving', 'Dart CSV generation with file_saver'],
-    ['UI', 'Material 3, light and dark themes'], ['Automated tests', 'Flutter test framework'],
+    ['UI', 'Material 3, light and dark themes'],
+    ['Automated tests', 'Flutter test framework'],
   ];
 
   protected readonly marketplaceFeatures = [
@@ -1268,7 +1272,18 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   protected openPricing(): void {
-    this.openStartProject();
+    if (this.routePath !== '/pricing') {
+      window.history.pushState({}, '', this.appPath('/pricing'));
+    }
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showPricingPage = true;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
   }
 
   protected returnToHome(): void {
@@ -1318,22 +1333,22 @@ export class App implements AfterViewInit, OnDestroy {
     const tierLower = tierName.toLowerCase();
     if (tierLower.includes('starter') || tierLower.includes('mvp')) {
       this.contactForm.package = 'Starter MVP';
-      this.contactForm.budget = '₹1–1.5 lakh';
+      this.contactForm.budget = 'From ₹1,00,000';
       this.contactForm.timeline = 'Within 1 month';
       this.contactForm.project_type = 'MVP to test an idea';
     } else if (tierLower.includes('standard')) {
       this.contactForm.package = 'Standard';
-      this.contactForm.budget = '₹2.5–3 lakh';
+      this.contactForm.budget = 'From ₹2,50,000';
       this.contactForm.timeline = '1–3 months';
       this.contactForm.project_type = 'New app from scratch';
     } else if (tierLower.includes('premium')) {
       this.contactForm.package = 'Premium';
-      this.contactForm.budget = '₹6 lakh and above';
+      this.contactForm.budget = 'From ₹6,00,000';
       this.contactForm.timeline = '1–3 months';
       this.contactForm.project_type = 'New app from scratch';
     } else {
       this.contactForm.package = 'Custom';
-      this.contactForm.budget = budget || '₹6 lakh and above';
+      this.contactForm.budget = budget || 'From ₹6,00,000';
       this.contactForm.timeline = 'Flexible';
       this.contactForm.project_type = 'New app from scratch';
     }
@@ -1405,7 +1420,7 @@ export class App implements AfterViewInit, OnDestroy {
         window.location.href = this.mailtoFallbackUrl;
         this.contactSending = false;
         this.contactStatus = 'ok';
-        this.contactMessage = 'Thank you. We opened your email client to send this enquiry to samrique.in@gmail.com and will reply within 24 hours.';
+        this.contactMessage = 'Thank you. We opened your email client to send this enquiry to samrique.in@gmail.com. We will reply within 24 hours, scoped roadmap within 48 hours.';
       }, 350);
       return;
     }
@@ -1430,7 +1445,7 @@ export class App implements AfterViewInit, OnDestroy {
           _gotcha: '',
         };
         this.contactStatus = 'ok';
-        this.contactMessage = 'Thank you. We received your enquiry and will reply within 24 hours.';
+        this.contactMessage = 'Thank you. We received your enquiry and will reply within 24 hours, scoped roadmap within 48 hours.';
       })
       .catch(() => {
         this.contactStatus = 'err';

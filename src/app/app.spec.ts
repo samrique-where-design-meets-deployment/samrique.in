@@ -126,4 +126,30 @@ describe('App', () => {
       Element.prototype.scrollIntoView = originalScrollIntoView;
     }
   });
+
+  it('should open and display Pricing page and select a tier', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openPricing']();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.pricing-page')).toBeTruthy();
+    expect(compiled.querySelector('h2')?.textContent).toContain('Clear pricing');
+
+    app['selectPricingTier']('Starter MVP');
+    fixture.detectChanges();
+    expect(app['contactForm'].package).toBe('Starter MVP');
+    expect(app['contactForm'].budget).toBe('From ₹1,00,000');
+    expect(app['enquiryOpen']).toBe(true);
+  });
+
+  it('should include SQLite in Money Manager tech stack', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    const hasSqlite = app['moneyManagerStack'].some(([category, tech]) =>
+      category.toLowerCase().includes('database') || tech.toLowerCase().includes('sqlite')
+    );
+    expect(hasSqlite).toBe(true);
+  });
 });
