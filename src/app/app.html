@@ -1292,7 +1292,7 @@
           </div>
         </div>
 
-        <form id="enquiry" (submit)="handleContactSubmit($event)" novalidate>
+        <form id="enquiry" action="https://formsubmit.co/ajax/samrique.in@gmail.com" method="POST" (submit)="handleContactSubmit($event)" novalidate>
           <div class="two">
             <label>Your name
               <input name="name" required autocomplete="name" placeholder="Your full name"
@@ -2491,7 +2491,7 @@
       </div>
 
       <!-- Panel 3: Step 2 - Pick a time & Contact details -->
-      <form class="booking-details" #bookingForm (submit)="submitBookingRequest($event, bookingForm)">
+      <form class="booking-details" action="https://formsubmit.co/ajax/samrique.in@gmail.com" method="POST" #bookingForm (submit)="submitBookingRequest($event, bookingForm)">
         <div class="booking-panel-heading">
           <div>
             <span class="booking-kicker">Step 2</span>
@@ -2539,18 +2539,43 @@
             <textarea id="booking-message" name="bookingMessage" [(ngModel)]="bookingMessage" placeholder=""></textarea>
           </div>
         </div>
+        <input class="hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" [(ngModel)]="bookingGotcha">
 
         @if (bookingError) {
         <p class="booking-error">{{ bookingError }}</p>
         }
 
-        <button type="submit" class="booking-submit">
+        @if (bookingStatus === 'ok') {
+        <div class="msg ok">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>{{ bookingMessageText || 'Discovery call request sent! We will reply within 24 hours to confirm.' }}</span>
+        </div>
+        }
+
+        @if (bookingStatus === 'err') {
+        <div class="msg err">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>{{ bookingMessageText }}</span>
+          @if (bookingMailto) {
+          <div class="booking-fallback-link">
+            <a [href]="bookingMailto">Click here to send direct email</a>
+          </div>
+          }
+        </div>
+        }
+
+        <button type="submit" class="booking-submit" [disabled]="bookingSending">
+          @if (bookingSending) {
+          <i class="fa-solid fa-spinner fa-spin"></i>
+          <span>Sending request…</span>
+          } @else {
           <span>Request this time</span>
           <i class="fa-solid fa-arrow-right"></i>
+          }
         </button>
 
         <p class="booking-email-note">
-          This opens an email draft to samrique.in@gmail.com. Nothing is sent automatically.
+          We will review your requested time and reply by email within 24 hours to confirm.
         </p>
       </form>
     </div>
@@ -2583,7 +2608,7 @@
         </div>
       </div>
 
-      <form class="enquiry-form" (submit)="handleContactSubmit($event)" novalidate>
+      <form class="enquiry-form" action="https://formsubmit.co/ajax/samrique.in@gmail.com" method="POST" (submit)="handleContactSubmit($event)" novalidate>
         <div class="two">
           <label>Your name
             <input name="name" required autocomplete="name" placeholder="Your full name" [(ngModel)]="contactForm.name">

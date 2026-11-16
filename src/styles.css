@@ -612,6 +612,44 @@ a:focus-visible {
 .booking-fallback { margin: 10px 0 0; color: #ef4444; font-size: 11px; font-weight: 500; line-height: 1.55; }
 .booking-fallback { color: #64748b; }
 .booking-fallback a { color: #e85f69; text-decoration: underline; }
+.booking-details .hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.booking-details .msg {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  line-height: 1.45;
+  margin: 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.booking-details .msg.ok {
+  background: #e5f6f2;
+  color: #0e6b59;
+  border: 1px solid #c2ece2;
+}
+.booking-details .msg.err {
+  background: #fdf2f2;
+  color: #b3263a;
+  border: 1px solid #f9cbd1;
+}
+.booking-fallback-link a {
+  color: #e85f69;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.booking-submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+}
 .booking-submit {
   display: flex;
   align-items: center;

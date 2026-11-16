@@ -152,4 +152,43 @@ describe('App', () => {
     );
     expect(hasSqlite).toBe(true);
   });
+
+  it('should validate and submit booking request via FormSubmit', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openBooking']();
+    fixture.detectChanges();
+
+    const mockForm = document.createElement('form');
+    mockForm.setAttribute('action', 'https://formsubmit.co/ajax/samrique.in@gmail.com');
+    const fakeEvent = { preventDefault: () => {} } as unknown as SubmitEvent;
+
+    // Missing date/time
+    app['submitBookingRequest'](fakeEvent, mockForm);
+    expect(app['bookingError']).toBe('Choose a date and time to request a call.');
+
+    // Provide date and time
+    app['selectedBookingDate'] = '2026-11-18';
+    app['selectedBookingTime'] = '11:00 AM';
+    app['bookingName'] = 'Musaddique Ali';
+    app['bookingEmail'] = 'musaddique.ali@gmail.com';
+
+    // Mock fetch
+    const fetchSpy = vi.spyOn(window, 'fetch').mockResolvedValueOnce(new Response(JSON.stringify({ success: 'true' }), { status: 200 }));
+
+    app['submitBookingRequest'](fakeEvent, mockForm);
+    expect(app['bookingSending']).toBe(true);
+
+    await new Promise((r) => setTimeout(r, 10));
+
+    expect(fetchSpy).toHaveBeenCalledWith(
+      'https://formsubmit.co/ajax/samrique.in@gmail.com',
+      expect.objectContaining({
+        method: 'POST',
+      }),
+    );
+    expect(app['bookingStatus']).toBe('ok');
+    expect(app['bookingSending']).toBe(false);
+    fetchSpy.mockRestore();
+  });
 });

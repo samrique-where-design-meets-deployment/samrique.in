@@ -33,6 +33,10 @@ export class App implements AfterViewInit, OnDestroy {
   protected bookingOpen = false;
   protected bookingNoticeVisible = false;
   protected bookingError = '';
+  protected bookingSending = false;
+  protected bookingStatus: 'ok' | 'err' | '' = '';
+  protected bookingMessageText = '';
+  protected bookingGotcha = '';
   protected bookingName = '';
   protected bookingEmail = '';
   protected bookingPhone = '';
@@ -267,6 +271,9 @@ export class App implements AfterViewInit, OnDestroy {
     this.bookingOpen = true;
     this.bookingNoticeVisible = false;
     this.bookingError = '';
+    this.bookingStatus = '';
+    this.bookingMessageText = '';
+    this.bookingSending = false;
     this.bookingMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
     this.selectedBookingDate = '';
     this.selectedBookingTime = '';
@@ -334,26 +341,84 @@ export class App implements AfterViewInit, OnDestroy {
     }
 
     const formData = new FormData(form);
-    const subject = `Call request: ${this.selectedBookingDateLabel} at ${this.selectedBookingTime}`;
+    const gotcha = (formData.get('_gotcha') as string) || this.bookingGotcha;
+    if (gotcha) {
+      return;
+    }
+
+    const name = ((formData.get('bookingName') as string) || this.bookingName || '').trim();
+    const email = ((formData.get('bookingEmail') as string) || this.bookingEmail || '').trim();
+    const phone = ((formData.get('bookingPhone') as string) || this.bookingPhone || '').trim();
+    const message = ((formData.get('bookingMessage') as string) || this.bookingMessage || '').trim();
+
+    const subject = `[Discovery Call Request] ${this.selectedBookingDateLabel} at ${this.selectedBookingTime} - ${name || 'Founder'}`;
     const body = [
       '30-minute project discovery call request',
       `Preferred date: ${this.selectedBookingDateLabel} (${this.selectedBookingDate})`,
       `Preferred time: ${this.selectedBookingTime} (${this.bookingTimezone})`,
-      `Name: ${formData.get('bookingName') ?? ''}`,
-      `Email: ${formData.get('bookingEmail') ?? ''}`,
-      `Phone: ${formData.get('bookingPhone') || 'Not provided'}`,
+      `Name: ${name || 'Not provided'}`,
+      `Email: ${email || 'Not provided'}`,
+      `Phone: ${phone || 'Not provided'}`,
       `Service: ${this.bookingService}`,
       '',
       'Project idea:',
-      String(formData.get('bookingMessage') || 'Not provided'),
+      message || 'Not provided',
       '',
       'This is a preferred time request, not a confirmed booking.',
     ].join('\n');
 
     this.bookingMailto = `mailto:samrique.in@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = this.bookingMailto;
-    this.bookingNoticeVisible = true;
+    this.bookingSending = true;
+    this.bookingStatus = '';
     this.bookingError = '';
+    this.bookingMessageText = '';
+
+    const actionUrl = form.getAttribute('action') || 'https://formsubmit.co/ajax/samrique.in@gmail.com';
+    const payload = {
+      _gotcha: gotcha,
+      name: name,
+      email: email,
+      _replyto: email,
+      phone: phone || 'N/A',
+      preferred_date: `${this.selectedBookingDateLabel} (${this.selectedBookingDate})`,
+      preferred_time: `${this.selectedBookingTime} (${this.bookingTimezone})`,
+      service: this.bookingService,
+      project_idea: message || 'N/A',
+      _subject: subject,
+      _template: 'table',
+      _captcha: 'false',
+    };
+
+    fetch(actionUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (r) => {
+        if (!r.ok) {
+          throw new Error(`Submission endpoint returned ${r.status}`);
+        }
+        this.bookingStatus = 'ok';
+        this.bookingMessageText =
+          'Discovery call request received! We will review your preferred time and reply by email within 24 hours to confirm.';
+        this.bookingName = '';
+        this.bookingEmail = '';
+        this.bookingPhone = '';
+        this.bookingMessage = '';
+        this.bookingNoticeVisible = true;
+      })
+      .catch(() => {
+        window.location.href = this.bookingMailto;
+        this.bookingStatus = 'err';
+        this.bookingMessageText =
+          'Could not send automatically. We prepared an email draft to samrique.in@gmail.com with your selected date & time.';
+      })
+      .finally(() => {
+        this.bookingSending = false;
+      });
   }
 
   private dateKey(date: Date): string {
@@ -1412,26 +1477,34 @@ export class App implements AfterViewInit, OnDestroy {
 
     this.contactSending = true;
 
-    const actionUrl = form.action || 'https://formspree.io/f/YOUR_FORM_ID';
+    const actionUrl = form.getAttribute('action') || 'https://formsubmit.co/ajax/samrique.in@gmail.com';
 
-    // If still using placeholder YOUR_FORM_ID, open mailto draft directly
-    if (actionUrl.includes('YOUR_FORM_ID')) {
-      window.setTimeout(() => {
-        window.location.href = this.mailtoFallbackUrl;
-        this.contactSending = false;
-        this.contactStatus = 'ok';
-        this.contactMessage = 'Thank you. We opened your email client to send this enquiry to samrique.in@gmail.com. We will reply within 24 hours, scoped roadmap within 48 hours.';
-      }, 350);
-      return;
-    }
+    const payload = {
+      name: this.contactForm.name,
+      email: this.contactForm.email,
+      _replyto: this.contactForm.email,
+      phone: this.contactForm.phone || 'N/A',
+      company: this.contactForm.company || 'N/A',
+      project_type: this.contactForm.project_type || 'N/A',
+      package: this.contactForm.package || 'Not specified',
+      budget: this.contactForm.budget || 'Not specified',
+      timeline: this.contactForm.timeline || 'Not specified',
+      message: this.contactForm.details,
+      _subject: decodeURIComponent(subject),
+      _template: 'table',
+      _captcha: 'false',
+    };
 
     fetch(actionUrl, {
       method: 'POST',
-      body: new FormData(form),
-      headers: { Accept: 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
     })
-      .then((r) => {
-        if (!r.ok) throw new Error('Network error');
+      .then(async (r) => {
+        if (!r.ok) throw new Error(`Submission endpoint returned ${r.status}`);
         this.contactForm = {
           name: '',
           email: '',
@@ -1445,11 +1518,14 @@ export class App implements AfterViewInit, OnDestroy {
           _gotcha: '',
         };
         this.contactStatus = 'ok';
-        this.contactMessage = 'Thank you. We received your enquiry and will reply within 24 hours, scoped roadmap within 48 hours.';
+        this.contactMessage =
+          'Thank you. We received your enquiry and will reply within 24 hours, scoped roadmap within 48 hours.';
       })
       .catch(() => {
-        this.contactStatus = 'err';
-        this.contactMessage = 'Could not send automatically. Please email samrique.in@gmail.com directly or click the draft link below.';
+        window.location.href = this.mailtoFallbackUrl;
+        this.contactStatus = 'ok';
+        this.contactMessage =
+          'We prepared an email draft to samrique.in@gmail.com with your project details. Please click Send in your email client, or click the draft link below.';
       })
       .finally(() => {
         this.contactSending = false;
