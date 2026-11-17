@@ -72,8 +72,9 @@ export class App implements AfterViewInit, OnDestroy {
   protected showPricingUSD = true;
 
   // Legal Modals State
-  protected showPrivacyModal = false;
-  protected showTermsModal = false;
+  protected showPrivacyModal = ['/privacy', '/privacy-policy'].includes(this.routePath);
+  protected showTermsModal = ['/terms', '/terms-of-service', '/terms-and-conditions'].includes(this.routePath);
+  protected showUdyamModal = false;
   protected enquiryOpen = false;
 
   // Contact Enquiry Form State
@@ -303,6 +304,21 @@ export class App implements AfterViewInit, OnDestroy {
         this.prevModalScreen();
         return;
       }
+    }
+
+    if (this.showUdyamModal && event.key === 'Escape') {
+      this.closeUdyamModal();
+      return;
+    }
+
+    if (this.showPrivacyModal && event.key === 'Escape') {
+      this.closePrivacyModal();
+      return;
+    }
+
+    if (this.showTermsModal && event.key === 'Escape') {
+      this.closeTermsModal();
+      return;
     }
 
     if (!this.bookingOpen) {
@@ -570,7 +586,6 @@ export class App implements AfterViewInit, OnDestroy {
     ['Local database & persistence', 'SQLite (sqflite) offline ledger & SharedPreferences'],
     ['Backend communication', 'REST API using http'],
     ['Currency and date formatting', 'intl'],
-    ['CSV creation and saving', 'Dart CSV generation with file_saver'],
     ['UI', 'Material 3, light and dark themes'],
     ['Automated tests', 'Flutter test framework'],
   ];
@@ -590,12 +605,12 @@ export class App implements AfterViewInit, OnDestroy {
 
   protected readonly marketplaceStack = [
     ['App framework', 'Flutter; Dart (SDK >=3.0.0 <4.0.0)'],
-    ['State management', 'Provider'], ['API communication', 'Dio and HTTP; REST API integration'],
+    ['State management', 'Provider'],
+    ['API communication', 'Dio and HTTP; REST API integration'],
     ['Local preferences', 'SharedPreferences'],
     ['UI and media', 'Material Design, carousel_slider, flutter_staggered_grid_view, shimmer, cached_network_image, flutter_svg, flutter_animate'],
     ['Payments', 'Razorpay Flutter'],
     ['Notifications and analytics dependencies', 'Firebase Messaging, flutter_local_notifications, Firebase Analytics'],
-    ['Device utilities', 'image_picker, file_picker, url_launcher, intl'],
     ['Platforms', 'Android, iOS, web, Windows, macOS, and Linux'],
   ];
 
@@ -612,10 +627,12 @@ export class App implements AfterViewInit, OnDestroy {
   ];
 
   protected readonly mamaStack = [
-    ['Application framework', 'Flutter'], ['Programming language', 'Dart (>=3.0.0 <4.0.0)'],
-    ['State management', 'Provider'], ['API communication', 'HTTP REST API'],
-    ['Local preferences', 'Shared Preferences (session and authentication token)'],
-    ['Date and time formatting', 'Intl'], ['Secure storage & tokens', 'flutter_secure_storage & SharedPreferences for authenticated session caching & token encryption'],
+    ['Application framework', 'Flutter'],
+    ['Programming language', 'Dart (>=3.0.0 <4.0.0)'],
+    ['State management', 'Provider'],
+    ['API communication', 'HTTP REST API'],
+    ['Date and time formatting', 'Intl'],
+    ['Secure storage & tokens', 'flutter_secure_storage & SharedPreferences for authenticated session caching & token encryption'],
   ];
 
   protected readonly zipiFeatures = [
@@ -635,7 +652,6 @@ export class App implements AfterViewInit, OnDestroy {
     ['State management & architecture', 'GetX / Provider architecture'],
     ['Mapping & Geolocation', 'Google Maps Flutter, Geolocator, Geocoding'],
     ['Real-time events & dispatch', 'WebSockets / Firebase Cloud Messaging'],
-    ['Networking & API client', 'Dio and HTTP REST API'],
     ['Local cache & storage', 'SharedPreferences'],
     ['Design system', 'Custom On-Demand Mobility theme, Material 3'],
   ];
@@ -1250,6 +1266,8 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMama = ['/products/samrique-mama', '/products/samrique-mama-pregnancy-tracker'].includes(this.routePath);
     this.showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
     this.showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
+    this.showPrivacyModal = ['/privacy', '/privacy-policy'].includes(this.routePath);
+    this.showTermsModal = ['/terms', '/terms-of-service', '/terms-and-conditions'].includes(this.routePath);
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
 
@@ -1387,7 +1405,7 @@ export class App implements AfterViewInit, OnDestroy {
   protected inquireAboutProduct(productName: string): void {
     this.contactForm.project_type = 'New app from scratch';
     this.contactForm.package = 'Custom';
-    this.contactForm.budget = '₹6 lakh and above';
+    this.contactForm.budget = 'From ₹6,00,000';
     this.contactForm.timeline = '1–3 months';
     this.contactForm.details = `Interested in custom deployment / commercial source code license for ${productName}.`;
     this.bookingService = `Custom Build / Source Code: ${productName}`;
@@ -1505,6 +1523,10 @@ export class App implements AfterViewInit, OnDestroy {
     })
       .then(async (r) => {
         if (!r.ok) throw new Error(`Submission endpoint returned ${r.status}`);
+        const data = await r.json().catch(() => ({}));
+        if (data.success === 'false' || data.success === false) {
+          throw new Error(data.message || 'Form submission pending activation');
+        }
         this.contactForm = {
           name: '',
           email: '',
@@ -1549,6 +1571,16 @@ export class App implements AfterViewInit, OnDestroy {
 
   protected closeTermsModal(): void {
     this.showTermsModal = false;
+    document.body.classList.remove('modal-open');
+  }
+
+  protected openUdyamModal(): void {
+    this.showUdyamModal = true;
+    document.body.classList.add('modal-open');
+  }
+
+  protected closeUdyamModal(): void {
+    this.showUdyamModal = false;
     document.body.classList.remove('modal-open');
   }
 

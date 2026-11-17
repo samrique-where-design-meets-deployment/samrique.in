@@ -107,7 +107,7 @@ describe('App', () => {
 
   it('should reveal the projects section when returning from a product page', async () => {
     const originalScrollIntoView = Element.prototype.scrollIntoView;
-    Element.prototype.scrollIntoView = () => {};
+    Element.prototype.scrollIntoView = () => { };
     window.history.pushState({}, '', '/products/money-manager');
     const fixture = TestBed.createComponent(App);
     try {
@@ -161,7 +161,7 @@ describe('App', () => {
 
     const mockForm = document.createElement('form');
     mockForm.setAttribute('action', 'https://formsubmit.co/ajax/samrique.in@gmail.com');
-    const fakeEvent = { preventDefault: () => {} } as unknown as SubmitEvent;
+    const fakeEvent = { preventDefault: () => { } } as unknown as SubmitEvent;
 
     // Missing date/time
     app['submitBookingRequest'](fakeEvent, mockForm);
@@ -190,5 +190,100 @@ describe('App', () => {
     expect(app['bookingStatus']).toBe('ok');
     expect(app['bookingSending']).toBe(false);
     fetchSpy.mockRestore();
+  });
+
+  it('should render Udyam MSME registration information in the footer', async () => {
+    window.history.pushState({}, '', '/');
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['returnToHome']();
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('UDYAM-TN-36-0066570');
+    expect(compiled.textContent).toContain('Udyam registered MSME');
+    expect(compiled.textContent).toContain('Samrique, proprietorship of P. Musaddique Ali');
+    expect(compiled.textContent).toContain('Ambur, Tamil Nadu');
+  });
+
+  it('should open and close the Udyam Registration modal', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    expect(app['showUdyamModal']).toBe(false);
+
+    app['openUdyamModal']();
+    fixture.detectChanges();
+    expect(app['showUdyamModal']).toBe(true);
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Enterprise Registration Details');
+    expect(compiled.textContent).toContain('Samrique, proprietorship of P. Musaddique Ali');
+    expect(compiled.textContent).toContain('UDYAM-TN-36-0066570');
+
+    app['closeUdyamModal']();
+    fixture.detectChanges();
+    expect(app['showUdyamModal']).toBe(false);
+  });
+
+  it('should verify all pricing page copy fixes and milestone rules', async () => {
+    window.history.pushState({}, '', '/');
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openPricing']();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    // Check non-range pricing
+    expect(compiled.textContent).toContain('From ₹1,00,000');
+    expect(compiled.textContent).toContain('From ₹2,50,000');
+    // Check extra screen price
+    expect(compiled.textContent).toContain('from ₹12,000 per simple screen');
+    // Check rush delivery
+    expect(compiled.textContent).toContain('+25% for a 30% shorter timeline, subject to availability');
+    // Milestone box
+    expect(compiled.textContent).toContain('No full upfront payment');
+    expect(compiled.textContent).toContain('Due on delivery of the final approved build. Source code and store handover follow after payment.');
+    expect(compiled.textContent).toContain('+ GST if applicable');
+    expect(compiled.textContent).toContain('Detailed terms are agreed in a written contract before work begins.');
+    // Check support and reply times
+    expect(compiled.textContent).toContain('30 Days Free Post-Launch Support on all packages');
+    expect(compiled.textContent).toContain('We reply within 24 hours, scoped roadmap within 48 hours.');
+
+    app['returnToHome']();
+    fixture.detectChanges();
+  });
+
+  it('should open and close the Privacy Policy modal', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openPrivacyModal']();
+    fixture.detectChanges();
+    expect(app['showPrivacyModal']).toBe(true);
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Privacy Policy');
+    expect(compiled.textContent).toContain('Information We Collect');
+    expect(compiled.textContent).toContain('Samrique, proprietorship of P. Musaddique Ali');
+
+    app['closePrivacyModal']();
+    fixture.detectChanges();
+    expect(app['showPrivacyModal']).toBe(false);
+  });
+
+  it('should open and close the Terms of Service modal', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openTermsModal']();
+    fixture.detectChanges();
+    expect(app['showTermsModal']).toBe(true);
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Terms of Service');
+    expect(compiled.textContent).toContain('Full source code handover');
+    expect(compiled.textContent).toContain('Fixed-Price Sprints & Scope');
+    expect(compiled.textContent).toContain('GST extra if applicable');
+
+    app['closeTermsModal']();
+    fixture.detectChanges();
+    expect(app['showTermsModal']).toBe(false);
   });
 });
