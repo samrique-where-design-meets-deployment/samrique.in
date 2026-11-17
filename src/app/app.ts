@@ -607,7 +607,7 @@ export class App implements AfterViewInit, OnDestroy {
     { title: 'Nutrition and hydration', detail: 'Log meals with meal type, calories, and protein, and record water intake.' },
     { title: 'Exercise tracking', detail: 'Keep a record of exercise as part of daily wellness habits.' },
     { title: 'Prenatal appointments', detail: 'Schedule visits with a date, time, and notes. See the next visit highlighted and delete appointments.' },
-    { title: 'Community & Peer Support', detail: 'Topic-based discussion threads for expectant mothers to share tips and prenatal experiences, with offline caching and backend moderation sync on the roadmap.' },
+    { title: 'Community & peer support', detail: 'Topic-based discussion threads for expectant mothers to share tips and prenatal experiences, with offline caching and backend moderation sync on the roadmap.' },
     { title: 'Responsive experience', detail: 'A pregnancy-themed Flutter UI built with Material 3 components.' },
   ];
 
@@ -616,14 +616,14 @@ export class App implements AfterViewInit, OnDestroy {
     ['Programming language', 'Dart (>=3.0.0 <4.0.0)'],
     ['State management', 'Provider'],
     ['API communication', 'HTTP REST API'],
-    ['Date and time formatting', 'Intl'],
+    ['Date and time formatting', 'intl'],
     ['Secure storage & tokens', 'flutter_secure_storage & SharedPreferences for authenticated session caching & token encryption'],
   ];
 
   protected readonly zipiFeatures = [
     { title: 'Role-based experience', detail: 'Dedicated, tailored workflows for commuters (riders) and captain drivers with seamless role switching.' },
     { title: 'Live interactive map booking', detail: 'Map-based pickup and drop-off point selection, real-time vehicle dispatch, route polyline preview, and ETA estimation.' },
-    { title: 'Upfront fare & ride options', detail: 'Transparent fare breakdown based on trip distance, surge multipliers, and vehicle choices (Bike Taxi, Express, EV Bike).' },
+    { title: 'Upfront fare & ride options', detail: 'Transparent fare breakdown based on trip distance, surge multipliers, and vehicle choices (Bike Taxi, Express Delivery, EV Bike).' },
     { title: 'Captain radar & dispatch', detail: 'Real-time order alert radar, trip acceptance or decline modals, and turn-by-turn navigation integration.' },
     { title: 'Captain KYC & verification', detail: 'End-to-end document submission and compliance verification for driving licenses, RC books, insurance, and vehicle fitness.' },
     { title: 'Digital ride invoices', detail: 'Automated receipt generation breaking down base fare, distance rate, wait charges, applicable taxes, and payment mode.' },
@@ -1055,7 +1055,7 @@ export class App implements AfterViewInit, OnDestroy {
     {
       id: 'zipi-driver-login',
       screenNumber: '04',
-      name: 'Driver Captain Login Screen',
+      name: 'Captain Login Screen',
       category: 'Authentication',
       previewImage: 'assets/images/zipi_bike_taxi_app/04_driver_login_preview.png',
       assetImage: 'assets/images/zipi_bike_taxi_app/04-driver-login.png',
@@ -1075,12 +1075,12 @@ export class App implements AfterViewInit, OnDestroy {
     {
       id: 'zipi-driver-otp',
       screenNumber: '06',
-      name: 'Driver OTP Verification Screen',
+      name: 'Captain OTP Verification Screen',
       category: 'Authentication',
       previewImage: 'assets/images/zipi_bike_taxi_app/06_driver_otp_preview.png',
       assetImage: 'assets/images/zipi_bike_taxi_app/05-otp-driver.png',
       description: 'High-security OTP validation guaranteeing captain identity prior to accepting rides.',
-      tags: ['Driver Security', 'Identity Gate'],
+      tags: ['Captain Security', 'Identity Gate'],
     },
     {
       id: 'zipi-rider-signup',
@@ -1099,7 +1099,7 @@ export class App implements AfterViewInit, OnDestroy {
       category: 'Onboarding',
       previewImage: 'assets/images/zipi_bike_taxi_app/09_driver_signup_preview.png',
       assetImage: 'assets/images/zipi_bike_taxi_app/07-driver-signup.png',
-      description: 'Driver partner onboarding capturing driving license credentials, city, and vehicle details.',
+      description: 'Captain partner onboarding capturing driving license credentials, city, and vehicle details.',
       tags: ['Captain Signup', 'Fleet Registration'],
     },
     {
@@ -1189,7 +1189,7 @@ export class App implements AfterViewInit, OnDestroy {
       category: 'Compliance',
       previewImage: 'assets/images/zipi_bike_taxi_app/18_documents_preview.png',
       assetImage: 'assets/images/zipi_bike_taxi_app/14-documents.png',
-      description: 'Verification checklist for driver license, vehicle registration (RC), and pollution certificate.',
+      description: 'Verification checklist for the captain’s driving license, vehicle registration (RC), and pollution certificate.',
       tags: ['KYC Upload', 'Document Checklist'],
     },
     {

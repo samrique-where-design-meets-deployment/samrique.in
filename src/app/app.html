@@ -612,7 +612,7 @@
   <section id="product-overview" class="product-section product-overview">
     <div>
       <span class="product-kicker">The product</span>
-      <h2>One marketplace.<br />Three experiences.</h2>
+      <h2>One marketplace.<br />Connected experiences.</h2>
     </div>
     <p>
       Samrique E-Marketplace is a Flutter marketplace for discovering, buying,
@@ -974,7 +974,7 @@
         ><i class="fa-solid fa-heart"></i> Pregnancy wellness · Flutter
         app</span
       >
-      <h1>Samrique<br /><span>Mama</span></h1>
+      <h1>Samrique<br /><span>Mama Tracker</span></h1>
       <p>
         A calm, caring companion for pregnancy. Keep your week-by-week overview,
         wellness habits, health logs, and prenatal appointments together in one
@@ -990,7 +990,7 @@
         <a
           class="product-primary"
           [attr.href]="appPath('/#contact')"
-          (click)="$event.preventDefault(); inquireAboutProduct('Samrique Mama Pregnancy Tracker')"
+          (click)="$event.preventDefault(); inquireAboutProduct('Samrique Mama Tracker')"
           >Discuss a similar product <i class="fa-solid fa-arrow-right"></i
         ></a>
         <a
@@ -1566,6 +1566,14 @@
         <button
           type="button"
           class="pill"
+          [class.on]="zipiCategory === 'Settings'"
+          (click)="zipiCategory = 'Settings'"
+        >
+          Settings<i>({{ getCategoryCount(zipiScreens, 'Settings') }})</i>
+        </button>
+        <button
+          type="button"
+          class="pill"
           [class.on]="zipiCategory === 'Profile'"
           (click)="zipiCategory = 'Profile'"
         >
@@ -1863,7 +1871,7 @@
               handover</span
             >
             <span
-              ><i class="fa-solid fa-circle-check"></i> Direct Senior Developer
+              ><i class="fa-solid fa-circle-check"></i> Direct senior developer
               Communication</span
             >
             <span
@@ -2085,7 +2093,7 @@
               <div class="bento-icon-badge teal">
                 <i class="fa-solid fa-puzzle-piece"></i>
               </div>
-              <h3>A la carte add-ons</h3>
+              <h3>À la carte add-ons</h3>
             </div>
             <p class="subtitle">
               Add to any package, or book on its own after launch.
@@ -2129,13 +2137,11 @@
                       color: var(--muted);
                       margin-top: 2px;
                     "
-                    >+25% for a 30% shorter timeline, subject to
-                    availability</small
+                    >30% shorter timeline, subject to availability</small
                   >
                 </div>
                 <span class="addon-chip"
-                  >+25% for a 30% shorter timeline, subject to
-                  availability</span
+                  >+25%</span
                 >
               </div>
             </div>
@@ -2217,15 +2223,19 @@
             <details class="faq-card">
               <summary>Who owns the code?</summary>
               <p>
-                You do. Full source code handover and Figma design files follow
-                immediately after the final milestone payment.
+                After final payment, we deliver client-specific source code and
+                agreed Figma files. Rights in custom work transfer under a
+                written assignment; third-party packages and Samrique's
+                reusable tools remain under their own licences.
               </p>
             </details>
             <details class="faq-card">
               <summary>What happens after launch?</summary>
               <p>
-                All core sprint packages include 30 days of free post-launch
-                support and bug fixes. After that you can choose our monthly
+                All fixed-price packages, including Custom, include 30 days of
+                support for in-scope bugs, starting at the earlier of public
+                store launch or written delivery acceptance. After that you can
+                choose our monthly
                 maintenance plan (from ₹8,000/mo) or pay per request.
               </p>
             </details>
@@ -2243,9 +2253,10 @@
             <details class="faq-card">
               <summary>Do prices include GST, store fees and hosting?</summary>
               <p>
-                GST extra if applicable. Prices exclude Apple Developer &amp;
-                Google Play store fees, and third-party cloud hosting. We
-                outline all external fees transparently in your written quote.
+                GST extra where applicable. Prices exclude Apple Developer and
+                Google Play fees, hosting, Google Maps and other API usage, and
+                Razorpay or other payment processing charges unless a written
+                quote says otherwise. We list external fees in the quote.
               </p>
             </details>
           </div>
@@ -3066,8 +3077,8 @@
             <span class="process-card-index">02 — SHAPE THE EXPERIENCE</span>
             <h3>Design</h3>
             <p>
-              We begin by understanding your vision and goals to craft the right
-              strategy.
+              We map the key user flows and visual direction into a clear
+              interface before development begins.
             </p>
           </div>
         </article>
@@ -3375,7 +3386,7 @@
           </div>
         </div>
 
-        <!-- Project 3: Samrique Mama Pregnancy Tracker -->
+        <!-- Project 3: Samrique Mama Tracker -->
         <div
           class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll"
         >
@@ -3404,7 +3415,7 @@
                   (click)="$event.preventDefault(); openMama()"
                   class="hover:text-teal-700 transition-colors inline-flex items-center gap-2"
                 >
-                  Samrique Mama Pregnancy Tracker
+                  Samrique Mama Tracker
                   <i
                     class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"
                   ></i>
@@ -3464,7 +3475,7 @@
               >
                 <img
                   src="assets/images/samrique_mama_pregnancy_tracker/04_pregnancy_overview_preview.png"
-                  alt="Samrique Mama Pregnancy Tracker"
+                  alt="Samrique Mama Tracker"
                   loading="lazy"
                   decoding="async"
                   class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-300"
@@ -3614,7 +3625,7 @@
           </div>
           <div class="why-card-copy">
             <span class="why-card-index">01 — THE RIGHT PEOPLE, CLOSE BY</span>
-            <h3>Just-Right-Size Teamwork</h3>
+            <h3>Right-Sized Teamwork</h3>
             <p>
               Direct access to senior Flutter engineers and designers without
               layers of account management or red tape.
@@ -3710,7 +3721,7 @@
               <div
                 class="w-full h-full rounded-[14px] bg-slate-900 flex items-center justify-center text-white text-3xl font-black"
               >
-                SQ
+                S
               </div>
             </div>
             <div>
@@ -3801,7 +3812,7 @@
           </h3>
           <p class="text-xs sm:text-sm text-slate-500">
             Every project below is an architected Flutter product build you can
-            inspect screen-by-screen or license as turnkey source code.
+            inspect screen-by-screen or license turnkey source code.
           </p>
         </div>
 
@@ -3964,7 +3975,7 @@
         </span>
         <span class="inline-flex items-center gap-2">
           <i class="fa-solid fa-shield-halved text-rose-600 text-base"></i>
-          Hardware Keystore &amp; KeyChain Encryption
+          Hardware Keystore &amp; Keychain Encryption
         </span>
       </div>
     </div>
@@ -4531,8 +4542,7 @@
         Privacy Policy
       </h2>
       <p class="text-xs text-slate-400">
-        Effective Date: November 2026 &bull; Compliant with DPDP Act &amp; IT
-        Act
+        Last updated: November 17, 2026
       </p>
 
       <div
@@ -4544,7 +4554,7 @@
           </h3>
           <p>
             When you contact Samrique via our enquiry desk, project intake form,
-            discovery call calendar, or direct email, we collect your name,
+            booking request form, or direct email, we collect your name,
             email address, phone or WhatsApp number, company name, project
             details, budget, and desired timeline. This information is submitted
             voluntarily and used strictly to evaluate requirements, reply within
@@ -4562,13 +4572,30 @@
             2. How We Use and Protect Your Data
           </h3>
           <p>
-            We use your information exclusively for direct technical and
-            commercial communication regarding custom software development
-            sprints, architectural consultations, and commercial source code
-            licensing. In compliance with the Digital Personal Data Protection
-            (DPDP) Act and international privacy frameworks, we will never sell,
-            rent, trade, monetize, or disclose your contact details or project
-            concepts to third parties.
+            We use your information to respond to enquiries and provide the
+            requested consultations, proposals, and project services. We do not
+            sell or rent personal data. We share it only with service providers
+            that process it on our behalf, or where disclosure is required by
+            law. We aim to handle personal data in line with applicable Indian
+            law, including the Digital Personal Data Protection Act, 2023, as
+            its provisions come into force.
+          </p>
+          <p class="mt-2">
+            Web enquiry forms are submitted through FormSubmit and delivered to
+            our Samrique inbox, which is handled via Google Gmail. Direct email
+            enquiries are handled via Gmail. Our website hosting provider may
+            process routine server logs. Google-hosted fonts, Google Analytics
+            code, Font Awesome's cdnjs service, and Tailwind's CDN deliver site
+            resources and may receive technical request information such as
+            your IP address, browser, and device details. Each provider handles
+            data under its own terms and privacy notice.
+          </p>
+          <p class="mt-2">
+            We keep enquiry records for up to 24 months after our last
+            substantive communication. If you become a client, relevant records
+            may be kept for the duration of the engagement and for any further
+            period required by law. We then delete or anonymize them where
+            practicable.
           </p>
         </div>
 
@@ -4581,21 +4608,24 @@
             software architecture portfolio piece and mobile UI demonstration
             for maternal lifestyle and wellness habit tracking. Samrique is a
             software engineering studio and does not provide clinical care or
-            medical services. We do not collect, process, or store protected
-            health information (PHI) or personal clinical records through this
-            website.
+            medical services. We do not request health or medical data through
+            this website and ask visitors not to include it in enquiry forms.
+            We do not collect personal clinical records through this website.
           </p>
         </div>
 
         <div>
           <h3 class="font-bold text-slate-900 text-sm mb-1">
-            4. Local Storage &amp; Cookies
+            4. Browser Storage, Cookies &amp; Third-Party Services
           </h3>
           <p>
-            Our website utilizes minimal local browser storage solely to
-            preserve functional preferences (such as light/dark mode and
-            single-page navigation). We do not deploy third-party advertising
-            trackers or behavioral profiling pixels.
+            The website does not currently save navigation or appearance
+            preferences in browser storage. It loads Google Analytics code with
+            a placeholder measurement ID (G-XXXXXXXXXX); analytics collection
+            may occur if that ID is replaced with an active one. The site also
+            loads fonts and other resources from Google, cdnjs, and the
+            Tailwind CDN, which may receive technical request data. We do not
+            use third-party advertising pixels or behavioral profiling.
           </p>
         </div>
 
@@ -4605,8 +4635,9 @@
           </h3>
           <p>
             We treat all client specifications, proprietary ideas, and
-            repository access with strict confidentiality. All website
-            communications use industry-standard TLS encryption. Mutual
+            repository access with strict confidentiality. Connections to this
+            site and its online forms use HTTPS/TLS. Email is handled by the
+            email providers described above. Mutual
             Non-Disclosure Agreements (NDAs) are provided upon request prior to
             discovery discussions.
           </p>
@@ -4617,14 +4648,32 @@
             6. Data Deletion Requests
           </h3>
           <p>
-            You may request the immediate deletion of your contact records and
-            submitted specifications at any time by contacting our studio team
-            at
+            You may ask us to delete your enquiry records and submitted
+            specifications by contacting us at
             <a
               href="mailto:samrique.in@gmail.com"
               class="text-teal-600 font-bold underline"
               >samrique.in&#64;gmail.com</a
             >.
+            We will respond to privacy requests or complaints and, after
+            verifying your request, delete our active records and ask our
+            processors to do the same within 30 days, unless specific records
+            must be retained by law or for an active contract. Provider backups
+            may persist under their retention policies.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">7. Children</h3>
+          <p>
+            This website and its services are intended for adults and are not
+            directed to children under 18. We do not knowingly collect personal
+            data from children. Contact us at
+            <a
+              href="mailto:samrique.in@gmail.com"
+              class="text-teal-600 font-bold underline"
+              >samrique.in&#64;gmail.com</a
+            > if you believe a child has submitted personal data, and we will
+            review and delete it as required.
           </p>
         </div>
       </div>
@@ -4666,8 +4715,7 @@
         Terms of Service
       </h2>
       <p class="text-xs text-slate-400">
-        Effective Date: November 2026 &bull; Fixed-Price Sprints &amp; IP
-        Licensing
+        Effective date: November 17, 2026 &bull; Last updated: November 17, 2026
       </p>
 
       <div
@@ -4680,9 +4728,14 @@
           <p>
             Samrique provides fixed-price Flutter mobile development and digital
             product sprints. Each sprint is executed under a clear Statement of
-            Work (SOW) outlining defined milestones, deliverables, weekly
-            TestFlight or Android APK test builds, and delivery dates. Sprint
-            pricing is fixed, with GST extra if applicable.
+            Work (SOW) outlining milestones, deliverables, TestFlight (iOS) and
+            APK (Android) test builds, review dates, and delivery dates. The
+            client should provide one consolidated set of feedback within five
+            business days of each build; late feedback may shift the schedule.
+            Changes to scope require a written change request that records any
+            revised price and timeline, approved by both parties before the
+            extra work begins. Sprint pricing is fixed, with GST extra where
+            applicable.
           </p>
         </div>
 
@@ -4691,10 +4744,17 @@
             2. Full source code handover
           </h3>
           <p>
-            Upon final settlement of sprint invoices, full source code handover,
-            100% unrestricted intellectual property ownership, Git repositories,
-            architectural schemas, and visual assets are transferred to the
-            client with zero royalty claims or ongoing developer lock-in.
+            Upon final payment, we transfer the full source code, intellectual
+            property rights in the custom deliverables, Git repositories,
+            architecture documents, and visual assets created specifically for
+            the client. The transfer is recorded in a written assignment signed
+            by both parties that identifies the work and rights assigned and
+            states that the assignment is perpetual and worldwide. Open-source and
+            other third-party components remain subject to their own licences.
+            Samrique retains its pre-existing tools, libraries, templates,
+            know-how, and reusable components; the client receives a licence to
+            use any such items embedded in the deliverables as needed to use the
+            project.
           </p>
         </div>
 
@@ -4705,9 +4765,13 @@
           <p>
             Clients purchasing commercial licenses to Samrique's pre-built
             platforms (Samrique E-Marketplace, Zipi Bike Taxi, Samrique Money
-            Manager, or Samrique Mama) receive perpetual, worldwide commercial
-            rights to modify, rebrand, deploy, and distribute the application
-            for their business venture.
+            Manager, or Samrique Mama) receive a non-exclusive, perpetual,
+            worldwide licence to modify, rebrand, and deploy the application for
+            their own business. Clients may distribute the compiled application
+            to their users, but may not resell, sublicense, or redistribute the
+            source code or codebase as a standalone product, template, or
+            competing codebase. Third-party components remain subject to their
+            respective licences.
           </p>
         </div>
 
@@ -4716,29 +4780,29 @@
             4. 30-Day Post-Launch Support &amp; Warranty
           </h3>
           <p>
-            All core fixed-price sprint packages (Starter MVP, Standard,
-            Premium) include 30 days of complimentary post-launch support and
-            bug-fix warranty, during which our team remediates any functional
-            bugs or regressions within the original sprint scope at zero
-            additional charge.
+            All fixed-price packages, including Starter MVP, Standard, Premium,
+            and Custom, include 30 days of support for reproducible functional
+            bugs within the agreed scope. The period starts on the earlier of
+            public store launch or the client's written acceptance of delivery.
+            It excludes client or third-party changes, third-party API or
+            service changes, new operating-system versions, and new features or
+            scope. Work outside these limits may be quoted separately.
           </p>
         </div>
 
         <div>
           <h3 class="font-bold text-slate-900 text-sm mb-1">
-            5. Health &amp; Medical Disclaimer (Samrique Mama)
+            5. Product Compliance Responsibilities
           </h3>
           <p>
-            Samrique Mama is engineered and licensed strictly as an
-            informational maternal lifestyle and wellness habit tracking
-            codebase. It is NOT a clinical medical device, diagnostic tool, or
-            medical consultation service. It does not provide medical diagnosis,
-            clinical prognosis, or obstetric treatment advice. Expectant mothers
-            should always seek guidance from certified physicians. Clients
-            licensing and deploying the Samrique Mama codebase to public app
-            stores are solely responsible for compliance with relevant clinical,
-            medical, and healthcare regulatory standards in their target
-            operating markets.
+            Clients are responsible for the legal and regulatory requirements
+            for the products they operate in each market, including privacy and
+            security, consumer protection, payments, seller KYC, financial data,
+            transport operations, and driver identity checks, as applicable to
+            Samrique E-Marketplace, Zipi, Samrique Money Manager, and Samrique
+            Mama. Samrique Mama is a wellness tracking product, not a clinical
+            device or medical service; clients must obtain appropriate clinical
+            advice and meet applicable health regulations before deployment.
           </p>
         </div>
 
@@ -4747,11 +4811,78 @@
             6. Governing Law &amp; Legal Entity
           </h3>
           <p>
-            These terms and all studio agreements are governed by the commercial
-            laws of India, with mutual good-faith arbitration as the dispute
-            resolution standard. Business Entity: Samrique, proprietorship of P.
+            These terms are governed by the laws of India. The parties will
+            first try to resolve disputes in good faith. Any dispute not
+            resolved that way will be referred to a sole arbitrator jointly
+            appointed under the Arbitration and Conciliation Act, 1996. The
+            seat and legal place of arbitration is Ambur, Tamil Nadu; the
+            proceedings will be in English. Courts at Tirupathur, Tamil Nadu,
+            will have jurisdiction over court proceedings, subject to
+            applicable law. Business entity: Samrique, proprietorship of P.
             Musaddique Ali, Ambur, Tamil Nadu, India (Udyam registered MSME:
             UDYAM-TN-36-0066570).
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">
+            7. Payment, Late Payment &amp; Taxes
+          </h3>
+          <p>
+            Unless the SOW states otherwise, sprint fees are due in three
+            milestones: 30% to schedule the project, 40% at the agreed
+            mid-project milestone, and 30% before final handover. Invoices are
+            due within seven calendar days. We may pause work after written
+            notice of an overdue invoice, and the delivery schedule will move
+            accordingly. Any late charge must be stated in the SOW or invoice
+            and comply with applicable law. GST is additional where applicable
+            and is shown on the invoice.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">
+            8. Third-Party Costs
+          </h3>
+          <p>
+            Unless a written quote expressly includes them, clients pay
+            third-party charges such as Apple Developer and Google Play fees,
+            hosting, domains, Google Maps or other API usage, and Razorpay or
+            other payment processing fees. These are paid directly by the
+            client where possible; otherwise, only pre-approved costs are
+            recharged at cost.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">
+            9. Cancellation &amp; Refunds
+          </h3>
+          <p>
+            Either party may end an engagement for a material breach if it is
+            not fixed within 15 days after written notice. A client may cancel
+            by written notice at any time and must pay for work completed and
+            non-cancellable costs committed up to the cancellation date. Any
+            remaining advance will be refunded within 30 days of the final
+            cancellation statement. Final deliverables and assigned rights are
+            handed over after all amounts due are paid.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">10. Liability</h3>
+          <p>
+            To the extent permitted by law, neither party is liable for
+            indirect or consequential loss, loss of profits, or loss of
+            business opportunity. Samrique's total liability for a project is
+            limited to the fees paid or payable under its SOW in the 12 months
+            before the event giving rise to the claim. This limit does not
+            apply to liability that cannot legally be limited.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm mb-1">11. Portfolio</h3>
+          <p>
+            After a project is publicly launched, Samrique may identify the
+            client and display non-confidential, public-facing work in its
+            portfolio unless the SOW or a separate NDA says otherwise, or the
+            client asks us in writing before launch not to do so.
           </p>
         </div>
       </div>
