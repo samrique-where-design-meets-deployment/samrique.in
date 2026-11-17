@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, NgZone, OnDestroy } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostListener, NgZone, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 interface BookingDay {
@@ -42,7 +42,6 @@ export class App implements AfterViewInit, OnDestroy {
   protected bookingPhone = '';
   protected bookingMessage = '';
   protected bookingService = 'General consultation';
-  protected bookingMailto = '';
   protected selectedBookingDate = '';
   protected selectedBookingTime = '';
   protected bookingMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
@@ -93,7 +92,6 @@ export class App implements AfterViewInit, OnDestroy {
   protected contactSending = false;
   protected contactStatus: 'ok' | 'err' | '' = '';
   protected contactMessage = '';
-  protected mailtoFallbackUrl = '';
 
   // Category filters
   protected moneyManagerCategory = 'All';
@@ -104,7 +102,10 @@ export class App implements AfterViewInit, OnDestroy {
   private revealObserver?: IntersectionObserver;
   private bookingTrigger?: HTMLElement;
 
-  constructor(private readonly zone: NgZone) { }
+  constructor(
+    private readonly zone: NgZone,
+    private readonly changeDetector: ChangeDetectorRef,
+  ) { }
 
   private readonly handleScroll = (): void => {
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -368,22 +369,6 @@ export class App implements AfterViewInit, OnDestroy {
     const message = ((formData.get('bookingMessage') as string) || this.bookingMessage || '').trim();
 
     const subject = `[Discovery Call Request] ${this.selectedBookingDateLabel} at ${this.selectedBookingTime} - ${name || 'Founder'}`;
-    const body = [
-      '30-minute project discovery call request',
-      `Preferred date: ${this.selectedBookingDateLabel} (${this.selectedBookingDate})`,
-      `Preferred time: ${this.selectedBookingTime} (${this.bookingTimezone})`,
-      `Name: ${name || 'Not provided'}`,
-      `Email: ${email || 'Not provided'}`,
-      `Phone: ${phone || 'Not provided'}`,
-      `Service: ${this.bookingService}`,
-      '',
-      'Project idea:',
-      message || 'Not provided',
-      '',
-      'This is a preferred time request, not a confirmed booking.',
-    ].join('\n');
-
-    this.bookingMailto = `mailto:samrique.in@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     this.bookingSending = true;
     this.bookingStatus = '';
     this.bookingError = '';
@@ -427,13 +412,13 @@ export class App implements AfterViewInit, OnDestroy {
         this.bookingNoticeVisible = true;
       })
       .catch(() => {
-        window.location.href = this.bookingMailto;
         this.bookingStatus = 'err';
         this.bookingMessageText =
-          'Could not send automatically. We prepared an email draft to samrique.in@gmail.com with your selected date & time.';
+          'We could not confirm the request with FormSubmit. It may still have been delivered, so please wait for our email reply before submitting again.';
       })
       .finally(() => {
         this.bookingSending = false;
+        this.changeDetector.markForCheck();
       });
   }
 
@@ -1477,21 +1462,8 @@ export class App implements AfterViewInit, OnDestroy {
       return;
     }
 
-    const subject = encodeURIComponent(
-      `[Samrique Project Enquiry] ${this.contactForm.project_type || 'Mobile App'} - ${this.contactForm.name}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${this.contactForm.name}\n` +
-      `Email: ${this.contactForm.email}\n` +
-      `Phone/WhatsApp: ${this.contactForm.phone || 'N/A'}\n` +
-      `Company: ${this.contactForm.company || 'N/A'}\n` +
-      `Project Type: ${this.contactForm.project_type}\n` +
-      `Package: ${this.contactForm.package || 'Not sure yet'}\n` +
-      `Budget: ${this.contactForm.budget}\n` +
-      `Timeline: ${this.contactForm.timeline}\n\n` +
-      `What to build:\n${this.contactForm.details}\n`
-    );
-    this.mailtoFallbackUrl = `mailto:samrique.in@gmail.com?subject=${subject}&body=${body}`;
+    const subject =
+      `[Samrique Project Enquiry] ${this.contactForm.project_type || 'Mobile App'} - ${this.contactForm.name}`;
 
     this.contactSending = true;
 
@@ -1507,8 +1479,8 @@ export class App implements AfterViewInit, OnDestroy {
       package: this.contactForm.package || 'Not specified',
       budget: this.contactForm.budget || 'Not specified',
       timeline: this.contactForm.timeline || 'Not specified',
-      message: this.contactForm.details,
-      _subject: decodeURIComponent(subject),
+        message: this.contactForm.details,
+      _subject: subject,
       _template: 'table',
       _captcha: 'false',
     };
@@ -1544,13 +1516,13 @@ export class App implements AfterViewInit, OnDestroy {
           'Thank you. We received your enquiry and will reply within 24 hours, scoped roadmap within 48 hours.';
       })
       .catch(() => {
-        window.location.href = this.mailtoFallbackUrl;
-        this.contactStatus = 'ok';
+        this.contactStatus = 'err';
         this.contactMessage =
-          'We prepared an email draft to samrique.in@gmail.com with your project details. Please click Send in your email client, or click the draft link below.';
+          'We could not confirm the enquiry with FormSubmit. It may still have been delivered, so please wait for our email reply before submitting again.';
       })
       .finally(() => {
         this.contactSending = false;
+        this.changeDetector.markForCheck();
       });
   }
 

@@ -2992,6 +2992,118 @@ a:focus-visible {
   }
 }
 
+/* Keep the project enquiry page on the same light palette as the home page,
+   regardless of the visitor's operating-system color preference. */
+.pricing-page {
+  color-scheme: light;
+  --bg: #f7f8fc;
+  --card: #ffffff;
+  --ink: #14162b;
+  --muted: #5c6078;
+  --line: #d9dcea;
+  background: #f8fafc !important;
+  color: #1e293b !important;
+}
+
+.pricing-page h1,
+.pricing-page h2,
+.pricing-page h3,
+.pricing-page h4 { color: #14162b !important; }
+
+.pricing-page .pricing-nav-bar {
+  background: rgba(255, 255, 255, .92) !important;
+  border-color: rgba(226, 232, 240, .95) !important;
+}
+.pricing-page .pricing-desktop-nav {
+  background: rgba(241, 245, 249, .95) !important;
+  border-color: #e2e8f0 !important;
+}
+.pricing-page .pricing-desktop-nav a { color: #4a5262 !important; }
+.pricing-page .pricing-nav-actions a {
+  background: #f8fafc !important;
+  color: #334155 !important;
+  border-color: #e2e8f0 !important;
+}
+.pricing-page .pricing-back-text { color: #334155 !important; }
+.pricing-page .pricing-contact-card,
+.pricing-page #pricing .plan,
+.pricing-page .bento-card,
+.pricing-page .faq-card {
+  background: #ffffff !important;
+  border-color: #e1e5ed !important;
+}
+.pricing-page #pricing .plan.featured {
+  border-color: var(--coral) !important;
+  background: linear-gradient(180deg, #fff7f7 0%, #ffffff 100%) !important;
+}
+.pricing-page .addon-item,
+.pricing-page .milestone-step {
+  background: #f7f8fc !important;
+  border-color: #e1e5ed !important;
+  color: #14162b !important;
+}
+.pricing-page .addon-item .addon-chip {
+  background: #ffffff !important;
+  border-color: #d9dcea !important;
+  color: #14162b !important;
+}
+.pricing-page .pricing-cta-banner {
+  background: linear-gradient(135deg, #f0f3f9 0%, #ffffff 100%);
+  color: #273143;
+  border-color: #e1e5ed;
+  box-shadow: 0 16px 40px -18px rgba(15, 23, 42, .18);
+}
+.pricing-page .pricing-cta-banner h3 { color: #172033 !important; }
+.pricing-page .pricing-cta-banner p { color: #596477; opacity: 1; }
+.pricing-page #contact form {
+  background: #ffffff !important;
+  border-color: #e1e5ed !important;
+}
+.pricing-page #contact input,
+.pricing-page #contact select,
+.pricing-page #contact textarea {
+  background: #ffffff !important;
+  color: #172033 !important;
+  border-color: #d9dcea !important;
+}
+.pricing-page #contact input::placeholder,
+.pricing-page #contact textarea::placeholder { color: #818a9b !important; }
+.pricing-page #contact .side button {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+}
+.pricing-page .pricing-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 0 0;
+  border-top: 1px solid #e1e5ed;
+  color: #778398;
+  font-size: 12px;
+}
+.pricing-page .pricing-footer-bottom button { color: inherit; }
+.pricing-page .pricing-footer-bottom i { color: #0d9488; }
+.pricing-page .pricing-site-footer {
+  padding: 56px 0 28px;
+  border-top: 1px solid #e1e5ed;
+  background: #ffffff;
+}
+.pricing-page .pricing-site-footer h4 { color: #273143 !important; }
+.pricing-page .pricing-site-footer ul,
+.pricing-page .pricing-site-footer p { color: #647084 !important; }
+.pricing-page .pricing-site-footer a,
+.pricing-page .pricing-site-footer button {
+  color: #647084;
+  transition: color .2s ease;
+}
+.pricing-page .pricing-site-footer a:hover,
+.pricing-page .pricing-site-footer button:hover { color: #0d9488; }
+@media (max-width: 640px) {
+  .pricing-page .pricing-footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
 /* Fallback for ultra-short landscape screens (< 480px) */
 @media (max-height: 480px) {
   .enquiry-overlay {
@@ -3747,3 +3859,50 @@ a:focus-visible {
     font-size: 13.5px !important;
   }
 }
+
+/* Final light-theme guard: pricing includes older OS dark-mode overrides. */
+.pricing-page {
+  color-scheme: light;
+  --bg: #f7f8fc;
+  --card: #ffffff;
+  --ink: #14162b;
+  --muted: #5c6078;
+  --line: #d9dcea;
+  background: #f8fafc !important;
+  color: #1e293b !important;
+}
+.pricing-page h1,
+.pricing-page h2,
+.pricing-page h3,
+.pricing-page h4 { color: #14162b !important; }
+.pricing-page .pricing-nav-bar { background: rgba(255,255,255,.92) !important; border-color: #e2e8f0 !important; }
+.pricing-page .pricing-desktop-nav { background: rgba(241,245,249,.95) !important; border-color: #e2e8f0 !important; }
+.pricing-page .pricing-desktop-nav a { color: #4a5262 !important; }
+.pricing-page .pricing-nav-actions a { background: #f8fafc !important; color: #334155 !important; border-color: #e2e8f0 !important; }
+.pricing-page .pricing-contact-card,
+.pricing-page #pricing .plan,
+.pricing-page .bento-card,
+.pricing-page .faq-card { background: #fff !important; border-color: #e1e5ed !important; }
+.pricing-page #pricing .plan.featured { background: linear-gradient(180deg,#fff7f7,#fff) !important; border-color: var(--coral) !important; }
+.pricing-page .addon-item,
+.pricing-page .milestone-step { background: #f7f8fc !important; border-color: #e1e5ed !important; color: #14162b !important; }
+.pricing-page .addon-item .addon-chip { background: #fff !important; border-color: #d9dcea !important; color: #14162b !important; }
+.pricing-page .pricing-cta-banner { background: linear-gradient(135deg,#f0f3f9,#fff); color: #273143; border-color: #e1e5ed; }
+.pricing-page .pricing-cta-banner h3 { color: #172033 !important; }
+.pricing-page .pricing-cta-banner p { color: #596477; opacity: 1; }
+.pricing-page #contact form { background: #fff !important; border-color: #e1e5ed !important; }
+.pricing-page #contact input,
+.pricing-page #contact select,
+.pricing-page #contact textarea { background: #fff !important; color: #172033 !important; border-color: #d9dcea !important; }
+.pricing-page #contact input::placeholder,
+.pricing-page #contact textarea::placeholder { color: #818a9b !important; }
+.pricing-page #contact .side button { background: #f1f5f9 !important; color: #334155 !important; }
+.pricing-page .pricing-site-footer { padding: 56px 0 28px; border-top: 1px solid #e1e5ed; background: #fff; }
+.pricing-page .pricing-site-footer h4 { color: #273143 !important; }
+.pricing-page .pricing-site-footer ul,
+.pricing-page .pricing-site-footer p { color: #647084 !important; }
+.pricing-page .pricing-site-footer a,
+.pricing-page .pricing-site-footer button { color: #647084; }
+.pricing-page .pricing-site-footer a:hover,
+.pricing-page .pricing-site-footer button:hover { color: #0d9488; }
+.pricing-page .pricing-footer-bottom { border-top: 1px solid #e1e5ed; color: #778398; }
