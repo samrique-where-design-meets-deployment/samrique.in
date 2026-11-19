@@ -552,6 +552,43 @@ export class App implements AfterViewInit, OnDestroy {
     return screens.filter((s) => s.category.toLowerCase() === category.toLowerCase()).length;
   }
 
+  // --- Proof Points & Case Build Classifications ---
+  protected readonly moneyManagerProofPoint = {
+    badge: 'Personal Finance · Offline-First',
+    classification: 'Product Showcase / Concept MVP',
+    notice: 'Internal reference build engineered to demonstrate offline-first state architecture, sub-second SQLite performance, and zero-latency transaction pipelines. Not a live banking service with active external users.',
+    problemSolved: 'Users hesitate to adopt finance apps that require continuous cloud lock-in or sensitive bank linking, creating latency and privacy concerns. Samrique Money Manager solves this with an instant, private, local-first transaction ledger.',
+    keyUserFlows: 'Sub-second expense & income recording with automated balance reconciliation across accounts → monthly spending distribution insights by category → one-tap filtered CSV ledger export.',
+    architectureTimeline: 'Engineered in a 2-week agile sprint utilizing an offline-first SQLite database architecture, reactive GetX controller lifecycle ensuring consistent 60fps frame rates, and strict type-safe Dart models.'
+  };
+
+  protected readonly marketplaceProofPoint = {
+    badge: 'Digital Commerce · Multi-Role',
+    classification: 'Product Showcase / Concept MVP',
+    notice: 'Turnkey concept build engineered to demonstrate multi-vendor commerce, asynchronous payment webhooks, and KYC moderation. Built as an internal concept MVP; not an active commercial marketplace with public sellers.',
+    problemSolved: 'Digital creators and boutique design agencies struggle with cumbersome multi-vendor platforms that suffer from delayed onboarding, manual KYC bottlenecks, and high checkout drop-offs.',
+    keyUserFlows: 'Buyer catalog discovery & search → Razorpay checkout → secure tokenized digital file download | Seller KYC onboarding & verification → listing approval moderation dashboard → seller wallet payout requests.',
+    architectureTimeline: 'Architected and built in a 4-week sprint using Flutter with modular Provider state management, unified REST API service adapters, and 18 production-ready screens compiled across mobile, tablet, and web.'
+  };
+
+  protected readonly mamaProofPoint = {
+    badge: 'Pregnancy & Wellness · HealthTech',
+    classification: 'Product Showcase / Concept MVP',
+    notice: 'Maternal health proof-of-capability app engineered to validate gestational calculation engines, real-time physiological timers, and secure medical logging. Built as an internal product showcase; not a certified clinical or live consumer service.',
+    problemSolved: 'Expectant mothers face clinical, fragmented utilities that overwhelm them with ads and clinical jargon rather than offering a calm, reassuring, and intuitive companion for tracking milestones, daily symptoms, and prenatal appointments.',
+    keyUserFlows: 'Dynamic due-date gestation engine calculating weekly milestones and developmental fruit analogies → interactive contraction stopwatch and fetal kick counter → daily symptom journaling & prenatal appointment reminder pipeline.',
+    architectureTimeline: 'Engineered in a 3-week design-to-code sprint utilizing Provider for decoupled event streams, Flutter Secure Storage for encrypted local session tokens, and a human-centered Material 3 aesthetic.'
+  };
+
+  protected readonly zipiProofPoint = {
+    badge: 'On-Demand Mobility · Dual-Persona',
+    classification: 'Product Showcase / Concept MVP',
+    notice: 'Multi-persona on-demand mobility platform engineered to demonstrate real-time geospatial dispatch, dynamic fare calculation, and dual-role driver/rider state synchronization. Built as an internal concept MVP; not an operating fleet with live municipal riders.',
+    problemSolved: 'Metropolitan commuters lose hours in traffic gridlock with unpredictable cab surge pricing, while independent two-wheeler drivers lack reliable dispatching, upfront fare transparency, and trusted driver verification.',
+    keyUserFlows: 'Commuter live map pickup selection → Google Maps route polyline rendering → instant captain matching & tracking → itemized digital fare invoice | Captain KYC document submission → real-time order radar alert acceptance → earnings analytics dashboard.',
+    architectureTimeline: 'Architected and delivered in a 4-week sprint featuring a synchronized dual-persona architecture with GetX state management, Google Maps Flutter SDK, real-time geocoding, and modular mock dispatch engines.'
+  };
+
   // --- Features & Stack Data ---
   protected readonly moneyManagerFeatures = [
     { title: 'Transaction tracking', detail: 'Record and edit income, expenses, and transfers between accounts. Each transaction can include an amount, category, account, date and time, plus optional notes or tags.' },

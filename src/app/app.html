@@ -23,6 +23,8 @@
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+          <a href="#product-proof-point" (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof Point</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -59,7 +61,13 @@
       <a class="product-back" [attr.href]="appPath('/#projects')"
         (click)="$event.preventDefault(); returnToProjects()"><i class="fa-solid fa-arrow-left"></i> Back to
         projects</a>
-      <span class="product-eyebrow"><i class="fa-solid fa-wallet"></i> Personal finance · Flutter app</span>
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-eyebrow"><i class="fa-solid fa-wallet"></i> Personal finance · Flutter app</span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          Product Showcase &bull; Concept MVP
+        </span>
+      </div>
       <h1>Samrique<br /><span>Money Manager</span></h1>
       <p>
         Clear everyday finances, at your pace. Record transactions, organize
@@ -92,6 +100,8 @@
   <nav class="product-toc" aria-label="On this page">
     <a href="#product-overview"
       (click)="$event.preventDefault(); scrollToProductSection('product-overview')">Overview</a>
+    <a href="#product-proof-point"
+      (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')">Proof Point</a>
     <a href="#product-features"
       (click)="$event.preventDefault(); scrollToProductSection('product-features')">Features</a>
     <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')">Screens
@@ -113,6 +123,69 @@
       for individuals who want a straightforward way to record day-to-day
       finances, keep account balances organized, and review spending patterns.
     </p>
+  </section>
+
+  <!-- Engineering & Product Proof Point Section -->
+  <section id="product-proof-point" class="product-section">
+    <div class="product-section-heading">
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-kicker">Engineering &amp; Product Proof Point</span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+          <i class="fa-solid fa-flask-vial text-emerald-600"></i> {{ moneyManagerProofPoint.classification }}
+        </span>
+      </div>
+      <h2>Engineered for real-world utility,<br /><span>not just UI screens.</span></h2>
+      <p class="max-w-3xl">
+        {{ moneyManagerProofPoint.notice }}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Problem Solved</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ moneyManagerProofPoint.problemSolved }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> Local-first offline privacy
+        </div>
+      </div>
+
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
+            <i class="fa-solid fa-route"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Key User Flows Built</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ moneyManagerProofPoint.keyUserFlows }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> Transaction &rarr; Audit &rarr; CSV Export
+        </div>
+      </div>
+
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
+            <i class="fa-solid fa-code-branch"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Architecture &amp; Timeline</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ moneyManagerProofPoint.architectureTimeline }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> 2-Week Sprint &bull; SQLite Ledger
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="product-features" class="product-section">
@@ -283,7 +356,8 @@
               cursor: pointer;
             ">
             Terms of Service
-          </button></span>
+          </button>
+          &bull; MSME Registered: UDYAM-TN-36-0066570</span>
         <span>Ambur, Tamil Nadu</span>
       </div>
     </div>
@@ -314,6 +388,8 @@
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+          <a href="#product-proof-point" (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof Point</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -349,8 +425,13 @@
       <a class="product-back" [attr.href]="appPath('/#projects')"
         (click)="$event.preventDefault(); returnToProjects()"><i class="fa-solid fa-arrow-left"></i> Back to
         projects</a>
-      <span class="product-eyebrow"><i class="fa-solid fa-bag-shopping"></i> Digital marketplace · Flutter
-        app</span>
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-eyebrow"><i class="fa-solid fa-bag-shopping"></i> Digital marketplace · Flutter app</span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 text-xs font-bold">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+          Product Showcase &bull; Concept MVP
+        </span>
+      </div>
       <h1>
         Samrique<br /><span style="white-space: nowrap">E-Marketplace</span>
       </h1>
@@ -384,6 +465,8 @@
   <nav class="product-toc" aria-label="On this page">
     <a href="#product-overview"
       (click)="$event.preventDefault(); scrollToProductSection('product-overview')">Overview</a>
+    <a href="#product-proof-point"
+      (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')">Proof Point</a>
     <a href="#product-features"
       (click)="$event.preventDefault(); scrollToProductSection('product-features')">Features</a>
     <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')">Screens
@@ -404,6 +487,69 @@
       delivery of purchased downloads, seller operations, and marketplace
       moderation into one connected product.
     </p>
+  </section>
+
+  <!-- Engineering & Product Proof Point Section -->
+  <section id="product-proof-point" class="product-section">
+    <div class="product-section-heading">
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-kicker">Engineering &amp; Product Proof Point</span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 text-xs font-bold">
+          <i class="fa-solid fa-flask-vial text-blue-600"></i> {{ marketplaceProofPoint.classification }}
+        </span>
+      </div>
+      <h2>Engineered for real-world utility,<br /><span>not just UI screens.</span></h2>
+      <p class="max-w-3xl">
+        {{ marketplaceProofPoint.notice }}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Problem Solved</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ marketplaceProofPoint.problemSolved }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> Seamless Multi-Vendor Checkout
+        </div>
+      </div>
+
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
+            <i class="fa-solid fa-route"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Key User Flows Built</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ marketplaceProofPoint.keyUserFlows }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> Buyer &rarr; Razorpay &rarr; Seller Wallet
+        </div>
+      </div>
+
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
+            <i class="fa-solid fa-code-branch"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Architecture &amp; Timeline</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ marketplaceProofPoint.architectureTimeline }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> 4-Week Sprint &bull; Provider Architecture
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="product-features" class="product-section">
@@ -579,7 +725,8 @@
               cursor: pointer;
             ">
             Terms of Service
-          </button></span>
+          </button>
+          &bull; MSME Registered: UDYAM-TN-36-0066570</span>
         <span>Ambur, Tamil Nadu</span>
       </div>
     </div>
@@ -610,6 +757,8 @@
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+          <a href="#product-proof-point" (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof Point</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -645,8 +794,13 @@
       <a class="product-back" [attr.href]="appPath('/#projects')"
         (click)="$event.preventDefault(); returnToProjects()"><i class="fa-solid fa-arrow-left"></i> Back to
         projects</a>
-      <span class="product-eyebrow"><i class="fa-solid fa-heart"></i> Pregnancy wellness · Flutter
-        app</span>
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-eyebrow"><i class="fa-solid fa-heart"></i> Pregnancy wellness · Flutter app</span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-50 text-pink-800 border border-pink-200 text-xs font-bold">
+          <span class="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse"></span>
+          Product Showcase &bull; Concept MVP
+        </span>
+      </div>
       <h1>Samrique<br /><span>Mama Tracker</span></h1>
       <p>
         A calm, caring companion for pregnancy. Keep your week-by-week overview,
@@ -679,6 +833,8 @@
   <nav class="product-toc" aria-label="On this page">
     <a href="#product-overview"
       (click)="$event.preventDefault(); scrollToProductSection('product-overview')">Overview</a>
+    <a href="#product-proof-point"
+      (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')">Proof Point</a>
     <a href="#product-features"
       (click)="$event.preventDefault(); scrollToProductSection('product-features')">Features</a>
     <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')">Screens
@@ -700,6 +856,69 @@
       date, and an illustrative fruit-size comparison based on the due date on
       the user profile.
     </p>
+  </section>
+
+  <!-- Engineering & Product Proof Point Section -->
+  <section id="product-proof-point" class="product-section">
+    <div class="product-section-heading">
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-kicker">Engineering &amp; Product Proof Point</span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-50 text-pink-800 border border-pink-200 text-xs font-bold">
+          <i class="fa-solid fa-flask-vial text-pink-600"></i> {{ mamaProofPoint.classification }}
+        </span>
+      </div>
+      <h2>Engineered for real-world utility,<br /><span>not just UI screens.</span></h2>
+      <p class="max-w-3xl">
+        {{ mamaProofPoint.notice }}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Problem Solved</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ mamaProofPoint.problemSolved }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> Calm Maternal Care Experience
+        </div>
+      </div>
+
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
+            <i class="fa-solid fa-route"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Key User Flows Built</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ mamaProofPoint.keyUserFlows }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> Milestones &rarr; Timers &rarr; Clinic Visits
+        </div>
+      </div>
+
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
+            <i class="fa-solid fa-code-branch"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Architecture &amp; Timeline</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ mamaProofPoint.architectureTimeline }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> 3-Week Sprint &bull; Secure Storage
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="product-features" class="product-section">
@@ -860,7 +1079,8 @@
               cursor: pointer;
             ">
             Terms of Service
-          </button></span>
+          </button>
+          &bull; MSME Registered: UDYAM-TN-36-0066570</span>
         <span>Ambur, Tamil Nadu</span>
       </div>
     </div>
@@ -891,6 +1111,8 @@
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+          <a href="#product-proof-point" (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof Point</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -927,9 +1149,15 @@
       <a class="product-back" [attr.href]="appPath('/#projects')"
         (click)="$event.preventDefault(); returnToProjects()"><i class="fa-solid fa-arrow-left"></i> Back to
         projects</a>
-      <span class="product-eyebrow" style="border-color: #f9731644; background: #f9731612; color: #f97316">
-        <i class="fa-solid fa-motorcycle"></i> On-Demand Mobility · Flutter app
-      </span>
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-eyebrow" style="border-color: #f9731644; background: #f9731612; color: #f97316">
+          <i class="fa-solid fa-motorcycle"></i> On-Demand Mobility · Flutter app
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+          Product Showcase &bull; Concept MVP
+        </span>
+      </div>
       <h1>Zipi<br /><span style="color: #f97316">Bike Taxi</span></h1>
       <p>
         Agile, instant city transit on two wheels. A synchronized multi-role
@@ -965,6 +1193,8 @@
   <nav class="product-toc" aria-label="On this page">
     <a href="#product-overview"
       (click)="$event.preventDefault(); scrollToProductSection('product-overview')">Overview</a>
+    <a href="#product-proof-point"
+      (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')">Proof Point</a>
     <a href="#product-features"
       (click)="$event.preventDefault(); scrollToProductSection('product-features')">Features</a>
     <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')">Screens
@@ -988,6 +1218,69 @@
       verification (KYC), vehicle selection, and multi-language localization to
       serve riders and drivers across metropolitan transit zones.
     </p>
+  </section>
+
+  <!-- Engineering & Product Proof Point Section -->
+  <section id="product-proof-point" class="product-section">
+    <div class="product-section-heading">
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-kicker">Engineering &amp; Product Proof Point</span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">
+          <i class="fa-solid fa-flask-vial text-amber-600"></i> {{ zipiProofPoint.classification }}
+        </span>
+      </div>
+      <h2>Engineered for real-world utility,<br /><span>not just UI screens.</span></h2>
+      <p class="max-w-3xl">
+        {{ zipiProofPoint.notice }}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Problem Solved</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ zipiProofPoint.problemSolved }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> Rapid Hyper-Local Dispatch
+        </div>
+      </div>
+
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
+            <i class="fa-solid fa-route"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Key User Flows Built</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ zipiProofPoint.keyUserFlows }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> Commuter &rarr; Maps &rarr; Captain Radar
+        </div>
+      </div>
+
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
+            <i class="fa-solid fa-code-branch"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Architecture &amp; Timeline</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ zipiProofPoint.architectureTimeline }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> 4-Week Sprint &bull; Dual Persona GetX
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="product-features" class="product-section">
@@ -1161,7 +1454,8 @@
               cursor: pointer;
             ">
             Terms of Service
-          </button></span>
+          </button>
+          &bull; MSME Registered: UDYAM-TN-36-0066570</span>
         <span>Ambur, Tamil Nadu</span>
       </div>
     </div>
@@ -2292,7 +2586,7 @@
         </h2>
         <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
           Every digital experience should earn its place on a user's home
-          screen. Here are selected systems we engineered.
+          screen. Here are selected systems we engineered as turnkey concept builds and production-grade MVPs.
         </p>
       </div>
 
@@ -2310,7 +2604,7 @@
                 <span
                   class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-bold">
                   <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-                  Product Build &bull; Available as Source Code
+                  Product Showcase &bull; Concept MVP
                 </span>
               </div>
               <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -2327,15 +2621,28 @@
                 experiences for buyers, sellers, and administrators.
               </p>
               <div
-                class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium space-y-1">
-                <div>
-                  <strong>Key outcomes:</strong> 18 responsive screens,
-                  multi-tier seller wallets, KYC moderation dashboards, Razorpay
-                  checkout.
+                class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-3">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200/70">
+                  <span class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-microchip text-rose-600"></i> Engineering &amp; Product Proof Point
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
+                    Case Build &bull; Internal MVP
+                  </span>
                 </div>
-                <div class="text-teal-700 font-semibold">
-                  <i class="fa-solid fa-code text-[11px]"></i> Turnkey codebase
-                  available for commercial license or custom brand sprint.
+                <div class="space-y-2">
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-bullseye text-rose-500 mr-1"></i> Problem Solved:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ marketplaceProofPoint.problemSolved }}</p>
+                  </div>
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ marketplaceProofPoint.keyUserFlows }}</p>
+                  </div>
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ marketplaceProofPoint.architectureTimeline }}</p>
+                  </div>
                 </div>
               </div>
               <div class="flex flex-wrap gap-2 pt-1">
@@ -2390,7 +2697,7 @@
                 <span
                   class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Product Build &bull; Source Code Available
+                  Product Showcase &bull; Concept MVP
                 </span>
               </div>
               <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -2407,14 +2714,28 @@
                 vs. expenses.
               </p>
               <div
-                class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium space-y-1">
-                <div>
-                  <strong>Key outcomes:</strong> 8 mobile screens, multi-account
-                  portfolios, spending analytics, CSV report export.
+                class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-3">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200/70">
+                  <span class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-microchip text-emerald-600"></i> Engineering &amp; Product Proof Point
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
+                    Case Build &bull; Internal MVP
+                  </span>
                 </div>
-                <div class="text-emerald-700 font-semibold">
-                  <i class="fa-solid fa-shield text-[11px]"></i> Offline-first
-                  personal finance architecture ready for white-labeling.
+                <div class="space-y-2">
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-bullseye text-emerald-600 mr-1"></i> Problem Solved:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ moneyManagerProofPoint.problemSolved }}</p>
+                  </div>
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ moneyManagerProofPoint.keyUserFlows }}</p>
+                  </div>
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ moneyManagerProofPoint.architectureTimeline }}</p>
+                  </div>
                 </div>
               </div>
               <div class="flex flex-wrap gap-2 pt-1">
@@ -2449,7 +2770,7 @@
                 <span
                   class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-50 text-pink-700 border border-pink-200 text-xs font-bold">
                   <span class="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse"></span>
-                  Product Build &bull; Available as Source Code
+                  Product Showcase &bull; Concept MVP
                 </span>
               </div>
               <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -2465,15 +2786,28 @@
                 timer, and community discussions.
               </p>
               <div
-                class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium space-y-1">
-                <div>
-                  <strong>Key outcomes:</strong> 11 mobile screens, weekly
-                  milestones, kick counter &amp; contractions, hydration &amp;
-                  visits.
+                class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-3">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200/70">
+                  <span class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-microchip text-pink-600"></i> Engineering &amp; Product Proof Point
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
+                    Case Build &bull; Internal MVP
+                  </span>
                 </div>
-                <div class="text-pink-700 font-semibold">
-                  <i class="fa-solid fa-heart-pulse text-[11px]"></i> Wellness
-                  tracking app, ready for startup deployment.
+                <div class="space-y-2">
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-bullseye text-pink-600 mr-1"></i> Problem Solved:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ mamaProofPoint.problemSolved }}</p>
+                  </div>
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ mamaProofPoint.keyUserFlows }}</p>
+                  </div>
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ mamaProofPoint.architectureTimeline }}</p>
+                  </div>
                 </div>
               </div>
               <div class="flex flex-wrap gap-2 pt-1">
@@ -2518,7 +2852,7 @@
                 <span
                   class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200 text-xs font-bold">
                   <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-                  Product Build &bull; Turnkey Mobility Codebase
+                  Product Showcase &bull; Concept MVP
                 </span>
               </div>
               <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
@@ -2534,15 +2868,28 @@
                 KYC verification, and digital invoicing.
               </p>
               <div
-                class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 text-xs text-slate-700 font-medium space-y-1">
-                <div>
-                  <strong>Key outcomes:</strong> 22 mobile screens, live maps
-                  &amp; radar, captain KYC pipeline, multi-language support.
+                class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-3">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200/70">
+                  <span class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-microchip text-amber-600"></i> Engineering &amp; Product Proof Point
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
+                    Turnkey Mobility MVP
+                  </span>
                 </div>
-                <div class="text-amber-700 font-semibold">
-                  <i class="fa-solid fa-map-location-dot text-[11px]"></i>
-                  Complete rider + captain dual codebase available for
-                  deployment.
+                <div class="space-y-2">
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-bullseye text-amber-600 mr-1"></i> Problem Solved:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ zipiProofPoint.problemSolved }}</p>
+                  </div>
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ zipiProofPoint.keyUserFlows }}</p>
+                  </div>
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ zipiProofPoint.architectureTimeline }}</p>
+                  </div>
                 </div>
               </div>
               <div class="flex flex-wrap gap-2 pt-1">
@@ -2759,8 +3106,8 @@
             Proven Flutter engineering across four sectors
           </h3>
           <p class="text-xs sm:text-sm text-slate-500">
-            Every project below is an architected Flutter product build you can
-            inspect screen-by-screen or license turnkey source code.
+            Every project below is an architected Flutter concept build or turnkey MVP you can
+            inspect screen-by-screen or license as reference source code.
           </p>
         </div>
 
@@ -2782,7 +3129,7 @@
               </p>
             </div>
             <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-[11px] font-bold text-slate-500 uppercase">18 Screens &bull; Product Build</span>
+              <span class="text-[11px] font-bold text-slate-500 uppercase">18 Screens &bull; Concept Case Build</span>
               <button type="button" (click)="openMarketplace()"
                 class="text-xs font-bold text-teal-600 hover:text-teal-800 transition-colors inline-flex items-center gap-1">
                 View build <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -2807,7 +3154,7 @@
               </p>
             </div>
             <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-[11px] font-bold text-slate-500 uppercase">8 Screens &bull; Product Build</span>
+              <span class="text-[11px] font-bold text-slate-500 uppercase">8 Screens &bull; Offline MVP Build</span>
               <button type="button" (click)="openMoneyManager()"
                 class="text-xs font-bold text-teal-600 hover:text-teal-800 transition-colors inline-flex items-center gap-1">
                 View build <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -2833,7 +3180,7 @@
               </p>
             </div>
             <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-[11px] font-bold text-slate-500 uppercase">11 Screens &bull; Product Build</span>
+              <span class="text-[11px] font-bold text-slate-500 uppercase">11 Screens &bull; Concept Case Build</span>
               <button type="button" (click)="openMama()"
                 class="text-xs font-bold text-teal-600 hover:text-teal-800 transition-colors inline-flex items-center gap-1">
                 View build <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -2859,7 +3206,7 @@
               </p>
             </div>
             <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-[11px] font-bold text-slate-500 uppercase">22 Screens &bull; Product Build</span>
+              <span class="text-[11px] font-bold text-slate-500 uppercase">22 Screens &bull; Turnkey Mobility MVP</span>
               <button type="button" (click)="openZipi()"
                 class="text-xs font-bold text-teal-600 hover:text-teal-800 transition-colors inline-flex items-center gap-1">
                 View build <i class="fa-solid fa-arrow-right text-[10px]"></i>

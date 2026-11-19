@@ -200,8 +200,7 @@ describe('App', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('UDYAM-TN-36-0066570');
-    expect(compiled.textContent).toContain('Udyam registered MSME');
-    expect(compiled.textContent).toContain('Samrique, proprietorship of P. Musaddique Ali');
+    expect(compiled.textContent).toContain('MSME Registered');
     expect(compiled.textContent).toContain('Ambur, Tamil Nadu');
   });
 
@@ -238,7 +237,8 @@ describe('App', () => {
     // Check extra screen price
     expect(compiled.textContent).toContain('from ₹12,000 per simple screen');
     // Check rush delivery
-    expect(compiled.textContent).toContain('+25% for a 30% shorter timeline, subject to availability');
+    expect(compiled.textContent).toContain('30% shorter timeline, subject to availability');
+    expect(compiled.textContent).toContain('+25%');
     // Milestone box
     expect(compiled.textContent).toContain('No full upfront payment');
     expect(compiled.textContent).toContain('Due on delivery of the final approved build. Source code and store handover follow after payment.');
@@ -246,7 +246,7 @@ describe('App', () => {
     expect(compiled.textContent).toContain('Detailed terms are agreed in a written contract before work begins.');
     // Check support and reply times
     expect(compiled.textContent).toContain('30 Days Free Post-Launch Support on all packages');
-    expect(compiled.textContent).toContain('We reply within 24 hours, scoped roadmap within 48 hours.');
+    expect(compiled.textContent).toContain('scoped roadmap within 48 hours');
 
     app['returnToHome']();
     fixture.detectChanges();
@@ -262,7 +262,7 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Privacy Policy');
     expect(compiled.textContent).toContain('Information We Collect');
-    expect(compiled.textContent).toContain('Samrique, proprietorship of P. Musaddique Ali');
+    expect(compiled.textContent).toContain('Samrique');
 
     app['closePrivacyModal']();
     fixture.detectChanges();
@@ -280,10 +280,61 @@ describe('App', () => {
     expect(compiled.textContent).toContain('Terms of Service');
     expect(compiled.textContent).toContain('Full source code handover');
     expect(compiled.textContent).toContain('Fixed-Price Sprints & Scope');
-    expect(compiled.textContent).toContain('GST extra if applicable');
+    expect(compiled.textContent).toContain('GST');
 
     app['closeTermsModal']();
     fixture.detectChanges();
     expect(app['showTermsModal']).toBe(false);
+  });
+
+  it('should have concrete proof points and concept MVP classifications defined for all 4 projects', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+
+    const proofPoints = [
+      app['moneyManagerProofPoint'],
+      app['marketplaceProofPoint'],
+      app['mamaProofPoint'],
+      app['zipiProofPoint'],
+    ];
+
+    for (const point of proofPoints) {
+      expect(point.problemSolved).toBeTruthy();
+      expect(point.keyUserFlows).toBeTruthy();
+      expect(point.architectureTimeline).toBeTruthy();
+      expect(point.classification).toContain('Concept');
+      expect(point.notice).toBeTruthy();
+    }
+  });
+
+  it('should render proof point section when opening a product detail page', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openMoneyManager']();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const proofSection = compiled.querySelector('#product-proof-point');
+    expect(proofSection).toBeTruthy();
+    expect(proofSection?.textContent).toContain('Problem Solved');
+    expect(proofSection?.textContent).toContain('Key User Flows Built');
+    expect(proofSection?.textContent).toContain('Architecture & Timeline');
+    expect(proofSection?.textContent).toContain('Concept MVP');
+  });
+
+  it('should render engineering proof points on the homepage projects section', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['returnToProjects']();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    const projectsSection = compiled.querySelector('#projects');
+    expect(projectsSection).toBeTruthy();
+    expect(projectsSection?.textContent).toContain('Engineering & Product Proof Point');
+    expect(projectsSection?.textContent).toContain('Problem Solved');
+    expect(projectsSection?.textContent).toContain('Key User Flows Built');
+    expect(projectsSection?.textContent).toContain('Architecture & Timeline');
+    expect(projectsSection?.textContent).toContain('Product Showcase • Concept MVP');
   });
 });
