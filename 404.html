@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <script>
+      (() => {
+        const isProjectRepo = window.location.pathname.startsWith('/samrique.in');
+        const basePath = isProjectRepo ? '/samrique.in/' : '/';
+        const path = window.location.pathname.slice(basePath.length);
+        const params = new URLSearchParams({
+          __ghp_path: path,
+          __ghp_search: window.location.search,
+          __ghp_hash: window.location.hash,
+        });
+        window.location.replace(`${basePath}?${params.toString()}`);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
