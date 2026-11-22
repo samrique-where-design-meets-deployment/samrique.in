@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, NgZone, OnDestroy } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostListener, NgZone, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 interface BookingDay {
@@ -33,12 +33,15 @@ export class App implements AfterViewInit, OnDestroy {
   protected bookingOpen = false;
   protected bookingNoticeVisible = false;
   protected bookingError = '';
+  protected bookingSending = false;
+  protected bookingStatus: 'ok' | 'err' | '' = '';
+  protected bookingMessageText = '';
+  protected bookingGotcha = '';
   protected bookingName = '';
   protected bookingEmail = '';
   protected bookingPhone = '';
   protected bookingMessage = '';
   protected bookingService = 'General consultation';
-  protected bookingMailto = '';
   protected selectedBookingDate = '';
   protected selectedBookingTime = '';
   protected bookingMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
@@ -57,29 +60,63 @@ export class App implements AfterViewInit, OnDestroy {
   protected showMarketplace = ['/products/samrique-e-marketplace', '/products/quickcart'].includes(this.routePath);
   protected showMama = ['/products/samrique-mama', '/products/samrique-mama-pregnancy-tracker'].includes(this.routePath);
   protected showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
+  protected showZest = ['/products/zest-grocery', '/products/zest', '/products/samrique-zest-grocery'].includes(this.routePath);
+  protected showJanovexa = ['/products/janovexa', '/products/janovexa-civic-grievance', '/products/samrique-janovexa'].includes(this.routePath);
+  protected showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
 
   // Modal Lightbox state
   protected activeModalScreen: ProductScreen | null = null;
   protected modalViewMode: 'preview' | 'asset' = 'preview';
   protected cardViewModes: Record<string, 'preview' | 'asset'> = {};
 
+  // Pricing & Currency State
+  protected showPricingUSD = true;
+
+  // Legal Modals State
+  protected showPrivacyModal = ['/privacy', '/privacy-policy'].includes(this.routePath);
+  protected showTermsModal = ['/terms', '/terms-of-service', '/terms-and-conditions'].includes(this.routePath);
+  protected showUdyamModal = false;
+  protected enquiryOpen = false;
+
+  // Contact Enquiry Form State
+  protected contactForm = {
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    project_type: '',
+    package: '',
+    budget: '',
+    timeline: '',
+    details: '',
+    _gotcha: '',
+  };
+  protected contactSending = false;
+  protected contactStatus: 'ok' | 'err' | '' = '';
+  protected contactMessage = '';
+
   // Category filters
   protected moneyManagerCategory = 'All';
   protected marketplaceCategory = 'All';
   protected mamaCategory = 'All';
   protected zipiCategory = 'All';
+  protected zestCategory = 'All';
+  protected janovexaCategory = 'All';
 
   private revealObserver?: IntersectionObserver;
   private bookingTrigger?: HTMLElement;
 
-  constructor(private readonly zone: NgZone) { }
+  constructor(
+    private readonly zone: NgZone,
+    private readonly changeDetector: ChangeDetectorRef,
+  ) { }
 
   private readonly handleScroll = (): void => {
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
     document.getElementById('top-progress-bar')?.style.setProperty('width', `${progress}%`);
 
-    const sections = ['hero', 'services', 'how-it-works', 'projects', 'about', 'contact'];
+    const sections = ['hero', 'services', 'how-it-works', 'projects', 'about'];
     const activeSection = sections
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null)
@@ -235,10 +272,14 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   protected openBooking(): void {
+    this.enquiryOpen = false;
     this.bookingTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : undefined;
     this.bookingOpen = true;
     this.bookingNoticeVisible = false;
     this.bookingError = '';
+    this.bookingStatus = '';
+    this.bookingMessageText = '';
+    this.bookingSending = false;
     this.bookingMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
     this.selectedBookingDate = '';
     this.selectedBookingTime = '';
@@ -268,6 +309,21 @@ export class App implements AfterViewInit, OnDestroy {
         this.prevModalScreen();
         return;
       }
+    }
+
+    if (this.showUdyamModal && event.key === 'Escape') {
+      this.closeUdyamModal();
+      return;
+    }
+
+    if (this.showPrivacyModal && event.key === 'Escape') {
+      this.closePrivacyModal();
+      return;
+    }
+
+    if (this.showTermsModal && event.key === 'Escape') {
+      this.closeTermsModal();
+      return;
     }
 
     if (!this.bookingOpen) {
@@ -306,26 +362,68 @@ export class App implements AfterViewInit, OnDestroy {
     }
 
     const formData = new FormData(form);
-    const subject = `Call request: ${this.selectedBookingDateLabel} at ${this.selectedBookingTime}`;
-    const body = [
-      '30-minute project discovery call request',
-      `Preferred date: ${this.selectedBookingDateLabel} (${this.selectedBookingDate})`,
-      `Preferred time: ${this.selectedBookingTime} (${this.bookingTimezone})`,
-      `Name: ${formData.get('bookingName') ?? ''}`,
-      `Email: ${formData.get('bookingEmail') ?? ''}`,
-      `Phone: ${formData.get('bookingPhone') || 'Not provided'}`,
-      `Service: ${this.bookingService}`,
-      '',
-      'Project idea:',
-      String(formData.get('bookingMessage') || 'Not provided'),
-      '',
-      'This is a preferred time request, not a confirmed booking.',
-    ].join('\n');
+    const gotcha = (formData.get('_gotcha') as string) || this.bookingGotcha;
+    if (gotcha) {
+      return;
+    }
 
-    this.bookingMailto = `mailto:samrique.in@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = this.bookingMailto;
-    this.bookingNoticeVisible = true;
+    const name = ((formData.get('bookingName') as string) || this.bookingName || '').trim();
+    const email = ((formData.get('bookingEmail') as string) || this.bookingEmail || '').trim();
+    const phone = ((formData.get('bookingPhone') as string) || this.bookingPhone || '').trim();
+    const message = ((formData.get('bookingMessage') as string) || this.bookingMessage || '').trim();
+
+    const subject = `[Discovery Call Request] ${this.selectedBookingDateLabel} at ${this.selectedBookingTime} - ${name || 'Founder'}`;
+    this.bookingSending = true;
+    this.bookingStatus = '';
     this.bookingError = '';
+    this.bookingMessageText = '';
+
+    const actionUrl = form.getAttribute('action') || 'https://formsubmit.co/ajax/samrique.in@gmail.com';
+    const payload = {
+      _gotcha: gotcha,
+      name: name,
+      email: email,
+      _replyto: email,
+      phone: phone || 'N/A',
+      preferred_date: `${this.selectedBookingDateLabel} (${this.selectedBookingDate})`,
+      preferred_time: `${this.selectedBookingTime} (${this.bookingTimezone})`,
+      service: this.bookingService,
+      project_idea: message || 'N/A',
+      _subject: subject,
+      _template: 'table',
+      _captcha: 'false',
+    };
+
+    fetch(actionUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (r) => {
+        if (!r.ok) {
+          throw new Error(`Submission endpoint returned ${r.status}`);
+        }
+        this.bookingStatus = 'ok';
+        this.bookingMessageText =
+          'Discovery call request received! We will review your preferred time and reply by email within 24 hours to confirm.';
+        this.bookingName = '';
+        this.bookingEmail = '';
+        this.bookingPhone = '';
+        this.bookingMessage = '';
+        this.bookingNoticeVisible = true;
+      })
+      .catch(() => {
+        this.bookingStatus = 'err';
+        this.bookingMessageText =
+          'We could not confirm the request with FormSubmit. It may still have been delivered, so please wait for our email reply before submitting again.';
+      })
+      .finally(() => {
+        this.bookingSending = false;
+        this.changeDetector.markForCheck();
+      });
   }
 
   private dateKey(date: Date): string {
@@ -339,6 +437,10 @@ export class App implements AfterViewInit, OnDestroy {
     document.querySelectorAll('.reveal-on-scroll:not(.is-visible)').forEach((element) => {
       this.revealObserver?.observe(element);
     });
+  }
+
+  private scheduleRevealObservation(): void {
+    window.requestAnimationFrame(() => this.observeRevealElements());
   }
 
   private refreshHomeVisibility(): void {
@@ -407,6 +509,8 @@ export class App implements AfterViewInit, OnDestroy {
     if (this.showMarketplace) return this.marketplaceScreens;
     if (this.showMama) return this.mamaScreens;
     if (this.showZipi) return this.zipiScreens;
+    if (this.showZest) return this.zestScreens;
+    if (this.showJanovexa) return this.janovexaScreens;
     return [];
   }
 
@@ -427,6 +531,97 @@ export class App implements AfterViewInit, OnDestroy {
     return screens.filter((s) => s.category.toLowerCase() === category.toLowerCase());
   }
 
+  protected getCategoryColor(category: string): string {
+    const map: Record<string, string> = {
+      'onboarding': '#8b5cf6',
+      'authentication': '#17b3a3',
+      'buyer': '#3b82f6',
+      'seller': '#f59e0b',
+      'admin': '#ec6a6f',
+      'transactions': '#10b981',
+      'accounts': '#6366f1',
+      'insights': '#ec4899',
+      'settings': '#64748b',
+      'daily vitals': '#f43f5e',
+      'wellness': '#a855f7',
+      'care': '#06b6d4',
+      'transit': '#f97316',
+      'captain': '#eab308',
+      'compliance': '#ef4444',
+      'profile': '#8b5cf6',
+      'retail': '#10b981',
+      'wholesale': '#3b82f6',
+      'delivery': '#f59e0b',
+      '01_citizen_portal': '#4A1525',
+      '02_department_admin_portal': '#0B132B',
+      '03_field_officer_portal': '#FF6B35',
+      'citizen portal': '#4A1525',
+      'department admin': '#0B132B',
+      'field officer': '#FF6B35',
+    };
+    return map[category?.toLowerCase()] || '#17b3a3';
+  }
+
+  protected getCategoryCount(screens: ProductScreen[], category: string): number {
+    if (category === 'All') return screens.length;
+    return screens.filter((s) => s.category.toLowerCase() === category.toLowerCase()).length;
+  }
+
+  // --- Proof Points & Case Build Classifications ---
+  protected readonly moneyManagerProofPoint = {
+    badge: 'Personal Finance · Offline-First',
+    classification: 'Product Showcase / Concept MVP',
+    notice: 'Internal reference build engineered to demonstrate offline-first state architecture, sub-second SQLite performance, and zero-latency transaction pipelines. Not a live banking service with active external users.',
+    problemSolved: 'Users hesitate to adopt finance apps that require continuous cloud lock-in or sensitive bank linking, creating latency and privacy concerns. Samrique Money Manager solves this with an instant, private, local-first transaction ledger.',
+    keyUserFlows: 'Sub-second expense & income recording with automated balance reconciliation across accounts → monthly spending distribution insights by category → one-tap filtered CSV ledger export.',
+    architectureTimeline: 'Engineered in a 2-week agile sprint utilizing an offline-first SQLite database architecture, reactive GetX controller lifecycle ensuring consistent 60fps frame rates, and strict type-safe Dart models.'
+  };
+
+  protected readonly marketplaceProofPoint = {
+    badge: 'Digital Commerce · Multi-Role',
+    classification: 'Product Showcase / Concept MVP',
+    notice: 'Turnkey concept build engineered to demonstrate multi-vendor commerce, asynchronous payment webhooks, and KYC moderation. Built as an internal concept MVP; not an active commercial marketplace with public sellers.',
+    problemSolved: 'Digital creators and boutique design agencies struggle with cumbersome multi-vendor platforms that suffer from delayed onboarding, manual KYC bottlenecks, and high checkout drop-offs.',
+    keyUserFlows: 'Buyer catalog discovery & search → Razorpay checkout → secure tokenized digital file download | Seller KYC onboarding & verification → listing approval moderation dashboard → seller wallet payout requests.',
+    architectureTimeline: 'Architected and built in a 4-week sprint using Flutter with modular Provider state management, unified REST API service adapters, and 18 production-ready screens compiled across mobile, tablet, and web.'
+  };
+
+  protected readonly mamaProofPoint = {
+    badge: 'Pregnancy & Wellness · HealthTech',
+    classification: 'Product Showcase / Concept MVP',
+    notice: 'Maternal health proof-of-capability app engineered to validate gestational calculation engines, real-time physiological timers, and secure medical logging. Built as an internal product showcase; not a certified clinical or live consumer service.',
+    problemSolved: 'Expectant mothers face clinical, fragmented utilities that overwhelm them with ads and clinical jargon rather than offering a calm, reassuring, and intuitive companion for tracking milestones, daily symptoms, and prenatal appointments.',
+    keyUserFlows: 'Dynamic due-date gestation engine calculating weekly milestones and developmental fruit analogies → interactive contraction stopwatch and fetal kick counter → daily symptom journaling & prenatal appointment reminder pipeline.',
+    architectureTimeline: 'Engineered in a 3-week design-to-code sprint utilizing Provider for decoupled event streams, Flutter Secure Storage for encrypted local session tokens, and a human-centered Material 3 aesthetic.'
+  };
+
+  protected readonly zipiProofPoint = {
+    badge: 'On-Demand Mobility · Dual-Persona',
+    classification: 'Product Showcase / Concept MVP',
+    notice: 'Multi-persona on-demand mobility platform engineered to demonstrate real-time geospatial dispatch, dynamic fare calculation, and dual-role driver/rider state synchronization. Built as an internal concept MVP; not an operating fleet with live municipal riders.',
+    problemSolved: 'Metropolitan commuters lose hours in traffic gridlock with unpredictable cab surge pricing, while independent two-wheeler drivers lack reliable dispatching, upfront fare transparency, and trusted driver verification.',
+    keyUserFlows: 'Commuter live map pickup selection → Google Maps route polyline rendering → instant captain matching & tracking → itemized digital fare invoice | Captain KYC document submission → real-time order radar alert acceptance → earnings analytics dashboard.',
+    architectureTimeline: 'Architected and delivered in a 4-week sprint featuring a synchronized dual-persona architecture with GetX state management, Google Maps Flutter SDK, real-time geocoding, and modular mock dispatch engines.'
+  };
+
+  protected readonly zestProofPoint = {
+    badge: 'Quick-Commerce & Wholesale · Multi-Role',
+    classification: 'Product Showcase / Concept MVP',
+    notice: 'Multi-role quick-commerce and wholesale grocery application prototype engineered to demonstrate unified B2C retail shopping, B2B wholesale ordering with volume tiers, and a 4-stage driver fulfillment pipeline backed by demo data fixtures.',
+    problemSolved: 'Grocery businesses struggle to unify retail consumer quick-delivery, bulk restaurant wholesale procurement, and last-mile driver coordination into a single maintainable Flutter codebase without fragmenting state and business logic.',
+    keyUserFlows: 'B2C consumer catalog discovery, search & express cart checkout → B2B wholesale bulk tier ordering, Net 30 credit terms & saved supply lists → Delivery partner task acceptance → store pickup → OpenStreetMap transit → customer handover & earnings analytics.',
+    architectureTimeline: 'Engineered in an agile sprint using Flutter & Dart (SDK ^3.13.5), GetX reactive state management and dependency injection, flutter_map with OpenStreetMap integration, and a unified multi-persona architecture.'
+  };
+
+  protected readonly janovexaProofPoint = {
+    badge: 'Civic Tech & Public Service · Multi-Role',
+    classification: 'Digital Public Service / Production-Grade MVP',
+    notice: 'JANOVEXA empowers citizens to report civic grievances with location and photographic evidence, track resolution progress with transparent department accountability, and provides city departments with a modern administration dashboard to triage, assign officers, and update complaint statuses.',
+    problemSolved: 'Municipal grievance redressal often suffers from opaque resolution timelines, unverified complaint geotags, fragmented citizen communication, and disconnected field dispatch, leading to breached SLAs and declining civic trust.',
+    keyUserFlows: 'Citizen 5-step grievance registration with OSM map pin drop & evidence upload → Department admin queue triage, SLA tracking & field officer dispatch → Field officer on-site navigation, repair resolution & timestamped audit journey → Citizen closure verification & reopening.',
+    architectureTimeline: 'Engineered with Flutter SDK ^3.47.7, Dart ^3.13.5, Flutter Riverpod ^3.5.0 compile-safe state management, flutter_map ^8.3.2 & latlong2 ^0.10.1 with OpenStreetMap tiles, and modern Material 3 design tokens spanning 41 screens across 3 distinct municipal roles.'
+  };
+
   // --- Features & Stack Data ---
   protected readonly moneyManagerFeatures = [
     { title: 'Transaction tracking', detail: 'Record and edit income, expenses, and transfers between accounts. Each transaction can include an amount, category, account, date and time, plus optional notes or tags.' },
@@ -440,11 +635,14 @@ export class App implements AfterViewInit, OnDestroy {
   ];
 
   protected readonly moneyManagerStack = [
-    ['Application framework', 'Flutter'], ['Programming language', 'Dart (SDK >=3.0.0 <4.0.0)'],
-    ['State management and navigation', 'GetX'], ['Backend communication', 'REST API using http'],
-    ['Local preferences', 'shared_preferences'], ['Currency and date formatting', 'intl'],
-    ['CSV creation and saving', 'Dart CSV generation with file_saver'],
-    ['UI', 'Material 3, light and dark themes'], ['Automated tests', 'Flutter test framework'],
+    ['Application framework', 'Flutter'],
+    ['Programming language', 'Dart (SDK >=3.0.0 <4.0.0)'],
+    ['State management and navigation', 'GetX'],
+    ['Local database & persistence', 'SQLite (sqflite) offline ledger & SharedPreferences'],
+    ['Backend communication', 'REST API using http'],
+    ['Currency and date formatting', 'intl'],
+    ['UI', 'Material 3, light and dark themes'],
+    ['Automated tests', 'Flutter test framework'],
   ];
 
   protected readonly marketplaceFeatures = [
@@ -462,12 +660,12 @@ export class App implements AfterViewInit, OnDestroy {
 
   protected readonly marketplaceStack = [
     ['App framework', 'Flutter; Dart (SDK >=3.0.0 <4.0.0)'],
-    ['State management', 'Provider'], ['API communication', 'Dio and HTTP; REST API integration'],
+    ['State management', 'Provider'],
+    ['API communication', 'Dio and HTTP; REST API integration'],
     ['Local preferences', 'SharedPreferences'],
     ['UI and media', 'Material Design, carousel_slider, flutter_staggered_grid_view, shimmer, cached_network_image, flutter_svg, flutter_animate'],
     ['Payments', 'Razorpay Flutter'],
     ['Notifications and analytics dependencies', 'Firebase Messaging, flutter_local_notifications, Firebase Analytics'],
-    ['Device utilities', 'image_picker, file_picker, url_launcher, intl'],
     ['Platforms', 'Android, iOS, web, Windows, macOS, and Linux'],
   ];
 
@@ -479,21 +677,23 @@ export class App implements AfterViewInit, OnDestroy {
     { title: 'Nutrition and hydration', detail: 'Log meals with meal type, calories, and protein, and record water intake.' },
     { title: 'Exercise tracking', detail: 'Keep a record of exercise as part of daily wellness habits.' },
     { title: 'Prenatal appointments', detail: 'Schedule visits with a date, time, and notes. See the next visit highlighted and delete appointments.' },
-    { title: 'Community', detail: 'Browse sample discussions by topic and compose a post or tip. Community content is currently stored in the app rather than synchronized with the backend.' },
+    { title: 'Community & peer support', detail: 'Topic-based discussion threads for expectant mothers to share tips and prenatal experiences, with offline caching and backend moderation sync on the roadmap.' },
     { title: 'Responsive experience', detail: 'A pregnancy-themed Flutter UI built with Material 3 components.' },
   ];
 
   protected readonly mamaStack = [
-    ['Application framework', 'Flutter'], ['Programming language', 'Dart (>=3.0.0 <4.0.0)'],
-    ['State management', 'Provider'], ['API communication', 'HTTP REST API'],
-    ['Local preferences', 'Shared Preferences (session and authentication token)'],
-    ['Date and time formatting', 'Intl'], ['Secure storage', 'flutter_secure_storage is declared but not currently used by the authentication flow'],
+    ['Application framework', 'Flutter'],
+    ['Programming language', 'Dart (>=3.0.0 <4.0.0)'],
+    ['State management', 'Provider'],
+    ['API communication', 'HTTP REST API'],
+    ['Date and time formatting', 'intl'],
+    ['Secure storage & tokens', 'flutter_secure_storage & SharedPreferences for authenticated session caching & token encryption'],
   ];
 
   protected readonly zipiFeatures = [
     { title: 'Role-based experience', detail: 'Dedicated, tailored workflows for commuters (riders) and captain drivers with seamless role switching.' },
     { title: 'Live interactive map booking', detail: 'Map-based pickup and drop-off point selection, real-time vehicle dispatch, route polyline preview, and ETA estimation.' },
-    { title: 'Upfront fare & ride options', detail: 'Transparent fare breakdown based on trip distance, surge multipliers, and vehicle choices (Bike Taxi, Express, EV Bike).' },
+    { title: 'Upfront fare & ride options', detail: 'Transparent fare breakdown based on trip distance, surge multipliers, and vehicle choices (Bike Taxi, Express Delivery, EV Bike).' },
     { title: 'Captain radar & dispatch', detail: 'Real-time order alert radar, trip acceptance or decline modals, and turn-by-turn navigation integration.' },
     { title: 'Captain KYC & verification', detail: 'End-to-end document submission and compliance verification for driving licenses, RC books, insurance, and vehicle fitness.' },
     { title: 'Digital ride invoices', detail: 'Automated receipt generation breaking down base fare, distance rate, wait charges, applicable taxes, and payment mode.' },
@@ -507,9 +707,54 @@ export class App implements AfterViewInit, OnDestroy {
     ['State management & architecture', 'GetX / Provider architecture'],
     ['Mapping & Geolocation', 'Google Maps Flutter, Geolocator, Geocoding'],
     ['Real-time events & dispatch', 'WebSockets / Firebase Cloud Messaging'],
-    ['Networking & API client', 'Dio and HTTP REST API'],
     ['Local cache & storage', 'SharedPreferences'],
     ['Design system', 'Custom On-Demand Mobility theme, Material 3'],
+  ];
+
+  protected readonly zestFeatures = [
+    { title: 'Three role-based experiences', detail: 'Seamless switching between B2C customer, B2B wholesale buyer, and delivery partner workflows with pre-configured quick-switch demo accounts.' },
+    { title: 'B2C retail grocery shopping', detail: 'Browse department categories, live keyword search with price and stock filters, detailed product view, wishlist favorites, and responsive shopping cart.' },
+    { title: 'B2B wholesale & volume tiers', detail: 'Bulk purchasing with tiered unit pricing, minimum order quantities (MOQ), crate/bag configurations, and automated volume discount calculations.' },
+    { title: 'Net 30 trade credit wallet', detail: 'Dedicated wholesale credit ledger with real-time balance tracking, Net 30 payment term selection, and recurring saved order lists for restaurants.' },
+    { title: '4-stage driver delivery pipeline', detail: 'Structured delivery partner fulfillment workflow: task dispatch acceptance, store pickup checklist, live GPS transit, and customer doorstep handover.' },
+    { title: 'OpenStreetMap & live routing', detail: 'Map views powered by flutter_map and latlong2 using OpenStreetMap tiles for hub pickup routing, transit tracking, and drop-off guidance.' },
+    { title: 'Driver earnings & surge zones', detail: 'Performance dashboard tracking daily payouts, tip totals, shift booking schedule, and high-demand surge zone incentives.' },
+    { title: 'Shared product architecture', detail: 'Centralized ProductModel in Dart supporting dual retail/wholesale prices, derived stock status, and sample catalogue across fresh produce, dairy, bakery, and pantry.' },
+  ];
+
+  protected readonly zestStack = [
+    ['Application framework', 'Flutter and Dart (SDK ^3.13.5 / Flutter 3.47.x)'],
+    ['State management & routing', 'GetX (routing, dependency injection, reactive controllers)'],
+    ['Mapping & Geolocation', 'flutter_map & latlong2 with OpenStreetMap tiles'],
+    ['API communication scaffold', 'http / GetConnect ApiProvider with mock fixture fallback'],
+    ['Typography & Design system', 'Google Fonts (Plus Jakarta Sans), Material 3, custom theme'],
+    ['Formatting & Media', 'intl for date/currency formatting, cached_network_image'],
+    ['Multi-persona architecture', 'B2C Customer, B2B Wholesale Buyer, Delivery Partner'],
+    ['Automated testing suite', 'Flutter test framework (widget and workflow test suite in test/)'],
+  ];
+
+  protected readonly janovexaFeatures = [
+    { title: 'Three synchronized civic portals', detail: 'Dedicated role-based portals for Citizens (01_Citizen_Portal), Department Administrators (02_Department_Admin_Portal), and Field Engineers (03_Field_Officer_Portal) with tailored UX and state models.' },
+    { title: '5-step evidence-based grievance filing', detail: 'Intuitive wizard covering category selection, character-counted description, interactive OSM map pin placement, 10MB photo/document uploads, and instant reference ID generation (JVX-2026-01482).' },
+    { title: 'OpenStreetMap GIS & geotagging', detail: 'Interactive vector/raster map powered by flutter_map and latlong2 with live GPS current-location auto-fill, reverse geocoding, and ward validation.' },
+    { title: 'Transparent lifecycle audit timeline', detail: 'Vertical connected timeline providing real-time visibility into complaint registration, department assignment, technician dispatch, and resolution verification.' },
+    { title: 'Multi-department admin dashboard', detail: 'Central command for Electrical, Solid Waste, Water Supply & Sewerage, and Roads departments featuring live SLA compliance (94.2%), turnaround times, and officer dispatch sheets.' },
+    { title: 'Field officer workspace & routing', detail: 'Assigned work order queue with turn-by-turn map directions, Mark On-Site check-in, on-site photo proof upload, and direct ticket resolution.' },
+    { title: 'Citizen charter & SLA governance', detail: 'Clear statutory turnaround targets, escalation matrices, public service announcements, and transparent citizen rights charter.' },
+    { title: 'Reopen & citizen recourse loop', detail: 'Empowers citizens to reopen unsatisfactory resolutions within a defined window by providing additional notes and photographic proof.' },
+  ];
+
+  protected readonly janovexaStack = [
+    ['Frontend Mobile Framework', 'Flutter SDK ^3.47.7 & Dart ^3.13.5 (cross-platform native compiled)'],
+    ['State Management', 'Flutter Riverpod ^3.5.0 (Declarative, compile-safe application state)'],
+    ['Mapping & GIS Navigation', 'flutter_map ^8.3.2 & latlong2 ^0.10.1 (OpenStreetMap interactive vector/raster tiles)'],
+    ['Design System & Typography', 'Material 3 (M3) with custom brand tokens (Imperial Maroon #4A1525, Orange #FF6B35, Navy #0B132B) & Google Fonts (Plus Jakarta Sans)'],
+    ['Localization & Date/Time', 'intl ^0.20.3 (localized complaint timestamps and date formatting)'],
+    ['Iconography & Visual Assets', 'Cupertino Icons ^1.0.8 & high-fidelity custom civic vector assets'],
+    ['Target Backend Architecture', 'NestJS enterprise TypeScript REST API with modular dependency injection & OpenAPI / Swagger contracts'],
+    ['Target Database & ORM', 'PostgreSQL relational database with Prisma ORM type-safe schemas and audit migrations'],
+    ['Target Security & Auth', 'Stateless JWT authentication with role-based access control (citizen, field_officer, dept_admin)'],
+    ['Test & Emulation Harness', 'Android ADB automated pipeline & Impeller Engine (OpenGLES) on Android 17 / API 37 emulator'],
   ];
 
   // --- Screens Data ---
@@ -926,7 +1171,7 @@ export class App implements AfterViewInit, OnDestroy {
     {
       id: 'zipi-driver-login',
       screenNumber: '04',
-      name: 'Driver Captain Login Screen',
+      name: 'Captain Login Screen',
       category: 'Authentication',
       previewImage: 'assets/images/zipi_bike_taxi_app/04_driver_login_preview.png',
       assetImage: 'assets/images/zipi_bike_taxi_app/04-driver-login.png',
@@ -946,12 +1191,12 @@ export class App implements AfterViewInit, OnDestroy {
     {
       id: 'zipi-driver-otp',
       screenNumber: '06',
-      name: 'Driver OTP Verification Screen',
+      name: 'Captain OTP Verification Screen',
       category: 'Authentication',
       previewImage: 'assets/images/zipi_bike_taxi_app/06_driver_otp_preview.png',
       assetImage: 'assets/images/zipi_bike_taxi_app/05-otp-driver.png',
       description: 'High-security OTP validation guaranteeing captain identity prior to accepting rides.',
-      tags: ['Driver Security', 'Identity Gate'],
+      tags: ['Captain Security', 'Identity Gate'],
     },
     {
       id: 'zipi-rider-signup',
@@ -970,7 +1215,7 @@ export class App implements AfterViewInit, OnDestroy {
       category: 'Onboarding',
       previewImage: 'assets/images/zipi_bike_taxi_app/09_driver_signup_preview.png',
       assetImage: 'assets/images/zipi_bike_taxi_app/07-driver-signup.png',
-      description: 'Driver partner onboarding capturing driving license credentials, city, and vehicle details.',
+      description: 'Captain partner onboarding capturing driving license credentials, city, and vehicle details.',
       tags: ['Captain Signup', 'Fleet Registration'],
     },
     {
@@ -1060,7 +1305,7 @@ export class App implements AfterViewInit, OnDestroy {
       category: 'Compliance',
       previewImage: 'assets/images/zipi_bike_taxi_app/18_documents_preview.png',
       assetImage: 'assets/images/zipi_bike_taxi_app/14-documents.png',
-      description: 'Verification checklist for driver license, vehicle registration (RC), and pollution certificate.',
+      description: 'Verification checklist for the captain’s driving license, vehicle registration (RC), and pollution certificate.',
       tags: ['KYC Upload', 'Document Checklist'],
     },
     {
@@ -1115,19 +1360,710 @@ export class App implements AfterViewInit, OnDestroy {
     },
   ];
 
+  protected readonly zestScreens: ProductScreen[] = [
+    // --- B2C Customer Screens ---
+    {
+      id: 'zest-b2c-home',
+      screenNumber: '01',
+      name: 'B2C Grocery Home Screen',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/zest_grocery_showcase.jpg',
+      assetImage: 'assets/images/zest_grocery/b2c_home.png',
+      description: 'Customer storefront with promotional banners, quick-order categories, featured fresh produce, and one-tap cart addition.',
+      tags: ['Retail Storefront', 'Express Delivery'],
+    },
+    {
+      id: 'zest-b2c-categories',
+      screenNumber: '02',
+      name: 'Grocery Categories Explorer',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_categories.png',
+      assetImage: 'assets/images/zest_grocery/b2c_categories.png',
+      description: 'Category hierarchy featuring fresh fruits, vegetables, dairy, bakery essentials, and packaged grocery goods.',
+      tags: ['Category Tree', 'Department Browsing'],
+    },
+    {
+      id: 'zest-b2c-search',
+      screenNumber: '03',
+      name: 'Product Search & Filtering Screen',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_search.png',
+      assetImage: 'assets/images/zest_grocery/b2c_search.png',
+      description: 'Instant autocomplete search with price filters, category chips, in-stock toggles, and recent search history.',
+      tags: ['Live Search', 'Faceted Filters'],
+    },
+    {
+      id: 'zest-b2c-product',
+      screenNumber: '04',
+      name: 'Retail Product Details Screen',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_product.png',
+      assetImage: 'assets/images/zest_grocery/b2c_product.png',
+      description: 'Detailed product page displaying high-resolution imagery, per-unit pricing, stock availability, nutritional notes, and cart controls.',
+      tags: ['Product Information', 'Unit Pricing'],
+    },
+    {
+      id: 'zest-b2c-cart',
+      screenNumber: '05',
+      name: 'B2C Shopping Cart & Checkout',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_cart.png',
+      assetImage: 'assets/images/zest_grocery/b2c_cart.png',
+      description: 'Interactive shopping cart with item quantity steppers, bill breakdown, delivery slot selection, and checkout CTA.',
+      tags: ['Cart Management', 'Order Summary'],
+    },
+    {
+      id: 'zest-b2c-favorites',
+      screenNumber: '06',
+      name: 'Saved Favorites & Wishlist',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_favorites.png',
+      assetImage: 'assets/images/zest_grocery/b2c_favorites.png',
+      description: 'Bookmarked grocery items for fast repeat shopping, stock alert indicators, and one-click add to active cart.',
+      tags: ['Wishlist', 'Repeat Purchases'],
+    },
+    {
+      id: 'zest-b2c-account',
+      screenNumber: '07',
+      name: 'Customer Account & Addresses',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_account.png',
+      assetImage: 'assets/images/zest_grocery/b2c_account.png',
+      description: 'Consumer profile overview managing saved delivery locations, order history, customer support, and demo account switching.',
+      tags: ['Customer Profile', 'Address Book'],
+    },
+    {
+      id: 'zest-b2c-more',
+      screenNumber: '08',
+      name: 'Services & Helpdesk Hub',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_more.png',
+      assetImage: 'assets/images/zest_grocery/b2c_more.png',
+      description: 'App preferences, order cancellation policy, customer support chat, FAQs, and terms of service.',
+      tags: ['Customer Support', 'Service Policies'],
+    },
+
+    // --- B2B Wholesale Buyer Screens ---
+    {
+      id: 'zest-b2b-registration',
+      screenNumber: '09',
+      name: 'Wholesale Business Registration',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_registration.png',
+      assetImage: 'assets/images/zest_grocery/b2b_registration.png',
+      description: 'B2B onboarding flow capturing trade name, GSTIN identification, FSSAI license, delivery dock address, and business type.',
+      tags: ['B2B Onboarding', 'GSTIN Verification'],
+    },
+    {
+      id: 'zest-b2b-home',
+      screenNumber: '10',
+      name: 'B2B Wholesale Portal Home',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_home.png',
+      assetImage: 'assets/images/zest_grocery/b2b_home.png',
+      description: 'Wholesale catalog interface showing bulk quantity tiers, MOQ notifications, crate discounts, and Net 30 credit banner.',
+      tags: ['Wholesale Catalog', 'Bulk Tiers'],
+    },
+    {
+      id: 'zest-b2b-categories',
+      screenNumber: '11',
+      name: 'Bulk Wholesale Categories',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_categories.png',
+      assetImage: 'assets/images/zest_grocery/b2b_categories.png',
+      description: 'Departmental bulk categories including commercial farm crates, wholesale produce, dairy cartons, and staple sacks.',
+      tags: ['Commercial Supply', 'Bulk Categories'],
+    },
+    {
+      id: 'zest-b2b-product',
+      screenNumber: '12',
+      name: 'Wholesale Product & Tier Pricing',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_product.png',
+      assetImage: 'assets/images/zest_grocery/b2b_product.png',
+      description: 'Bulk product specifications displaying minimum wholesale quantities (MOQ), crate/bag volume tiers, and tiered margin savings.',
+      tags: ['MOQ Thresholds', 'Tiered Pricing'],
+    },
+    {
+      id: 'zest-b2b-cart',
+      screenNumber: '13',
+      name: 'Wholesale Bulk Cart & Net 30 Terms',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_cart.png',
+      assetImage: 'assets/images/zest_grocery/b2b_cart.png',
+      description: 'Large-scale purchase order review with automatic tier discounts, freight calculation, and Net 30 credit checkout option.',
+      tags: ['Bulk Orders', 'Net 30 Checkout'],
+    },
+    {
+      id: 'zest-b2b-saved-lists',
+      screenNumber: '14',
+      name: 'Saved Order Lists & Quick Reorder',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_saved-lists.png',
+      assetImage: 'assets/images/zest_grocery/b2b_saved-lists.png',
+      description: 'Custom standing purchase templates for restaurants, caterers, and retail grocers for instant weekly stock replenishment.',
+      tags: ['Standing Orders', 'Quick Reorder'],
+    },
+    {
+      id: 'zest-b2b-wallet',
+      screenNumber: '15',
+      name: 'Net 30 Credit Wallet & Invoices',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_wallet.png',
+      assetImage: 'assets/images/zest_grocery/b2b_wallet.png',
+      description: 'B2B credit balance management, available trade credit line, pending invoice due dates, and settlement payment history.',
+      tags: ['Trade Credit', 'Invoice Ledger'],
+    },
+    {
+      id: 'zest-b2b-profile',
+      screenNumber: '16',
+      name: 'Business Profile & Tax Records',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_profile.png',
+      assetImage: 'assets/images/zest_grocery/b2b_profile.png',
+      description: 'Commercial enterprise settings with verified GSTIN, trade license records, registered billing address, and contact officers.',
+      tags: ['Business Entity', 'Tax Compliance'],
+    },
+
+    // --- Delivery Partner Screens ---
+    {
+      id: 'zest-delivery-home',
+      screenNumber: '17',
+      name: 'Delivery Partner Home Dashboard',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_home.png',
+      assetImage: 'assets/images/zest_grocery/delivery_home.png',
+      description: 'Driver operational hub featuring duty online/offline toggle, today earnings gauge, active dispatch alert, and surge hot-spots.',
+      tags: ['Driver Hub', 'Duty Toggle'],
+    },
+    {
+      id: 'zest-delivery-tasks',
+      screenNumber: '18',
+      name: 'Delivery Tasks & Dispatch Pool',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_tasks.png',
+      assetImage: 'assets/images/zest_grocery/delivery_tasks.png',
+      description: 'Real-time dispatch requests queue displaying pickup hub location, delivery distance, estimated transit time, and payout.',
+      tags: ['Dispatch Radar', 'Task Queue'],
+    },
+    {
+      id: 'zest-delivery-pickup',
+      screenNumber: '19',
+      name: 'Store Pickup & Order Checklist',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_pickup.png',
+      assetImage: 'assets/images/zest_grocery/delivery_pickup.png',
+      description: 'Store arrival workflow with fulfillment center directions, parcel item checklist verification, and departure confirmation.',
+      tags: ['Store Pickup', 'Package Checklist'],
+    },
+    {
+      id: 'zest-delivery-transit',
+      screenNumber: '20',
+      name: 'Live Transit Navigation & Map',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_transit.png',
+      assetImage: 'assets/images/zest_grocery/delivery_transit.png',
+      description: 'Map navigation powered by flutter_map and OpenStreetMap with live transit path, destination marker, and customer phone dialer.',
+      tags: ['OpenStreetMap', 'Live Routing'],
+    },
+    {
+      id: 'zest-delivery-handover',
+      screenNumber: '21',
+      name: 'Customer Handover & Verification',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_handover.png',
+      assetImage: 'assets/images/zest_grocery/delivery_handover.png',
+      description: 'Doorstep completion screen verifying customer handover, delivery passcode confirmation, and contactless drop photo capture.',
+      tags: ['Doorstep Delivery', 'OTP Handover'],
+    },
+    {
+      id: 'zest-delivery-completed',
+      screenNumber: '22',
+      name: 'Order Completed & Payout Summary',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_completed.png',
+      assetImage: 'assets/images/zest_grocery/delivery_completed.png',
+      description: 'Successful delivery screen breaking down base trip fare, distance bonus, customer tip, and readiness for next dispatch.',
+      tags: ['Delivery Completed', 'Trip Payout'],
+    },
+    {
+      id: 'zest-delivery-earnings',
+      screenNumber: '23',
+      name: 'Driver Earnings & Performance',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_earnings.png',
+      assetImage: 'assets/images/zest_grocery/delivery_earnings.png',
+      description: 'Comprehensive earnings analytics with daily payout graphs, weekly milestones, completed deliveries, and tip totals.',
+      tags: ['Earnings Analytics', 'Incentives'],
+    },
+    {
+      id: 'zest-delivery-shifts',
+      screenNumber: '24',
+      name: 'Shift Scheduling & Surge Zones',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_shifts.png',
+      assetImage: 'assets/images/zest_grocery/delivery_shifts.png',
+      description: 'Weekly shift planner with booking slots, high-demand surge map zones, peak bonus multipliers, and attendance tracking.',
+      tags: ['Shift Planner', 'Surge Zones'],
+    },
+    {
+      id: 'zest-delivery-profile',
+      screenNumber: '25',
+      name: 'Driver Partner Profile & KYC',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_profile.png',
+      assetImage: 'assets/images/zest_grocery/delivery_profile.png',
+      description: 'Courier partner identification, vehicle registration documentation, driving license KYC status, and customer rating metrics.',
+      tags: ['Driver Profile', 'KYC Compliance'],
+    },
+  ];
+
+  protected readonly janovexaScreens: ProductScreen[] = [
+    // ==========================================
+    // 01_Citizen_Portal (27 Screens)
+    // ==========================================
+    // --- Onboarding & Authentication ---
+    {
+      id: 'jvx-splash',
+      screenNumber: '01',
+      name: 'Brand Splash & Mission Screen',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/01_splash_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/01_splash_screen.png',
+      description: 'Animated 3D ribbon mark with civic slogan "Your voice. A better city. Together, we make progress" and smooth boot transition.',
+      tags: ['Splash Screen', 'Brand Identity'],
+    },
+    {
+      id: 'jvx-welcome',
+      screenNumber: '02',
+      name: 'Welcome & Value Proposition',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/02_welcome_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/02_welcome_screen.png',
+      description: 'City skyline illustration with landmark civic buildings, value proposition ("Better neighbourhoods. Built together."), and action buttons.',
+      tags: ['Civic Onboarding', 'Value Proposition'],
+    },
+    {
+      id: 'jvx-role-select',
+      screenNumber: '03',
+      name: 'Multi-Role Portal Selection',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/03_role_selection_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/03_role_selection_screen.png',
+      description: 'Role selection hub directing citizens, field engineers, and department administrators to their dedicated workflows.',
+      tags: ['Role Gateway', 'Portal Switcher'],
+    },
+    {
+      id: 'jvx-cit-login',
+      screenNumber: '04',
+      name: 'Citizen Sign In',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/04_citizen_login_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/04_citizen_login_screen.png',
+      description: 'Credential-based login with mobile number or email, password visibility toggle, "Log in with OTP" fallback, and secure account storage notices.',
+      tags: ['Authentication', 'Citizen Login'],
+    },
+    {
+      id: 'jvx-cit-signup',
+      screenNumber: '05',
+      name: 'Citizen Account Registration',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/05_citizen_signup_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/05_citizen_signup_screen.png',
+      description: 'Citizen sign-up capturing Full name, Mobile number, Email address, and Password with visibility toggle and strength criteria.',
+      tags: ['Account Registration', 'Citizen Sign-up'],
+    },
+    {
+      id: 'jvx-forgot-pw',
+      screenNumber: '06',
+      name: 'Forgot Password Screen',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/06_forgot_password_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/06_forgot_password_screen.png',
+      description: 'Mobile number entry with automated code dispatch and 5-minute code expiration guidance for account recovery.',
+      tags: ['Account Recovery', 'Forgot Password'],
+    },
+    {
+      id: 'jvx-otp-verify',
+      screenNumber: '07',
+      name: 'OTP Verification Screen',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/07_otp_verification_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/07_otp_verification_screen.png',
+      description: '6 individual verification boxes with auto-focus, live resend timer, 1-tap quick fill for demo (123456), and simulated SMS notification banner.',
+      tags: ['OTP Verification', '2FA Security'],
+    },
+    {
+      id: 'jvx-reset-pw',
+      screenNumber: '08',
+      name: 'Reset Password Screen',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/08_reset_password_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/08_reset_password_screen.png',
+      description: 'Password creation with real-time criteria validation (8+ characters, uppercase & lowercase, number/special character).',
+      tags: ['Password Reset', 'Credential Security'],
+    },
+    // --- Citizen Dashboard & Tracking ---
+    {
+      id: 'jvx-cit-home',
+      screenNumber: '09',
+      name: 'Citizen Home Dashboard',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/01_citizen_home_dashboard.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/01_citizen_home_dashboard.png',
+      description: 'Greeting header ("Good morning, Aarav - Ward 12 · Indiranagar"), alert bell, hero burgundy action card, live grievance updates banner, 4 metric counters (07 Total, 02 Pending, 02 In progress, 02 Resolved), and recent complaints list.',
+      tags: ['Citizen Dashboard', 'Civic Feed'],
+    },
+    {
+      id: 'jvx-cit-grievances',
+      screenNumber: '10',
+      name: 'My Grievances List (All)',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/02_citizen_grievances_list_all.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/02_citizen_grievances_list_all.png',
+      description: 'Searchable complaint list with filter pills (All · 6, In Progress · 3, Resolved · 3) displaying reference numbers, addresses, submission dates, and status badges.',
+      tags: ['My Complaints', 'Filter & Search'],
+    },
+    {
+      id: 'jvx-cit-details',
+      screenNumber: '11',
+      name: 'Complaint Details & Active Alert',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/03_citizen_complaint_details.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/03_citizen_complaint_details.png',
+      description: 'Reference header, status pill, active "REPAIR UNDERWAY" alert banner, OpenStreetMap geotag, assigned officer details, attached evidence viewer, and dynamic actions.',
+      tags: ['Complaint Details', 'SLA Tracking'],
+    },
+    {
+      id: 'jvx-cit-audit',
+      screenNumber: '12',
+      name: 'Status Audit History Timeline',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/04_citizen_status_audit_history.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/04_citizen_status_audit_history.png',
+      description: 'Vertical connected timeline detailing lifecycle milestones: Repair in progress, Assigned to department, Under review, and Complaint registered.',
+      tags: ['Status History', 'Audit Trail'],
+    },
+    {
+      id: 'jvx-cit-reopen',
+      screenNumber: '13',
+      name: 'Reopen Complaint Request',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/05_citizen_reopen_complaint.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/05_citizen_reopen_complaint.png',
+      description: 'Recourse form for resolved complaints requiring further attention, allowing citizens to submit detailed justification and attach additional photo proof.',
+      tags: ['Reopen Complaint', 'Citizen Recourse'],
+    },
+    {
+      id: 'jvx-cit-analytics',
+      screenNumber: '14',
+      name: 'Civic Analytics & SLA Metrics',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/06_citizen_analytics_reports.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/06_citizen_analytics_reports.png',
+      description: 'Zonal transparency metrics showing 71.4% resolution rate, departmental ticket breakdowns, and average civic turnaround velocity.',
+      tags: ['Civic Analytics', 'Resolution SLA'],
+    },
+    {
+      id: 'jvx-cit-charter',
+      screenNumber: '15',
+      name: 'Citizen Charter & Guidelines',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/07_citizen_instructions_charter.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/07_citizen_instructions_charter.png',
+      description: 'Statutory municipal turnaround SLAs, escalation tiers, guaranteed citizen rights, and department response timelines.',
+      tags: ['Citizen Charter', 'Service Standards'],
+    },
+    {
+      id: 'jvx-cit-alerts',
+      screenNumber: '16',
+      name: 'Alerts & Notifications Feed',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/08_citizen_alerts_notifications.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/08_citizen_alerts_notifications.png',
+      description: 'Live alerts feed with unread count badges, "Mark all as read", filter tabs (All, Unread · 2), and interactive 1-tap links directly to complaint details.',
+      tags: ['Notification Feed', 'Broadcast Alerts'],
+    },
+    {
+      id: 'jvx-cit-profile',
+      screenNumber: '17',
+      name: 'Citizen Profile & Quick Links',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/09_citizen_user_profile.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/09_citizen_user_profile.png',
+      description: 'Verified citizen account badge for Aarav Sharma (+91 98765 43210), quick shortcuts to settings and support, and direct switch to Department Admin Dashboard.',
+      tags: ['Citizen Profile', 'Identity Verification'],
+    },
+    {
+      id: 'jvx-cit-edit-profile',
+      screenNumber: '18',
+      name: 'Edit Citizen Profile',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/10_citizen_edit_profile.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/10_citizen_edit_profile.png',
+      description: 'Profile editing interface managing full name, phone verification update, email address, and residential ward neighbourhood.',
+      tags: ['Edit Profile', 'Ward Info'],
+    },
+    {
+      id: 'jvx-cit-change-pw',
+      screenNumber: '19',
+      name: 'Change Account Password',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/11_citizen_change_password.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/11_citizen_change_password.png',
+      description: 'Credential modification screen requiring current password verification and validating new password strength rules.',
+      tags: ['Security Settings', 'Password Change'],
+    },
+    {
+      id: 'jvx-cit-settings',
+      screenNumber: '20',
+      name: 'Citizen Application Settings',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/12_citizen_settings_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/12_citizen_settings_screen.png',
+      description: 'Toggle switches for Push notifications, SMS updates, and Email copies, plus Language selector and Privacy & permissions controls.',
+      tags: ['App Settings', 'Notification Preferences'],
+    },
+    {
+      id: 'jvx-cit-help',
+      screenNumber: '21',
+      name: 'Civic Help, FAQs & Helpline',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/13_citizen_help_support_faqs.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/13_citizen_help_support_faqs.png',
+      description: 'Searchable civic FAQs, 24/7 toll-free municipal helpline (1912), emergency escalation contacts, and terms of service.',
+      tags: ['Help & Support', 'Municipal Helpline'],
+    },
+    // --- 5-Step Grievance Registration ---
+    {
+      id: 'jvx-step1-cat',
+      screenNumber: '22',
+      name: 'Step 1: Category Selection',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/01_step1_category_selection.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/01_step1_category_selection.png',
+      description: 'Grievance triage selection between Roads & footpaths, Water supply, Streetlights, Waste & sanitation, and Other civic issues.',
+      tags: ['Category Selection', 'Step 1 of 5'],
+    },
+    {
+      id: 'jvx-step2-details',
+      screenNumber: '23',
+      name: 'Step 2: Grievance Details',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/02_step2_grievance_details.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/02_step2_grievance_details.png',
+      description: 'Category confirmation, complaint title, contextual landmark description, and character counter (123 / 1000 characters).',
+      tags: ['Grievance Details', 'Step 2 of 5'],
+    },
+    {
+      id: 'jvx-step3-map',
+      screenNumber: '24',
+      name: 'Step 3: OSM Geolocation Map',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/03_step3_location_gps_map.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/03_step3_location_gps_map.png',
+      description: 'Search bar, interactive stylized city grid map with pin marker, GPS auto-fill ("Use current location"), and ward verification.',
+      tags: ['OpenStreetMap Pin', 'Step 3 of 5'],
+    },
+    {
+      id: 'jvx-step4-evidence',
+      screenNumber: '25',
+      name: 'Step 4: Evidence Photo Upload',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/04_step4_evidence_upload.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/04_step4_evidence_upload.png',
+      description: 'Dashed upload zone ("Take a photo or browse files") supporting images and documents up to 10MB, plus list of attached evidence files.',
+      tags: ['Evidence Upload', 'Step 4 of 5'],
+    },
+    {
+      id: 'jvx-step5-review',
+      screenNumber: '26',
+      name: 'Step 5: Review & Declaration',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/05_step5_review_and_confirm.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/05_step5_review_and_confirm.png',
+      description: 'Comprehensive review summary card with Category, inline Edit shortcuts, Title, Description, Geolocation, and statutory Declaration checkbox.',
+      tags: ['Review Summary', 'Step 5 of 5'],
+    },
+    {
+      id: 'jvx-submission-success',
+      screenNumber: '27',
+      name: 'Complaint Registered Success',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/06_submission_success.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/06_submission_success.png',
+      description: 'Success checkmark badge, reference ID generator (JVX-2026-01482), "Track complaint", and "Back to dashboard" direct actions.',
+      tags: ['Submission Success', 'Tracking ID'],
+    },
+
+    // ==========================================
+    // 02_Department_Admin_Portal (8 Screens)
+    // ==========================================
+    {
+      id: 'jvx-adm-login',
+      screenNumber: '28',
+      name: 'Department Admin Login',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/10_department_admin_login_screen.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/10_department_admin_login_screen.png',
+      description: 'Agency administrator credential checkpoint with department tag security and administrative authorization.',
+      tags: ['Admin Auth', 'Agency Checkpoint'],
+    },
+    {
+      id: 'jvx-adm-dash',
+      screenNumber: '29',
+      name: 'Department Admin Dashboard',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/01_department_admin_dashboard.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/01_department_admin_dashboard.png',
+      description: 'Multi-department switcher (Electrical, Solid Waste, Water Supply, Roads), real-time KPIs (Total Received, Active/Under Repair, SLA Met 94.2%), and triage queue table.',
+      tags: ['Admin Command', 'Department KPIs'],
+    },
+    {
+      id: 'jvx-adm-assign',
+      screenNumber: '30',
+      name: 'Assign Field Officer Bottom Sheet',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/02_admin_assign_officer_sheet.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/02_admin_assign_officer_sheet.png',
+      description: 'Bottom sheet modal to allocate field engineers (K. Ramesh Rao, Smt. Geetha V., Anand Kulkarni) with workload stats and 1-tap dispatch.',
+      tags: ['Officer Dispatch', 'Task Allocation'],
+    },
+    {
+      id: 'jvx-adm-update',
+      screenNumber: '31',
+      name: 'Update Complaint Status Sheet',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/03_admin_update_status_sheet.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/03_admin_update_status_sheet.png',
+      description: 'Modal sheet to move ticket lifecycle status, enter official resolution remarks, and broadcast real-time updates and notifications to the citizen.',
+      tags: ['Status Update', 'Citizen Broadcast'],
+    },
+    {
+      id: 'jvx-adm-sla',
+      screenNumber: '32',
+      name: 'Zonal SLA & Performance Reports',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/04_admin_zonal_sla_reports.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/04_admin_zonal_sla_reports.png',
+      description: 'Department-wide resolution speed, zonal SLA met vs breached breakdown, turnaround time metrics, and escalation audits.',
+      tags: ['Zonal SLA', 'Compliance Reports'],
+    },
+    {
+      id: 'jvx-adm-history',
+      screenNumber: '33',
+      name: 'Archived Resolution History',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/05_admin_resolution_history.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/05_admin_resolution_history.png',
+      description: 'Archived audit logs of resolved grievances with multi-parameter filtering by department, resolution date, and assigned officer.',
+      tags: ['Resolution Archive', 'Audit Logs'],
+    },
+    {
+      id: 'jvx-adm-sops',
+      screenNumber: '34',
+      name: 'Administrative Operating SOPs',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/06_admin_administrative_sops.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/06_admin_administrative_sops.png',
+      description: 'Operational protocol guidelines, statutory turnaround requirements, grievance priority classification, and triage rules.',
+      tags: ['Administrative SOPs', 'Triage Rules'],
+    },
+    {
+      id: 'jvx-adm-profile',
+      screenNumber: '35',
+      name: 'Admin Profile & Agency Info',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/07_admin_profile_management.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/07_admin_profile_management.png',
+      description: 'Administrator identity, municipal agency affiliation (BBMP / BESCOM), designated zonal jurisdiction, and session credentials.',
+      tags: ['Admin Profile', 'Agency Credentials'],
+    },
+
+    // ==========================================
+    // 03_Field_Officer_Portal (6 Screens)
+    // ==========================================
+    {
+      id: 'jvx-off-login',
+      screenNumber: '36',
+      name: 'Field Officer Login',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/09_officer_login_screen.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/09_officer_login_screen.png',
+      description: 'Officer badge ID, department tag, and staff credentials checkpoint for field engineers and on-site inspection teams.',
+      tags: ['Staff Login', 'Officer Checkpoint'],
+    },
+    {
+      id: 'jvx-off-workspace',
+      screenNumber: '37',
+      name: 'Field Officer Workspace & Orders',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/01_field_officer_workspace.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/01_field_officer_workspace.png',
+      description: 'Assigned work orders feed with turn-by-turn routing, priority badges, "Mark On-Site" arrival check-in, and "Mark Resolved" resolution actions.',
+      tags: ['Work Orders', 'Field Dispatch'],
+    },
+    {
+      id: 'jvx-off-history',
+      screenNumber: '38',
+      name: 'Officer Work History & Archive',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/02_field_officer_history.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/02_field_officer_history.png',
+      description: 'Personal work order resolution archive with completion timestamps, photographic proof records, and citizen sign-offs.',
+      tags: ['Work History', 'Closed Tickets'],
+    },
+    {
+      id: 'jvx-off-reports',
+      screenNumber: '39',
+      name: 'Officer Performance Reports',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/03_field_officer_performance_reports.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/03_field_officer_performance_reports.png',
+      description: 'Personal SLA velocity dashboard, total work orders handled, first-time fix rate, and monthly engineering efficiency ratings.',
+      tags: ['Performance Metrics', 'Officer SLA'],
+    },
+    {
+      id: 'jvx-off-safety',
+      screenNumber: '40',
+      name: 'Field Safety & SOP Guidelines',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/04_field_officer_safety_guidelines.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/04_field_officer_safety_guidelines.png',
+      description: 'Standard operating safety procedures, mandatory PPE gear requirements, high-voltage hazard protocols, and on-site evidence capture standards.',
+      tags: ['Safety Guidelines', 'Field SOPs'],
+    },
+    {
+      id: 'jvx-off-profile',
+      screenNumber: '41',
+      name: 'Officer Profile & Official ID Badge',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/05_field_officer_profile.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/05_field_officer_profile.png',
+      description: 'Official municipal engineer identity card, verified beat ward assignment, department credentials, and emergency desk contact.',
+      tags: ['Official Badge', 'Beat Assignment'],
+    },
+  ];
+
   @HostListener('window:popstate')
   protected syncRoute(): void {
     this.showMoneyManager = ['/products/money-manager', '/products/samrique-money-manager'].includes(this.routePath);
     this.showMarketplace = ['/products/samrique-e-marketplace', '/products/quickcart'].includes(this.routePath);
     this.showMama = ['/products/samrique-mama', '/products/samrique-mama-pregnancy-tracker'].includes(this.routePath);
     this.showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
+    this.showZest = ['/products/zest-grocery', '/products/zest', '/products/samrique-zest-grocery'].includes(this.routePath);
+    this.showJanovexa = ['/products/janovexa', '/products/janovexa-civic-grievance', '/products/samrique-janovexa'].includes(this.routePath);
+    this.showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
+    this.showPrivacyModal = ['/privacy', '/privacy-policy'].includes(this.routePath);
+    this.showTermsModal = ['/terms', '/terms-of-service', '/terms-and-conditions'].includes(this.routePath);
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
 
-    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi) {
+    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi && !this.showZest && !this.showJanovexa && !this.showPricingPage) {
       this.refreshHomeVisibility();
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' });
+      this.scheduleRevealObservation();
     }
   }
 
@@ -1139,9 +2075,13 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = false;
+    this.showZest = false;
+    this.showJanovexa = false;
+    this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
   }
 
   protected openMarketplace(): void {
@@ -1152,9 +2092,13 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = true;
     this.showMama = false;
     this.showZipi = false;
+    this.showZest = false;
+    this.showJanovexa = false;
+    this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
   }
 
   protected openMama(): void {
@@ -1165,9 +2109,13 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = true;
     this.showZipi = false;
+    this.showZest = false;
+    this.showJanovexa = false;
+    this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
   }
 
   protected openZipi(): void {
@@ -1178,8 +2126,95 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = true;
+    this.showZest = false;
+    this.showJanovexa = false;
+    this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
+  }
+
+  protected openZest(): void {
+    if (this.routePath !== '/products/zest-grocery') {
+      window.history.pushState({}, '', this.appPath('/products/zest-grocery'));
+    }
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showZest = true;
+    this.showJanovexa = false;
+    this.showPricingPage = false;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
+  }
+
+  protected openJanovexa(): void {
+    if (this.routePath !== '/products/janovexa') {
+      window.history.pushState({}, '', this.appPath('/products/janovexa'));
+    }
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showZest = false;
+    this.showJanovexa = true;
+    this.showPricingPage = false;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
+  }
+
+  protected openStartProject(): void {
+    if (this.routePath !== '/start-a-project') {
+      window.history.pushState({}, '', this.appPath('/start-a-project'));
+    }
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showZest = false;
+    this.showJanovexa = false;
+    this.showPricingPage = true;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
+  }
+
+  protected openPricing(): void {
+    if (this.routePath !== '/pricing') {
+      window.history.pushState({}, '', this.appPath('/pricing'));
+    }
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showZest = false;
+    this.showJanovexa = false;
+    this.showPricingPage = true;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
+  }
+
+  protected returnToHome(): void {
+    window.history.pushState({}, '', this.appPath('/'));
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showZest = false;
+    this.showJanovexa = false;
+    this.showPricingPage = false;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    this.refreshHomeVisibility();
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
@@ -1193,21 +2228,193 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = false;
+    this.showZest = false;
+    this.showJanovexa = false;
+    this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     this.refreshHomeVisibility();
   }
 
+  protected inquireAboutJanovexa(): void {;
+    this.inquireAboutProduct('JANOVEXA – Your City. Your Voice');
+  }
+
   protected inquireAboutMoneyManager(): void {
-    if (this.routePath !== '/') {
-      window.history.pushState({}, '', this.appPath('/#contact'));
+    this.inquireAboutProduct('Samrique Money Manager');
+  }
+
+  protected inquireAboutZest(): void {
+    this.inquireAboutProduct('Zest Grocery App');
+  }
+
+  protected inquireAboutProduct(productName: string): void {
+    this.contactForm.project_type = 'New app from scratch';
+    this.contactForm.package = 'Custom';
+    this.contactForm.budget = 'From ₹6,00,000';
+    this.contactForm.timeline = '1–3 months';
+    this.contactForm.details = `Interested in custom deployment / commercial source code license for ${productName}.`;
+    this.bookingService = `Custom Build / Source Code: ${productName}`;
+    this.openEnquiry();
+  }
+
+  protected selectPricingTier(tierName: string, budget?: string): void {
+    const tierLower = tierName.toLowerCase();
+    if (tierLower.includes('starter') || tierLower.includes('mvp')) {
+      this.contactForm.package = 'Starter MVP';
+      this.contactForm.budget = 'From ₹1,00,000';
+      this.contactForm.timeline = 'Within 1 month';
+      this.contactForm.project_type = 'MVP to test an idea';
+    } else if (tierLower.includes('standard')) {
+      this.contactForm.package = 'Standard';
+      this.contactForm.budget = 'From ₹2,50,000';
+      this.contactForm.timeline = '1–3 months';
+      this.contactForm.project_type = 'New app from scratch';
+    } else if (tierLower.includes('premium')) {
+      this.contactForm.package = 'Premium';
+      this.contactForm.budget = 'From ₹6,00,000';
+      this.contactForm.timeline = '1–3 months';
+      this.contactForm.project_type = 'New app from scratch';
+    } else {
+      this.contactForm.package = 'Custom';
+      this.contactForm.budget = budget || 'From ₹6,00,000';
+      this.contactForm.timeline = 'Flexible';
+      this.contactForm.project_type = 'New app from scratch';
     }
-    this.showMoneyManager = false;
-    this.showMarketplace = false;
-    this.showMama = false;
-    this.showZipi = false;
-    this.refreshHomeVisibility();
+    this.bookingService = tierName;
+    this.openEnquiry();
+  }
+
+  protected openEnquiry(tierName?: string): void {
+    if (tierName) {
+      this.selectPricingTier(tierName);
+      return;
+    }
+    this.enquiryOpen = true;
+    document.body.classList.add('booking-open');
+    window.setTimeout(() => {
+      const input = document.querySelector('.enquiry-dialog input[name="name"]') as HTMLInputElement | null;
+      input?.focus();
+    }, 120);
+  }
+
+  protected closeEnquiry(): void {
+    this.enquiryOpen = false;
+    document.body.classList.remove('booking-open');
+  }
+
+  protected switchToBookingModal(): void {
+    this.closeEnquiry();
     this.openBooking();
+  }
+
+  protected togglePricingCurrency(isUSD: boolean): void {
+    this.showPricingUSD = isUSD;
+  }
+
+  protected handleContactSubmit(event: Event): void {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    this.contactStatus = '';
+    this.contactMessage = '';
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const subject =
+      `[Samrique Project Enquiry] ${this.contactForm.project_type || 'Mobile App'} - ${this.contactForm.name}`;
+
+    this.contactSending = true;
+
+    const actionUrl = form.getAttribute('action') || 'https://formsubmit.co/ajax/samrique.in@gmail.com';
+
+    const payload = {
+      name: this.contactForm.name,
+      email: this.contactForm.email,
+      _replyto: this.contactForm.email,
+      phone: this.contactForm.phone || 'N/A',
+      company: this.contactForm.company || 'N/A',
+      project_type: this.contactForm.project_type || 'N/A',
+      package: this.contactForm.package || 'Not specified',
+      budget: this.contactForm.budget || 'Not specified',
+      timeline: this.contactForm.timeline || 'Not specified',
+        message: this.contactForm.details,
+      _subject: subject,
+      _template: 'table',
+      _captcha: 'false',
+    };
+
+    fetch(actionUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (r) => {
+        if (!r.ok) throw new Error(`Submission endpoint returned ${r.status}`);
+        const data = await r.json().catch(() => ({}));
+        if (data.success === 'false' || data.success === false) {
+          throw new Error(data.message || 'Form submission pending activation');
+        }
+        this.contactForm = {
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          project_type: '',
+          package: '',
+          budget: '',
+          timeline: '',
+          details: '',
+          _gotcha: '',
+        };
+        this.contactStatus = 'ok';
+        this.contactMessage =
+          'Thank you. We received your enquiry and will reply within 24 hours, scoped roadmap within 48 hours.';
+      })
+      .catch(() => {
+        this.contactStatus = 'err';
+        this.contactMessage =
+          'We could not confirm the enquiry with FormSubmit. It may still have been delivered, so please wait for our email reply before submitting again.';
+      })
+      .finally(() => {
+        this.contactSending = false;
+        this.changeDetector.markForCheck();
+      });
+  }
+
+  protected openPrivacyModal(): void {
+    this.showPrivacyModal = true;
+    document.body.classList.add('modal-open');
+  }
+
+  protected closePrivacyModal(): void {
+    this.showPrivacyModal = false;
+    document.body.classList.remove('modal-open');
+  }
+
+  protected openTermsModal(): void {
+    this.showTermsModal = true;
+    document.body.classList.add('modal-open');
+  }
+
+  protected closeTermsModal(): void {
+    this.showTermsModal = false;
+    document.body.classList.remove('modal-open');
+  }
+
+  protected openUdyamModal(): void {
+    this.showUdyamModal = true;
+    document.body.classList.add('modal-open');
+  }
+
+  protected closeUdyamModal(): void {
+    this.showUdyamModal = false;
+    document.body.classList.remove('modal-open');
   }
 
   protected toggleMobileMenu(): void {
