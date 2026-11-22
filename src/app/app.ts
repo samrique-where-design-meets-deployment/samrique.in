@@ -61,6 +61,7 @@ export class App implements AfterViewInit, OnDestroy {
   protected showMama = ['/products/samrique-mama', '/products/samrique-mama-pregnancy-tracker'].includes(this.routePath);
   protected showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
   protected showZest = ['/products/zest-grocery', '/products/zest', '/products/samrique-zest-grocery'].includes(this.routePath);
+  protected showJanovexa = ['/products/janovexa', '/products/janovexa-civic-grievance', '/products/samrique-janovexa'].includes(this.routePath);
   protected showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
 
   // Modal Lightbox state
@@ -100,6 +101,7 @@ export class App implements AfterViewInit, OnDestroy {
   protected mamaCategory = 'All';
   protected zipiCategory = 'All';
   protected zestCategory = 'All';
+  protected janovexaCategory = 'All';
 
   private revealObserver?: IntersectionObserver;
   private bookingTrigger?: HTMLElement;
@@ -508,6 +510,7 @@ export class App implements AfterViewInit, OnDestroy {
     if (this.showMama) return this.mamaScreens;
     if (this.showZipi) return this.zipiScreens;
     if (this.showZest) return this.zestScreens;
+    if (this.showJanovexa) return this.janovexaScreens;
     return [];
   }
 
@@ -549,6 +552,12 @@ export class App implements AfterViewInit, OnDestroy {
       'retail': '#10b981',
       'wholesale': '#3b82f6',
       'delivery': '#f59e0b',
+      '01_citizen_portal': '#4A1525',
+      '02_department_admin_portal': '#0B132B',
+      '03_field_officer_portal': '#FF6B35',
+      'citizen portal': '#4A1525',
+      'department admin': '#0B132B',
+      'field officer': '#FF6B35',
     };
     return map[category?.toLowerCase()] || '#17b3a3';
   }
@@ -602,6 +611,15 @@ export class App implements AfterViewInit, OnDestroy {
     problemSolved: 'Grocery businesses struggle to unify retail consumer quick-delivery, bulk restaurant wholesale procurement, and last-mile driver coordination into a single maintainable Flutter codebase without fragmenting state and business logic.',
     keyUserFlows: 'B2C consumer catalog discovery, search & express cart checkout → B2B wholesale bulk tier ordering, Net 30 credit terms & saved supply lists → Delivery partner task acceptance → store pickup → OpenStreetMap transit → customer handover & earnings analytics.',
     architectureTimeline: 'Engineered in an agile sprint using Flutter & Dart (SDK ^3.13.5), GetX reactive state management and dependency injection, flutter_map with OpenStreetMap integration, and a unified multi-persona architecture.'
+  };
+
+  protected readonly janovexaProofPoint = {
+    badge: 'Civic Tech & Public Service · Multi-Role',
+    classification: 'Digital Public Service / Production-Grade MVP',
+    notice: 'JANOVEXA empowers citizens to report civic grievances with location and photographic evidence, track resolution progress with transparent department accountability, and provides city departments with a modern administration dashboard to triage, assign officers, and update complaint statuses.',
+    problemSolved: 'Municipal grievance redressal often suffers from opaque resolution timelines, unverified complaint geotags, fragmented citizen communication, and disconnected field dispatch, leading to breached SLAs and declining civic trust.',
+    keyUserFlows: 'Citizen 5-step grievance registration with OSM map pin drop & evidence upload → Department admin queue triage, SLA tracking & field officer dispatch → Field officer on-site navigation, repair resolution & timestamped audit journey → Citizen closure verification & reopening.',
+    architectureTimeline: 'Engineered with Flutter SDK ^3.47.7, Dart ^3.13.5, Flutter Riverpod ^3.5.0 compile-safe state management, flutter_map ^8.3.2 & latlong2 ^0.10.1 with OpenStreetMap tiles, and modern Material 3 design tokens spanning 41 screens across 3 distinct municipal roles.'
   };
 
   // --- Features & Stack Data ---
@@ -713,6 +731,30 @@ export class App implements AfterViewInit, OnDestroy {
     ['Formatting & Media', 'intl for date/currency formatting, cached_network_image'],
     ['Multi-persona architecture', 'B2C Customer, B2B Wholesale Buyer, Delivery Partner'],
     ['Automated testing suite', 'Flutter test framework (widget and workflow test suite in test/)'],
+  ];
+
+  protected readonly janovexaFeatures = [
+    { title: 'Three synchronized civic portals', detail: 'Dedicated role-based portals for Citizens (01_Citizen_Portal), Department Administrators (02_Department_Admin_Portal), and Field Engineers (03_Field_Officer_Portal) with tailored UX and state models.' },
+    { title: '5-step evidence-based grievance filing', detail: 'Intuitive wizard covering category selection, character-counted description, interactive OSM map pin placement, 10MB photo/document uploads, and instant reference ID generation (JVX-2026-01482).' },
+    { title: 'OpenStreetMap GIS & geotagging', detail: 'Interactive vector/raster map powered by flutter_map and latlong2 with live GPS current-location auto-fill, reverse geocoding, and ward validation.' },
+    { title: 'Transparent lifecycle audit timeline', detail: 'Vertical connected timeline providing real-time visibility into complaint registration, department assignment, technician dispatch, and resolution verification.' },
+    { title: 'Multi-department admin dashboard', detail: 'Central command for Electrical, Solid Waste, Water Supply & Sewerage, and Roads departments featuring live SLA compliance (94.2%), turnaround times, and officer dispatch sheets.' },
+    { title: 'Field officer workspace & routing', detail: 'Assigned work order queue with turn-by-turn map directions, Mark On-Site check-in, on-site photo proof upload, and direct ticket resolution.' },
+    { title: 'Citizen charter & SLA governance', detail: 'Clear statutory turnaround targets, escalation matrices, public service announcements, and transparent citizen rights charter.' },
+    { title: 'Reopen & citizen recourse loop', detail: 'Empowers citizens to reopen unsatisfactory resolutions within a defined window by providing additional notes and photographic proof.' },
+  ];
+
+  protected readonly janovexaStack = [
+    ['Frontend Mobile Framework', 'Flutter SDK ^3.47.7 & Dart ^3.13.5 (cross-platform native compiled)'],
+    ['State Management', 'Flutter Riverpod ^3.5.0 (Declarative, compile-safe application state)'],
+    ['Mapping & GIS Navigation', 'flutter_map ^8.3.2 & latlong2 ^0.10.1 (OpenStreetMap interactive vector/raster tiles)'],
+    ['Design System & Typography', 'Material 3 (M3) with custom brand tokens (Imperial Maroon #4A1525, Orange #FF6B35, Navy #0B132B) & Google Fonts (Plus Jakarta Sans)'],
+    ['Localization & Date/Time', 'intl ^0.20.3 (localized complaint timestamps and date formatting)'],
+    ['Iconography & Visual Assets', 'Cupertino Icons ^1.0.8 & high-fidelity custom civic vector assets'],
+    ['Target Backend Architecture', 'NestJS enterprise TypeScript REST API with modular dependency injection & OpenAPI / Swagger contracts'],
+    ['Target Database & ORM', 'PostgreSQL relational database with Prisma ORM type-safe schemas and audit migrations'],
+    ['Target Security & Auth', 'Stateless JWT authentication with role-based access control (citizen, field_officer, dept_admin)'],
+    ['Test & Emulation Harness', 'Android ADB automated pipeline & Impeller Engine (OpenGLES) on Android 17 / API 37 emulator'],
   ];
 
   // --- Screens Data ---
@@ -1576,6 +1618,433 @@ export class App implements AfterViewInit, OnDestroy {
     },
   ];
 
+  protected readonly janovexaScreens: ProductScreen[] = [
+    // ==========================================
+    // 01_Citizen_Portal (27 Screens)
+    // ==========================================
+    // --- Onboarding & Authentication ---
+    {
+      id: 'jvx-splash',
+      screenNumber: '01',
+      name: 'Brand Splash & Mission Screen',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/01_splash_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/01_splash_screen.png',
+      description: 'Animated 3D ribbon mark with civic slogan "Your voice. A better city. Together, we make progress" and smooth boot transition.',
+      tags: ['Splash Screen', 'Brand Identity'],
+    },
+    {
+      id: 'jvx-welcome',
+      screenNumber: '02',
+      name: 'Welcome & Value Proposition',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/02_welcome_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/02_welcome_screen.png',
+      description: 'City skyline illustration with landmark civic buildings, value proposition ("Better neighbourhoods. Built together."), and action buttons.',
+      tags: ['Civic Onboarding', 'Value Proposition'],
+    },
+    {
+      id: 'jvx-role-select',
+      screenNumber: '03',
+      name: 'Multi-Role Portal Selection',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/03_role_selection_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/03_role_selection_screen.png',
+      description: 'Role selection hub directing citizens, field engineers, and department administrators to their dedicated workflows.',
+      tags: ['Role Gateway', 'Portal Switcher'],
+    },
+    {
+      id: 'jvx-cit-login',
+      screenNumber: '04',
+      name: 'Citizen Sign In',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/04_citizen_login_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/04_citizen_login_screen.png',
+      description: 'Credential-based login with mobile number or email, password visibility toggle, "Log in with OTP" fallback, and secure account storage notices.',
+      tags: ['Authentication', 'Citizen Login'],
+    },
+    {
+      id: 'jvx-cit-signup',
+      screenNumber: '05',
+      name: 'Citizen Account Registration',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/05_citizen_signup_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/05_citizen_signup_screen.png',
+      description: 'Citizen sign-up capturing Full name, Mobile number, Email address, and Password with visibility toggle and strength criteria.',
+      tags: ['Account Registration', 'Citizen Sign-up'],
+    },
+    {
+      id: 'jvx-forgot-pw',
+      screenNumber: '06',
+      name: 'Forgot Password Screen',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/06_forgot_password_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/06_forgot_password_screen.png',
+      description: 'Mobile number entry with automated code dispatch and 5-minute code expiration guidance for account recovery.',
+      tags: ['Account Recovery', 'Forgot Password'],
+    },
+    {
+      id: 'jvx-otp-verify',
+      screenNumber: '07',
+      name: 'OTP Verification Screen',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/07_otp_verification_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/07_otp_verification_screen.png',
+      description: '6 individual verification boxes with auto-focus, live resend timer, 1-tap quick fill for demo (123456), and simulated SMS notification banner.',
+      tags: ['OTP Verification', '2FA Security'],
+    },
+    {
+      id: 'jvx-reset-pw',
+      screenNumber: '08',
+      name: 'Reset Password Screen',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/08_reset_password_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/08_reset_password_screen.png',
+      description: 'Password creation with real-time criteria validation (8+ characters, uppercase & lowercase, number/special character).',
+      tags: ['Password Reset', 'Credential Security'],
+    },
+    // --- Citizen Dashboard & Tracking ---
+    {
+      id: 'jvx-cit-home',
+      screenNumber: '09',
+      name: 'Citizen Home Dashboard',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/01_citizen_home_dashboard.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/01_citizen_home_dashboard.png',
+      description: 'Greeting header ("Good morning, Aarav - Ward 12 · Indiranagar"), alert bell, hero burgundy action card, live grievance updates banner, 4 metric counters (07 Total, 02 Pending, 02 In progress, 02 Resolved), and recent complaints list.',
+      tags: ['Citizen Dashboard', 'Civic Feed'],
+    },
+    {
+      id: 'jvx-cit-grievances',
+      screenNumber: '10',
+      name: 'My Grievances List (All)',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/02_citizen_grievances_list_all.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/02_citizen_grievances_list_all.png',
+      description: 'Searchable complaint list with filter pills (All · 6, In Progress · 3, Resolved · 3) displaying reference numbers, addresses, submission dates, and status badges.',
+      tags: ['My Complaints', 'Filter & Search'],
+    },
+    {
+      id: 'jvx-cit-details',
+      screenNumber: '11',
+      name: 'Complaint Details & Active Alert',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/03_citizen_complaint_details.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/03_citizen_complaint_details.png',
+      description: 'Reference header, status pill, active "REPAIR UNDERWAY" alert banner, OpenStreetMap geotag, assigned officer details, attached evidence viewer, and dynamic actions.',
+      tags: ['Complaint Details', 'SLA Tracking'],
+    },
+    {
+      id: 'jvx-cit-audit',
+      screenNumber: '12',
+      name: 'Status Audit History Timeline',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/04_citizen_status_audit_history.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/04_citizen_status_audit_history.png',
+      description: 'Vertical connected timeline detailing lifecycle milestones: Repair in progress, Assigned to department, Under review, and Complaint registered.',
+      tags: ['Status History', 'Audit Trail'],
+    },
+    {
+      id: 'jvx-cit-reopen',
+      screenNumber: '13',
+      name: 'Reopen Complaint Request',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/05_citizen_reopen_complaint.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/05_citizen_reopen_complaint.png',
+      description: 'Recourse form for resolved complaints requiring further attention, allowing citizens to submit detailed justification and attach additional photo proof.',
+      tags: ['Reopen Complaint', 'Citizen Recourse'],
+    },
+    {
+      id: 'jvx-cit-analytics',
+      screenNumber: '14',
+      name: 'Civic Analytics & SLA Metrics',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/06_citizen_analytics_reports.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/06_citizen_analytics_reports.png',
+      description: 'Zonal transparency metrics showing 71.4% resolution rate, departmental ticket breakdowns, and average civic turnaround velocity.',
+      tags: ['Civic Analytics', 'Resolution SLA'],
+    },
+    {
+      id: 'jvx-cit-charter',
+      screenNumber: '15',
+      name: 'Citizen Charter & Guidelines',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/07_citizen_instructions_charter.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/07_citizen_instructions_charter.png',
+      description: 'Statutory municipal turnaround SLAs, escalation tiers, guaranteed citizen rights, and department response timelines.',
+      tags: ['Citizen Charter', 'Service Standards'],
+    },
+    {
+      id: 'jvx-cit-alerts',
+      screenNumber: '16',
+      name: 'Alerts & Notifications Feed',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/08_citizen_alerts_notifications.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/08_citizen_alerts_notifications.png',
+      description: 'Live alerts feed with unread count badges, "Mark all as read", filter tabs (All, Unread · 2), and interactive 1-tap links directly to complaint details.',
+      tags: ['Notification Feed', 'Broadcast Alerts'],
+    },
+    {
+      id: 'jvx-cit-profile',
+      screenNumber: '17',
+      name: 'Citizen Profile & Quick Links',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/09_citizen_user_profile.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/09_citizen_user_profile.png',
+      description: 'Verified citizen account badge for Aarav Sharma (+91 98765 43210), quick shortcuts to settings and support, and direct switch to Department Admin Dashboard.',
+      tags: ['Citizen Profile', 'Identity Verification'],
+    },
+    {
+      id: 'jvx-cit-edit-profile',
+      screenNumber: '18',
+      name: 'Edit Citizen Profile',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/10_citizen_edit_profile.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/10_citizen_edit_profile.png',
+      description: 'Profile editing interface managing full name, phone verification update, email address, and residential ward neighbourhood.',
+      tags: ['Edit Profile', 'Ward Info'],
+    },
+    {
+      id: 'jvx-cit-change-pw',
+      screenNumber: '19',
+      name: 'Change Account Password',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/11_citizen_change_password.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/11_citizen_change_password.png',
+      description: 'Credential modification screen requiring current password verification and validating new password strength rules.',
+      tags: ['Security Settings', 'Password Change'],
+    },
+    {
+      id: 'jvx-cit-settings',
+      screenNumber: '20',
+      name: 'Citizen Application Settings',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/12_citizen_settings_screen.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/12_citizen_settings_screen.png',
+      description: 'Toggle switches for Push notifications, SMS updates, and Email copies, plus Language selector and Privacy & permissions controls.',
+      tags: ['App Settings', 'Notification Preferences'],
+    },
+    {
+      id: 'jvx-cit-help',
+      screenNumber: '21',
+      name: 'Civic Help, FAQs & Helpline',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/13_citizen_help_support_faqs.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/13_citizen_help_support_faqs.png',
+      description: 'Searchable civic FAQs, 24/7 toll-free municipal helpline (1912), emergency escalation contacts, and terms of service.',
+      tags: ['Help & Support', 'Municipal Helpline'],
+    },
+    // --- 5-Step Grievance Registration ---
+    {
+      id: 'jvx-step1-cat',
+      screenNumber: '22',
+      name: 'Step 1: Category Selection',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/01_step1_category_selection.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/01_step1_category_selection.png',
+      description: 'Grievance triage selection between Roads & footpaths, Water supply, Streetlights, Waste & sanitation, and Other civic issues.',
+      tags: ['Category Selection', 'Step 1 of 5'],
+    },
+    {
+      id: 'jvx-step2-details',
+      screenNumber: '23',
+      name: 'Step 2: Grievance Details',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/02_step2_grievance_details.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/02_step2_grievance_details.png',
+      description: 'Category confirmation, complaint title, contextual landmark description, and character counter (123 / 1000 characters).',
+      tags: ['Grievance Details', 'Step 2 of 5'],
+    },
+    {
+      id: 'jvx-step3-map',
+      screenNumber: '24',
+      name: 'Step 3: OSM Geolocation Map',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/03_step3_location_gps_map.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/03_step3_location_gps_map.png',
+      description: 'Search bar, interactive stylized city grid map with pin marker, GPS auto-fill ("Use current location"), and ward verification.',
+      tags: ['OpenStreetMap Pin', 'Step 3 of 5'],
+    },
+    {
+      id: 'jvx-step4-evidence',
+      screenNumber: '25',
+      name: 'Step 4: Evidence Photo Upload',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/04_step4_evidence_upload.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/04_step4_evidence_upload.png',
+      description: 'Dashed upload zone ("Take a photo or browse files") supporting images and documents up to 10MB, plus list of attached evidence files.',
+      tags: ['Evidence Upload', 'Step 4 of 5'],
+    },
+    {
+      id: 'jvx-step5-review',
+      screenNumber: '26',
+      name: 'Step 5: Review & Declaration',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/05_step5_review_and_confirm.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/05_step5_review_and_confirm.png',
+      description: 'Comprehensive review summary card with Category, inline Edit shortcuts, Title, Description, Geolocation, and statutory Declaration checkbox.',
+      tags: ['Review Summary', 'Step 5 of 5'],
+    },
+    {
+      id: 'jvx-submission-success',
+      screenNumber: '27',
+      name: 'Complaint Registered Success',
+      category: '01_Citizen_Portal',
+      previewImage: 'assets/images/janovexa/01_Citizen_Portal/06_submission_success.png',
+      assetImage: 'assets/images/janovexa/01_Citizen_Portal/06_submission_success.png',
+      description: 'Success checkmark badge, reference ID generator (JVX-2026-01482), "Track complaint", and "Back to dashboard" direct actions.',
+      tags: ['Submission Success', 'Tracking ID'],
+    },
+
+    // ==========================================
+    // 02_Department_Admin_Portal (8 Screens)
+    // ==========================================
+    {
+      id: 'jvx-adm-login',
+      screenNumber: '28',
+      name: 'Department Admin Login',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/10_department_admin_login_screen.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/10_department_admin_login_screen.png',
+      description: 'Agency administrator credential checkpoint with department tag security and administrative authorization.',
+      tags: ['Admin Auth', 'Agency Checkpoint'],
+    },
+    {
+      id: 'jvx-adm-dash',
+      screenNumber: '29',
+      name: 'Department Admin Dashboard',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/01_department_admin_dashboard.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/01_department_admin_dashboard.png',
+      description: 'Multi-department switcher (Electrical, Solid Waste, Water Supply, Roads), real-time KPIs (Total Received, Active/Under Repair, SLA Met 94.2%), and triage queue table.',
+      tags: ['Admin Command', 'Department KPIs'],
+    },
+    {
+      id: 'jvx-adm-assign',
+      screenNumber: '30',
+      name: 'Assign Field Officer Bottom Sheet',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/02_admin_assign_officer_sheet.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/02_admin_assign_officer_sheet.png',
+      description: 'Bottom sheet modal to allocate field engineers (K. Ramesh Rao, Smt. Geetha V., Anand Kulkarni) with workload stats and 1-tap dispatch.',
+      tags: ['Officer Dispatch', 'Task Allocation'],
+    },
+    {
+      id: 'jvx-adm-update',
+      screenNumber: '31',
+      name: 'Update Complaint Status Sheet',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/03_admin_update_status_sheet.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/03_admin_update_status_sheet.png',
+      description: 'Modal sheet to move ticket lifecycle status, enter official resolution remarks, and broadcast real-time updates and notifications to the citizen.',
+      tags: ['Status Update', 'Citizen Broadcast'],
+    },
+    {
+      id: 'jvx-adm-sla',
+      screenNumber: '32',
+      name: 'Zonal SLA & Performance Reports',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/04_admin_zonal_sla_reports.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/04_admin_zonal_sla_reports.png',
+      description: 'Department-wide resolution speed, zonal SLA met vs breached breakdown, turnaround time metrics, and escalation audits.',
+      tags: ['Zonal SLA', 'Compliance Reports'],
+    },
+    {
+      id: 'jvx-adm-history',
+      screenNumber: '33',
+      name: 'Archived Resolution History',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/05_admin_resolution_history.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/05_admin_resolution_history.png',
+      description: 'Archived audit logs of resolved grievances with multi-parameter filtering by department, resolution date, and assigned officer.',
+      tags: ['Resolution Archive', 'Audit Logs'],
+    },
+    {
+      id: 'jvx-adm-sops',
+      screenNumber: '34',
+      name: 'Administrative Operating SOPs',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/06_admin_administrative_sops.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/06_admin_administrative_sops.png',
+      description: 'Operational protocol guidelines, statutory turnaround requirements, grievance priority classification, and triage rules.',
+      tags: ['Administrative SOPs', 'Triage Rules'],
+    },
+    {
+      id: 'jvx-adm-profile',
+      screenNumber: '35',
+      name: 'Admin Profile & Agency Info',
+      category: '02_Department_Admin_Portal',
+      previewImage: 'assets/images/janovexa/02_Department_Admin_Portal/07_admin_profile_management.png',
+      assetImage: 'assets/images/janovexa/02_Department_Admin_Portal/07_admin_profile_management.png',
+      description: 'Administrator identity, municipal agency affiliation (BBMP / BESCOM), designated zonal jurisdiction, and session credentials.',
+      tags: ['Admin Profile', 'Agency Credentials'],
+    },
+
+    // ==========================================
+    // 03_Field_Officer_Portal (6 Screens)
+    // ==========================================
+    {
+      id: 'jvx-off-login',
+      screenNumber: '36',
+      name: 'Field Officer Login',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/09_officer_login_screen.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/09_officer_login_screen.png',
+      description: 'Officer badge ID, department tag, and staff credentials checkpoint for field engineers and on-site inspection teams.',
+      tags: ['Staff Login', 'Officer Checkpoint'],
+    },
+    {
+      id: 'jvx-off-workspace',
+      screenNumber: '37',
+      name: 'Field Officer Workspace & Orders',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/01_field_officer_workspace.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/01_field_officer_workspace.png',
+      description: 'Assigned work orders feed with turn-by-turn routing, priority badges, "Mark On-Site" arrival check-in, and "Mark Resolved" resolution actions.',
+      tags: ['Work Orders', 'Field Dispatch'],
+    },
+    {
+      id: 'jvx-off-history',
+      screenNumber: '38',
+      name: 'Officer Work History & Archive',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/02_field_officer_history.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/02_field_officer_history.png',
+      description: 'Personal work order resolution archive with completion timestamps, photographic proof records, and citizen sign-offs.',
+      tags: ['Work History', 'Closed Tickets'],
+    },
+    {
+      id: 'jvx-off-reports',
+      screenNumber: '39',
+      name: 'Officer Performance Reports',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/03_field_officer_performance_reports.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/03_field_officer_performance_reports.png',
+      description: 'Personal SLA velocity dashboard, total work orders handled, first-time fix rate, and monthly engineering efficiency ratings.',
+      tags: ['Performance Metrics', 'Officer SLA'],
+    },
+    {
+      id: 'jvx-off-safety',
+      screenNumber: '40',
+      name: 'Field Safety & SOP Guidelines',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/04_field_officer_safety_guidelines.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/04_field_officer_safety_guidelines.png',
+      description: 'Standard operating safety procedures, mandatory PPE gear requirements, high-voltage hazard protocols, and on-site evidence capture standards.',
+      tags: ['Safety Guidelines', 'Field SOPs'],
+    },
+    {
+      id: 'jvx-off-profile',
+      screenNumber: '41',
+      name: 'Officer Profile & Official ID Badge',
+      category: '03_Field_Officer_Portal',
+      previewImage: 'assets/images/janovexa/03_Field_Officer_Portal/05_field_officer_profile.png',
+      assetImage: 'assets/images/janovexa/03_Field_Officer_Portal/05_field_officer_profile.png',
+      description: 'Official municipal engineer identity card, verified beat ward assignment, department credentials, and emergency desk contact.',
+      tags: ['Official Badge', 'Beat Assignment'],
+    },
+  ];
+
   @HostListener('window:popstate')
   protected syncRoute(): void {
     this.showMoneyManager = ['/products/money-manager', '/products/samrique-money-manager'].includes(this.routePath);
@@ -1583,13 +2052,14 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMama = ['/products/samrique-mama', '/products/samrique-mama-pregnancy-tracker'].includes(this.routePath);
     this.showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
     this.showZest = ['/products/zest-grocery', '/products/zest', '/products/samrique-zest-grocery'].includes(this.routePath);
+    this.showJanovexa = ['/products/janovexa', '/products/janovexa-civic-grievance', '/products/samrique-janovexa'].includes(this.routePath);
     this.showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
     this.showPrivacyModal = ['/privacy', '/privacy-policy'].includes(this.routePath);
     this.showTermsModal = ['/terms', '/terms-of-service', '/terms-and-conditions'].includes(this.routePath);
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
 
-    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi && !this.showZest && !this.showPricingPage) {
+    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi && !this.showZest && !this.showJanovexa && !this.showPricingPage) {
       this.refreshHomeVisibility();
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1606,6 +2076,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMama = false;
     this.showZipi = false;
     this.showZest = false;
+    this.showJanovexa = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1622,6 +2093,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMama = false;
     this.showZipi = false;
     this.showZest = false;
+    this.showJanovexa = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1638,6 +2110,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMama = true;
     this.showZipi = false;
     this.showZest = false;
+    this.showJanovexa = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1654,6 +2127,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMama = false;
     this.showZipi = true;
     this.showZest = false;
+    this.showJanovexa = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1670,6 +2144,24 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMama = false;
     this.showZipi = false;
     this.showZest = true;
+    this.showJanovexa = false;
+    this.showPricingPage = false;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
+  }
+
+  protected openJanovexa(): void {
+    if (this.routePath !== '/products/janovexa') {
+      window.history.pushState({}, '', this.appPath('/products/janovexa'));
+    }
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showZest = false;
+    this.showJanovexa = true;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1686,6 +2178,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMama = false;
     this.showZipi = false;
     this.showZest = false;
+    this.showJanovexa = false;
     this.showPricingPage = true;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1702,6 +2195,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMama = false;
     this.showZipi = false;
     this.showZest = false;
+    this.showJanovexa = false;
     this.showPricingPage = true;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1716,6 +2210,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMama = false;
     this.showZipi = false;
     this.showZest = false;
+    this.showJanovexa = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1734,10 +2229,15 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMama = false;
     this.showZipi = false;
     this.showZest = false;
+    this.showJanovexa = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     this.refreshHomeVisibility();
+  }
+
+  protected inquireAboutJanovexa(): void {;
+    this.inquireAboutProduct('JANOVEXA – Your City. Your Voice');
   }
 
   protected inquireAboutMoneyManager(): void {

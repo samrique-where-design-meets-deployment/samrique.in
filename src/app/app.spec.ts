@@ -83,6 +83,21 @@ describe('App', () => {
     expect(app['zestScreens'].length).toBe(25);
   });
 
+  it('should open and display JANOVEXA product details with 41 screens across 3 roles', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openJanovexa']();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.janovexa-page')).toBeTruthy();
+    expect(compiled.querySelector('h1')?.textContent).toContain('JANOVEXA');
+    expect(app['janovexaScreens'].length).toBe(41);
+    expect(app['getCategoryCount'](app['janovexaScreens'], '01_Citizen_Portal')).toBe(27);
+    expect(app['getCategoryCount'](app['janovexaScreens'], '02_Department_Admin_Portal')).toBe(8);
+    expect(app['getCategoryCount'](app['janovexaScreens'], '03_Field_Officer_Portal')).toBe(6);
+  });
+
   it('should open screen modal and allow switching between preview mockup and raw asset', async () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;

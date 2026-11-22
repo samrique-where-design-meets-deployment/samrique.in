@@ -319,7 +319,8 @@
           <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
             Taxi App</a>
           <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery App</a>
-        </div>
+          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa Civic Platform</a>
+</div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
           <span>Flutter Multi-Platform</span>
@@ -689,6 +690,7 @@
           <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
             Taxi App</a>
           <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery App</a>
+          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa Civic Platform</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -1830,6 +1832,377 @@
     </div>
   </footer>
 </main>
+} @else if (showJanovexa) {
+<main class="product-page janovexa-page">
+  <div class="top-progress" aria-hidden="true">
+    <span id="top-progress-bar"></span>
+  </div>
+
+  <!-- Navigation Header (Matched with Home Screen) -->
+  <header class="product-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3 flex-shrink-0">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            class="flex items-center gap-2 group" aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
+              class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md mx-auto"
+          aria-label="Product page sections">
+          <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+          <a href="#product-proof-point" (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof Point</a>
+          <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
+          <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens
+            &amp; Previews</a>
+          <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
+        </nav>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3 sm:gap-3.5 flex-shrink-0">
+          <a [attr.href]="appPath('/#projects')" (click)="$event.preventDefault(); returnToProjects()"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
+            <span class="hidden sm:inline">Projects</span>
+          </a>
+          <button (click)="openBooking()"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-rose-300 bg-rose-50 text-rose-900 text-xs font-semibold hover:bg-rose-100 transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-600 animate-pulse"></span>
+            Book Call
+          </button>
+          <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()"
+            class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
+            <span>Start Project</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="product-hero">
+    <div class="product-hero-copy">
+      <a class="product-back" [attr.href]="appPath('/#projects')"
+        (click)="$event.preventDefault(); returnToProjects()"><i class="fa-solid fa-arrow-left"></i> Back to
+        projects</a>
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-eyebrow" style="border-color: #4A152544; background: #4A152512; color: #4A1525">
+          <i class="fa-solid fa-landmark"></i> Digital Public Service · Flutter app
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          Product Showcase &bull; Concept MVP
+        </span>
+      </div>
+      <h1>JANOVEXA<br /><span style="color: #4A1525">Your City. Your Voice.</span></h1>
+      <p style="font-weight: 700; color: #4A1525; margin-bottom: 8px">A SAMRIQUE Digital Public Service</p>
+      <p>
+        JANOVEXA empowers citizens to report civic grievances with location and photographic evidence,
+        track resolution progress with transparent department accountability, and provides city
+        departments with a modern administration dashboard to triage, assign officers, and update
+        complaint statuses.
+      </p>
+      <div class="product-pills">
+        <span>Flutter ^3.47</span><span>Riverpod ^3.5</span><span>OpenStreetMap</span><span>latlong2</span><span>Material 3</span><span>3 Portals</span><span>41 Screens</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center">
+        <a class="product-primary" [attr.href]="appPath('/#contact')"
+          (click)="$event.preventDefault(); inquireAboutJanovexa()">
+          Discuss a similar product <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
+          class="screen-inspect-action" style="padding: 12px 20px; font-size: 14px">
+          <i class="fa-solid fa-mobile-screen"></i> Explore Screens ({{
+          janovexaScreens.length }})
+        </a>
+      </div>
+    </div>
+    <figure class="product-hero-image" style="cursor: pointer" (click)="scrollToProductSection('product-screens')">
+      <img src="assets/images/janovexa/janovexa_showcase.png"
+        alt="Preview Screen: JANOVEXA Citizen Home Dashboard" loading="eager" fetchpriority="high"
+        decoding="async" />
+      <figcaption>
+        Preview Screen: Citizen Home Dashboard &bull; Indiranagar Ward 12 Civic Grievances
+      </figcaption>
+    </figure>
+  </section>
+
+  <nav class="product-toc" aria-label="On this page">
+    <a href="#product-overview"
+      (click)="$event.preventDefault(); scrollToProductSection('product-overview')">Overview</a>
+    <a href="#product-proof-point"
+      (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')">Proof Point</a>
+    <a href="#product-features"
+      (click)="$event.preventDefault(); scrollToProductSection('product-features')">Features</a>
+    <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')">Screens
+      &amp; Previews</a>
+    <a href="#product-technology"
+      (click)="$event.preventDefault(); scrollToProductSection('product-technology')">Technology</a>
+  </nav>
+
+  <section id="product-overview" class="product-section product-overview">
+    <div>
+      <span class="product-kicker">The product</span>
+      <h2>Three unified roles.<br />From citizen voice to field resolution.</h2>
+    </div>
+    <p>
+      JANOVEXA is an enterprise-grade digital civic service platform engineered in Flutter to unify
+      the complete lifecycle of municipal complaints and infrastructure redressal. Built with 1:1 fidelity
+      to civic design specifications across three synchronized roles:<br /><br />
+      <b>01 Citizen Portal:</b> Complete onboarding with OTP simulation, personalized ward dashboard, 5-step
+      evidence-based grievance registration with OpenStreetMap pin drops and photo uploads, real-time status audit
+      timelines, SLA transparency analytics, citizen rights charter, and reopen recourse loops.<br />
+      <b>02 Department Admin Portal:</b> Multi-department administration hub covering Electrical, Solid Waste, Water
+      Supply, and Roads with real-time 94.2% SLA compliance tracking, bottom-sheet field officer allocation, and official
+      status update broadcasts.<br />
+      <b>03 Field Officer Portal:</b> Mobile engineer workspace featuring assigned work order radar, turn-by-turn routing,
+      Mark On-Site arrival verification, photo proof capture, performance analytics, and official ID badges.
+    </p>
+  </section>
+
+  <!-- Engineering & Product Proof Point Section -->
+  <section id="product-proof-point" class="product-section">
+    <div class="product-section-heading">
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-kicker">Engineering &amp; Product Proof Point</span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-900 border border-rose-200 text-xs font-bold" style="color: #4A1525; background: #4A152512; border-color: #4A152530">
+          <i class="fa-solid fa-flask-vial" style="color: #4A1525"></i> {{ janovexaProofPoint.classification }}
+        </span>
+      </div>
+      <h2>Engineered for municipal transparency,<br /><span>not just UI screens.</span></h2>
+      <p class="max-w-3xl">
+        {{ janovexaProofPoint.notice }}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-800 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100" style="color: #4A1525; background: #4A152512">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Problem Solved</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ janovexaProofPoint.problemSolved }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-800 flex items-center gap-1.5" style="color: #4A1525">
+          <i class="fa-solid fa-check-circle"></i> Transparent Municipal Governance
+        </div>
+      </div>
+
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
+            <i class="fa-solid fa-route"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Key User Flows Built</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ janovexaProofPoint.keyUserFlows }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> Citizen &rarr; Admin Triage &rarr; Field Work Order
+        </div>
+      </div>
+
+      <div class="product-proof-card flex flex-col justify-between">
+        <div>
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
+            <i class="fa-solid fa-code-branch"></i>
+          </div>
+          <h3 class="text-base font-extrabold text-slate-900 mb-2">Architecture &amp; Timeline</h3>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            {{ janovexaProofPoint.architectureTimeline }}
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i> Riverpod &bull; flutter_map &bull; Material 3
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="product-features" class="product-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">Engineered for Public Trust &amp; Field Velocity</span>
+      <h2>Platform Features</h2>
+      <p>End-to-end municipal capabilities across citizens, department administrators, and field engineers.</p>
+    </div>
+    <div class="product-feature-grid">
+      @for (feature of janovexaFeatures; track feature.title; let i = $index) {
+      <article class="product-feature">
+        <span class="product-feature-number" style="color: #4A1525; border-color: #fbcfe8; background: #fdf2f8">0{{ i +
+          1 }}</span>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.detail }}</p>
+      </article>
+      }
+    </div>
+  </section>
+
+  <!-- Mobile Screens & Previews Section -->
+  <section id="product-screens" class="product-screens-section">
+    <div class="wrap">
+      <span class="eyebrow" style="color: #4A1525">Civic tech &amp; public service showcase</span>
+      <h2>Mobile screens, <span>end to end</span></h2>
+      <p class="lead">
+        Explore 41 production-ready screens across 3 distinct municipal roles: Citizen Portal (01_Citizen_Portal), Department Admin Portal (02_Department_Admin_Portal), and Field Officer Portal (03_Field_Officer_Portal).
+      </p>
+      <div class="stats">
+        <div><b>41</b><small>Screens</small></div>
+        <div><b>3</b><small>Municipal Roles</small></div>
+        <div><b>Flutter</b><small>Cross-platform</small></div>
+      </div>
+
+      <div class="filters" role="tablist">
+        <button type="button" class="pill" [class.on]="janovexaCategory === 'All'" (click)="janovexaCategory = 'All'">
+          All<i>({{ janovexaScreens.length }})</i>
+        </button>
+        <button type="button" class="pill" [class.on]="janovexaCategory === '01_Citizen_Portal'" (click)="janovexaCategory = '01_Citizen_Portal'">
+          01 Citizen Portal<i>({{ getCategoryCount(janovexaScreens, '01_Citizen_Portal') }})</i>
+        </button>
+        <button type="button" class="pill" [class.on]="janovexaCategory === '02_Department_Admin_Portal'" (click)="janovexaCategory = '02_Department_Admin_Portal'">
+          02 Department Admin<i>({{ getCategoryCount(janovexaScreens, '02_Department_Admin_Portal') }})</i>
+        </button>
+        <button type="button" class="pill" [class.on]="janovexaCategory === '03_Field_Officer_Portal'" (click)="janovexaCategory = '03_Field_Officer_Portal'">
+          03 Field Officer<i>({{ getCategoryCount(janovexaScreens, '03_Field_Officer_Portal') }})</i>
+        </button>
+      </div>
+
+      <div class="grid">
+        @for (screen of filterScreens(janovexaScreens, janovexaCategory); track
+        screen.id) {
+        <article class="card" [style.--c]="getCategoryColor(screen.category)" (click)="openScreenModal(screen, 'asset')"
+          (keydown.enter)="openScreenModal(screen, 'asset')" tabindex="0" role="button" [attr.aria-label]="screen.name">
+          <div class="stage">
+            <span class="num">SCREEN {{ screen.screenNumber }}</span>
+            <span class="badge">{{ screen.category }}</span>
+            <div class="phone">
+              <img [src]="screen.assetImage || screen.previewImage" [alt]="screen.name" class="phone-screen-img"
+                loading="lazy" />
+            </div>
+          </div>
+          <div class="body">
+            <h3>{{ screen.name }}</h3>
+            <p>{{ screen.description }}</p>
+            <div class="tags">
+              @for (tag of screen.tags; track tag) {
+              <span>{{ tag }}</span>
+              }
+            </div>
+          </div>
+        </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="product-technology" class="product-section product-tech-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">High-Performance Municipal Tech Stack</span>
+      <h2>Technology stack</h2>
+    </div>
+    <div class="product-table-wrap">
+      <table class="product-table">
+        <tbody>
+          @for (item of janovexaStack; track item[0]) {
+          <tr>
+            <th scope="row">{{ item[0] }}</th>
+            <td>{{ item[1] }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="product-footer product-footer-rich reveal-on-scroll">
+    <div class="product-footer-inner">
+      <div class="product-footer-columns">
+        <div class="product-footer-brand">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            class="flex items-center gap-2 group mb-3 inline-block" aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
+              class="w-24 h-auto object-contain transition-transform group-hover:scale-105" />
+          </a>
+          <p>
+            Bespoke Flutter mobile app development and cross-platform product architecture.
+          </p>
+          <div class="product-footer-contact">
+            <a href="mailto:samrique.in@gmail.com">samrique.in@gmail.com</a>
+            <span>Available for global mobile sprints</span>
+          </div>
+        </div>
+        <div class="product-footer-column">
+          <h2>Projects</h2>
+          <a [attr.href]="appPath('/products/samrique-e-marketplace')"
+            (click)="$event.preventDefault(); openMarketplace()">Samrique E-Marketplace</a>
+          <a [attr.href]="appPath('/products/money-manager')"
+            (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
+          <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique
+            Mama Tracker</a>
+          <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
+            Taxi App</a>
+          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery App</a>
+          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa Civic Platform</a>
+        </div>
+        <div class="product-footer-column">
+          <h2>Capabilities</h2>
+          <span>Flutter Multi-Platform</span>
+          <span>UI &amp; Frontend Innovation</span>
+          <span>Payment Systems &amp; Wallets</span>
+          <span>Real-Time GPS &amp; Dispatch</span>
+          <span>B2B &amp; Multi-Role State</span>
+        </div>
+        <div class="product-footer-column">
+          <h2>Start a Sprint</h2>
+          <a [attr.href]="appPath('/pricing')" (click)="$event.preventDefault(); openPricing()">Pricing</a>
+          <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()">Start a
+            project</a>
+          <button (click)="openBooking()" class="product-footer-book-btn">
+            Schedule a Call
+          </button>
+        </div>
+      </div>
+      <div class="product-footer-bottom">
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved. &bull;
+          <button (click)="openPrivacyModal()" style="
+              background: none;
+              border: none;
+              color: inherit;
+              text-decoration: underline;
+              cursor: pointer;
+            ">
+            Privacy Policy
+          </button>
+          &bull;
+          <button (click)="openTermsModal()" style="
+              background: none;
+              border: none;
+              color: inherit;
+              text-decoration: underline;
+              cursor: pointer;
+            ">
+            Terms of Service
+          </button>
+          &bull; MSME Registered: UDYAM-TN-36-0066570</span>
+        <span>Ambur, Tamil Nadu</span>
+      </div>
+    </div>
+  </footer>
+</main>
+
 } @else if (showPricingPage) {
 <main class="pricing-page min-h-screen">
   <div class="top-progress" aria-hidden="true">
@@ -3374,6 +3747,85 @@
             </div>
           </div>
         </div>
+
+        <!-- Project 6: JANOVEXA (Alternating: Mockup on Left!) -->
+        <div
+          class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll">
+          <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-6 lg:col-span-6 order-2 md:order-1 lg:order-1">
+              <div
+                class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-900 cursor-pointer group"
+                (click)="openJanovexa()">
+                <img src="assets/images/janovexa/janovexa_showcase.png" alt="JANOVEXA – Your City. Your Voice"
+                  loading="lazy" decoding="async"
+                  class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-300" />
+              </div>
+            </div>
+            <div class="md:col-span-6 lg:col-span-6 space-y-5 order-1 md:order-2 lg:order-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  class="inline-block px-3 py-1 rounded-full text-xs font-bold" style="color: #4A1525; background: #4A152512; border: 1px solid #4A152530">
+                  Civic Tech &amp; Public Service
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Product Showcase &bull; Concept MVP
+                </span>
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()"
+                  class="hover:text-rose-950 transition-colors inline-flex items-center gap-2">
+                  JANOVEXA – Your City. Your Voice
+                  <i class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"></i>
+                </a>
+              </h3>
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                A multi-role digital public service platform empowering citizens to report civic grievances with location and photographic evidence, track resolution progress with transparent department accountability, and providing city departments with a modern administration dashboard to triage, assign officers, and update complaint statuses.
+              </p>
+              <div
+                class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-3">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200/70">
+                  <span class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-microchip" style="color: #4A1525"></i> Engineering &amp; Product Proof Point
+                  </span>
+                  <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
+                    Case Build &bull; Multi-Role MVP
+                  </span>
+                </div>
+                <div class="space-y-2">
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-bullseye text-rose-800 mr-1" style="color: #4A1525"></i> Problem Solved:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ janovexaProofPoint.problemSolved }}</p>
+                  </div>
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ janovexaProofPoint.keyUserFlows }}</p>
+                  </div>
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ janovexaProofPoint.architectureTimeline }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-2 pt-1">
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Flutter 3.47</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Riverpod 3.5</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">OpenStreetMap</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">latlong2</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">3 Portals</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">SLA Triage</span>
+              </div>
+              <div>
+                <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()"
+                  class="btn-brand-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-md transition-all">
+                  <span>Explore Case Study &amp; Screens</span>
+                  <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -3556,7 +4008,7 @@
         <div class="text-center max-w-2xl mx-auto space-y-2">
           <span class="text-xs font-extrabold text-teal-600 tracking-widest uppercase">Verified Outcomes</span>
           <h3 class="text-2xl sm:text-3xl font-black text-slate-900">
-            Proven Flutter engineering across five sectors
+            Proven Flutter engineering across six sectors
           </h3>
           <p class="text-xs sm:text-sm text-slate-500">
             Every project below is an architected Flutter concept build or turnkey MVP you can
@@ -3564,7 +4016,7 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
           <!-- Outcome 1: Samrique E-Marketplace -->
           <div
             class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4 hover:border-slate-300 transition-colors">
@@ -3687,6 +4139,31 @@
               <span class="text-[11px] font-bold text-slate-500 uppercase">25 Screens &bull; Multi-Role MVP</span>
               <button type="button" (click)="openZest()"
                 class="text-xs font-bold text-teal-600 hover:text-teal-800 transition-colors inline-flex items-center gap-1">
+                View build <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Outcome 6: JANOVEXA -->
+          <div
+            class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4 hover:border-slate-300 transition-colors">
+            <div class="space-y-3">
+              <div
+                class="w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold" style="color: #4A1525; background: #4A152515">
+                <i class="fa-solid fa-landmark"></i>
+              </div>
+              <h4 class="text-base font-extrabold text-slate-900">
+                JANOVEXA Civic Platform
+              </h4>
+              <p class="text-slate-600 text-xs leading-relaxed">
+                Multi-persona digital public service platform with 5-step evidence grievance filing,
+                department admin SLA triage, and field officer work orders.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] font-bold text-slate-500 uppercase">41 Screens &bull; Multi-Role MVP</span>
+              <button type="button" (click)="openJanovexa()"
+                class="text-xs font-bold hover:underline transition-colors inline-flex items-center gap-1" style="color: #4A1525">
                 View build <i class="fa-solid fa-arrow-right text-[10px]"></i>
               </button>
             </div>

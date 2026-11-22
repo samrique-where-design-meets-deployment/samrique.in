@@ -51,18 +51,18 @@
 .product-nav { height: auto; padding: 0 max(5vw, calc((100vw - 1240px) / 2)); border-bottom: 1px solid var(--product-line); display:flex; align-items:center; justify-content:space-between; background:rgba(7,17,15,.88); }
 .product-nav img { width: auto; max-width: 110px; max-height: 76px; object-fit:contain; }
 .product-nav-cta,.product-primary { display:inline-flex; align-items:center; gap:12px; padding:13px 22px; border-radius:9999px; background:linear-gradient(110deg,#f36d75,#13bfae); color:#fff!important; font-size:14px; font-weight:750; box-shadow:0 6px 20px rgba(243, 109, 117, 0.28); }
-.product-hero { max-width:1240px; margin:auto; padding: clamp(140px, 17vh, 165px) 28px 60px; display:grid; grid-template-columns:.85fr 1.15fr; align-items:flex-start; gap:64px; }
-.product-hero-copy { padding:12px 0; }
-.product-back { display:inline-flex; align-items:center; gap:10px; color:var(--product-muted)!important; font-size:13px; margin-bottom:36px; }
+.product-hero { max-width:1240px; margin:auto; padding: clamp(100px, 12vh, 130px) 28px 40px; display:grid; grid-template-columns:.85fr 1.15fr; align-items:center; gap:56px; }
+.product-hero-copy { padding:12px 0; align-self:center; }
+.product-back { display:inline-flex; align-items:center; gap:10px; color:var(--product-muted)!important; font-size:13px; margin-bottom:20px; }
 .product-back:hover,.product-toc a:hover { color:var(--product-coral)!important; }
 .product-eyebrow,.product-kicker { display:block; color:var(--product-coral); text-transform:uppercase; letter-spacing:.14em; font-weight:750; font-size:11px; }
-.product-eyebrow { width:fit-content; padding:10px 13px; border:1px solid #ff725f52; border-radius:99px; background:#ff725f12; }
-.product-hero h1 { font-size:clamp(42px,6vw,76px); letter-spacing:-.055em; line-height:.99; margin:26px 0 20px; }
+.product-eyebrow { width:fit-content; padding:8px 13px; border:1px solid #ff725f52; border-radius:99px; background:#ff725f12; }
+.product-hero h1 { font-size:clamp(42px,6vw,76px); letter-spacing:-.055em; line-height:.99; margin:18px 0 16px; }
 .product-hero h1 span { color:var(--product-coral); }
 .product-hero-copy>p { color:#bdc9c2; font-size:18px; line-height:1.7; max-width:490px; }
-.product-pills { display:flex; flex-wrap:wrap; gap:9px; margin:25px 0 30px; }
+.product-pills { display:flex; flex-wrap:wrap; gap:9px; margin:18px 0 24px; }
 .product-pills span { border:1px solid var(--product-line); background:#ffffff08; border-radius:99px; padding:8px 12px; color:#ced9d2; font-size:12px; }
-.product-hero-image { margin:0; border:1px solid var(--product-line); border-radius:23px; overflow:hidden; background:var(--product-panel); box-shadow:0 28px 100px #0008; }
+.product-hero-image { margin:0; border:1px solid var(--product-line); border-radius:23px; overflow:hidden; background:var(--product-panel); box-shadow:0 28px 100px #0008; align-self:center; }
 .product-hero-image img { width:100%; display:block; }
 .product-hero-image figcaption { padding:14px 18px; color:var(--product-muted); font-size:12px; }
 .product-toc { position:sticky; top:0; z-index:10; display:flex; justify-content:center; flex-wrap:wrap; gap:28px; padding:17px 20px; background:#0b1714ed; border-top:1px solid var(--product-line); border-bottom:1px solid var(--product-line); backdrop-filter:blur(14px); }
@@ -224,8 +224,9 @@ header.product-nav {
 
 .product-hero {
   min-height: auto;
-  padding-top: clamp(140px, 17vh, 165px);
-  padding-bottom: 40px;
+  padding-top: clamp(100px, 12vh, 130px);
+  padding-bottom: 36px;
+  align-items: center;
 }
 
 .product-eyebrow {
@@ -387,7 +388,8 @@ footer.product-footer-rich::before {
 .marketplace-page,
 .product-page.mama-page,
 .product-page.zipi-page,
-.product-page.zest-page {
+.product-page.zest-page,
+.product-page.janovexa-page {
   --product-bg: #f8fafc;
   --product-panel: #fff;
   --product-line: #e2e7f0;
@@ -403,6 +405,10 @@ footer.product-footer-rich::before {
 
 .zest-page {
   --product-coral: #10b981;
+}
+
+.janovexa-page {
+  --product-coral: #4A1525;
 }
 
 /* --- Screens & Previews Reference Design (Matches User Specification) --- */
@@ -964,7 +970,7 @@ body.modal-open {
   .product-nav { height: auto; }
   .product-nav img { width: auto; max-width: 90px; max-height: 58px; }
   .product-nav-links { display: none; }
-  .product-hero { min-height: auto; padding-top: 130px; }
+  .product-hero { min-height: auto; padding-top: 100px; }
   .product-feature-number { min-height: 32px; }
 }
 
