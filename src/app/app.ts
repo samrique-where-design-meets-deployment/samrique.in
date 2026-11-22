@@ -60,6 +60,7 @@ export class App implements AfterViewInit, OnDestroy {
   protected showMarketplace = ['/products/samrique-e-marketplace', '/products/quickcart'].includes(this.routePath);
   protected showMama = ['/products/samrique-mama', '/products/samrique-mama-pregnancy-tracker'].includes(this.routePath);
   protected showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
+  protected showZest = ['/products/zest-grocery', '/products/zest', '/products/samrique-zest-grocery'].includes(this.routePath);
   protected showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
 
   // Modal Lightbox state
@@ -98,6 +99,7 @@ export class App implements AfterViewInit, OnDestroy {
   protected marketplaceCategory = 'All';
   protected mamaCategory = 'All';
   protected zipiCategory = 'All';
+  protected zestCategory = 'All';
 
   private revealObserver?: IntersectionObserver;
   private bookingTrigger?: HTMLElement;
@@ -505,6 +507,7 @@ export class App implements AfterViewInit, OnDestroy {
     if (this.showMarketplace) return this.marketplaceScreens;
     if (this.showMama) return this.mamaScreens;
     if (this.showZipi) return this.zipiScreens;
+    if (this.showZest) return this.zestScreens;
     return [];
   }
 
@@ -543,6 +546,9 @@ export class App implements AfterViewInit, OnDestroy {
       'captain': '#eab308',
       'compliance': '#ef4444',
       'profile': '#8b5cf6',
+      'retail': '#10b981',
+      'wholesale': '#3b82f6',
+      'delivery': '#f59e0b',
     };
     return map[category?.toLowerCase()] || '#17b3a3';
   }
@@ -587,6 +593,15 @@ export class App implements AfterViewInit, OnDestroy {
     problemSolved: 'Metropolitan commuters lose hours in traffic gridlock with unpredictable cab surge pricing, while independent two-wheeler drivers lack reliable dispatching, upfront fare transparency, and trusted driver verification.',
     keyUserFlows: 'Commuter live map pickup selection → Google Maps route polyline rendering → instant captain matching & tracking → itemized digital fare invoice | Captain KYC document submission → real-time order radar alert acceptance → earnings analytics dashboard.',
     architectureTimeline: 'Architected and delivered in a 4-week sprint featuring a synchronized dual-persona architecture with GetX state management, Google Maps Flutter SDK, real-time geocoding, and modular mock dispatch engines.'
+  };
+
+  protected readonly zestProofPoint = {
+    badge: 'Quick-Commerce & Wholesale · Multi-Role',
+    classification: 'Product Showcase / Concept MVP',
+    notice: 'Multi-role quick-commerce and wholesale grocery application prototype engineered to demonstrate unified B2C retail shopping, B2B wholesale ordering with volume tiers, and a 4-stage driver fulfillment pipeline backed by demo data fixtures.',
+    problemSolved: 'Grocery businesses struggle to unify retail consumer quick-delivery, bulk restaurant wholesale procurement, and last-mile driver coordination into a single maintainable Flutter codebase without fragmenting state and business logic.',
+    keyUserFlows: 'B2C consumer catalog discovery, search & express cart checkout → B2B wholesale bulk tier ordering, Net 30 credit terms & saved supply lists → Delivery partner task acceptance → store pickup → OpenStreetMap transit → customer handover & earnings analytics.',
+    architectureTimeline: 'Engineered in an agile sprint using Flutter & Dart (SDK ^3.13.5), GetX reactive state management and dependency injection, flutter_map with OpenStreetMap integration, and a unified multi-persona architecture.'
   };
 
   // --- Features & Stack Data ---
@@ -676,6 +691,28 @@ export class App implements AfterViewInit, OnDestroy {
     ['Real-time events & dispatch', 'WebSockets / Firebase Cloud Messaging'],
     ['Local cache & storage', 'SharedPreferences'],
     ['Design system', 'Custom On-Demand Mobility theme, Material 3'],
+  ];
+
+  protected readonly zestFeatures = [
+    { title: 'Three role-based experiences', detail: 'Seamless switching between B2C customer, B2B wholesale buyer, and delivery partner workflows with pre-configured quick-switch demo accounts.' },
+    { title: 'B2C retail grocery shopping', detail: 'Browse department categories, live keyword search with price and stock filters, detailed product view, wishlist favorites, and responsive shopping cart.' },
+    { title: 'B2B wholesale & volume tiers', detail: 'Bulk purchasing with tiered unit pricing, minimum order quantities (MOQ), crate/bag configurations, and automated volume discount calculations.' },
+    { title: 'Net 30 trade credit wallet', detail: 'Dedicated wholesale credit ledger with real-time balance tracking, Net 30 payment term selection, and recurring saved order lists for restaurants.' },
+    { title: '4-stage driver delivery pipeline', detail: 'Structured delivery partner fulfillment workflow: task dispatch acceptance, store pickup checklist, live GPS transit, and customer doorstep handover.' },
+    { title: 'OpenStreetMap & live routing', detail: 'Map views powered by flutter_map and latlong2 using OpenStreetMap tiles for hub pickup routing, transit tracking, and drop-off guidance.' },
+    { title: 'Driver earnings & surge zones', detail: 'Performance dashboard tracking daily payouts, tip totals, shift booking schedule, and high-demand surge zone incentives.' },
+    { title: 'Shared product architecture', detail: 'Centralized ProductModel in Dart supporting dual retail/wholesale prices, derived stock status, and sample catalogue across fresh produce, dairy, bakery, and pantry.' },
+  ];
+
+  protected readonly zestStack = [
+    ['Application framework', 'Flutter and Dart (SDK ^3.13.5 / Flutter 3.47.x)'],
+    ['State management & routing', 'GetX (routing, dependency injection, reactive controllers)'],
+    ['Mapping & Geolocation', 'flutter_map & latlong2 with OpenStreetMap tiles'],
+    ['API communication scaffold', 'http / GetConnect ApiProvider with mock fixture fallback'],
+    ['Typography & Design system', 'Google Fonts (Plus Jakarta Sans), Material 3, custom theme'],
+    ['Formatting & Media', 'intl for date/currency formatting, cached_network_image'],
+    ['Multi-persona architecture', 'B2C Customer, B2B Wholesale Buyer, Delivery Partner'],
+    ['Automated testing suite', 'Flutter test framework (widget and workflow test suite in test/)'],
   ];
 
   // --- Screens Data ---
@@ -1281,19 +1318,278 @@ export class App implements AfterViewInit, OnDestroy {
     },
   ];
 
+  protected readonly zestScreens: ProductScreen[] = [
+    // --- B2C Customer Screens ---
+    {
+      id: 'zest-b2c-home',
+      screenNumber: '01',
+      name: 'B2C Grocery Home Screen',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/zest_grocery_showcase.jpg',
+      assetImage: 'assets/images/zest_grocery/b2c_home.png',
+      description: 'Customer storefront with promotional banners, quick-order categories, featured fresh produce, and one-tap cart addition.',
+      tags: ['Retail Storefront', 'Express Delivery'],
+    },
+    {
+      id: 'zest-b2c-categories',
+      screenNumber: '02',
+      name: 'Grocery Categories Explorer',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_categories.png',
+      assetImage: 'assets/images/zest_grocery/b2c_categories.png',
+      description: 'Category hierarchy featuring fresh fruits, vegetables, dairy, bakery essentials, and packaged grocery goods.',
+      tags: ['Category Tree', 'Department Browsing'],
+    },
+    {
+      id: 'zest-b2c-search',
+      screenNumber: '03',
+      name: 'Product Search & Filtering Screen',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_search.png',
+      assetImage: 'assets/images/zest_grocery/b2c_search.png',
+      description: 'Instant autocomplete search with price filters, category chips, in-stock toggles, and recent search history.',
+      tags: ['Live Search', 'Faceted Filters'],
+    },
+    {
+      id: 'zest-b2c-product',
+      screenNumber: '04',
+      name: 'Retail Product Details Screen',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_product.png',
+      assetImage: 'assets/images/zest_grocery/b2c_product.png',
+      description: 'Detailed product page displaying high-resolution imagery, per-unit pricing, stock availability, nutritional notes, and cart controls.',
+      tags: ['Product Information', 'Unit Pricing'],
+    },
+    {
+      id: 'zest-b2c-cart',
+      screenNumber: '05',
+      name: 'B2C Shopping Cart & Checkout',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_cart.png',
+      assetImage: 'assets/images/zest_grocery/b2c_cart.png',
+      description: 'Interactive shopping cart with item quantity steppers, bill breakdown, delivery slot selection, and checkout CTA.',
+      tags: ['Cart Management', 'Order Summary'],
+    },
+    {
+      id: 'zest-b2c-favorites',
+      screenNumber: '06',
+      name: 'Saved Favorites & Wishlist',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_favorites.png',
+      assetImage: 'assets/images/zest_grocery/b2c_favorites.png',
+      description: 'Bookmarked grocery items for fast repeat shopping, stock alert indicators, and one-click add to active cart.',
+      tags: ['Wishlist', 'Repeat Purchases'],
+    },
+    {
+      id: 'zest-b2c-account',
+      screenNumber: '07',
+      name: 'Customer Account & Addresses',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_account.png',
+      assetImage: 'assets/images/zest_grocery/b2c_account.png',
+      description: 'Consumer profile overview managing saved delivery locations, order history, customer support, and demo account switching.',
+      tags: ['Customer Profile', 'Address Book'],
+    },
+    {
+      id: 'zest-b2c-more',
+      screenNumber: '08',
+      name: 'Services & Helpdesk Hub',
+      category: 'Retail',
+      previewImage: 'assets/images/zest_grocery/b2c_more.png',
+      assetImage: 'assets/images/zest_grocery/b2c_more.png',
+      description: 'App preferences, order cancellation policy, customer support chat, FAQs, and terms of service.',
+      tags: ['Customer Support', 'Service Policies'],
+    },
+
+    // --- B2B Wholesale Buyer Screens ---
+    {
+      id: 'zest-b2b-registration',
+      screenNumber: '09',
+      name: 'Wholesale Business Registration',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_registration.png',
+      assetImage: 'assets/images/zest_grocery/b2b_registration.png',
+      description: 'B2B onboarding flow capturing trade name, GSTIN identification, FSSAI license, delivery dock address, and business type.',
+      tags: ['B2B Onboarding', 'GSTIN Verification'],
+    },
+    {
+      id: 'zest-b2b-home',
+      screenNumber: '10',
+      name: 'B2B Wholesale Portal Home',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_home.png',
+      assetImage: 'assets/images/zest_grocery/b2b_home.png',
+      description: 'Wholesale catalog interface showing bulk quantity tiers, MOQ notifications, crate discounts, and Net 30 credit banner.',
+      tags: ['Wholesale Catalog', 'Bulk Tiers'],
+    },
+    {
+      id: 'zest-b2b-categories',
+      screenNumber: '11',
+      name: 'Bulk Wholesale Categories',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_categories.png',
+      assetImage: 'assets/images/zest_grocery/b2b_categories.png',
+      description: 'Departmental bulk categories including commercial farm crates, wholesale produce, dairy cartons, and staple sacks.',
+      tags: ['Commercial Supply', 'Bulk Categories'],
+    },
+    {
+      id: 'zest-b2b-product',
+      screenNumber: '12',
+      name: 'Wholesale Product & Tier Pricing',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_product.png',
+      assetImage: 'assets/images/zest_grocery/b2b_product.png',
+      description: 'Bulk product specifications displaying minimum wholesale quantities (MOQ), crate/bag volume tiers, and tiered margin savings.',
+      tags: ['MOQ Thresholds', 'Tiered Pricing'],
+    },
+    {
+      id: 'zest-b2b-cart',
+      screenNumber: '13',
+      name: 'Wholesale Bulk Cart & Net 30 Terms',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_cart.png',
+      assetImage: 'assets/images/zest_grocery/b2b_cart.png',
+      description: 'Large-scale purchase order review with automatic tier discounts, freight calculation, and Net 30 credit checkout option.',
+      tags: ['Bulk Orders', 'Net 30 Checkout'],
+    },
+    {
+      id: 'zest-b2b-saved-lists',
+      screenNumber: '14',
+      name: 'Saved Order Lists & Quick Reorder',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_saved-lists.png',
+      assetImage: 'assets/images/zest_grocery/b2b_saved-lists.png',
+      description: 'Custom standing purchase templates for restaurants, caterers, and retail grocers for instant weekly stock replenishment.',
+      tags: ['Standing Orders', 'Quick Reorder'],
+    },
+    {
+      id: 'zest-b2b-wallet',
+      screenNumber: '15',
+      name: 'Net 30 Credit Wallet & Invoices',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_wallet.png',
+      assetImage: 'assets/images/zest_grocery/b2b_wallet.png',
+      description: 'B2B credit balance management, available trade credit line, pending invoice due dates, and settlement payment history.',
+      tags: ['Trade Credit', 'Invoice Ledger'],
+    },
+    {
+      id: 'zest-b2b-profile',
+      screenNumber: '16',
+      name: 'Business Profile & Tax Records',
+      category: 'Wholesale',
+      previewImage: 'assets/images/zest_grocery/b2b_profile.png',
+      assetImage: 'assets/images/zest_grocery/b2b_profile.png',
+      description: 'Commercial enterprise settings with verified GSTIN, trade license records, registered billing address, and contact officers.',
+      tags: ['Business Entity', 'Tax Compliance'],
+    },
+
+    // --- Delivery Partner Screens ---
+    {
+      id: 'zest-delivery-home',
+      screenNumber: '17',
+      name: 'Delivery Partner Home Dashboard',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_home.png',
+      assetImage: 'assets/images/zest_grocery/delivery_home.png',
+      description: 'Driver operational hub featuring duty online/offline toggle, today earnings gauge, active dispatch alert, and surge hot-spots.',
+      tags: ['Driver Hub', 'Duty Toggle'],
+    },
+    {
+      id: 'zest-delivery-tasks',
+      screenNumber: '18',
+      name: 'Delivery Tasks & Dispatch Pool',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_tasks.png',
+      assetImage: 'assets/images/zest_grocery/delivery_tasks.png',
+      description: 'Real-time dispatch requests queue displaying pickup hub location, delivery distance, estimated transit time, and payout.',
+      tags: ['Dispatch Radar', 'Task Queue'],
+    },
+    {
+      id: 'zest-delivery-pickup',
+      screenNumber: '19',
+      name: 'Store Pickup & Order Checklist',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_pickup.png',
+      assetImage: 'assets/images/zest_grocery/delivery_pickup.png',
+      description: 'Store arrival workflow with fulfillment center directions, parcel item checklist verification, and departure confirmation.',
+      tags: ['Store Pickup', 'Package Checklist'],
+    },
+    {
+      id: 'zest-delivery-transit',
+      screenNumber: '20',
+      name: 'Live Transit Navigation & Map',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_transit.png',
+      assetImage: 'assets/images/zest_grocery/delivery_transit.png',
+      description: 'Map navigation powered by flutter_map and OpenStreetMap with live transit path, destination marker, and customer phone dialer.',
+      tags: ['OpenStreetMap', 'Live Routing'],
+    },
+    {
+      id: 'zest-delivery-handover',
+      screenNumber: '21',
+      name: 'Customer Handover & Verification',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_handover.png',
+      assetImage: 'assets/images/zest_grocery/delivery_handover.png',
+      description: 'Doorstep completion screen verifying customer handover, delivery passcode confirmation, and contactless drop photo capture.',
+      tags: ['Doorstep Delivery', 'OTP Handover'],
+    },
+    {
+      id: 'zest-delivery-completed',
+      screenNumber: '22',
+      name: 'Order Completed & Payout Summary',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_completed.png',
+      assetImage: 'assets/images/zest_grocery/delivery_completed.png',
+      description: 'Successful delivery screen breaking down base trip fare, distance bonus, customer tip, and readiness for next dispatch.',
+      tags: ['Delivery Completed', 'Trip Payout'],
+    },
+    {
+      id: 'zest-delivery-earnings',
+      screenNumber: '23',
+      name: 'Driver Earnings & Performance',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_earnings.png',
+      assetImage: 'assets/images/zest_grocery/delivery_earnings.png',
+      description: 'Comprehensive earnings analytics with daily payout graphs, weekly milestones, completed deliveries, and tip totals.',
+      tags: ['Earnings Analytics', 'Incentives'],
+    },
+    {
+      id: 'zest-delivery-shifts',
+      screenNumber: '24',
+      name: 'Shift Scheduling & Surge Zones',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_shifts.png',
+      assetImage: 'assets/images/zest_grocery/delivery_shifts.png',
+      description: 'Weekly shift planner with booking slots, high-demand surge map zones, peak bonus multipliers, and attendance tracking.',
+      tags: ['Shift Planner', 'Surge Zones'],
+    },
+    {
+      id: 'zest-delivery-profile',
+      screenNumber: '25',
+      name: 'Driver Partner Profile & KYC',
+      category: 'Delivery',
+      previewImage: 'assets/images/zest_grocery/delivery_profile.png',
+      assetImage: 'assets/images/zest_grocery/delivery_profile.png',
+      description: 'Courier partner identification, vehicle registration documentation, driving license KYC status, and customer rating metrics.',
+      tags: ['Driver Profile', 'KYC Compliance'],
+    },
+  ];
+
   @HostListener('window:popstate')
   protected syncRoute(): void {
     this.showMoneyManager = ['/products/money-manager', '/products/samrique-money-manager'].includes(this.routePath);
     this.showMarketplace = ['/products/samrique-e-marketplace', '/products/quickcart'].includes(this.routePath);
     this.showMama = ['/products/samrique-mama', '/products/samrique-mama-pregnancy-tracker'].includes(this.routePath);
     this.showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
+    this.showZest = ['/products/zest-grocery', '/products/zest', '/products/samrique-zest-grocery'].includes(this.routePath);
     this.showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
     this.showPrivacyModal = ['/privacy', '/privacy-policy'].includes(this.routePath);
     this.showTermsModal = ['/terms', '/terms-of-service', '/terms-and-conditions'].includes(this.routePath);
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
 
-    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi && !this.showPricingPage) {
+    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi && !this.showZest && !this.showPricingPage) {
       this.refreshHomeVisibility();
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1309,6 +1605,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = false;
+    this.showZest = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1324,6 +1621,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = true;
     this.showMama = false;
     this.showZipi = false;
+    this.showZest = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1339,6 +1637,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = true;
     this.showZipi = false;
+    this.showZest = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1354,6 +1653,23 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = true;
+    this.showZest = false;
+    this.showPricingPage = false;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
+  }
+
+  protected openZest(): void {
+    if (this.routePath !== '/products/zest-grocery') {
+      window.history.pushState({}, '', this.appPath('/products/zest-grocery'));
+    }
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showZest = true;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1369,6 +1685,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = false;
+    this.showZest = false;
     this.showPricingPage = true;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1384,6 +1701,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = false;
+    this.showZest = false;
     this.showPricingPage = true;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1397,6 +1715,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = false;
+    this.showZest = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1414,6 +1733,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showMarketplace = false;
     this.showMama = false;
     this.showZipi = false;
+    this.showZest = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -1422,6 +1742,10 @@ export class App implements AfterViewInit, OnDestroy {
 
   protected inquireAboutMoneyManager(): void {
     this.inquireAboutProduct('Samrique Money Manager');
+  }
+
+  protected inquireAboutZest(): void {
+    this.inquireAboutProduct('Zest Grocery App');
   }
 
   protected inquireAboutProduct(productName: string): void {

@@ -71,6 +71,18 @@ describe('App', () => {
     expect(app['zipiScreens'].length).toBe(22);
   });
 
+  it('should open and display Zest Grocery product details with screens', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openZest']();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.zest-page')).toBeTruthy();
+    expect(compiled.querySelector('h1')?.textContent).toContain('Zest');
+    expect(app['zestScreens'].length).toBe(25);
+  });
+
   it('should open screen modal and allow switching between preview mockup and raw asset', async () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
