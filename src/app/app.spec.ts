@@ -293,7 +293,7 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('UDYAM-TN-36-0066570');
     expect(compiled.textContent).toContain('MSME Registered');
-    expect(compiled.textContent).toContain('Ambur, Tamil Nadu');
+    expect(compiled.textContent).toContain('Chennai, Tamil Nadu');
   });
 
   it('should open and close the Udyam Registration modal', async () => {
