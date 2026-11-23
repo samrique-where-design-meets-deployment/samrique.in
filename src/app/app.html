@@ -334,6 +334,8 @@
             Civic Platform</a>
           <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
             Staff Tracking</a>
+          <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()">Nagriq
+            Municipal Payments</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -719,6 +721,8 @@
             Civic Platform</a>
           <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
             Staff Tracking</a>
+          <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()">Nagriq
+            Municipal Payments</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -1089,6 +1093,8 @@
             Civic Platform</a>
           <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
             Staff Tracking</a>
+          <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()">Nagriq
+            Municipal Payments</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -1480,6 +1486,8 @@
             Civic Platform</a>
           <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
             Staff Tracking</a>
+          <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()">Nagriq
+            Municipal Payments</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -1861,6 +1869,8 @@
             Civic Platform</a>
           <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
             Staff Tracking</a>
+          <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()">Nagriq
+            Municipal Payments</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -2306,6 +2316,8 @@
             Civic Platform</a>
           <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
             Staff Tracking</a>
+          <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()">Nagriq
+            Municipal Payments</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -2770,6 +2782,8 @@
             Civic Platform</a>
           <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
             Staff Tracking</a>
+          <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()">Nagriq
+            Municipal Payments</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -2778,6 +2792,438 @@
           <span>Payment Systems &amp; Wallets</span>
           <span>Real-Time GPS &amp; Dispatch</span>
           <span>B2B &amp; Multi-Role State</span>
+        </div>
+        <div class="product-footer-column">
+          <h2>Start a Sprint</h2>
+          <a [attr.href]="appPath('/pricing')" (click)="$event.preventDefault(); openPricing()">Pricing</a>
+          <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()">Start a
+            project</a>
+          <button (click)="openBooking()" class="product-footer-book-btn">Schedule a Call</button>
+        </div>
+      </div>
+      <div class="product-footer-bottom">
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved. &bull;
+          <button (click)="openPrivacyModal()"
+            style="background: none; border: none; color: inherit; text-decoration: underline; cursor: pointer;">Privacy
+            Policy</button>
+          &bull;
+          <button (click)="openTermsModal()"
+            style="background: none; border: none; color: inherit; text-decoration: underline; cursor: pointer;">Terms
+            of Service</button>
+          &bull; MSME Registered: UDYAM-TN-36-0066570</span>
+        <span>Chennai, Tamil Nadu</span>
+      </div>
+    </div>
+  </footer>
+</main>
+} @else if (showNagriq) {
+<main class="product-page nagriq-page">
+  <div class="top-progress" aria-hidden="true">
+    <span id="top-progress-bar"></span>
+  </div>
+
+  <!-- Navigation Header (Matched with Home and Product Pages) -->
+  <header class="product-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3 flex-shrink-0">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            class="flex items-center gap-2 group" aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
+              class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md mx-auto"
+          aria-label="Product page sections">
+          <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+          <a href="#product-roles" (click)="$event.preventDefault(); scrollToProductSection('product-roles')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Platform
+            Roles</a>
+          <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens
+            &amp; Previews</a>
+          <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
+        </nav>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3 sm:gap-3.5 flex-shrink-0">
+          <a [attr.href]="appPath('/#gov-solutions')" (click)="$event.preventDefault(); returnToProjects()"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
+            <span class="hidden sm:inline">Gov Tech Demos</span>
+          </a>
+          <button (click)="openBooking()"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-900 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+            Book Call
+          </button>
+          <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()"
+            class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
+            <span>Start Project</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="product-hero">
+    <div class="product-hero-copy">
+      <a class="product-back" [attr.href]="appPath('/#gov-solutions')"
+        (click)="$event.preventDefault(); returnToProjects()"><i class="fa-solid fa-arrow-left"></i> Back to
+        solutions</a>
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-eyebrow" style="border-color: #164E4344; background: #164E4312; color: #164E43">
+          <i class="fa-solid fa-landmark"></i> Municipal Digital Payments &amp; Administration · Flutter App
+        </span>
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-300 text-xs font-extrabold tracking-wide uppercase">
+          <i class="fa-solid fa-flask"></i>
+          INDEPENDENT PRODUCT DEMONSTRATION
+        </span>
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          Capability Showcase &bull; 32 Screens
+        </span>
+      </div>
+      <h1>NAGRIQ<br /><span style="color: #164E43">Municipal Digital Payment &amp; Administration Platform</span></h1>
+      <p style="font-weight: 700; color: #D9822B; margin-bottom: 8px">Enterprise Public Service Billing, Cryptographic Receipts &amp; Treasury Reconciliation</p>
+      <p>
+        NAGRIQ is an enterprise-grade municipal digital payment platform and administrative command center designed for modern urban local bodies (ULBs). It delivers a seamless, transparent public service billing experience for citizens alongside high-precision financial reconciliation, CAG compliance reporting, and audit capabilities for municipal administrators.
+      </p>
+
+      <!-- Independent Project Classification & Disclaimer -->
+      <div
+        class="my-4 p-4 rounded-2xl border border-amber-300/80 bg-amber-50/90 text-slate-900 text-xs leading-relaxed space-y-2 shadow-xs">
+        <div class="flex items-center justify-between gap-2 border-b border-amber-200/80 pb-2">
+          <div class="flex items-center gap-2 font-extrabold text-xs text-amber-900 uppercase tracking-wider">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>NAGRIQ – Municipal Digital Payment &amp; Administration Platform</span>
+          </div>
+          <span
+            class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold tracking-wide uppercase">
+            INDEPENDENT PRODUCT DEMONSTRATION
+          </span>
+        </div>
+        <p class="font-bold text-amber-900">
+          Project Type: Independent Product Demonstration / Portfolio Project
+        </p>
+        <p>
+          NAGRIQ is an independently conceptualized and developed municipal digital payment and administration platform
+          demonstration by SAMRIQUE.
+        </p>
+        <p>
+          The platform demonstrates our capabilities in citizen utility billing, multi-tender gateway checkout, cryptographic SHA-256 receipt generation, 3-way banking reconciliation, and CAG-compliant municipal treasury accounting.
+        </p>
+        <p class="italic text-slate-600">
+          This project is presented solely as a technology demonstration to showcase our software development
+          capabilities.
+        </p>
+        <div class="pt-2 border-t border-amber-200/80 font-bold text-amber-950 text-[11px] space-y-1">
+          <div>
+            <strong>Disclaimer:</strong> These products are independently developed by SAMRIQUE and are not officially
+            commissioned, approved or endorsed by any government department or urban local body. No official municipal
+            corporation or government department affiliation is implied.
+          </div>
+          <div class="text-[11px] text-slate-600 font-normal pt-1 flex items-start gap-1.5">
+            <i class="fa-solid fa-database text-slate-400 mt-0.5"></i>
+            <span><strong>Realistic Demo Data:</strong> Demonstrations use synthetic, anonymized demo data. No real
+              municipal citizen records, taxpayer details or government treasury information are used or stored.</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-pills">
+        <span>Flutter ^3.13.5</span><span>Dart ^3.13.5</span><span>Riverpod
+          ^2.5.1</span><span>Material 3</span><span>Civic Tokens</span><span>Intl</span><span>SHA-256 Receipts</span><span>3-Way Reconciliation</span><span>CAG Compliance</span><span>2
+          Roles</span><span>32 Screens</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center">
+        <a class="product-primary" [attr.href]="appPath('/#contact')"
+          (click)="$event.preventDefault(); inquireAboutNagriq()" style="background: #164E43">
+          Discuss a similar platform <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
+          class="screen-inspect-action" style="padding: 12px 20px; font-size: 14px">
+          <i class="fa-solid fa-mobile-screen"></i> Explore Screens ({{
+          nagriqScreens.length }})
+        </a>
+      </div>
+    </div>
+    <figure class="product-hero-image" style="cursor: pointer" (click)="scrollToProductSection('product-screens')">
+      <img src="assets/images/nagriq/nagriq_showcase.png"
+        alt="Preview Screen: NAGRIQ Municipal Digital Payment &amp; Administration Platform" loading="eager"
+        fetchpriority="high" decoding="async" />
+      <figcaption>
+        Preview: NAGRIQ Citizen Payments &amp; Municipal Command Suite
+      </figcaption>
+    </figure>
+  </section>
+
+  <nav class="product-toc" aria-label="On this page">
+    <a href="#product-overview"
+      (click)="$event.preventDefault(); scrollToProductSection('product-overview')">Overview</a>
+    <a href="#product-roles" (click)="$event.preventDefault(); scrollToProductSection('product-roles')">Platform
+      Roles</a>
+    <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')">Screens
+      &amp; Previews</a>
+    <a href="#product-technology"
+      (click)="$event.preventDefault(); scrollToProductSection('product-technology')">Technology</a>
+  </nav>
+
+  <!-- Product Overview Section -->
+  <section id="product-overview" class="product-section product-overview">
+    <div>
+      <span class="product-kicker">The platform</span>
+      <h2>Unified municipal payments.<br />Audit-proof treasury reconciliation.</h2>
+    </div>
+    <p>
+      NAGRIQ unifies citizen convenience with municipal financial governance in a high-performance cross-platform Flutter application:
+      <br /><br />
+      <b>Citizen Public Service Payments App:</b> Enables urban citizens to search, verify, and pay municipal utility bills
+      (Water Supply, Property Tax, Electricity, Trade Licences, Waste Collection), and obtain cryptographically verifiable receipts
+      with instant QR codes and SHA-256 tamper-proof validation hashes.
+      <br /><br />
+      <b>Municipal Administration &amp; Revenue Portal:</b> Provides municipal revenue officers, accountants, and administrators
+      with real-time collection metrics, 3-way banking gateway reconciliation (Gateway vs Bank UTR vs ULB Ledger),
+      dynamic service fee configuration, demand notice batch management, and CAG-compliant treasury settlement exports.
+    </p>
+  </section>
+
+  <!-- Platform Roles Section -->
+  <section id="product-roles" class="product-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">Multi-Persona Architecture</span>
+      <h2>🏛️ Platform Roles</h2>
+      <p class="max-w-3xl text-slate-600">
+        Engineered with clean separation of duties across urban citizens and municipal administrative officers.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Role 1: Citizen Services -->
+      <div
+        class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-5 hover:border-emerald-300 transition-colors">
+        <div class="space-y-4">
+          <div
+            class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold border"
+            style="color: #164E43; background: #164E4315; border-color: #164E4330">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-extrabold text-slate-900">1. Citizen Public Service App</h3>
+            <span
+              class="px-3 py-1 rounded-full text-xs font-bold border"
+              style="color: #164E43; background: #164E4315; border-color: #164E4330">19
+              Screens</span>
+          </div>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Enables urban citizens to search, verify, and pay municipal utility bills across Water, Property Tax, Electricity,
+            Trade Licences, and Waste Collection, with multi-tender payment methods, itemized charge breakdowns, and cryptographic QR receipts.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check" style="color: #164E43"></i> Multi-department utility bills catalog &amp; consumer lookup</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check" style="color: #164E43"></i> Itemized charge breakdown, rebate calculation &amp; convenience fees</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check" style="color: #164E43"></i> Multi-tender payment checkout (UPI, NetBanking, Cards, BBPS)</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check" style="color: #164E43"></i> Cryptographic SHA-256 receipts with instant verification QR</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check" style="color: #164E43"></i> Filterable payment history, full-text search &amp; civic demand alerts</li>
+          </ul>
+        </div>
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module: Auth, Catalog, Billing, Checkout, QR Receipts</span>
+          <button type="button" (click)="nagriqCategory = 'Citizen Services'; scrollToProductSection('product-screens')"
+            class="text-xs font-bold transition-colors inline-flex items-center gap-1" style="color: #164E43">
+            View Citizen Screens <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Role 2: Municipal Administration Portal -->
+      <div
+        class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-5 hover:border-amber-300 transition-colors">
+        <div class="space-y-4">
+          <div
+            class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold border"
+            style="color: #D9822B; background: #D9822B15; border-color: #D9822B30">
+            <i class="fa-solid fa-building-columns"></i>
+          </div>
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-extrabold text-slate-900">2. Municipal Administration Portal</h3>
+            <span class="px-3 py-1 rounded-full text-xs font-bold border"
+              style="color: #D9822B; background: #D9822B15; border-color: #D9822B30">13
+              Screens</span>
+          </div>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Provides municipal revenue officers, accountants, and administrators with real-time collection metrics,
+            daily 3-way banking reconciliation, dynamic fee and surcharge configuration, bill demand batch generation, and CAG settlement exports.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check" style="color: #D9822B"></i> Real-time executive KPIs, daily collections &amp; clearance rate</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check" style="color: #D9822B"></i> Department collections vs target monitoring progress</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check" style="color: #D9822B"></i> Dynamic convenience fee &amp; late penalty surcharge rules</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check" style="color: #D9822B"></i> Daily automated 3-way reconciliation (Gateway, Bank UTR, ULB Ledger)</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check" style="color: #D9822B"></i> Deep forensic transaction trace &amp; CAG-compliant treasury reports</li>
+          </ul>
+        </div>
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module: KPIs, Reconciliation, Audit, CAG Reports</span>
+          <button type="button" (click)="nagriqCategory = 'Municipal Admin'; scrollToProductSection('product-screens')"
+            class="text-xs font-bold transition-colors inline-flex items-center gap-1" style="color: #D9822B">
+            View Admin Screens <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Screens & Previews Section -->
+  <section id="product-screens" class="product-screens-section">
+    <div class="wrap">
+      <span class="eyebrow" style="color: #164E43">Municipal Digital Payment &amp; Administration Platform</span>
+      <h2>Mobile &amp; Admin screens, <span>end to end</span></h2>
+      <p class="lead">
+        Explore {{ nagriqScreens.length }} production-ready screens across 2 distinct operational roles: Citizen Public Service Payments App and Municipal Administration Portal.
+      </p>
+      <div class="stats">
+        <div><b>{{ nagriqScreens.length }}</b><small>Screens</small></div>
+        <div><b>2</b><small>Platform Roles</small></div>
+        <div><b>Flutter</b><small>Cross-platform</small></div>
+      </div>
+
+      <div class="filters" role="tablist">
+        <button type="button" class="pill" [class.on]="nagriqCategory === 'All'" (click)="nagriqCategory = 'All'">
+          All<i>({{ nagriqScreens.length }})</i>
+        </button>
+        <button type="button" class="pill" [class.on]="nagriqCategory === 'Citizen Services'"
+          (click)="nagriqCategory = 'Citizen Services'">
+          Citizen Services<i>({{ getCategoryCount(nagriqScreens, 'Citizen Services') }})</i>
+        </button>
+        <button type="button" class="pill" [class.on]="nagriqCategory === 'Municipal Admin'"
+          (click)="nagriqCategory = 'Municipal Admin'">
+          Municipal Admin<i>({{ getCategoryCount(nagriqScreens, 'Municipal Admin') }})</i>
+        </button>
+      </div>
+
+      <div class="grid">
+        @for (screen of filterScreens(nagriqScreens, nagriqCategory); track screen.id) {
+        <article class="card" [style.--c]="getCategoryColor(screen.category)" (click)="openScreenModal(screen, 'asset')"
+          (keydown.enter)="openScreenModal(screen, 'asset')" tabindex="0" role="button" [attr.aria-label]="screen.name">
+          <div class="stage">
+            <span class="num">SCREEN {{ screen.screenNumber }}</span>
+            <span class="badge">{{ screen.category }}</span>
+            <div class="phone">
+              <img [src]="screen.assetImage || screen.previewImage" [alt]="screen.name" class="phone-screen-img"
+                loading="lazy" />
+            </div>
+          </div>
+          <div class="body">
+            <h3>{{ screen.name }}</h3>
+            <p>{{ screen.description }}</p>
+            <div class="tags">
+              @for (tag of screen.tags; track tag) {
+              <span>{{ tag }}</span>
+              }
+            </div>
+          </div>
+        </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Stack Section -->
+  <section id="product-technology" class="product-section product-tech-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">Enterprise Municipal FinTech Tech Stack</span>
+      <h2>Technology stack</h2>
+    </div>
+    <div class="product-table-wrap">
+      <table class="product-table">
+        <tbody>
+          @for (item of nagriqStack; track item[0]) {
+          <tr>
+            <th scope="row">{{ item[0] }}</th>
+            <td>{{ item[1] }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CTA / Consultation Card -->
+  <section class="product-cta-section" style="max-width: 1220px; margin: 40px auto 80px; padding: 0 20px;">
+    <div
+      class="rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8"
+      style="background: linear-gradient(135deg, #0d322b 0%, #164E43 50%, #0f172a 100%)">
+      <div class="space-y-3 max-w-xl z-10">
+        <span
+          class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
+          style="background: #D9822B30; color: #f59e0b; border: 1px solid #D9822B50">
+          Turnkey Municipal &amp; GovTech Deployment
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Need a customized municipal digital payments or revenue command platform?</h2>
+        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+          We license and customize NAGRIQ with local ULB treasury gateways, BBPS integrations, CAG municipal accounting formats, and SMS/WhatsApp bill notifications in a 2–4 week sprint.
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0 z-10 w-full md:w-auto">
+        <button (click)="openBooking()"
+          class="px-6 py-3.5 rounded-full font-extrabold text-xs shadow-lg transition-all hover:scale-105 text-center text-slate-950"
+          style="background: #D9822B; color: #ffffff">
+          Schedule Technical Discovery Call
+        </button>
+        <button (click)="inquireAboutNagriq()"
+          class="px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20 transition-all text-center">
+          Inquire Source Code
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Page Footer -->
+  <footer class="product-footer">
+    <div class="product-footer-inner">
+      <div class="product-footer-columns">
+        <div class="product-footer-brand">
+          <img src="samrique-logo.png" alt="Samrique Logo" />
+          <p>
+            Bespoke Flutter app development, mobile architecture, and digital product solutions.
+          </p>
+        </div>
+        <div class="product-footer-column">
+          <h2>Projects</h2>
+          <a [attr.href]="appPath('/products/samrique-e-marketplace')"
+            (click)="$event.preventDefault(); openMarketplace()">Samrique E-Marketplace</a>
+          <a [attr.href]="appPath('/products/money-manager')"
+            (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
+          <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique
+            Mama Tracker</a>
+          <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
+            Taxi App</a>
+          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery
+            App</a>
+          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa
+            Civic Platform</a>
+          <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
+            Staff Tracking</a>
+          <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()">Nagriq
+            Municipal Payments</a>
+        </div>
+        <div class="product-footer-column">
+          <h2>Capabilities</h2>
+          <span>Flutter Multi-Platform</span>
+          <span>UI &amp; Frontend Innovation</span>
+          <span>Payment Systems &amp; Wallets</span>
+          <span>Municipal Treasury &amp; 3-Way Audit</span>
+          <span>CAG Compliance Accounting</span>
         </div>
         <div class="product-footer-column">
           <h2>Start a Sprint</h2>
@@ -3422,6 +3868,10 @@
             <li>
               <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
                 Staff Tracking</a>
+            </li>
+            <li>
+              <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()">Nagriq
+                Municipal Payments</a>
             </li>
           </ul>
         </div>
@@ -4663,6 +5113,129 @@
             </div>
           </div>
         </div>
+
+        <!-- Solution 3: NAGRIQ – Municipal Digital Payment & Administration Platform -->
+        <div
+          class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll">
+          <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-6 lg:col-span-6 order-2 md:order-1 lg:order-1">
+              <div
+                class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-white cursor-pointer group"
+                (click)="openNagriq()">
+                <img src="assets/images/nagriq/nagriq_showcase.png" alt="NAGRIQ – Municipal Digital Payment &amp; Administration Platform"
+                  loading="lazy" decoding="async"
+                  class="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300" />
+              </div>
+            </div>
+            <div class="md:col-span-6 lg:col-span-6 space-y-4 order-1 md:order-2 lg:order-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-300 text-xs font-extrabold tracking-wide uppercase">
+                  <i class="fa-solid fa-flask"></i>
+                  INDEPENDENT PRODUCT DEMONSTRATION
+                </span>
+                <span
+                  class="inline-block px-3 py-1 rounded-full text-xs font-bold border"
+                  style="color: #164E43; background: #164E4315; border-color: #164E4330">
+                  Municipal FinTech &amp; Revenue Command
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-300 text-xs font-bold">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                  Capability Showcase &bull; 32 Screens
+                </span>
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()"
+                  class="hover:text-emerald-800 transition-colors inline-flex items-center gap-2" style="color: #164E43">
+                  NAGRIQ – Municipal Digital Payment &amp; Administration Platform
+                  <i class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"></i>
+                </a>
+              </h3>
+              <p class="text-xs font-bold" style="color: #D9822B">
+                Enterprise Public Service Billing, Cryptographic Receipts &amp; Treasury Reconciliation
+              </p>
+              <p class="text-xs font-bold" style="color: #164E43">
+                <strong>Project Type:</strong> Independent Product Demonstration / Portfolio Project
+              </p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                NAGRIQ is an independently conceptualized and developed municipal digital payment and administration platform demonstration by
+                SAMRIQUE.
+              </p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                The platform demonstrates our capabilities in citizen utility billing, multi-tender gateway checkout, cryptographic SHA-256
+                receipt generation, 3-way banking reconciliation, and CAG-compliant municipal treasury accounting.
+              </p>
+              <p class="text-slate-500 text-xs leading-relaxed italic">
+                This project is presented solely as a technology demonstration to showcase our software development
+                capabilities.
+              </p>
+
+              <!-- Prominent Disclaimer Box -->
+              <div
+                class="p-4 rounded-2xl border border-amber-300/80 bg-amber-50/90 text-slate-900 text-xs leading-relaxed space-y-2 shadow-xs">
+                <div class="flex items-center justify-between gap-2 border-b border-amber-200/80 pb-2">
+                  <span class="font-extrabold text-amber-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-halved text-amber-700"></i> Disclaimer
+                  </span>
+                  <span
+                    class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold tracking-wide uppercase">
+                    INDEPENDENT DEMONSTRATION
+                  </span>
+                </div>
+                <p class="font-bold text-amber-950">
+                  These products are independently developed by SAMRIQUE and are not officially commissioned, approved
+                  or endorsed by any government department or urban local body.
+                </p>
+                <p class="text-slate-600 text-[11px]">
+                  No official municipal corporation or government department affiliation is implied. This project is presented
+                  solely as a technology demonstration to showcase our software architecture and Flutter capabilities.
+                </p>
+                <div class="pt-1.5 border-t border-amber-200/60 flex items-start gap-1.5 text-[11px] text-slate-600">
+                  <i class="fa-solid fa-database text-slate-400 mt-0.5"></i>
+                  <span><strong>Realistic Demo Data:</strong> Demonstrations use synthetic, anonymized demo data. No
+                    real municipal citizen records, taxpayer details or government treasury information are used or stored.</span>
+                </div>
+              </div>
+
+              <!-- Two Platform Roles Breakdown -->
+              <div
+                class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-2.5">
+                <div
+                  class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 border-b border-slate-200 pb-2">
+                  <i class="fa-solid fa-landmark" style="color: #164E43"></i> Platform Roles (32 Screens Catalog)
+                </div>
+                <div>
+                  <strong class="text-slate-900">1. Citizen Public Service Payments App (19 Screens):</strong> Unified billing
+                  portal for Water, Property Tax, Electricity, Trade Licences, and Waste Collection, multi-tender gateway checkout (UPI, Cards, NetBanking),
+                  and cryptographic SHA-256 digital receipts with QR code verification.
+                </div>
+                <div>
+                  <strong class="text-slate-900">2. Municipal Administration Portal (13 Screens):</strong> Executive KPI dashboard,
+                  department collection monitoring, dynamic service fee and late penalty configuration, automated 3-way banking reconciliation,
+                  deep forensic transaction trace, and CAG treasury settlement reports.
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-1">
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Flutter ^3.13.5</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Dart ^3.13.5</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Riverpod ^2.5.1</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Material 3</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">SHA-256 Receipts</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">3-Way Reconciliation</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">CAG Compliance</span>
+              </div>
+              <div class="pt-2">
+                <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()"
+                  class="btn-brand-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-md transition-all hover:scale-105">
+                  <span>Explore NAGRIQ Demonstration &amp; 32 Screens</span>
+                  <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -5033,6 +5606,32 @@
               </button>
             </div>
           </div>
+
+          <!-- Outcome 8: NAGRIQ -->
+          <div
+            class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4 hover:border-slate-300 transition-colors">
+            <div class="space-y-3">
+              <div
+                class="w-10 h-10 rounded-xl overflow-hidden p-1 border border-amber-300/60 shadow-2xs flex-shrink-0 bg-white flex items-center justify-center">
+                <img src="assets/images/nagriq/nagriq_logo.png" alt="Nagriq Logo" class="w-full h-full object-contain" />
+              </div>
+              <h4 class="text-base font-extrabold text-slate-900">
+                NAGRIQ Municipal Platform
+              </h4>
+              <p class="text-slate-600 text-xs leading-relaxed">
+                Municipal digital payments and administrative command center with multi-tender utility billing, SHA-256 QR receipts, and 3-way banking reconciliation.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] font-bold text-slate-500 uppercase">32 Screens &bull; Independent Tech
+                Demo</span>
+              <button type="button" (click)="openNagriq()"
+                class="text-xs font-bold hover:underline transition-colors inline-flex items-center gap-1"
+                style="color: #164E43">
+                View build <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -5101,6 +5700,10 @@
             <li>
               <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()"
                 class="hover:text-teal-700 transition-colors">Fieldora Staff Tracking</a>
+            </li>
+            <li>
+              <a [attr.href]="appPath('/products/nagriq')" (click)="$event.preventDefault(); openNagriq()"
+                class="hover:text-teal-700 transition-colors">Nagriq Municipal Payments</a>
             </li>
           </ul>
         </div>

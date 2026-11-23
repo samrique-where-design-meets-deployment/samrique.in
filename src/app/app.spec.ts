@@ -112,6 +112,20 @@ describe('App', () => {
     expect(app['getCategoryCount'](app['fieldoraScreens'], 'Admin')).toBe(21);
   });
 
+  it('should open and display NAGRIQ product details with 32 screens across 2 roles', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openNagriq']();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.nagriq-page')).toBeTruthy();
+    expect(compiled.querySelector('h1')?.textContent).toContain('NAGRIQ');
+    expect(app['nagriqScreens'].length).toBe(32);
+    expect(app['getCategoryCount'](app['nagriqScreens'], 'Citizen Services')).toBe(19);
+    expect(app['getCategoryCount'](app['nagriqScreens'], 'Municipal Admin')).toBe(13);
+  });
+
   it('should display JANOVEXA disclaimer and classification as independent demonstration project', async () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
@@ -136,6 +150,18 @@ describe('App', () => {
     expect(compiled.textContent).toContain('These products are independently developed by SAMRIQUE and are not officially commissioned');
   });
 
+  it('should display NAGRIQ disclaimer and classification as independent demonstration project', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openNagriq']();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Independent Product Demonstration / Portfolio Project');
+    expect(compiled.textContent).toContain('INDEPENDENT PRODUCT DEMONSTRATION');
+    expect(compiled.textContent).toContain('These products are independently developed by SAMRIQUE and are not officially commissioned');
+  });
+
   it('should render the dedicated Government & Public Sector Technology Demonstrations section on home', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
@@ -146,6 +172,7 @@ describe('App', () => {
     expect(govSection?.textContent).toContain('Government & Public Sector Technology Demonstrations');
     expect(govSection?.textContent).toContain('JANOVEXA – Citizen Services Platform');
     expect(govSection?.textContent).toContain('FIELDORA — Field Workforce & Staff Tracking Platform');
+    expect(govSection?.textContent).toContain('NAGRIQ – Municipal Digital Payment & Administration Platform');
     expect(govSection?.textContent).toContain('INDEPENDENT PRODUCT DEMONSTRATION');
   });
 
@@ -155,12 +182,12 @@ describe('App', () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    expect(app['totalProductBuilds']).toBe(7);
-    expect(app['totalDocumentedScreens']).toBe(165);
+    expect(app['totalProductBuilds']).toBe(8);
+    expect(app['totalDocumentedScreens']).toBe(197);
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('7');
-    expect(compiled.textContent).toContain('165');
+    expect(compiled.textContent).toContain('8');
+    expect(compiled.textContent).toContain('197');
   });
 
   it('should open screen modal and allow switching between preview mockup and raw asset', async () => {

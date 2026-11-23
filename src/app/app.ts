@@ -63,6 +63,7 @@ export class App implements AfterViewInit, OnDestroy {
   protected showZest = ['/products/zest-grocery', '/products/zest', '/products/samrique-zest-grocery'].includes(this.routePath);
   protected showJanovexa = ['/products/janovexa', '/products/janovexa-civic-grievance', '/products/samrique-janovexa'].includes(this.routePath);
   protected showFieldora = ['/products/fieldora', '/products/fieldora-staff-tracking', '/products/samrique-fieldora'].includes(this.routePath);
+  protected showNagriq = ['/products/nagriq', '/products/nagriq-municipal-payments', '/products/samrique-nagriq'].includes(this.routePath);
   protected showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
 
   // Modal Lightbox state
@@ -104,6 +105,7 @@ export class App implements AfterViewInit, OnDestroy {
   protected zestCategory = 'All';
   protected janovexaCategory = 'All';
   protected fieldoraCategory = 'All';
+  protected nagriqCategory = 'All';
 
   private revealObserver?: IntersectionObserver;
   private bookingTrigger?: HTMLElement;
@@ -514,6 +516,7 @@ export class App implements AfterViewInit, OnDestroy {
     if (this.showZest) return this.zestScreens;
     if (this.showJanovexa) return this.janovexaScreens;
     if (this.showFieldora) return this.fieldoraScreens;
+    if (this.showNagriq) return this.nagriqScreens;
     return [];
   }
 
@@ -562,6 +565,9 @@ export class App implements AfterViewInit, OnDestroy {
       'department admin': '#0B132B',
       'field officer': '#FF6B35',
       'staff': '#059669',
+      'citizen': '#164E43',
+      'citizen services': '#164E43',
+      'municipal admin': '#D9822B',
     };
     return map[category?.toLowerCase()] || '#17b3a3';
   }
@@ -572,7 +578,7 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   protected get totalProductBuilds(): number {
-    return 7;
+    return 8;
   }
 
   protected get totalDocumentedScreens(): number {
@@ -583,7 +589,8 @@ export class App implements AfterViewInit, OnDestroy {
       this.zipiScreens.length +
       this.zestScreens.length +
       this.janovexaScreens.length +
-      this.fieldoraScreens.length
+      this.fieldoraScreens.length +
+      this.nagriqScreens.length
     );
   }
 
@@ -818,6 +825,43 @@ export class App implements AfterViewInit, OnDestroy {
     ['Target Database & Geodata', 'PostgreSQL / PostGIS geospatial database with Prisma ORM type-safe schemas and audit migrations'],
     ['Target Security & Audit', 'Stateless JWT authentication with role-based access control (field_staff, supervisor, admin) & immutable audit trail'],
     ['Test & Emulation Harness', 'Android ADB automated pipeline & Impeller Engine (OpenGLES) on Android 17 / API 37 emulator'],
+  ];
+
+  protected readonly nagriqProofPoint = {
+    badge: 'Municipal Digital Payments & Admin Command · Multi-Role',
+    title: 'NAGRIQ – Municipal Digital Payment & Administration Platform',
+    projectType: 'Independent Product Demonstration / Portfolio Project',
+    classification: 'Independent Product Demonstration / Portfolio Project',
+    demoLabel: 'INDEPENDENT PRODUCT DEMONSTRATION',
+    notice: 'NAGRIQ is an independently conceptualized and developed municipal digital payment and administration platform demonstration by SAMRIQUE. The platform demonstrates our capabilities in citizen utility billing, multi-tender gateway checkout, cryptographic SHA-256 receipt generation, 3-way banking reconciliation, and CAG-compliant municipal treasury accounting. This project is presented solely as a technology demonstration to showcase our software development capabilities.',
+    disclaimer: 'These products are independently developed by SAMRIQUE and are not officially commissioned, approved or endorsed by any government department or urban local body. No official municipal corporation or government department affiliation is implied.',
+    syntheticDataNotice: 'Demonstration uses synthetic, anonymized demo data: No real municipal citizen records, taxpayer details or government treasury information.',
+    problemSolved: 'Urban Local Bodies (ULBs) face severe revenue leakage, manual paper receipts, delayed bank reconciliations, lack of citizen convenience across utility bills, and arduous CAG audit preparation.',
+    keyUserFlows: 'Citizen search consumer bill → Review itemized charges & rebate → Multi-tender checkout (UPI/Cards/NetBanking) → Instant cryptographic QR receipt & SHA-256 verification → Admin 3-way bank reconciliation & CAG settlement report export.',
+    architectureTimeline: 'Engineered with Flutter SDK ^3.13.5, Dart ^3.13.5, Flutter Riverpod ^2.5.1 reactive state architecture, Material 3 design tokens with Civic Forest Green (#164E43) and Amber (#D9822B), and Intl ^0.20.3 across 32 captured screens and 2 distinct operational roles.'
+  };
+
+  protected readonly nagriqFeatures = [
+    { title: 'Two Synchronized Municipal Roles', detail: 'Tailored cross-platform experiences for Citizens (19 screens) and Municipal Revenue Officers & Administrators (13 screens) in one unified client.' },
+    { title: 'Multi-Department Utility Billing', detail: 'Single unified payment gateway for Water Supply, Property Tax, Electricity, Trade Licences, and Waste Collection charges with instant consumer lookup.' },
+    { title: 'Itemized Breakdown & Rebates', detail: 'Transparent charge calculation displaying base tariff, sewerage/drainage cess, early-bird payment rebate incentives, and statutory late penalties.' },
+    { title: 'Multi-Tender Payment Gateway', detail: 'Support for UPI (Google Pay, PhonePe, Paytm), NetBanking, Credit/Debit cards, and Bharat BillPay (BBPS) with real-time settlement authorization.' },
+    { title: 'Cryptographic SHA-256 QR Receipts', detail: 'Instant tamper-proof digital receipts featuring SHA-256 integrity hashes, scannable verification QR codes, and audit-ready PDF export.' },
+    { title: 'Automated 3-Way Reconciliation', detail: 'High-precision financial audit matching Payment Gateway transaction logs, Bank UTR credit advice, and ULB municipal treasury ledgers.' },
+    { title: 'Executive Municipal KPI Command Center', detail: 'Real-time revenue metrics, daily collection targets vs actuals, department performance meters, and 30-day clearance rate tracking.' },
+    { title: 'CAG-Compliant Treasury Reporting', detail: 'Settlement reports pre-formatted to Comptroller and Auditor General (CAG) municipal accounting standards for immediate audit filing.' },
+  ];
+
+  protected readonly nagriqStack = [
+    ['Frontend Mobile Framework', 'Flutter SDK ^3.13.5 & Dart ^3.13.5 (cross-platform native compiled)'],
+    ['State Management & Architecture', 'Flutter Riverpod ^2.5.1 (Reactive unidirectional data flow, StateNotifierProvider)'],
+    ['Design System & Tokens', 'Material 3 (M3) with custom Civic Tokens (Forest Green #164E43, Amber #D9822B)'],
+    ['Localization & Currency', 'intl ^0.20.3 (Localized Indian Rupee ₹ INR, date stamps, municipal accounting formats)'],
+    ['Receipt Security & Cryptography', 'SHA-256 cryptographic hash generation & dynamic verification QR codes'],
+    ['Target Backend & APIs', 'NestJS modular TypeScript REST API (/api/v1/...) with RBAC & rate limiting'],
+    ['Target Database & Ledgers', 'PostgreSQL relational database with Prisma ORM & Decimal precision financial ledger'],
+    ['File Storage & Audit PDFs', 'AWS S3 / MinIO encrypted storage for generated receipts and audit exports'],
+    ['Test & Tour Automation', 'Flutter test framework (10 widget suites) & automated 32-screen capture pipeline'],
   ];
 
   // --- Screens Data ---
@@ -2514,6 +2558,332 @@ export class App implements AfterViewInit, OnDestroy {
     },
   ];
 
+  protected readonly nagriqScreens: ProductScreen[] = [
+    // --- Part 1: Citizen Public Service Payments App (19 Screens) ---
+    {
+      id: 'nag-cit-01-splash',
+      screenNumber: '01',
+      name: 'Splash Screen',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/01_citizen_splash.png',
+      assetImage: 'assets/images/nagriq/01_citizen_splash.png',
+      description: 'Civic branding with animated entry point, municipal emblem, and secure session state initialization.',
+      tags: ['Civic Branding', 'Splash Screen', 'Session Init'],
+    },
+    {
+      id: 'nag-cit-02-role-selection',
+      screenNumber: '02',
+      name: 'Role Selection Gateway',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/02_role_selection.png',
+      assetImage: 'assets/images/nagriq/02_role_selection.png',
+      description: 'Dual-role gateway facilitating instant role selection between Citizen Services and Municipal Administration Portal.',
+      tags: ['Role Gateway', 'Multi-Role UX', 'Access Control'],
+    },
+    {
+      id: 'nag-cit-03-login',
+      screenNumber: '03',
+      name: 'Citizen Login',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/03_citizen_login.png',
+      assetImage: 'assets/images/nagriq/03_citizen_login.png',
+      description: 'Mobile number OTP verification and password sign-in for secure citizen account access.',
+      tags: ['Authentication', 'OTP Login', 'Citizen Portal'],
+    },
+    {
+      id: 'nag-cit-04-register',
+      screenNumber: '04',
+      name: 'Citizen Registration',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/04_citizen_register.png',
+      assetImage: 'assets/images/nagriq/04_citizen_register.png',
+      description: 'New citizen onboarding with Ward selection, municipal zone mapping, and residential address verification.',
+      tags: ['Registration', 'Ward Mapping', 'Citizen Onboarding'],
+    },
+    {
+      id: 'nag-cit-05-home',
+      screenNumber: '05',
+      name: 'Home Dashboard',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/05_citizen_home_dashboard.png',
+      assetImage: 'assets/images/nagriq/05_citizen_home_dashboard.png',
+      description: 'Active utility bills summary, quick service shortcuts, due date alerts, and recent payment ledger.',
+      tags: ['Dashboard', 'Bill Summary', 'Quick Actions'],
+    },
+    {
+      id: 'nag-cit-06-nav-drawer',
+      screenNumber: '06',
+      name: 'Navigation Drawer',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/06_citizen_navigation_drawer.png',
+      assetImage: 'assets/images/nagriq/06_citizen_navigation_drawer.png',
+      description: 'Quick drawer navigation across municipal departments, digital receipts, grievance links, and settings.',
+      tags: ['Drawer Navigation', 'Department Routing', 'Civic Shell'],
+    },
+    {
+      id: 'nag-cit-07-catalog',
+      screenNumber: '07',
+      name: 'Services Catalog',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/07_citizen_services_catalog.png',
+      assetImage: 'assets/images/nagriq/07_citizen_services_catalog.png',
+      description: 'Categorized municipal catalog for Water Supply, Property Tax, Electricity, Trade Licences, and Waste Collection.',
+      tags: ['Service Catalog', 'Utility Billing', 'Municipal Taxes'],
+    },
+    {
+      id: 'nag-cit-08-reference-entry',
+      screenNumber: '08',
+      name: 'Reference Entry',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/08_citizen_bill_reference_entry.png',
+      assetImage: 'assets/images/nagriq/08_citizen_bill_reference_entry.png',
+      description: 'Consumer / CA / Assessment / Trade Licence number lookup with dynamic format validation hints.',
+      tags: ['Consumer Lookup', 'Assessment No', 'Validation Hints'],
+    },
+    {
+      id: 'nag-cit-09-bill-details',
+      screenNumber: '09',
+      name: 'Bill Details',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/09_citizen_bill_details.png',
+      assetImage: 'assets/images/nagriq/09_citizen_bill_details.png',
+      description: 'Verified municipal demand breakdown, meter reading units, billing cycle period, and due date penalty indicator.',
+      tags: ['Demand Notice', 'Meter Reading', 'Bill Cycle'],
+    },
+    {
+      id: 'nag-cit-10-breakdown',
+      screenNumber: '10',
+      name: 'Payment Breakdown',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/10_citizen_payment_breakdown.png',
+      assetImage: 'assets/images/nagriq/10_citizen_payment_breakdown.png',
+      description: 'Itemized municipal charge summary, early-bird rebate deduction, convenience surcharge, and net payable amount.',
+      tags: ['Charge Summary', 'Rebate Calculation', 'Convenience Fee'],
+    },
+    {
+      id: 'nag-cit-11-payment-method',
+      screenNumber: '11',
+      name: 'Payment Methods',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/11_citizen_payment_method.png',
+      assetImage: 'assets/images/nagriq/11_citizen_payment_method.png',
+      description: 'Multi-tender payment gateway selector: UPI (Google Pay, PhonePe, Paytm), NetBanking, Credit/Debit cards, and BBPS.',
+      tags: ['Multi-Tender', 'UPI & Cards', 'BBPS Integration'],
+    },
+    {
+      id: 'nag-cit-12-processing',
+      screenNumber: '12',
+      name: 'Gateway Processing',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/12_citizen_payment_processing.png',
+      assetImage: 'assets/images/nagriq/12_citizen_payment_processing.png',
+      description: 'Animated secure transaction authorization screen verifying bank gateway response and settlement handshake.',
+      tags: ['Payment Gateway', 'Bank Handshake', 'Secure Processing'],
+    },
+    {
+      id: 'nag-cit-13-payment-success',
+      screenNumber: '13',
+      name: 'Payment Success',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/13_citizen_payment_success.png',
+      assetImage: 'assets/images/nagriq/13_citizen_payment_success.png',
+      description: 'Instant municipal settlement confirmation with Transaction ID, Bank UTR, and demand clearance stamp.',
+      tags: ['Payment Success', 'Bank UTR', 'Instant Clearance'],
+    },
+    {
+      id: 'nag-cit-14-receipt',
+      screenNumber: '14',
+      name: 'Digital Receipt & QR',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/14_citizen_receipt_view.png',
+      assetImage: 'assets/images/nagriq/14_citizen_receipt_view.png',
+      description: 'Official municipal e-receipt featuring SHA-256 cryptographic hash, verification QR code, and PDF download action.',
+      tags: ['Cryptographic QR', 'SHA-256 Hash', 'PDF Receipt'],
+    },
+    {
+      id: 'nag-cit-15-payment-history',
+      screenNumber: '15',
+      name: 'Payment History',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/15_citizen_payment_history.png',
+      assetImage: 'assets/images/nagriq/15_citizen_payment_history.png',
+      description: 'Filterable transaction ledger across Success, Pending, and Failed states with department tags and receipt links.',
+      tags: ['Transaction Ledger', 'Audit Filter', 'Payment History'],
+    },
+    {
+      id: 'nag-cit-16-search',
+      screenNumber: '16',
+      name: 'Transaction Search',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/16_citizen_search_transactions.png',
+      assetImage: 'assets/images/nagriq/16_citizen_search_transactions.png',
+      description: 'Full-text search interface by Consumer ID, Service Department, UTR, or Transaction reference number.',
+      tags: ['Search Engine', 'Transaction Lookup', 'Full-Text Filter'],
+    },
+    {
+      id: 'nag-cit-17-profile',
+      screenNumber: '17',
+      name: 'Citizen Profile',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/17_citizen_profile.png',
+      assetImage: 'assets/images/nagriq/17_citizen_profile.png',
+      description: 'Verified citizen profile, Aadhaar/PAN linkage indicator, registered mobile number, and ward mapping.',
+      tags: ['Citizen Identity', 'KYC Linkage', 'Ward Details'],
+    },
+    {
+      id: 'nag-cit-18-notifications',
+      screenNumber: '18',
+      name: 'Civic Alerts',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/18_citizen_notifications.png',
+      assetImage: 'assets/images/nagriq/18_citizen_notifications.png',
+      description: 'Departmental announcements, pending bill demand reminders, rebate deadlines, and payment confirmation alerts.',
+      tags: ['Push Alerts', 'Due Date Reminder', 'Civic Announcements'],
+    },
+    {
+      id: 'nag-cit-19-settings',
+      screenNumber: '19',
+      name: 'App Settings',
+      category: 'Citizen Services',
+      previewImage: 'assets/images/nagriq/19_citizen_settings.png',
+      assetImage: 'assets/images/nagriq/19_citizen_settings.png',
+      description: 'Biometric authentication lock, notification preferences, multilingual support, and cache management.',
+      tags: ['Biometric Lock', 'Preferences', 'Security Settings'],
+    },
+
+    // --- Part 2: Municipal Administration Portal (13 Screens) ---
+    {
+      id: 'nag-adm-20-login',
+      screenNumber: '20',
+      name: 'Officer Login',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/20_admin_login.png',
+      assetImage: 'assets/images/nagriq/20_admin_login.png',
+      description: 'Multi-factor authentication gateway for municipal revenue officers, treasury accountants, and administrators.',
+      tags: ['MFA Authentication', 'Officer Credentials', 'RBAC Security'],
+    },
+    {
+      id: 'nag-adm-21-executive-dashboard',
+      screenNumber: '21',
+      name: 'Executive Dashboard',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/21_admin_executive_dashboard.png',
+      assetImage: 'assets/images/nagriq/21_admin_executive_dashboard.png',
+      description: 'Real-time municipal KPIs, daily revenue collections, 30-day clearance rate, and department contribution breakdown.',
+      tags: ['Executive KPIs', 'Revenue Metrics', 'Clearance Rate'],
+    },
+    {
+      id: 'nag-adm-22-nav-drawer',
+      screenNumber: '22',
+      name: 'Master Navigation Drawer',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/22_admin_navigation_drawer.png',
+      assetImage: 'assets/images/nagriq/22_admin_navigation_drawer.png',
+      description: '12-section administrative command navigation across Finance, Billing, Reconciliation, CAG Reports, and System.',
+      tags: ['Administrative Shell', 'Navigation Tree', 'Command Center'],
+    },
+    {
+      id: 'nag-adm-23-collections-overview',
+      screenNumber: '23',
+      name: 'Department Collections',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/23_admin_collections_overview.png',
+      assetImage: 'assets/images/nagriq/23_admin_collections_overview.png',
+      description: 'Revenue vs target progress monitoring for Water, Property Tax, Electricity, Trade Licences, and Waste Management.',
+      tags: ['Target vs Actual', 'Department Revenue', 'Collection Monitor'],
+    },
+    {
+      id: 'nag-adm-24-fee-config',
+      screenNumber: '24',
+      name: 'Service Fee Config',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/24_admin_service_fee_config.png',
+      assetImage: 'assets/images/nagriq/24_admin_service_fee_config.png',
+      description: 'Dynamic convenience fee rules, early-bird rebate incentives, and statutory late penalty surcharge settings.',
+      tags: ['Fee Rules', 'Late Penalty', 'Rebate Surcharge'],
+    },
+    {
+      id: 'nag-adm-25-bill-management',
+      screenNumber: '25',
+      name: 'Bill Demand Manager',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/25_admin_bill_management.png',
+      assetImage: 'assets/images/nagriq/25_admin_bill_management.png',
+      description: 'Batch bill demand generation, consumer billing lookup, overdue notice dispatch, and adjustment audits.',
+      tags: ['Demand Notice', 'Batch Generation', 'Consumer Audit'],
+    },
+    {
+      id: 'nag-adm-26-reconciliation',
+      screenNumber: '26',
+      name: '3-Way Reconciliation',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/26_admin_payment_reconciliation.png',
+      assetImage: 'assets/images/nagriq/26_admin_payment_reconciliation.png',
+      description: 'Daily automated 3-way financial reconciliation cross-matching Payment Gateway logs, Bank UTR, and ULB Municipal Ledger.',
+      tags: ['3-Way Audit', 'Bank UTR Matching', 'Discrepancy Resolution'],
+    },
+    {
+      id: 'nag-adm-27-transactions',
+      screenNumber: '27',
+      name: 'Master Transaction Audit',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/27_admin_transactions_list.png',
+      assetImage: 'assets/images/nagriq/27_admin_transactions_list.png',
+      description: 'Comprehensive searchable ledger of all municipal payments with settlement status, payment mode, and audit flags.',
+      tags: ['Master Ledger', 'Audit Trail', 'Settlement Status'],
+    },
+    {
+      id: 'nag-adm-28-transaction-trace',
+      screenNumber: '28',
+      name: 'Deep Transaction Trace',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/28_admin_transaction_audit.png',
+      assetImage: 'assets/images/nagriq/28_admin_transaction_audit.png',
+      description: 'Forensic audit drill-down displaying Bank UTR, Gateway RRN, timestamped lifecycle states, and treasury settlement trace.',
+      tags: ['Forensic Audit', 'Gateway RRN', 'Lifecycle Trace'],
+    },
+    {
+      id: 'nag-adm-29-receipt-verifier',
+      screenNumber: '29',
+      name: 'Receipt Verifier',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/29_admin_receipt_verification.png',
+      assetImage: 'assets/images/nagriq/29_admin_receipt_verification.png',
+      description: 'Public and internal cryptographic verification tool validating receipt hash integrity and preventing document tampering.',
+      tags: ['Cryptographic Verifier', 'SHA-256 Validation', 'Tamper Proof'],
+    },
+    {
+      id: 'nag-adm-30-settlement-reports',
+      screenNumber: '30',
+      name: 'CAG Settlement Reports',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/30_admin_settlement_reports.png',
+      assetImage: 'assets/images/nagriq/30_admin_settlement_reports.png',
+      description: 'Comptroller and Auditor General (CAG) compliant treasury settlement reports formatted for state municipal audits.',
+      tags: ['CAG Compliance', 'Treasury Settlement', 'Audit Filing'],
+    },
+    {
+      id: 'nag-adm-31-analytics-exports',
+      screenNumber: '31',
+      name: 'Analytics & Exports',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/31_admin_analytics_exports.png',
+      assetImage: 'assets/images/nagriq/31_admin_analytics_exports.png',
+      description: 'Revenue trend analysis, collection forecast curves, and export generators for CSV, Excel, and signed audit PDFs.',
+      tags: ['Revenue Analytics', 'Forecasting', 'CSV & PDF Export'],
+    },
+    {
+      id: 'nag-adm-32-officers-settings',
+      screenNumber: '32',
+      name: 'Officer Directory & RBAC',
+      category: 'Municipal Admin',
+      previewImage: 'assets/images/nagriq/32_admin_officers_settings.png',
+      assetImage: 'assets/images/nagriq/32_admin_officers_settings.png',
+      description: 'Municipal staff directory, Role-Based Access Control (RBAC) permissions, officer login logs, and access audit.',
+      tags: ['RBAC Permissions', 'Staff Directory', 'Access Logs'],
+    },
+  ];
+
   @HostListener('window:popstate')
   protected syncRoute(): void {
     this.showMoneyManager = ['/products/money-manager', '/products/samrique-money-manager'].includes(this.routePath);
@@ -2523,13 +2893,14 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = ['/products/zest-grocery', '/products/zest', '/products/samrique-zest-grocery'].includes(this.routePath);
     this.showJanovexa = ['/products/janovexa', '/products/janovexa-civic-grievance', '/products/samrique-janovexa'].includes(this.routePath);
     this.showFieldora = ['/products/fieldora', '/products/fieldora-staff-tracking', '/products/samrique-fieldora'].includes(this.routePath);
+    this.showNagriq = ['/products/nagriq', '/products/nagriq-municipal-payments', '/products/samrique-nagriq'].includes(this.routePath);
     this.showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
     this.showPrivacyModal = ['/privacy', '/privacy-policy'].includes(this.routePath);
     this.showTermsModal = ['/terms', '/terms-of-service', '/terms-and-conditions'].includes(this.routePath);
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
 
-    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi && !this.showZest && !this.showJanovexa && !this.showFieldora && !this.showPricingPage) {
+    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi && !this.showZest && !this.showJanovexa && !this.showFieldora && !this.showNagriq && !this.showPricingPage) {
       this.refreshHomeVisibility();
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -2548,6 +2919,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = false;
     this.showJanovexa = false;
     this.showFieldora = false;
+    this.showNagriq = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2566,6 +2938,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = false;
     this.showJanovexa = false;
     this.showFieldora = false;
+    this.showNagriq = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2584,6 +2957,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = false;
     this.showJanovexa = false;
     this.showFieldora = false;
+    this.showNagriq = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2602,6 +2976,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = false;
     this.showJanovexa = false;
     this.showFieldora = false;
+    this.showNagriq = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2620,6 +2995,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = true;
     this.showJanovexa = false;
     this.showFieldora = false;
+    this.showNagriq = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2638,6 +3014,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = false;
     this.showJanovexa = true;
     this.showFieldora = false;
+    this.showNagriq = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2656,10 +3033,31 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = false;
     this.showJanovexa = false;
     this.showFieldora = true;
+    this.showNagriq = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     this.fieldoraCategory = 'All';
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
+  }
+
+  protected openNagriq(): void {
+    if (this.routePath !== '/products/nagriq') {
+      window.history.pushState({}, '', this.appPath('/products/nagriq'));
+    }
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showZest = false;
+    this.showJanovexa = false;
+    this.showFieldora = false;
+    this.showNagriq = true;
+    this.showPricingPage = false;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    this.nagriqCategory = 'All';
     window.scrollTo({ top: 0, behavior: 'instant' });
     this.scheduleRevealObservation();
   }
@@ -2675,6 +3073,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = false;
     this.showJanovexa = false;
     this.showFieldora = false;
+    this.showNagriq = false;
     this.showPricingPage = true;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2693,6 +3092,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = false;
     this.showJanovexa = false;
     this.showFieldora = false;
+    this.showNagriq = false;
     this.showPricingPage = true;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2709,6 +3109,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = false;
     this.showJanovexa = false;
     this.showFieldora = false;
+    this.showNagriq = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2729,10 +3130,15 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZest = false;
     this.showJanovexa = false;
     this.showFieldora = false;
+    this.showNagriq = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     this.refreshHomeVisibility();
+  }
+
+  protected inquireAboutNagriq(): void {
+    this.inquireAboutProduct('NAGRIQ — Municipal Digital Payment & Administration Platform');
   }
 
   protected inquireAboutFieldora(): void {
