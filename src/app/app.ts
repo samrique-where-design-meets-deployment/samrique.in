@@ -62,6 +62,7 @@ export class App implements AfterViewInit, OnDestroy {
   protected showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
   protected showZest = ['/products/zest-grocery', '/products/zest', '/products/samrique-zest-grocery'].includes(this.routePath);
   protected showJanovexa = ['/products/janovexa', '/products/janovexa-civic-grievance', '/products/samrique-janovexa'].includes(this.routePath);
+  protected showFieldora = ['/products/fieldora', '/products/fieldora-staff-tracking', '/products/samrique-fieldora'].includes(this.routePath);
   protected showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
 
   // Modal Lightbox state
@@ -102,6 +103,7 @@ export class App implements AfterViewInit, OnDestroy {
   protected zipiCategory = 'All';
   protected zestCategory = 'All';
   protected janovexaCategory = 'All';
+  protected fieldoraCategory = 'All';
 
   private revealObserver?: IntersectionObserver;
   private bookingTrigger?: HTMLElement;
@@ -116,7 +118,7 @@ export class App implements AfterViewInit, OnDestroy {
     const progress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
     document.getElementById('top-progress-bar')?.style.setProperty('width', `${progress}%`);
 
-    const sections = ['hero', 'services', 'how-it-works', 'projects', 'about'];
+    const sections = ['hero', 'services', 'how-it-works', 'projects', 'gov-solutions', 'about'];
     const activeSection = sections
       .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null)
@@ -511,6 +513,7 @@ export class App implements AfterViewInit, OnDestroy {
     if (this.showZipi) return this.zipiScreens;
     if (this.showZest) return this.zestScreens;
     if (this.showJanovexa) return this.janovexaScreens;
+    if (this.showFieldora) return this.fieldoraScreens;
     return [];
   }
 
@@ -558,6 +561,7 @@ export class App implements AfterViewInit, OnDestroy {
       'citizen portal': '#4A1525',
       'department admin': '#0B132B',
       'field officer': '#FF6B35',
+      'staff': '#059669',
     };
     return map[category?.toLowerCase()] || '#17b3a3';
   }
@@ -565,6 +569,22 @@ export class App implements AfterViewInit, OnDestroy {
   protected getCategoryCount(screens: ProductScreen[], category: string): number {
     if (category === 'All') return screens.length;
     return screens.filter((s) => s.category.toLowerCase() === category.toLowerCase()).length;
+  }
+
+  protected get totalProductBuilds(): number {
+    return 7;
+  }
+
+  protected get totalDocumentedScreens(): number {
+    return (
+      this.marketplaceScreens.length +
+      this.moneyManagerScreens.length +
+      this.mamaScreens.length +
+      this.zipiScreens.length +
+      this.zestScreens.length +
+      this.janovexaScreens.length +
+      this.fieldoraScreens.length
+    );
   }
 
   // --- Proof Points & Case Build Classifications ---
@@ -615,11 +635,30 @@ export class App implements AfterViewInit, OnDestroy {
 
   protected readonly janovexaProofPoint = {
     badge: 'Civic Tech & Public Service · Multi-Role',
-    classification: 'Digital Public Service / Production-Grade MVP',
-    notice: 'JANOVEXA empowers citizens to report civic grievances with location and photographic evidence, track resolution progress with transparent department accountability, and provides city departments with a modern administration dashboard to triage, assign officers, and update complaint statuses.',
+    title: 'JANOVEXA – Citizen Services Platform',
+    projectType: 'Independent Product Demonstration / Portfolio Project',
+    classification: 'Independent Product Demonstration / Portfolio Project',
+    demoLabel: 'INDEPENDENT PRODUCT DEMONSTRATION',
+    notice: 'JANOVEXA is an independently conceptualized and developed citizen services platform demonstration by SAMRIQUE. The platform demonstrates our capabilities in citizen complaint management, service requests, complaint tracking, notifications, administrative workflows and mobile application development. This project is presented solely as a technology demonstration to showcase our software development capabilities.',
+    disclaimer: 'These products are independently developed by SAMRIQUE and are not officially commissioned, approved or endorsed by any government department. No government department affiliation or official partnership is implied.',
+    syntheticDataNotice: 'Demonstration uses synthetic, anonymized demo data: No real citizen records, government employee details or confidential information.',
     problemSolved: 'Municipal grievance redressal often suffers from opaque resolution timelines, unverified complaint geotags, fragmented citizen communication, and disconnected field dispatch, leading to breached SLAs and declining civic trust.',
     keyUserFlows: 'Citizen 5-step grievance registration with OSM map pin drop & evidence upload → Department admin queue triage, SLA tracking & field officer dispatch → Field officer on-site navigation, repair resolution & timestamped audit journey → Citizen closure verification & reopening.',
     architectureTimeline: 'Engineered with Flutter SDK ^3.47.7, Dart ^3.13.5, Flutter Riverpod ^3.5.0 compile-safe state management, flutter_map ^8.3.2 & latlong2 ^0.10.1 with OpenStreetMap tiles, and modern Material 3 design tokens spanning 41 screens across 3 distinct municipal roles.'
+  };
+
+  protected readonly fieldoraProofPoint = {
+    badge: 'Field Workforce & Staff Tracking · Multi-Role',
+    title: 'FIELDORA — Field Workforce & Staff Tracking Platform',
+    projectType: 'Independent Product Demonstration / Portfolio Project',
+    classification: 'Independent Product Demonstration / Portfolio Project',
+    demoLabel: 'INDEPENDENT PRODUCT DEMONSTRATION',
+    notice: 'FIELDORA is an independently conceptualized and developed field workforce and staff tracking platform demonstration by SAMRIQUE. The platform demonstrates our capabilities in GPS-verified attendance, real-time route tracking, daily activity reporting, dispatch administration, supervisor inspection workflows, and mobile application development. This project is presented solely as a technology demonstration to showcase our software development capabilities.',
+    disclaimer: 'These products are independently developed by SAMRIQUE and are not officially commissioned, approved or endorsed by any government department. No official organization or government department affiliation is implied.',
+    syntheticDataNotice: 'Demonstration uses synthetic, anonymized demo data: No real personnel records, employee details or confidential information.',
+    problemSolved: 'Organizations struggle with unverified attendance timesheets, lack of real-time field staff visibility, delayed work order dispatch, cumbersome paper-based reporting, and staff privacy concerns during off-duty hours.',
+    keyUserFlows: 'Frontline staff GPS check-in (±8m verification) & privacy consent → Live route polyline tracking on OpenStreetMap with manual stop controls → Daily task inspection checklist & geotagged photo reports → Admin live OpenStreetMap fleet radar, animated route playback, work order dispatch, and report approval workflows.',
+    architectureTimeline: 'Engineered with Flutter SDK 3.47.7, Dart 3.13.5, Flutter Riverpod ^3.5.0 reactive state architecture, OpenStreetMap tiles with flutter_map ^8.3.2 and latlong2 ^0.10.1, Material 3 design tokens, and Intl ^0.20.3 across 38 screens and 2 distinct mobile roles.'
   };
 
   // --- Features & Stack Data ---
@@ -754,6 +793,30 @@ export class App implements AfterViewInit, OnDestroy {
     ['Target Backend Architecture', 'NestJS enterprise TypeScript REST API with modular dependency injection & OpenAPI / Swagger contracts'],
     ['Target Database & ORM', 'PostgreSQL relational database with Prisma ORM type-safe schemas and audit migrations'],
     ['Target Security & Auth', 'Stateless JWT authentication with role-based access control (citizen, field_officer, dept_admin)'],
+    ['Test & Emulation Harness', 'Android ADB automated pipeline & Impeller Engine (OpenGLES) on Android 17 / API 37 emulator'],
+  ];
+
+  protected readonly fieldoraFeatures = [
+    { title: 'Two Synchronized Enterprise Roles', detail: 'Tailored mobile experiences for Field Staff (18 screens) and Admin & Supervisors (20 screens) with role-based permission tiers.' },
+    { title: 'GPS-Verified Attendance & Geofencing', detail: 'Check-in/out with precision location verification (±8m), break deduction calculation, and authorized geofenced job site enforcement.' },
+    { title: 'Shift-Bound Privacy Control', detail: '"Visible on duty. Private off duty." Transparent location consent disclosures, visible duty indicators, manual tracking pause controls, and automatic end-of-shift tracking cut-off.' },
+    { title: 'OpenStreetMap Live Fleet Radar & Playback', detail: 'Interactive vector/raster maps with live markers for on-duty employees, animated route playback with speed controls (1x, 2x, 5x), and waypoint scrubbers.' },
+    { title: 'Task Dispatch & Field Inspections', detail: 'Work order dispatch form by priority and site, paired with an interactive field inspection checklist, progress notes, and one-tap completion.' },
+    { title: 'Geotagged Photo Reports & Approvals', detail: 'Daily activity reports with up to 5 photos from camera/gallery, offline draft support, supervisor review remarks, and Approve / Request Changes workflow.' },
+    { title: 'Compliance & Performance Analytics', detail: 'Fleet attendance compliance percentage, late arrivals, velocity index scorecards, and comprehensive PDF / Excel / CSV export capabilities.' },
+  ];
+
+  protected readonly fieldoraStack = [
+    ['Frontend Mobile Framework', 'Flutter SDK ^3.47.7 & Dart ^3.13.5 (cross-platform native compiled)'],
+    ['State Management', 'Flutter Riverpod ^3.5.0 (Declarative, compile-safe application state)'],
+    ['Mapping & GIS Navigation', 'flutter_map ^8.3.2 & latlong2 ^0.10.1 (OpenStreetMap interactive vector/raster tiles, live polylines & geofences)'],
+    ['Design System & Typography', 'Material 3 (M3) with custom enterprise field tokens & Google Fonts (Inter, Plus Jakarta Sans)'],
+    ['GPS Tracking & Attendance', 'Geolocator & Background Location services with ±8m geofence validation and off-duty privacy cut-offs'],
+    ['Localization & Date/Time', 'intl ^0.20.3 (timestamped shift audits, route playback scrubbers & localized date formatting)'],
+    ['Iconography & Visual Assets', 'Cupertino Icons ^1.0.8 & high-fidelity custom operations vector assets'],
+    ['Target Backend Architecture', 'Enterprise TypeScript / Node.js REST API with WebSockets for real-time fleet radar dispatch'],
+    ['Target Database & Geodata', 'PostgreSQL / PostGIS geospatial database with Prisma ORM type-safe schemas and audit migrations'],
+    ['Target Security & Audit', 'Stateless JWT authentication with role-based access control (field_staff, supervisor, admin) & immutable audit trail'],
     ['Test & Emulation Harness', 'Android ADB automated pipeline & Impeller Engine (OpenGLES) on Android 17 / API 37 emulator'],
   ];
 
@@ -2045,6 +2108,412 @@ export class App implements AfterViewInit, OnDestroy {
     },
   ];
 
+  protected readonly fieldoraScreens: ProductScreen[] = [
+    // --- Part 1: Staff Mobile App Role (18 Screens + Main Shell) ---
+    {
+      id: 'fld-stf-01-splash',
+      screenNumber: '01',
+      name: 'Splash Screen',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_01_splash.png',
+      assetImage: 'assets/images/fieldora/staff/staff_01_splash.png',
+      description: 'Hero branding, assets/logo.png, 3-step value prop, animated progress bar with auto-transition.',
+      tags: ['Auth', 'Splash Experience', 'Brand Identity'],
+    },
+    {
+      id: 'fld-stf-02-login',
+      screenNumber: '02',
+      name: 'Login Screen',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_02_login.png',
+      assetImage: 'assets/images/fieldora/staff/staff_02_login.png',
+      description: 'Employee ID / work email credentials, role switcher link, security advisory notice.',
+      tags: ['Auth', 'Staff Credentials', 'Security Notice'],
+    },
+    {
+      id: 'fld-stf-03-forgot-password',
+      screenNumber: '03',
+      name: 'Forgot / Reset Password',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_03_forgot_password.png',
+      assetImage: 'assets/images/fieldora/staff/staff_03_forgot_password.png',
+      description: 'Password recovery input, expiration timers, spam folder instructions.',
+      tags: ['Auth', 'Password Recovery', 'Security Timers'],
+    },
+    {
+      id: 'fld-stf-04-consent',
+      screenNumber: '04',
+      name: 'Tracking Consent & Permissions',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_04_consent.png',
+      assetImage: 'assets/images/fieldora/staff/staff_04_consent.png',
+      description: 'Privacy disclosure (Precise, Background, Notifications), "Visible on duty. Private off duty."',
+      tags: ['Tracking', 'Privacy Consent', 'Shift Compliance'],
+    },
+    {
+      id: 'fld-stf-05-home',
+      screenNumber: '05',
+      name: 'Home Dashboard',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_05_home_dashboard.png',
+      assetImage: 'assets/images/fieldora/staff/staff_05_home_dashboard.png',
+      description: 'On-duty elapsed timer, 3 KPI cards (Tasks Today, Completed, Distance), Up Next task card.',
+      tags: ['Core', 'Duty Timer', 'Staff Dashboard'],
+    },
+    {
+      id: 'fld-stf-06-check-in-out',
+      screenNumber: '06',
+      name: 'Check-in / Check-out',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_06_check_in_out.png',
+      assetImage: 'assets/images/fieldora/staff/staff_06_check_in_out.png',
+      description: 'GPS-verified location card (±8m), today\'s timeline, check-in / check-out button.',
+      tags: ['Attendance', 'GPS Verification', 'Shift Check-in'],
+    },
+    {
+      id: 'fld-stf-07-attendance-history',
+      screenNumber: '07',
+      name: 'Attendance History',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_07_attendance_history.png',
+      assetImage: 'assets/images/fieldora/staff/staff_07_attendance_history.png',
+      description: 'Month selector, monthly statistics (Present, Late, Absent), recent shifts list.',
+      tags: ['Attendance', 'Monthly Records', 'Shift History'],
+    },
+    {
+      id: 'fld-stf-08-attendance-detail',
+      screenNumber: '08',
+      name: 'Attendance Detail',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_08_attendance_detail.png',
+      assetImage: 'assets/images/fieldora/staff/staff_08_attendance_detail.png',
+      description: 'Verified timestamps, break deduction, geofence site verification, "Report an issue" button.',
+      tags: ['Attendance', 'Geofence Verification', 'Break Deduction'],
+    },
+    {
+      id: 'fld-stf-09-tracking-status',
+      screenNumber: '09',
+      name: 'Tracking Status & Stop Control',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_09_tracking_status.png',
+      assetImage: 'assets/images/fieldora/staff/staff_09_tracking_status.png',
+      description: 'OpenStreetMap route preview, sync timestamps, signal accuracy, red manual stop button.',
+      tags: ['Tracking', 'Manual Stop Control', 'Signal Accuracy'],
+    },
+    {
+      id: 'fld-stf-10-route-map',
+      screenNumber: '10',
+      name: 'My Route Map',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_10_my_route_map.png',
+      assetImage: 'assets/images/fieldora/staff/staff_10_my_route_map.png',
+      description: 'Interactive OpenStreetMap route polyline, distance/stops counters, waypoint timeline.',
+      tags: ['Tracking', 'Route Polyline', 'OpenStreetMap Waypoints'],
+    },
+    {
+      id: 'fld-stf-11-task-list',
+      screenNumber: '11',
+      name: 'Task List',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_11_task_list.png',
+      assetImage: 'assets/images/fieldora/staff/staff_11_task_list.png',
+      description: 'Dark progress card with lime progress bar, category filter pills (All, Pending, Done).',
+      tags: ['Activity', 'Work Orders', 'Progress Bar'],
+    },
+    {
+      id: 'fld-stf-12-task-detail',
+      screenNumber: '12',
+      name: 'Task Detail & Status Update',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_12_task_detail.png',
+      assetImage: 'assets/images/fieldora/staff/staff_12_task_detail.png',
+      description: 'Task instructions, interactive inspection checklist, progress notes, "Mark complete".',
+      tags: ['Activity', 'Inspection Checklist', 'Status Update'],
+    },
+    {
+      id: 'fld-stf-13-create-report',
+      screenNumber: '13',
+      name: 'Create Daily Activity Report',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_13_create_report.png',
+      assetImage: 'assets/images/fieldora/staff/staff_13_create_report.png',
+      description: 'Task link, date dropdown, summary textarea, blocker notes, offline draft capability.',
+      tags: ['Activity', 'Daily Activity Report', 'Offline Drafts'],
+    },
+    {
+      id: 'fld-stf-14-photo-upload',
+      screenNumber: '14',
+      name: 'Photo Capture & Upload',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_14_photo_upload.png',
+      assetImage: 'assets/images/fieldora/staff/staff_14_photo_upload.png',
+      description: 'Camera trigger, gallery selector, upload queue (up to 5 photos), geotag warning.',
+      tags: ['Activity', 'Geotagged Evidence', 'Photo Upload'],
+    },
+    {
+      id: 'fld-stf-15-report-history',
+      screenNumber: '15',
+      name: 'Report History',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_15_report_history.png',
+      assetImage: 'assets/images/fieldora/staff/staff_15_report_history.png',
+      description: 'Submissions filterable by All, Drafts, Submitted; displays supervisor review remarks.',
+      tags: ['Activity', 'Supervisor Remarks', 'Report History'],
+    },
+    {
+      id: 'fld-stf-16-notifications',
+      screenNumber: '16',
+      name: 'Notifications',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_16_notifications.png',
+      assetImage: 'assets/images/fieldora/staff/staff_16_notifications.png',
+      description: 'Grouped by Today / Yesterday; task updates, approval alerts, shift reminders.',
+      tags: ['Core', 'Alerts Feed', 'Shift Reminders'],
+    },
+    {
+      id: 'fld-stf-17-profile',
+      screenNumber: '17',
+      name: 'Profile',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_17_profile.png',
+      assetImage: 'assets/images/fieldora/staff/staff_17_profile.png',
+      description: 'Staff ID dossier, department, supervisor, base location, shift timing, contact info.',
+      tags: ['Auth', 'Staff Dossier', 'Shift Timing'],
+    },
+    {
+      id: 'fld-stf-18-settings',
+      screenNumber: '18',
+      name: 'Settings',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_18_settings.png',
+      assetImage: 'assets/images/fieldora/staff/staff_18_settings.png',
+      description: 'Push notifications toggles, shift reminders, location permissions, language, sign out.',
+      tags: ['Core', 'Privacy Controls', 'App Settings'],
+    },
+    {
+      id: 'fld-stf-19-main-shell',
+      screenNumber: '—',
+      name: 'Staff Main Shell',
+      category: 'Staff',
+      previewImage: 'assets/images/fieldora/staff/staff_19_main_shell.png',
+      assetImage: 'assets/images/fieldora/staff/staff_19_main_shell.png',
+      description: '5-tab bottom navigation bar (Home, Attendance, Route, Tasks, More Menu).',
+      tags: ['Navigation', 'Bottom Navigation Shell', 'Staff UX'],
+    },
+
+    // --- Part 2: Admin & Supervisor Mobile App Role (20 Screens + Main Shell) ---
+    {
+      id: 'fld-adm-01-login',
+      screenNumber: '01',
+      name: 'Admin Login',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_01_login.png',
+      assetImage: 'assets/images/fieldora/admin/admin_01_login.png',
+      description: 'Dedicated supervisor & administrator authentication gateway.',
+      tags: ['Auth', 'Supervisor Gateway', 'Security Authentication'],
+    },
+    {
+      id: 'fld-adm-02-dashboard',
+      screenNumber: '02',
+      name: 'Dashboard (KPIs)',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_02_dashboard.png',
+      assetImage: 'assets/images/fieldora/admin/admin_02_dashboard.png',
+      description: 'Real-time fleet counter (Active in Field, Total, Off Duty, Pending Reports), quick actions.',
+      tags: ['Dashboard', 'Fleet Counter', 'Operational KPIs'],
+    },
+    {
+      id: 'fld-adm-03-employee-list',
+      screenNumber: '03',
+      name: 'Employee List',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_03_employee_list.png',
+      assetImage: 'assets/images/fieldora/admin/admin_03_employee_list.png',
+      description: 'Searchable directory with live status pills (On duty, Off duty, On leave) and department tags.',
+      tags: ['Employees', 'Workforce Directory', 'Duty Status'],
+    },
+    {
+      id: 'fld-adm-04-add-edit-employee',
+      screenNumber: '04',
+      name: 'Add / Edit Employee',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_04_add_edit_employee.png',
+      assetImage: 'assets/images/fieldora/admin/admin_04_add_edit_employee.png',
+      description: 'Staff provisioning form for names, IDs, designations, departments, base sites, and shifts.',
+      tags: ['Employees', 'Workforce Provisioning', 'Staff Onboarding'],
+    },
+    {
+      id: 'fld-adm-05-employee-detail',
+      screenNumber: '05',
+      name: 'Employee Detail',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_05_employee_detail.png',
+      assetImage: 'assets/images/fieldora/admin/admin_05_employee_detail.png',
+      description: 'Complete employee dossier, last active GPS coordinates, supervisor and shift details.',
+      tags: ['Employees', 'Employee Dossier', 'GPS Coordinates'],
+    },
+    {
+      id: 'fld-adm-06-departments',
+      screenNumber: '06',
+      name: 'Departments',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_06_departments.png',
+      assetImage: 'assets/images/fieldora/admin/admin_06_departments.png',
+      description: 'Divisional breakdown, staff counts, department leads, and "New Dept" creation modal.',
+      tags: ['Settings', 'Divisional Structure', 'Department Leads'],
+    },
+    {
+      id: 'fld-adm-07-shifts',
+      screenNumber: '07',
+      name: 'Shifts & Working Hours',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_07_shifts.png',
+      assetImage: 'assets/images/fieldora/admin/admin_07_shifts.png',
+      description: 'Shift policies, grace periods, assigned workforce counts, privacy cut-off explanation.',
+      tags: ['Settings', 'Shift Policies', 'Privacy Cut-Off'],
+    },
+    {
+      id: 'fld-adm-08-work-locations',
+      screenNumber: '08',
+      name: 'Work Locations',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_08_work_locations.png',
+      assetImage: 'assets/images/fieldora/admin/admin_08_work_locations.png',
+      description: 'Geofenced job sites, latitude/longitude, authorized radius in meters, assigned headcounts.',
+      tags: ['Settings', 'Geofenced Job Sites', 'Radius Configuration'],
+    },
+    {
+      id: 'fld-adm-09-live-map',
+      screenNumber: '09',
+      name: 'Live Map Dashboard',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_09_live_map.png',
+      assetImage: 'assets/images/fieldora/admin/admin_09_live_map.png',
+      description: 'Full-screen OpenStreetMap with live markers for on-duty employees & interactive card slider.',
+      tags: ['Map', 'Live OpenStreetMap Radar', 'Fleet Tracking'],
+    },
+    {
+      id: 'fld-adm-10-route-playback',
+      screenNumber: '10',
+      name: 'Route Playback',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_10_route_playback.png',
+      assetImage: 'assets/images/fieldora/admin/admin_10_route_playback.png',
+      description: 'Animated GPS route replay, timeline scrubber, speed multipliers (1x, 2x, 5x).',
+      tags: ['Map', 'Animated GPS Replay', 'Speed Multipliers'],
+    },
+    {
+      id: 'fld-adm-11-task-assignment',
+      screenNumber: '11',
+      name: 'Task Assignment',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_11_task_assignment.png',
+      assetImage: 'assets/images/fieldora/admin/admin_11_task_assignment.png',
+      description: 'Work order dispatch form with employee assignment, target site, due time, and priority.',
+      tags: ['Tasks', 'Work Order Dispatch', 'Task Priority'],
+    },
+    {
+      id: 'fld-adm-12-task-tracking',
+      screenNumber: '12',
+      name: 'Task List & Tracking',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_12_task_tracking.png',
+      assetImage: 'assets/images/fieldora/admin/admin_12_task_tracking.png',
+      description: 'Real-time status board of field work orders filtered by In Progress, Pending, Completed.',
+      tags: ['Tasks', 'Status Board', 'Work Order Tracking'],
+    },
+    {
+      id: 'fld-adm-13-reports-list',
+      screenNumber: '13',
+      name: 'Daily Activity Reports List',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_13_reports_list.png',
+      assetImage: 'assets/images/fieldora/admin/admin_13_reports_list.png',
+      description: 'Supervisor review queue of staff submissions across all operational divisions.',
+      tags: ['Reports', 'Review Queue', 'Daily Activity Reports'],
+    },
+    {
+      id: 'fld-adm-14-report-approval',
+      screenNumber: '14',
+      name: 'Activity Detail & Approval',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_14_report_approval.png',
+      assetImage: 'assets/images/fieldora/admin/admin_14_report_approval.png',
+      description: 'In-depth review with photo inspection, supervisor remarks input, Approve and Request Changes.',
+      tags: ['Reports', 'Report Approval', 'Photo Inspection'],
+    },
+    {
+      id: 'fld-adm-15-attendance-report',
+      screenNumber: '15',
+      name: 'Attendance Report',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_15_attendance_report.png',
+      assetImage: 'assets/images/fieldora/admin/admin_15_attendance_report.png',
+      description: 'Compliance percentage, late arrivals, absenteeism metrics, department breakdown, CSV export.',
+      tags: ['Analytics', 'Attendance Compliance', 'CSV Export'],
+    },
+    {
+      id: 'fld-adm-16-performance-report',
+      screenNumber: '16',
+      name: 'Employee Performance Report',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_16_performance_report.png',
+      assetImage: 'assets/images/fieldora/admin/admin_16_performance_report.png',
+      description: 'Fleet velocity index, productivity rankings, on-time leaderboard.',
+      tags: ['Analytics', 'Velocity Index', 'Leaderboard'],
+    },
+    {
+      id: 'fld-adm-17-activity-analytics',
+      screenNumber: '17',
+      name: 'Activity Analytics & Export',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_17_activity_analytics.png',
+      assetImage: 'assets/images/fieldora/admin/admin_17_activity_analytics.png',
+      description: 'Weekly submission bar chart, geotagged photo metrics, comprehensive PDF/Excel export.',
+      tags: ['Analytics', 'Activity Trends', 'PDF/Excel Export'],
+    },
+    {
+      id: 'fld-adm-18-roles-users',
+      screenNumber: '18',
+      name: 'Roles & Users',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_18_roles_users.png',
+      assetImage: 'assets/images/fieldora/admin/admin_18_roles_users.png',
+      description: 'Role-based permission tiers (Field Staff, Supervisor, Org Administrator) & access control.',
+      tags: ['Settings', 'Role-Based Permissions', 'Access Control'],
+    },
+    {
+      id: 'fld-adm-19-audit-log',
+      screenNumber: '19',
+      name: 'Consent & Audit Log',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_19_audit_log.png',
+      assetImage: 'assets/images/fieldora/admin/admin_19_audit_log.png',
+      description: 'Immutable audit trail of tracking start/stop events, geofence breaches, and consents.',
+      tags: ['Settings', 'Immutable Audit Trail', 'Compliance Log'],
+    },
+    {
+      id: 'fld-adm-20-settings',
+      screenNumber: '20',
+      name: 'Profile & System Settings',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_20_settings.png',
+      assetImage: 'assets/images/fieldora/admin/admin_20_settings.png',
+      description: 'Supervisor profile, GPS ping interval (2–5 min), 90-day retention policy, GIS tile config.',
+      tags: ['Settings', 'System Settings', 'Retention Policy'],
+    },
+    {
+      id: 'fld-adm-22-main-shell',
+      screenNumber: '—',
+      name: 'Admin Main Shell',
+      category: 'Admin',
+      previewImage: 'assets/images/fieldora/admin/admin_22_main_shell.png',
+      assetImage: 'assets/images/fieldora/admin/admin_22_main_shell.png',
+      description: '5-tab bottom navigation bar (Dashboard, Live Map, Staff, Tasks, Admin Hub).',
+      tags: ['Navigation', 'Bottom Navigation Shell', 'Admin Hub'],
+    },
+  ];
+
   @HostListener('window:popstate')
   protected syncRoute(): void {
     this.showMoneyManager = ['/products/money-manager', '/products/samrique-money-manager'].includes(this.routePath);
@@ -2053,13 +2522,14 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZipi = ['/products/zipi-bike-taxi', '/products/zipi-bike-taxi-app', '/products/samrique-zipi-multi-modal-transit'].includes(this.routePath);
     this.showZest = ['/products/zest-grocery', '/products/zest', '/products/samrique-zest-grocery'].includes(this.routePath);
     this.showJanovexa = ['/products/janovexa', '/products/janovexa-civic-grievance', '/products/samrique-janovexa'].includes(this.routePath);
+    this.showFieldora = ['/products/fieldora', '/products/fieldora-staff-tracking', '/products/samrique-fieldora'].includes(this.routePath);
     this.showPricingPage = ['/start-a-project', '/pricing', '/pricing-plans'].includes(this.routePath);
     this.showPrivacyModal = ['/privacy', '/privacy-policy'].includes(this.routePath);
     this.showTermsModal = ['/terms', '/terms-of-service', '/terms-and-conditions'].includes(this.routePath);
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
 
-    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi && !this.showZest && !this.showJanovexa && !this.showPricingPage) {
+    if (!this.showMoneyManager && !this.showMarketplace && !this.showMama && !this.showZipi && !this.showZest && !this.showJanovexa && !this.showFieldora && !this.showPricingPage) {
       this.refreshHomeVisibility();
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -2077,6 +2547,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZipi = false;
     this.showZest = false;
     this.showJanovexa = false;
+    this.showFieldora = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2094,6 +2565,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZipi = false;
     this.showZest = false;
     this.showJanovexa = false;
+    this.showFieldora = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2111,6 +2583,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZipi = false;
     this.showZest = false;
     this.showJanovexa = false;
+    this.showFieldora = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2128,6 +2601,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZipi = true;
     this.showZest = false;
     this.showJanovexa = false;
+    this.showFieldora = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2145,6 +2619,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZipi = false;
     this.showZest = true;
     this.showJanovexa = false;
+    this.showFieldora = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2162,9 +2637,29 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZipi = false;
     this.showZest = false;
     this.showJanovexa = true;
+    this.showFieldora = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    this.scheduleRevealObservation();
+  }
+
+  protected openFieldora(): void {
+    if (this.routePath !== '/products/fieldora') {
+      window.history.pushState({}, '', this.appPath('/products/fieldora'));
+    }
+    this.showMoneyManager = false;
+    this.showMarketplace = false;
+    this.showMama = false;
+    this.showZipi = false;
+    this.showZest = false;
+    this.showJanovexa = false;
+    this.showFieldora = true;
+    this.showPricingPage = false;
+    this.activeModalScreen = null;
+    document.body.classList.remove('modal-open');
+    this.fieldoraCategory = 'All';
     window.scrollTo({ top: 0, behavior: 'instant' });
     this.scheduleRevealObservation();
   }
@@ -2179,6 +2674,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZipi = false;
     this.showZest = false;
     this.showJanovexa = false;
+    this.showFieldora = false;
     this.showPricingPage = true;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2196,6 +2692,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZipi = false;
     this.showZest = false;
     this.showJanovexa = false;
+    this.showFieldora = false;
     this.showPricingPage = true;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2211,6 +2708,7 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZipi = false;
     this.showZest = false;
     this.showJanovexa = false;
+    this.showFieldora = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
@@ -2230,13 +2728,18 @@ export class App implements AfterViewInit, OnDestroy {
     this.showZipi = false;
     this.showZest = false;
     this.showJanovexa = false;
+    this.showFieldora = false;
     this.showPricingPage = false;
     this.activeModalScreen = null;
     document.body.classList.remove('modal-open');
     this.refreshHomeVisibility();
   }
 
-  protected inquireAboutJanovexa(): void {;
+  protected inquireAboutFieldora(): void {
+    this.inquireAboutProduct('FIELDORA — Field Workforce & Staff Tracking Platform');
+  }
+
+  protected inquireAboutJanovexa(): void {
     this.inquireAboutProduct('JANOVEXA – Your City. Your Voice');
   }
 

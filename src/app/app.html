@@ -23,8 +23,10 @@
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
-          <a href="#product-proof-point" (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
-            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof Point</a>
+          <a href="#product-proof-point"
+            (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof
+            Point</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -63,7 +65,8 @@
         projects</a>
       <div class="flex flex-wrap items-center gap-2 mb-2">
         <span class="product-eyebrow"><i class="fa-solid fa-wallet"></i> Personal finance · Flutter app</span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           Product Showcase &bull; Concept MVP
         </span>
@@ -130,7 +133,8 @@
     <div class="product-section-heading">
       <div class="flex flex-wrap items-center gap-2 mb-2">
         <span class="product-kicker">Engineering &amp; Product Proof Point</span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
           <i class="fa-solid fa-flask-vial text-emerald-600"></i> {{ moneyManagerProofPoint.classification }}
         </span>
       </div>
@@ -143,7 +147,8 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
             <i class="fa-solid fa-bullseye"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Problem Solved</h3>
@@ -151,14 +156,16 @@
             {{ moneyManagerProofPoint.problemSolved }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Local-first offline privacy
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
             <i class="fa-solid fa-route"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Key User Flows Built</h3>
@@ -166,14 +173,16 @@
             {{ moneyManagerProofPoint.keyUserFlows }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Transaction &rarr; Audit &rarr; CSV Export
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
             <i class="fa-solid fa-code-branch"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Architecture &amp; Timeline</h3>
@@ -181,7 +190,8 @@
             {{ moneyManagerProofPoint.architectureTimeline }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> 2-Week Sprint &bull; SQLite Ledger
         </div>
       </div>
@@ -318,9 +328,13 @@
             Mama Tracker</a>
           <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
             Taxi App</a>
-          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery App</a>
-          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa Civic Platform</a>
-</div>
+          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery
+            App</a>
+          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa
+            Civic Platform</a>
+          <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
+            Staff Tracking</a>
+        </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
           <span>Flutter Multi-Platform</span>
@@ -390,8 +404,10 @@
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
-          <a href="#product-proof-point" (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
-            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof Point</a>
+          <a href="#product-proof-point"
+            (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof
+            Point</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -429,7 +445,8 @@
         projects</a>
       <div class="flex flex-wrap items-center gap-2 mb-2">
         <span class="product-eyebrow"><i class="fa-solid fa-bag-shopping"></i> Digital marketplace · Flutter app</span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 text-xs font-bold">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 text-xs font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
           Product Showcase &bull; Concept MVP
         </span>
@@ -496,7 +513,8 @@
     <div class="product-section-heading">
       <div class="flex flex-wrap items-center gap-2 mb-2">
         <span class="product-kicker">Engineering &amp; Product Proof Point</span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 text-xs font-bold">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 text-xs font-bold">
           <i class="fa-solid fa-flask-vial text-blue-600"></i> {{ marketplaceProofPoint.classification }}
         </span>
       </div>
@@ -509,7 +527,8 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
             <i class="fa-solid fa-bullseye"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Problem Solved</h3>
@@ -517,14 +536,16 @@
             {{ marketplaceProofPoint.problemSolved }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Seamless Multi-Vendor Checkout
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
             <i class="fa-solid fa-route"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Key User Flows Built</h3>
@@ -532,14 +553,16 @@
             {{ marketplaceProofPoint.keyUserFlows }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Buyer &rarr; Razorpay &rarr; Seller Wallet
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
             <i class="fa-solid fa-code-branch"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Architecture &amp; Timeline</h3>
@@ -547,7 +570,8 @@
             {{ marketplaceProofPoint.architectureTimeline }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> 4-Week Sprint &bull; Provider Architecture
         </div>
       </div>
@@ -689,8 +713,12 @@
             Mama Tracker</a>
           <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
             Taxi App</a>
-          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery App</a>
-          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa Civic Platform</a>
+          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery
+            App</a>
+          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa
+            Civic Platform</a>
+          <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
+            Staff Tracking</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -761,8 +789,10 @@
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
-          <a href="#product-proof-point" (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
-            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof Point</a>
+          <a href="#product-proof-point"
+            (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof
+            Point</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -800,7 +830,8 @@
         projects</a>
       <div class="flex flex-wrap items-center gap-2 mb-2">
         <span class="product-eyebrow"><i class="fa-solid fa-heart"></i> Pregnancy wellness · Flutter app</span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-50 text-pink-800 border border-pink-200 text-xs font-bold">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-50 text-pink-800 border border-pink-200 text-xs font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse"></span>
           Product Showcase &bull; Concept MVP
         </span>
@@ -867,7 +898,8 @@
     <div class="product-section-heading">
       <div class="flex flex-wrap items-center gap-2 mb-2">
         <span class="product-kicker">Engineering &amp; Product Proof Point</span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-50 text-pink-800 border border-pink-200 text-xs font-bold">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-50 text-pink-800 border border-pink-200 text-xs font-bold">
           <i class="fa-solid fa-flask-vial text-pink-600"></i> {{ mamaProofPoint.classification }}
         </span>
       </div>
@@ -880,7 +912,8 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
             <i class="fa-solid fa-bullseye"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Problem Solved</h3>
@@ -888,14 +921,16 @@
             {{ mamaProofPoint.problemSolved }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Calm Maternal Care Experience
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
             <i class="fa-solid fa-route"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Key User Flows Built</h3>
@@ -903,14 +938,16 @@
             {{ mamaProofPoint.keyUserFlows }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Milestones &rarr; Timers &rarr; Clinic Visits
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
             <i class="fa-solid fa-code-branch"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Architecture &amp; Timeline</h3>
@@ -918,7 +955,8 @@
             {{ mamaProofPoint.architectureTimeline }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> 3-Week Sprint &bull; Secure Storage
         </div>
       </div>
@@ -1045,7 +1083,12 @@
             Mama Tracker</a>
           <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
             Taxi App</a>
-          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery App</a>
+          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery
+            App</a>
+          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa
+            Civic Platform</a>
+          <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
+            Staff Tracking</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -1116,8 +1159,10 @@
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
-          <a href="#product-proof-point" (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
-            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof Point</a>
+          <a href="#product-proof-point"
+            (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof
+            Point</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -1158,7 +1203,8 @@
         <span class="product-eyebrow" style="border-color: #f9731644; background: #f9731612; color: #f97316">
           <i class="fa-solid fa-motorcycle"></i> On-Demand Mobility · Flutter app
         </span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
           Product Showcase &bull; Concept MVP
         </span>
@@ -1230,7 +1276,8 @@
     <div class="product-section-heading">
       <div class="flex flex-wrap items-center gap-2 mb-2">
         <span class="product-kicker">Engineering &amp; Product Proof Point</span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-bold">
           <i class="fa-solid fa-flask-vial text-amber-600"></i> {{ zipiProofPoint.classification }}
         </span>
       </div>
@@ -1243,7 +1290,8 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
             <i class="fa-solid fa-bullseye"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Problem Solved</h3>
@@ -1251,14 +1299,16 @@
             {{ zipiProofPoint.problemSolved }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Rapid Hyper-Local Dispatch
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
             <i class="fa-solid fa-route"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Key User Flows Built</h3>
@@ -1266,14 +1316,16 @@
             {{ zipiProofPoint.keyUserFlows }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Commuter &rarr; Maps &rarr; Captain Radar
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
             <i class="fa-solid fa-code-branch"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Architecture &amp; Timeline</h3>
@@ -1281,7 +1333,8 @@
             {{ zipiProofPoint.architectureTimeline }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> 4-Week Sprint &bull; Dual Persona GetX
         </div>
       </div>
@@ -1421,7 +1474,12 @@
             Mama Tracker</a>
           <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
             Taxi App</a>
-          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery App</a>
+          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery
+            App</a>
+          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa
+            Civic Platform</a>
+          <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
+            Staff Tracking</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -1492,8 +1550,10 @@
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
-          <a href="#product-proof-point" (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
-            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof Point</a>
+          <a href="#product-proof-point"
+            (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof
+            Point</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -1534,7 +1594,8 @@
         <span class="product-eyebrow" style="border-color: #10b98144; background: #10b98112; color: #10b981">
           <i class="fa-solid fa-basket-shopping"></i> Quick-Commerce &amp; Wholesale · Flutter app
         </span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           Product Showcase &bull; Concept MVP
         </span>
@@ -1546,7 +1607,8 @@
         volume tiers and Net 30 trade wallets, and last-mile delivery partners.
       </p>
       <div class="product-pills">
-        <span>Flutter 3.47</span><span>GetX State</span><span>OpenStreetMap</span><span>B2B Net 30</span><span>Delivery Pipeline</span><span>Dart</span>
+        <span>Flutter 3.47</span><span>GetX State</span><span>OpenStreetMap</span><span>B2B Net 30</span><span>Delivery
+          Pipeline</span><span>Dart</span>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center">
         <a class="product-primary" [attr.href]="appPath('/#contact')"
@@ -1562,8 +1624,7 @@
     </div>
     <figure class="product-hero-image" style="cursor: pointer" (click)="scrollToProductSection('product-screens')">
       <img src="assets/images/zest_grocery/zest_grocery_showcase.jpg"
-        alt="Preview Screen: Zest Grocery B2C Customer Home" loading="eager" fetchpriority="high"
-        decoding="async" />
+        alt="Preview Screen: Zest Grocery B2C Customer Home" loading="eager" fetchpriority="high" decoding="async" />
       <figcaption>
         Preview Screen: Retail Grocery Storefront, Departments &amp; Fresh Produce
       </figcaption>
@@ -1606,7 +1667,8 @@
     <div class="product-section-heading">
       <div class="flex flex-wrap items-center gap-2 mb-2">
         <span class="product-kicker">Engineering &amp; Product Proof Point</span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
           <i class="fa-solid fa-flask-vial text-emerald-600"></i> {{ zestProofPoint.classification }}
         </span>
       </div>
@@ -1619,7 +1681,8 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100">
             <i class="fa-solid fa-bullseye"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Problem Solved</h3>
@@ -1627,14 +1690,16 @@
             {{ zestProofPoint.problemSolved }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-600 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Unified Multi-Persona State
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
             <i class="fa-solid fa-route"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Key User Flows Built</h3>
@@ -1642,14 +1707,16 @@
             {{ zestProofPoint.keyUserFlows }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Retail &rarr; B2B Tiers &rarr; Driver Fulfillment
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
             <i class="fa-solid fa-code-branch"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Architecture &amp; Timeline</h3>
@@ -1657,7 +1724,8 @@
             {{ zestProofPoint.architectureTimeline }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> GetX &bull; flutter_map &bull; Shared Models
         </div>
       </div>
@@ -1688,7 +1756,8 @@
       <span class="eyebrow">Quick-commerce &amp; wholesale showcase</span>
       <h2>Mobile screens, <span>end to end</span></h2>
       <p class="lead">
-        Explore 25 production-ready screens spanning B2C retail discovery, B2B wholesale ordering, and 4-stage delivery logistics.
+        Explore 25 production-ready screens spanning B2C retail discovery, B2B wholesale ordering, and 4-stage delivery
+        logistics.
       </p>
       <div class="stats">
         <div><b>25</b><small>Screens</small></div>
@@ -1703,7 +1772,8 @@
         <button type="button" class="pill" [class.on]="zestCategory === 'Retail'" (click)="zestCategory = 'Retail'">
           B2C Retail<i>({{ getCategoryCount(zestScreens, 'Retail') }})</i>
         </button>
-        <button type="button" class="pill" [class.on]="zestCategory === 'Wholesale'" (click)="zestCategory = 'Wholesale'">
+        <button type="button" class="pill" [class.on]="zestCategory === 'Wholesale'"
+          (click)="zestCategory = 'Wholesale'">
           B2B Wholesale<i>({{ getCategoryCount(zestScreens, 'Wholesale') }})</i>
         </button>
         <button type="button" class="pill" [class.on]="zestCategory === 'Delivery'" (click)="zestCategory = 'Delivery'">
@@ -1785,7 +1855,12 @@
             Mama Tracker</a>
           <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
             Taxi App</a>
-          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery App</a>
+          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery
+            App</a>
+          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa
+            Civic Platform</a>
+          <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
+            Staff Tracking</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -1857,8 +1932,10 @@
           aria-label="Product page sections">
           <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
-          <a href="#product-proof-point" (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
-            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof Point</a>
+          <a href="#product-proof-point"
+            (click)="$event.preventDefault(); scrollToProductSection('product-proof-point')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Proof
+            Point</a>
           <a href="#product-features" (click)="$event.preventDefault(); scrollToProductSection('product-features')"
             class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Features</a>
           <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
@@ -1897,23 +1974,68 @@
         projects</a>
       <div class="flex flex-wrap items-center gap-2 mb-2">
         <span class="product-eyebrow" style="border-color: #4A152544; background: #4A152512; color: #4A1525">
-          <i class="fa-solid fa-landmark"></i> Digital Public Service · Flutter app
+          <i class="fa-solid fa-layer-group"></i> Civic Tech &amp; Citizen Services · Flutter App
         </span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-300 text-xs font-extrabold tracking-wide uppercase">
+          <i class="fa-solid fa-flask"></i>
+          INDEPENDENT PRODUCT DEMONSTRATION
+        </span>
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          Product Showcase &bull; Concept MVP
+          Capability Showcase &bull; 41 Screens
         </span>
       </div>
-      <h1>JANOVEXA<br /><span style="color: #4A1525">Your City. Your Voice.</span></h1>
-      <p style="font-weight: 700; color: #4A1525; margin-bottom: 8px">A SAMRIQUE Digital Public Service</p>
+      <h1>JANOVEXA<br /><span style="color: #4A1525">Citizen Services Platform Demonstration</span></h1>
+      <p style="font-weight: 700; color: #4A1525; margin-bottom: 8px">An Independent Civic Tech Exploration by SAMRIQUE</p>
       <p>
         JANOVEXA empowers citizens to report civic grievances with location and photographic evidence,
         track resolution progress with transparent department accountability, and provides city
         departments with a modern administration dashboard to triage, assign officers, and update
         complaint statuses.
       </p>
+
+      <!-- Independent Project Classification & Disclaimer -->
+      <div
+        class="my-4 p-4 rounded-2xl border border-amber-300/80 bg-amber-50/90 text-slate-900 text-xs leading-relaxed space-y-2 shadow-xs">
+        <div class="flex items-center justify-between gap-2 border-b border-amber-200/80 pb-2">
+          <div class="flex items-center gap-2 font-extrabold text-xs text-amber-900 uppercase tracking-wider">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>JANOVEXA – Citizen Services Platform</span>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold tracking-wide uppercase">
+            INDEPENDENT PRODUCT DEMONSTRATION
+          </span>
+        </div>
+        <p class="font-bold text-amber-900">
+          Project Type: Independent Product Demonstration / Portfolio Project
+        </p>
+        <p>
+          JANOVEXA is an independently conceptualized and developed citizen services platform demonstration by SAMRIQUE.
+        </p>
+        <p>
+          The platform demonstrates our capabilities in citizen complaint management, service requests, complaint
+          tracking, notifications, administrative workflows and mobile application development.
+        </p>
+        <p class="italic text-slate-600">
+          This project is presented solely as a technology demonstration to showcase our software development
+          capabilities.
+        </p>
+        <div class="pt-2 border-t border-amber-200/80 font-bold text-amber-950 text-[11px] space-y-1">
+          <div>
+            <strong>Disclaimer:</strong> These products are independently developed by SAMRIQUE and are not officially commissioned, approved or endorsed by any government department. No government department affiliation or official partnership is implied.
+          </div>
+          <div class="text-[11px] text-slate-600 font-normal pt-1 flex items-start gap-1.5">
+            <i class="fa-solid fa-database text-slate-400 mt-0.5"></i>
+            <span><strong>Realistic Demo Data:</strong> Demonstrations use synthetic, anonymized demo data. No real citizen records, government employee details or confidential information are used or stored.</span>
+          </div>
+        </div>
+      </div>
       <div class="product-pills">
-        <span>Flutter ^3.47</span><span>Riverpod ^3.5</span><span>OpenStreetMap</span><span>latlong2</span><span>Material 3</span><span>3 Portals</span><span>41 Screens</span>
+        <span>Flutter ^3.47</span><span>Riverpod
+          ^3.5</span><span>OpenStreetMap</span><span>latlong2</span><span>Material 3</span><span>3
+          Portals</span><span>41 Screens</span>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center">
         <a class="product-primary" [attr.href]="appPath('/#contact')"
@@ -1928,9 +2050,8 @@
       </div>
     </div>
     <figure class="product-hero-image" style="cursor: pointer" (click)="scrollToProductSection('product-screens')">
-      <img src="assets/images/janovexa/janovexa_showcase.png"
-        alt="Preview Screen: JANOVEXA Citizen Home Dashboard" loading="eager" fetchpriority="high"
-        decoding="async" />
+      <img src="assets/images/janovexa/janovexa_showcase.png" alt="Preview Screen: JANOVEXA Citizen Home Dashboard"
+        loading="eager" fetchpriority="high" decoding="async" />
       <figcaption>
         Preview Screen: Citizen Home Dashboard &bull; Indiranagar Ward 12 Civic Grievances
       </figcaption>
@@ -1963,9 +2084,11 @@
       evidence-based grievance registration with OpenStreetMap pin drops and photo uploads, real-time status audit
       timelines, SLA transparency analytics, citizen rights charter, and reopen recourse loops.<br />
       <b>02 Department Admin Portal:</b> Multi-department administration hub covering Electrical, Solid Waste, Water
-      Supply, and Roads with real-time 94.2% SLA compliance tracking, bottom-sheet field officer allocation, and official
+      Supply, and Roads with real-time 94.2% SLA compliance tracking, bottom-sheet field officer allocation, and
+      official
       status update broadcasts.<br />
-      <b>03 Field Officer Portal:</b> Mobile engineer workspace featuring assigned work order radar, turn-by-turn routing,
+      <b>03 Field Officer Portal:</b> Mobile engineer workspace featuring assigned work order radar, turn-by-turn
+      routing,
       Mark On-Site arrival verification, photo proof capture, performance analytics, and official ID badges.
     </p>
   </section>
@@ -1975,7 +2098,9 @@
     <div class="product-section-heading">
       <div class="flex flex-wrap items-center gap-2 mb-2">
         <span class="product-kicker">Engineering &amp; Product Proof Point</span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-900 border border-rose-200 text-xs font-bold" style="color: #4A1525; background: #4A152512; border-color: #4A152530">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-900 border border-rose-200 text-xs font-bold"
+          style="color: #4A1525; background: #4A152512; border-color: #4A152530">
           <i class="fa-solid fa-flask-vial" style="color: #4A1525"></i> {{ janovexaProofPoint.classification }}
         </span>
       </div>
@@ -1983,12 +2108,18 @@
       <p class="max-w-3xl">
         {{ janovexaProofPoint.notice }}
       </p>
+      <div
+        class="mt-4 p-3.5 rounded-xl border border-rose-200 bg-rose-50 text-rose-950 text-xs font-semibold max-w-3xl">
+        <strong class="text-rose-900">Disclaimer:</strong> {{ janovexaProofPoint.disclaimer }}
+      </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-800 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100" style="color: #4A1525; background: #4A152512">
+          <div
+            class="w-10 h-10 rounded-xl bg-rose-50 text-rose-800 flex items-center justify-center text-lg font-bold mb-4 border border-rose-100"
+            style="color: #4A1525; background: #4A152512">
             <i class="fa-solid fa-bullseye"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Problem Solved</h3>
@@ -1996,14 +2127,17 @@
             {{ janovexaProofPoint.problemSolved }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-800 flex items-center gap-1.5" style="color: #4A1525">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-rose-800 flex items-center gap-1.5"
+          style="color: #4A1525">
           <i class="fa-solid fa-check-circle"></i> Transparent Municipal Governance
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg font-bold mb-4 border border-teal-100">
             <i class="fa-solid fa-route"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Key User Flows Built</h3>
@@ -2011,14 +2145,16 @@
             {{ janovexaProofPoint.keyUserFlows }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-teal-700 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Citizen &rarr; Admin Triage &rarr; Field Work Order
         </div>
       </div>
 
       <div class="product-proof-card flex flex-col justify-between">
         <div>
-          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
+          <div
+            class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg font-bold mb-4 border border-indigo-100">
             <i class="fa-solid fa-code-branch"></i>
           </div>
           <h3 class="text-base font-extrabold text-slate-900 mb-2">Architecture &amp; Timeline</h3>
@@ -2026,7 +2162,8 @@
             {{ janovexaProofPoint.architectureTimeline }}
           </p>
         </div>
-        <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
+        <div
+          class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-indigo-600 flex items-center gap-1.5">
           <i class="fa-solid fa-check-circle"></i> Riverpod &bull; flutter_map &bull; Material 3
         </div>
       </div>
@@ -2057,7 +2194,8 @@
       <span class="eyebrow" style="color: #4A1525">Civic tech &amp; public service showcase</span>
       <h2>Mobile screens, <span>end to end</span></h2>
       <p class="lead">
-        Explore 41 production-ready screens across 3 distinct municipal roles: Citizen Portal (01_Citizen_Portal), Department Admin Portal (02_Department_Admin_Portal), and Field Officer Portal (03_Field_Officer_Portal).
+        Explore 41 production-ready screens across 3 distinct municipal roles: Citizen Portal (01_Citizen_Portal),
+        Department Admin Portal (02_Department_Admin_Portal), and Field Officer Portal (03_Field_Officer_Portal).
       </p>
       <div class="stats">
         <div><b>41</b><small>Screens</small></div>
@@ -2069,13 +2207,16 @@
         <button type="button" class="pill" [class.on]="janovexaCategory === 'All'" (click)="janovexaCategory = 'All'">
           All<i>({{ janovexaScreens.length }})</i>
         </button>
-        <button type="button" class="pill" [class.on]="janovexaCategory === '01_Citizen_Portal'" (click)="janovexaCategory = '01_Citizen_Portal'">
+        <button type="button" class="pill" [class.on]="janovexaCategory === '01_Citizen_Portal'"
+          (click)="janovexaCategory = '01_Citizen_Portal'">
           01 Citizen Portal<i>({{ getCategoryCount(janovexaScreens, '01_Citizen_Portal') }})</i>
         </button>
-        <button type="button" class="pill" [class.on]="janovexaCategory === '02_Department_Admin_Portal'" (click)="janovexaCategory = '02_Department_Admin_Portal'">
+        <button type="button" class="pill" [class.on]="janovexaCategory === '02_Department_Admin_Portal'"
+          (click)="janovexaCategory = '02_Department_Admin_Portal'">
           02 Department Admin<i>({{ getCategoryCount(janovexaScreens, '02_Department_Admin_Portal') }})</i>
         </button>
-        <button type="button" class="pill" [class.on]="janovexaCategory === '03_Field_Officer_Portal'" (click)="janovexaCategory = '03_Field_Officer_Portal'">
+        <button type="button" class="pill" [class.on]="janovexaCategory === '03_Field_Officer_Portal'"
+          (click)="janovexaCategory = '03_Field_Officer_Portal'">
           03 Field Officer<i>({{ getCategoryCount(janovexaScreens, '03_Field_Officer_Portal') }})</i>
         </button>
       </div>
@@ -2154,8 +2295,12 @@
             Mama Tracker</a>
           <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
             Taxi App</a>
-          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery App</a>
-          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa Civic Platform</a>
+          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery
+            App</a>
+          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa
+            Civic Platform</a>
+          <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
+            Staff Tracking</a>
         </div>
         <div class="product-footer-column">
           <h2>Capabilities</h2>
@@ -2203,6 +2348,443 @@
   </footer>
 </main>
 
+} @else if (showFieldora) {
+<main class="product-page fieldora-page">
+  <div class="top-progress" aria-hidden="true">
+    <span id="top-progress-bar"></span>
+  </div>
+
+  <!-- Navigation Header (Matched with Home and Product Pages) -->
+  <header class="product-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="mx-auto my-3 px-5 sm:px-6 py-2 rounded-full flex items-center justify-between gap-4 sm:gap-6 lg:gap-8 shadow-xs bg-white/90 backdrop-blur-md border border-slate-200/90 transition-all duration-300">
+        <div class="flex items-center gap-3 flex-shrink-0">
+          <a [attr.href]="appPath('/')" (click)="$event.preventDefault(); returnToProjects()"
+            class="flex items-center gap-2 group" aria-label="Samrique home">
+            <img src="samrique-logo.png" alt="Samrique — Build Beyond Limits"
+              class="w-20 h-auto sm:w-24 object-contain transition-transform group-hover:scale-105" />
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav
+          class="hidden md:flex items-center gap-1 bg-slate-100/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md mx-auto"
+          aria-label="Product page sections">
+          <a href="#product-overview" (click)="$event.preventDefault(); scrollToProductSection('product-overview')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Overview</a>
+          <a href="#product-roles" (click)="$event.preventDefault(); scrollToProductSection('product-roles')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Platform
+            Roles</a>
+          <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Screens
+            &amp; Previews</a>
+          <a href="#product-technology" (click)="$event.preventDefault(); scrollToProductSection('product-technology')"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all duration-200">Technology</a>
+        </nav>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-3 sm:gap-3.5 flex-shrink-0">
+          <a [attr.href]="appPath('/#gov-solutions')" (click)="$event.preventDefault(); returnToProjects()"
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-slate-700 text-xs font-semibold hover:bg-slate-100 transition-colors">
+            <i class="fa-solid fa-arrow-left text-xs"></i>
+            <span class="hidden sm:inline">Gov Tech Demos</span>
+          </a>
+          <button (click)="openBooking()"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-900 text-xs font-semibold hover:bg-emerald-100 transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+            Book Call
+          </button>
+          <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()"
+            class="btn-brand-gradient relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-xs font-bold tracking-wide uppercase shadow-md hover:scale-105 active:scale-95 transition-all duration-200">
+            <span>Start Project</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="product-hero">
+    <div class="product-hero-copy">
+      <a class="product-back" [attr.href]="appPath('/#gov-solutions')"
+        (click)="$event.preventDefault(); returnToProjects()"><i class="fa-solid fa-arrow-left"></i> Back to
+        solutions</a>
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="product-eyebrow" style="border-color: #05966944; background: #05966912; color: #059669">
+          <i class="fa-solid fa-location-crosshairs"></i> Field Workforce &amp; Staff Tracking · Flutter App
+        </span>
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-300 text-xs font-extrabold tracking-wide uppercase">
+          <i class="fa-solid fa-flask"></i>
+          INDEPENDENT PRODUCT DEMONSTRATION
+        </span>
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          Capability Showcase &bull; 38 Screens
+        </span>
+      </div>
+      <h1>FIELDORA<br /><span style="color: #059669">Field Workforce &amp; Staff Tracking Platform</span></h1>
+      <p style="font-weight: 700; color: #059669; margin-bottom: 8px">Visible on duty. Private off duty.</p>
+      <p>
+        FIELDORA is an enterprise-grade field-workforce platform that enables organizations to monitor field staff,
+        record verified GPS attendance, track worker routes strictly during working hours, maintain daily activity
+        reports with photo evidence, and empower supervisors with real-time dispatch, audit, and analytics dashboards.
+      </p>
+
+      <!-- Independent Project Classification & Disclaimer -->
+      <div
+        class="my-4 p-4 rounded-2xl border border-amber-300/80 bg-amber-50/90 text-slate-900 text-xs leading-relaxed space-y-2 shadow-xs">
+        <div class="flex items-center justify-between gap-2 border-b border-amber-200/80 pb-2">
+          <div class="flex items-center gap-2 font-extrabold text-xs text-amber-900 uppercase tracking-wider">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>FIELDORA – Field Workforce &amp; Staff Tracking Platform</span>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold tracking-wide uppercase">
+            INDEPENDENT PRODUCT DEMONSTRATION
+          </span>
+        </div>
+        <p class="font-bold text-amber-900">
+          Project Type: Independent Product Demonstration / Portfolio Project
+        </p>
+        <p>
+          FIELDORA is an independently conceptualized and developed field workforce and staff tracking platform demonstration by SAMRIQUE.
+        </p>
+        <p>
+          The platform demonstrates our capabilities in GPS-verified attendance, real-time route tracking, daily activity reporting, dispatch administration, supervisor inspection workflows, and mobile application development.
+        </p>
+        <p class="italic text-slate-600">
+          This project is presented solely as a technology demonstration to showcase our software development capabilities.
+        </p>
+        <div class="pt-2 border-t border-amber-200/80 font-bold text-amber-950 text-[11px] space-y-1">
+          <div>
+            <strong>Disclaimer:</strong> These products are independently developed by SAMRIQUE and are not officially commissioned, approved or endorsed by any government department. No official organization or government department affiliation is implied.
+          </div>
+          <div class="text-[11px] text-slate-600 font-normal pt-1 flex items-start gap-1.5">
+            <i class="fa-solid fa-database text-slate-400 mt-0.5"></i>
+            <span><strong>Realistic Demo Data:</strong> Demonstrations use synthetic, anonymized demo data. No real personnel records, employee details or confidential information are used or stored.</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-pills">
+        <span>Flutter 3.47.7</span><span>Dart 3.13.5</span><span>Riverpod
+          ^3.5.0</span><span>OpenStreetMap</span><span>latlong2</span><span>Material 3</span><span>Intl</span><span>2
+          Roles</span><span>38 Screens</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center">
+        <a class="product-primary" [attr.href]="appPath('/#contact')"
+          (click)="$event.preventDefault(); inquireAboutFieldora()">
+          Discuss a similar platform <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')"
+          class="screen-inspect-action" style="padding: 12px 20px; font-size: 14px">
+          <i class="fa-solid fa-mobile-screen"></i> Explore Screens ({{
+          fieldoraScreens.length }})
+        </a>
+      </div>
+    </div>
+    <figure class="product-hero-image" style="cursor: pointer" (click)="scrollToProductSection('product-screens')">
+      <img src="assets/images/fieldora/fieldora_showcase.png"
+        alt="Preview Screen: FIELDORA Field Workforce &amp; Staff Tracking Platform" loading="eager"
+        fetchpriority="high" decoding="async" />
+      <figcaption>
+        Preview: FIELDORA Live Map Radar &amp; Field Staff Operations Suite
+      </figcaption>
+    </figure>
+  </section>
+
+  <nav class="product-toc" aria-label="On this page">
+    <a href="#product-overview"
+      (click)="$event.preventDefault(); scrollToProductSection('product-overview')">Overview</a>
+    <a href="#product-roles" (click)="$event.preventDefault(); scrollToProductSection('product-roles')">Platform
+      Roles</a>
+    <a href="#product-screens" (click)="$event.preventDefault(); scrollToProductSection('product-screens')">Screens
+      &amp; Previews</a>
+    <a href="#product-technology"
+      (click)="$event.preventDefault(); scrollToProductSection('product-technology')">Technology</a>
+  </nav>
+
+  <!-- Product Overview Section -->
+  <section id="product-overview" class="product-section product-overview">
+    <div>
+      <span class="product-kicker">The platform</span>
+      <h2>Precision tracking.<br />Zero compromise on worker privacy.</h2>
+    </div>
+    <p>
+      FIELDORA bridges frontline workforce operations with dispatch centers through a dual-role mobile architecture.
+      Built with Flutter and Riverpod, the platform combines high-precision GPS verification with strict shift-bound
+      privacy controls:
+      <br /><br />
+      <b>Frontline Field Staff Mobile Experience:</b> One-tap GPS check-in/out verified within ±8m, real-time duty
+      timer,
+      shift route polylines on OpenStreetMap, interactive daily inspection checklists, up to 5 geotagged photo uploads
+      with offline draft storage,
+      and manual tracking pause controls with clear on-duty indicators.
+      <br /><br />
+      <b>Admin &amp; Supervisor Command Hub:</b> Full-screen OpenStreetMap fleet radar with real-time on-duty pins,
+      animated GPS route playback with speed controls (1x, 2x, 5x),
+      drag-and-drop task dispatch, submission review queue with photo evidence audit, compliance scorecards, late
+      arrival metrics, and CSV/PDF export.
+    </p>
+  </section>
+
+  <!-- Platform Roles Section -->
+  <section id="product-roles" class="product-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">Multi-Persona Architecture</span>
+      <h2>👥 Platform Roles</h2>
+      <p class="max-w-3xl text-slate-600">
+        Engineered with clean separation of duties across field personnel and operational supervisors.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Role 1: Field Staff -->
+      <div
+        class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-5 hover:border-emerald-300 transition-colors">
+        <div class="space-y-4">
+          <div
+            class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl font-bold border border-emerald-100">
+            <i class="fa-solid fa-person-walking"></i>
+          </div>
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-extrabold text-slate-900">1. Field Staff Mobile Role</h3>
+            <span
+              class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">18
+              Screens</span>
+          </div>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Enables frontline personnel to check-in/out with GPS verification, record daily activities, submit geotagged
+            photos, view shift routes, review feedback, and retain strict control over their privacy with visible
+            on-duty indicators and manual tracking pause controls.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> GPS-verified
+              check-in/out with ±8m precision card</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Active shift elapsed
+              timer &amp; daily KPI cards</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> OpenStreetMap route
+              polyline &amp; waypoints timeline</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Task checklist,
+              progress notes &amp; photo evidence queue</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> "Visible on duty.
+              Private off duty." consent controls</li>
+          </ul>
+        </div>
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module: Auth, Tracking, Attendance,
+            Activity</span>
+          <button type="button" (click)="fieldoraCategory = 'Staff'; scrollToProductSection('product-screens')"
+            class="text-xs font-bold text-emerald-600 hover:text-emerald-800 transition-colors inline-flex items-center gap-1">
+            View Staff Screens <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Role 2: Admin & Supervisor -->
+      <div
+        class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-5 hover:border-sky-300 transition-colors">
+        <div class="space-y-4">
+          <div
+            class="w-12 h-12 rounded-2xl bg-sky-50 text-sky-700 flex items-center justify-center text-xl font-bold border border-sky-100">
+            <i class="fa-solid fa-users-gear"></i>
+          </div>
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-extrabold text-slate-900">2. Admin &amp; Supervisor Mobile Role</h3>
+            <span class="px-3 py-1 rounded-full bg-sky-50 text-sky-700 text-xs font-bold border border-sky-200">20
+              Screens</span>
+          </div>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Enables dispatchers, operations leads, and administrators to monitor live personnel across OpenStreetMap,
+            dispatch and track tasks, approve or request revisions on activity reports, audit attendance compliance,
+            manage organizational shifts and geofenced job sites, and review performance analytics.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-600 pt-2 border-t border-slate-100">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-600"></i> Full-screen OpenStreetMap
+              live radar with employee cards</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-600"></i> Animated GPS route
+              playback with 1x, 2x, 5x scrubbing</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-600"></i> Real-time fleet counter
+              &amp; task dispatch board</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-600"></i> Daily activity report
+              inspection &amp; approval workflow</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-sky-600"></i> Geofenced sites, shift
+              policies, &amp; immutable audit log</li>
+          </ul>
+        </div>
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module: Dashboard, Map, Tasks,
+            Reports, Settings</span>
+          <button type="button" (click)="fieldoraCategory = 'Admin'; scrollToProductSection('product-screens')"
+            class="text-xs font-bold text-sky-600 hover:text-sky-800 transition-colors inline-flex items-center gap-1">
+            View Admin Screens <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Screens & Previews Section -->
+  <section id="product-screens" class="product-screens-section">
+    <div class="wrap">
+      <span class="eyebrow" style="color: #059669">Field Workforce &amp; Staff Tracking Platform</span>
+      <h2>Mobile screens, <span>end to end</span></h2>
+      <p class="lead">
+        Explore {{ fieldoraScreens.length }} production-ready screens across 2 distinct operational roles: Field Staff Mobile Role and Admin &amp; Supervisor Mobile Role.
+      </p>
+      <div class="stats">
+        <div><b>{{ fieldoraScreens.length }}</b><small>Screens</small></div>
+        <div><b>2</b><small>Platform Roles</small></div>
+        <div><b>Flutter</b><small>Cross-platform</small></div>
+      </div>
+
+      <div class="filters" role="tablist">
+        <button type="button" class="pill" [class.on]="fieldoraCategory === 'All'" (click)="fieldoraCategory = 'All'">
+          All<i>({{ fieldoraScreens.length }})</i>
+        </button>
+        <button type="button" class="pill" [class.on]="fieldoraCategory === 'Staff'" (click)="fieldoraCategory = 'Staff'">
+          Field Staff<i>({{ getCategoryCount(fieldoraScreens, 'Staff') }})</i>
+        </button>
+        <button type="button" class="pill" [class.on]="fieldoraCategory === 'Admin'" (click)="fieldoraCategory = 'Admin'">
+          Admin &amp; Supervisor<i>({{ getCategoryCount(fieldoraScreens, 'Admin') }})</i>
+        </button>
+      </div>
+
+      <div class="grid">
+        @for (screen of filterScreens(fieldoraScreens, fieldoraCategory); track screen.id) {
+        <article class="card" [style.--c]="getCategoryColor(screen.category)" (click)="openScreenModal(screen, 'asset')"
+          (keydown.enter)="openScreenModal(screen, 'asset')" tabindex="0" role="button" [attr.aria-label]="screen.name">
+          <div class="stage">
+            <span class="num">SCREEN {{ screen.screenNumber }}</span>
+            <span class="badge">{{ screen.category }}</span>
+            <div class="phone">
+              <img [src]="screen.assetImage || screen.previewImage" [alt]="screen.name" class="phone-screen-img" loading="lazy" />
+            </div>
+          </div>
+          <div class="body">
+            <h3>{{ screen.name }}</h3>
+            <p>{{ screen.description }}</p>
+            <div class="tags">
+              @for (tag of screen.tags; track tag) {
+              <span>{{ tag }}</span>
+              }
+            </div>
+          </div>
+        </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Stack Section -->
+  <section id="product-technology" class="product-section product-tech-section">
+    <div class="product-section-heading">
+      <span class="product-kicker">High-Performance Field Workforce Tech Stack</span>
+      <h2>Technology stack</h2>
+    </div>
+    <div class="product-table-wrap">
+      <table class="product-table">
+        <tbody>
+          @for (item of fieldoraStack; track item[0]) {
+          <tr>
+            <th scope="row">{{ item[0] }}</th>
+            <td>{{ item[1] }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CTA / Consultation Card -->
+  <section class="product-cta-section" style="max-width: 1220px; margin: 40px auto 80px; padding: 0 20px;">
+    <div
+      class="bg-gradient-to-r from-emerald-900 via-slate-900 to-slate-950 rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="space-y-3 max-w-xl z-10">
+        <span
+          class="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30 uppercase tracking-wider">
+          Turnkey Enterprise Deployment
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Need a customized field workforce or fleet
+          tracking platform?</h2>
+        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+          We license and customize FIELDORA with custom geofences, ERP/CRM backend sync, biometric integrations, and
+          private on-premise OpenStreetMap tiles in a 2–4 week sprint.
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0 z-10 w-full md:w-auto">
+        <button (click)="openBooking()"
+          class="px-6 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs shadow-lg transition-all hover:scale-105 text-center">
+          Schedule Technical Discovery Call
+        </button>
+        <button (click)="inquireAboutFieldora()"
+          class="px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20 transition-all text-center">
+          Inquire Source Code
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Page Footer -->
+  <footer class="product-footer">
+    <div class="product-footer-inner">
+      <div class="product-footer-columns">
+        <div class="product-footer-brand">
+          <img src="samrique-logo.png" alt="Samrique Logo" />
+          <p>
+            Bespoke Flutter app development, mobile architecture, and digital product solutions.
+          </p>
+        </div>
+        <div class="product-footer-column">
+          <h2>Projects</h2>
+          <a [attr.href]="appPath('/products/samrique-e-marketplace')"
+            (click)="$event.preventDefault(); openMarketplace()">Samrique E-Marketplace</a>
+          <a [attr.href]="appPath('/products/money-manager')"
+            (click)="$event.preventDefault(); openMoneyManager()">Money Manager</a>
+          <a [attr.href]="appPath('/products/samrique-mama')" (click)="$event.preventDefault(); openMama()">Samrique
+            Mama Tracker</a>
+          <a [attr.href]="appPath('/products/zipi-bike-taxi')" (click)="$event.preventDefault(); openZipi()">Zipi Bike
+            Taxi App</a>
+          <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest Grocery
+            App</a>
+          <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa
+            Civic Platform</a>
+          <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
+            Staff Tracking</a>
+        </div>
+        <div class="product-footer-column">
+          <h2>Capabilities</h2>
+          <span>Flutter Multi-Platform</span>
+          <span>UI &amp; Frontend Innovation</span>
+          <span>Payment Systems &amp; Wallets</span>
+          <span>Real-Time GPS &amp; Dispatch</span>
+          <span>B2B &amp; Multi-Role State</span>
+        </div>
+        <div class="product-footer-column">
+          <h2>Start a Sprint</h2>
+          <a [attr.href]="appPath('/pricing')" (click)="$event.preventDefault(); openPricing()">Pricing</a>
+          <a [attr.href]="appPath('/start-a-project')" (click)="$event.preventDefault(); openStartProject()">Start a
+            project</a>
+          <button (click)="openBooking()" class="product-footer-book-btn">Schedule a Call</button>
+        </div>
+      </div>
+      <div class="product-footer-bottom">
+        <span>&copy; {{ currentYear }} Samrique. All rights reserved. &bull;
+          <button (click)="openPrivacyModal()"
+            style="background: none; border: none; color: inherit; text-decoration: underline; cursor: pointer;">Privacy
+            Policy</button>
+          &bull;
+          <button (click)="openTermsModal()"
+            style="background: none; border: none; color: inherit; text-decoration: underline; cursor: pointer;">Terms
+            of Service</button>
+          &bull; MSME Registered: UDYAM-TN-36-0066570</span>
+        <span>Ambur, Tamil Nadu</span>
+      </div>
+    </div>
+  </footer>
+</main>
 } @else if (showPricingPage) {
 <main class="pricing-page min-h-screen">
   <div class="top-progress" aria-hidden="true">
@@ -2816,6 +3398,14 @@
               <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()">Zest
                 Grocery App</a>
             </li>
+            <li>
+              <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()">Janovexa
+                Civic Platform</a>
+            </li>
+            <li>
+              <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()">Fieldora
+                Staff Tracking</a>
+            </li>
           </ul>
         </div>
         <div>
@@ -2913,6 +3503,14 @@
             [class.hover:text-slate-900]="activeSection !== 'projects'"
             [class.hover:bg-white/60]="activeSection !== 'projects'"
             [attr.aria-current]="activeSection === 'projects' ? 'location' : null">Projects</a>
+          <a href="#gov-solutions" (click)="scrollToSection('gov-solutions')"
+            class="px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200"
+            [class.text-slate-900]="activeSection === 'gov-solutions'"
+            [class.bg-white]="activeSection === 'gov-solutions'" [class.shadow-xs]="activeSection === 'gov-solutions'"
+            [class.text-slate-600]="activeSection !== 'gov-solutions'"
+            [class.hover:text-slate-900]="activeSection !== 'gov-solutions'"
+            [class.hover:bg-white/60]="activeSection !== 'gov-solutions'"
+            [attr.aria-current]="activeSection === 'gov-solutions' ? 'location' : null">Gov Tech Demos</a>
           <a href="#about" (click)="scrollToSection('about')"
             class="px-4 py-1.5 text-xs font-semibold rounded-full transition-all duration-200"
             [class.text-slate-900]="activeSection === 'about'" [class.bg-white]="activeSection === 'about'"
@@ -2958,6 +3556,8 @@
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Pricing</a>
       <a href="#projects" (click)="closeMobileMenu()"
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">Projects</a>
+      <a href="#gov-solutions" (click)="closeMobileMenu()"
+        class="block px-3 py-2 rounded-lg text-sm font-medium text-rose-700 hover:text-rose-900 hover:bg-rose-50 font-bold">Gov Tech Demos</a>
       <a href="#about" (click)="closeMobileMenu()"
         class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50">About</a>
       <a [attr.href]="appPath('/start-a-project')"
@@ -3369,25 +3969,31 @@
               <div
                 class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-3">
                 <div class="flex items-center justify-between pb-2 border-b border-slate-200/70">
-                  <span class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
+                  <span
+                    class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
                     <i class="fa-solid fa-microchip text-rose-600"></i> Engineering &amp; Product Proof Point
                   </span>
-                  <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
+                  <span
+                    class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
                     Case Build &bull; Internal MVP
                   </span>
                 </div>
                 <div class="space-y-2">
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-bullseye text-rose-500 mr-1"></i> Problem Solved:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-bullseye text-rose-500 mr-1"></i> Problem Solved:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ marketplaceProofPoint.problemSolved }}</p>
                   </div>
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ marketplaceProofPoint.keyUserFlows }}</p>
                   </div>
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
-                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ marketplaceProofPoint.architectureTimeline }}</p>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ marketplaceProofPoint.architectureTimeline }}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -3462,25 +4068,31 @@
               <div
                 class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-3">
                 <div class="flex items-center justify-between pb-2 border-b border-slate-200/70">
-                  <span class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
+                  <span
+                    class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
                     <i class="fa-solid fa-microchip text-emerald-600"></i> Engineering &amp; Product Proof Point
                   </span>
-                  <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
+                  <span
+                    class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
                     Case Build &bull; Internal MVP
                   </span>
                 </div>
                 <div class="space-y-2">
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-bullseye text-emerald-600 mr-1"></i> Problem Solved:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-bullseye text-emerald-600 mr-1"></i> Problem Solved:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ moneyManagerProofPoint.problemSolved }}</p>
                   </div>
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ moneyManagerProofPoint.keyUserFlows }}</p>
                   </div>
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
-                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ moneyManagerProofPoint.architectureTimeline }}</p>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
+                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ moneyManagerProofPoint.architectureTimeline }}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -3534,24 +4146,29 @@
               <div
                 class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-3">
                 <div class="flex items-center justify-between pb-2 border-b border-slate-200/70">
-                  <span class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
+                  <span
+                    class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
                     <i class="fa-solid fa-microchip text-pink-600"></i> Engineering &amp; Product Proof Point
                   </span>
-                  <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
+                  <span
+                    class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
                     Case Build &bull; Internal MVP
                   </span>
                 </div>
                 <div class="space-y-2">
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-bullseye text-pink-600 mr-1"></i> Problem Solved:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-bullseye text-pink-600 mr-1"></i> Problem Solved:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ mamaProofPoint.problemSolved }}</p>
                   </div>
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ mamaProofPoint.keyUserFlows }}</p>
                   </div>
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ mamaProofPoint.architectureTimeline }}</p>
                   </div>
                 </div>
@@ -3625,24 +4242,29 @@
               <div
                 class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-3">
                 <div class="flex items-center justify-between pb-2 border-b border-slate-200/70">
-                  <span class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
+                  <span
+                    class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
                     <i class="fa-solid fa-microchip text-amber-600"></i> Engineering &amp; Product Proof Point
                   </span>
-                  <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
+                  <span
+                    class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
                     Turnkey Mobility MVP
                   </span>
                 </div>
                 <div class="space-y-2">
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-bullseye text-amber-600 mr-1"></i> Problem Solved:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-bullseye text-amber-600 mr-1"></i> Problem Solved:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ zipiProofPoint.problemSolved }}</p>
                   </div>
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ zipiProofPoint.keyUserFlows }}</p>
                   </div>
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ zipiProofPoint.architectureTimeline }}</p>
                   </div>
                 </div>
@@ -3699,34 +4321,42 @@
               <div
                 class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-3">
                 <div class="flex items-center justify-between pb-2 border-b border-slate-200/70">
-                  <span class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
+                  <span
+                    class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
                     <i class="fa-solid fa-microchip text-emerald-600"></i> Engineering &amp; Product Proof Point
                   </span>
-                  <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
+                  <span
+                    class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
                     Case Build &bull; Multi-Role MVP
                   </span>
                 </div>
                 <div class="space-y-2">
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-bullseye text-emerald-600 mr-1"></i> Problem Solved:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-bullseye text-emerald-600 mr-1"></i> Problem Solved:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ zestProofPoint.problemSolved }}</p>
                   </div>
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ zestProofPoint.keyUserFlows }}</p>
                   </div>
                   <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
+                    <span class="font-bold text-slate-900 block mb-0.5"><i
+                        class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
                     <p class="text-slate-600 leading-relaxed pl-3.5">{{ zestProofPoint.architectureTimeline }}</p>
                   </div>
                 </div>
               </div>
               <div class="flex flex-wrap gap-2 pt-1">
-                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Flutter 3.47</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Flutter
+                  3.47</span>
                 <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">GetX State</span>
-                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">flutter_map</span>
+                <span
+                  class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">flutter_map</span>
                 <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">B2B Net 30</span>
-                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Driver Pipeline</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Driver
+                  Pipeline</span>
               </div>
               <div>
                 <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()"
@@ -3740,88 +4370,258 @@
               <div
                 class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-900 cursor-pointer group"
                 (click)="openZest()">
-                <img src="assets/images/zest_grocery/zest_grocery_showcase.jpg" alt="Zest Grocery App"
-                  loading="lazy" decoding="async"
+                <img src="assets/images/zest_grocery/zest_grocery_showcase.jpg" alt="Zest Grocery App" loading="lazy"
+                  decoding="async"
                   class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-300" />
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Project 6: JANOVEXA (Alternating: Mockup on Left!) -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMRIQUE – Government & Public Sector Technology Demonstrations -->
+  <section id="gov-solutions" class="py-24 relative bg-slate-50/70 text-slate-900 overflow-hidden border-t border-slate-200/80">
+    <div
+      class="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none"
+      aria-hidden="true"></div>
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-rose-100/60 rounded-full blur-3xl pointer-events-none"
+      aria-hidden="true"></div>
+    <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-emerald-100/60 rounded-full blur-3xl pointer-events-none"
+      aria-hidden="true"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 reveal-on-scroll">
+        <div
+          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-xs font-extrabold text-amber-800 tracking-wide uppercase">
+          <i class="fa-solid fa-flask"></i>
+          <span>INDEPENDENT PRODUCT DEMONSTRATION</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
+          Government &amp; Public Sector Technology Demonstrations
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+          Exploring digital solutions for citizen services, workforce management and public service delivery.
+        </p>
+        <div class="pt-1">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[11px] font-semibold border border-slate-200/80">
+            <i class="fa-solid fa-circle-info text-teal-600"></i>
+            Software Capability Demonstrations &bull; Distinct from Client Commissioned Deliverables
+          </span>
+        </div>
+      </div>
+
+      <div class="space-y-16 max-w-6xl mx-auto">
+        <!-- Solution 1: JANOVEXA – Citizen Services Platform -->
         <div
           class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll">
           <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 items-center">
             <div class="md:col-span-6 lg:col-span-6 order-2 md:order-1 lg:order-1">
               <div
-                class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-900 cursor-pointer group"
+                class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-white cursor-pointer group"
                 (click)="openJanovexa()">
-                <img src="assets/images/janovexa/janovexa_showcase.png" alt="JANOVEXA – Your City. Your Voice"
+                <img src="assets/images/janovexa/janovexa_showcase.png" alt="JANOVEXA – Citizen Services Platform"
                   loading="lazy" decoding="async"
-                  class="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-300" />
+                  class="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300" />
               </div>
             </div>
-            <div class="md:col-span-6 lg:col-span-6 space-y-5 order-1 md:order-2 lg:order-2">
+            <div class="md:col-span-6 lg:col-span-6 space-y-4 order-1 md:order-2 lg:order-2">
               <div class="flex flex-wrap items-center gap-2">
-                <span
-                  class="inline-block px-3 py-1 rounded-full text-xs font-bold" style="color: #4A1525; background: #4A152512; border: 1px solid #4A152530">
-                  Civic Tech &amp; Public Service
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-300 text-xs font-extrabold tracking-wide uppercase">
+                  <i class="fa-solid fa-flask"></i>
+                  INDEPENDENT PRODUCT DEMONSTRATION
+                </span>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
+                  Civic Tech &amp; Citizen Services
                 </span>
                 <span
-                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Product Showcase &bull; Concept MVP
+                  Capability Showcase &bull; 41 Screens
                 </span>
               </div>
               <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
                 <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()"
-                  class="hover:text-rose-950 transition-colors inline-flex items-center gap-2">
-                  JANOVEXA – Your City. Your Voice
+                  class="hover:text-rose-700 transition-colors inline-flex items-center gap-2">
+                  JANOVEXA – Citizen Services Platform
                   <i class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"></i>
                 </a>
               </h3>
-              <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-                A multi-role digital public service platform empowering citizens to report civic grievances with location and photographic evidence, track resolution progress with transparent department accountability, and providing city departments with a modern administration dashboard to triage, assign officers, and update complaint statuses.
+              <p class="text-xs font-bold text-rose-800">
+                <strong>Project Type:</strong> Independent Product Demonstration / Portfolio Project
               </p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                JANOVEXA is an independently conceptualized and developed citizen services platform demonstration by
+                SAMRIQUE.
+              </p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                The platform demonstrates our capabilities in citizen complaint management, service requests, complaint
+                tracking, notifications, administrative workflows and mobile application development.
+              </p>
+              <p class="text-slate-500 text-xs leading-relaxed italic">
+                This project is presented solely as a technology demonstration to showcase our software development
+                capabilities.
+              </p>
+
+              <!-- Prominent Disclaimer Box -->
               <div
-                class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-3">
-                <div class="flex items-center justify-between pb-2 border-b border-slate-200/70">
-                  <span class="font-extrabold uppercase tracking-wider text-[11px] text-slate-900 flex items-center gap-1.5">
-                    <i class="fa-solid fa-microchip" style="color: #4A1525"></i> Engineering &amp; Product Proof Point
+                class="p-4 rounded-2xl border border-amber-300/80 bg-amber-50/90 text-slate-900 text-xs leading-relaxed space-y-2 shadow-xs">
+                <div class="flex items-center justify-between gap-2 border-b border-amber-200/80 pb-2">
+                  <span class="font-extrabold text-amber-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-halved text-amber-700"></i> Disclaimer
                   </span>
-                  <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-[10px] font-bold text-slate-600">
-                    Case Build &bull; Multi-Role MVP
+                  <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold tracking-wide uppercase">
+                    INDEPENDENT DEMONSTRATION
                   </span>
                 </div>
-                <div class="space-y-2">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-bullseye text-rose-800 mr-1" style="color: #4A1525"></i> Problem Solved:</span>
-                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ janovexaProofPoint.problemSolved }}</p>
-                  </div>
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-route text-teal-600 mr-1"></i> Key User Flows Built:</span>
-                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ janovexaProofPoint.keyUserFlows }}</p>
-                  </div>
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5"><i class="fa-solid fa-code-branch text-indigo-600 mr-1"></i> Architecture &amp; Timeline:</span>
-                    <p class="text-slate-600 leading-relaxed pl-3.5">{{ janovexaProofPoint.architectureTimeline }}</p>
-                  </div>
+                <p class="font-bold text-amber-950">
+                  These products are independently developed by SAMRIQUE and are not officially commissioned, approved or endorsed by any government department.
+                </p>
+                <p class="text-slate-600 text-[11px]">
+                  No government department affiliation or official partnership is implied. This project is presented solely as a technology demonstration to showcase our software architecture and Flutter capabilities.
+                </p>
+                <div class="pt-1.5 border-t border-amber-200/60 flex items-start gap-1.5 text-[11px] text-slate-600">
+                  <i class="fa-solid fa-database text-slate-400 mt-0.5"></i>
+                  <span><strong>Realistic Demo Data:</strong> Demonstrations use synthetic, anonymized demo data. No real citizen records, government employee details or confidential information are used or stored.</span>
                 </div>
               </div>
+
               <div class="flex flex-wrap gap-2 pt-1">
-                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Flutter 3.47</span>
-                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Riverpod 3.5</span>
-                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">OpenStreetMap</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Flutter
+                  ^3.47</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Riverpod
+                  ^3.5</span>
+                <span
+                  class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">OpenStreetMap</span>
                 <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">latlong2</span>
-                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">3 Portals</span>
-                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">SLA Triage</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">3 Portals
+                  (Citizen, Admin, Officer)</span>
               </div>
-              <div>
+              <div class="pt-2">
                 <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()"
-                  class="btn-brand-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-md transition-all">
-                  <span>Explore Case Study &amp; Screens</span>
+                  class="btn-brand-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-md transition-all hover:scale-105">
+                  <span>Explore JANOVEXA Demonstration &amp; 41 Screens</span>
                   <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Solution 2: FIELDORA — Field Workforce & Staff Tracking Platform -->
+        <div
+          class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll">
+          <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-6 lg:col-span-6 space-y-4">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-300 text-xs font-extrabold tracking-wide uppercase">
+                  <i class="fa-solid fa-flask"></i>
+                  INDEPENDENT PRODUCT DEMONSTRATION
+                </span>
+                <span
+                  class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  Field Workforce &amp; Staff Tracking
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200 text-xs font-bold">
+                  <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
+                  Capability Showcase &bull; 38 Screens
+                </span>
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()"
+                  class="hover:text-emerald-700 transition-colors inline-flex items-center gap-2">
+                  FIELDORA — Field Workforce &amp; Staff Tracking Platform
+                  <i class="fa-solid fa-arrow-up-right-from-square text-sm text-slate-400"></i>
+                </a>
+              </h3>
+              <p class="text-xs font-bold text-emerald-700">
+                Visible on duty. Private off duty.
+              </p>
+              <p class="text-xs font-bold text-emerald-800">
+                <strong>Project Type:</strong> Independent Product Demonstration / Portfolio Project
+              </p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                FIELDORA is an independently conceptualized and developed field workforce and staff tracking platform demonstration by SAMRIQUE.
+              </p>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                The platform demonstrates our capabilities in GPS-verified attendance, real-time route tracking, daily activity reporting, dispatch administration, supervisor inspection workflows, and mobile application development.
+              </p>
+              <p class="text-slate-500 text-xs leading-relaxed italic">
+                This project is presented solely as a technology demonstration to showcase our software development capabilities.
+              </p>
+
+              <!-- Prominent Disclaimer Box -->
+              <div
+                class="p-4 rounded-2xl border border-amber-300/80 bg-amber-50/90 text-slate-900 text-xs leading-relaxed space-y-2 shadow-xs">
+                <div class="flex items-center justify-between gap-2 border-b border-amber-200/80 pb-2">
+                  <span class="font-extrabold text-amber-900 flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-halved text-amber-700"></i> Disclaimer
+                  </span>
+                  <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold tracking-wide uppercase">
+                    INDEPENDENT DEMONSTRATION
+                  </span>
+                </div>
+                <p class="font-bold text-amber-950">
+                  These products are independently developed by SAMRIQUE and are not officially commissioned, approved or endorsed by any government department.
+                </p>
+                <p class="text-slate-600 text-[11px]">
+                  No official organization or government department affiliation is implied. This project is presented solely as a technology demonstration to showcase our software architecture and Flutter capabilities.
+                </p>
+                <div class="pt-1.5 border-t border-amber-200/60 flex items-start gap-1.5 text-[11px] text-slate-600">
+                  <i class="fa-solid fa-database text-slate-400 mt-0.5"></i>
+                  <span><strong>Realistic Demo Data:</strong> Demonstrations use synthetic, anonymized demo data. No real personnel records, employee details or confidential information are used or stored.</span>
+                </div>
+              </div>
+
+              <!-- Two Platform Roles Breakdown -->
+              <div
+                class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-xs text-slate-700 space-y-2.5">
+                <div
+                  class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 border-b border-slate-200 pb-2">
+                  <i class="fa-solid fa-users text-emerald-600"></i> Platform Roles (38 Screens Catalog)
+                </div>
+                <div>
+                  <strong class="text-slate-900">1. Field Staff Mobile Role (18 Screens):</strong> Frontline check-in/out
+                  with GPS verification (±8m), shift route polyline, task inspection checklists, daily photo reports,
+                  and manual tracking pause controls.
+                </div>
+                <div>
+                  <strong class="text-slate-900">2. Admin &amp; Supervisor Mobile Role (20 Screens):</strong> Live
+                  OpenStreetMap fleet radar, animated route playback (1x/2x/5x), work order dispatch, report approval
+                  queue, and compliance audits.
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-2 pt-1">
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Flutter
+                  3.47.7</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Dart
+                  3.13.5</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Riverpod
+                  ^3.5.0</span>
+                <span
+                  class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">OpenStreetMap</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">LatLong2</span>
+                <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-semibold">Material 3</span>
+              </div>
+              <div class="pt-2">
+                <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()"
+                  class="btn-brand-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white font-bold text-xs shadow-md transition-all hover:scale-105">
+                  <span>Explore FIELDORA Demonstration &amp; 38 Screens</span>
+                  <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+              </div>
+            </div>
+            <div class="md:col-span-6 lg:col-span-6">
+              <div
+                class="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-white cursor-pointer group"
+                (click)="openFieldora()">
+                <img src="assets/images/fieldora/fieldora_showcase.png"
+                  alt="FIELDORA — Field Workforce &amp; Staff Tracking Platform" loading="lazy" decoding="async"
+                  class="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300" />
               </div>
             </div>
           </div>
@@ -3975,13 +4775,13 @@
             </p>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-100">
               <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 text-center">
-                <div class="text-2xl font-black text-slate-900">4</div>
+                <div class="text-2xl font-black text-slate-900">{{ totalProductBuilds }}</div>
                 <div class="text-[11px] font-semibold text-slate-500 uppercase mt-0.5">
                   Product Builds
                 </div>
               </div>
               <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 text-center">
-                <div class="text-2xl font-black text-teal-600">59</div>
+                <div class="text-2xl font-black text-teal-600">{{ totalDocumentedScreens }}</div>
                 <div class="text-[11px] font-semibold text-slate-500 uppercase mt-0.5">
                   Documented Screens
                 </div>
@@ -4008,7 +4808,7 @@
         <div class="text-center max-w-2xl mx-auto space-y-2">
           <span class="text-xs font-extrabold text-teal-600 tracking-widest uppercase">Verified Outcomes</span>
           <h3 class="text-2xl sm:text-3xl font-black text-slate-900">
-            Proven Flutter engineering across six sectors
+            Proven Flutter engineering across key sectors
           </h3>
           <p class="text-xs sm:text-sm text-slate-500">
             Every project below is an architected Flutter concept build or turnkey MVP you can
@@ -4016,7 +4816,7 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           <!-- Outcome 1: Samrique E-Marketplace -->
           <div
             class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4 hover:border-slate-300 transition-colors">
@@ -4148,8 +4948,8 @@
           <div
             class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4 hover:border-slate-300 transition-colors">
             <div class="space-y-3">
-              <div
-                class="w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold" style="color: #4A1525; background: #4A152515">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold"
+                style="color: #4A1525; background: #4A152515">
                 <i class="fa-solid fa-landmark"></i>
               </div>
               <h4 class="text-base font-extrabold text-slate-900">
@@ -4161,9 +4961,35 @@
               </p>
             </div>
             <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-              <span class="text-[11px] font-bold text-slate-500 uppercase">41 Screens &bull; Multi-Role MVP</span>
+              <span class="text-[11px] font-bold text-slate-500 uppercase">41 Screens &bull; Independent Tech Demo</span>
               <button type="button" (click)="openJanovexa()"
-                class="text-xs font-bold hover:underline transition-colors inline-flex items-center gap-1" style="color: #4A1525">
+                class="text-xs font-bold hover:underline transition-colors inline-flex items-center gap-1"
+                style="color: #4A1525">
+                View build <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Outcome 7: FIELDORA -->
+          <div
+            class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4 hover:border-slate-300 transition-colors">
+            <div class="space-y-3">
+              <div
+                class="w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
+                <i class="fa-solid fa-location-crosshairs"></i>
+              </div>
+              <h4 class="text-base font-extrabold text-slate-900">
+                FIELDORA Workforce Platform
+              </h4>
+              <p class="text-slate-600 text-xs leading-relaxed">
+                Enterprise field-workforce platform with GPS check-in (±8m), shift routes, daily photo reports,
+                supervisor live radar, and route playback.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] font-bold text-slate-500 uppercase">38 Screens &bull; Independent Tech Demo</span>
+              <button type="button" (click)="openFieldora()"
+                class="text-xs font-bold hover:underline transition-colors inline-flex items-center gap-1 text-emerald-700">
                 View build <i class="fa-solid fa-arrow-right text-[10px]"></i>
               </button>
             </div>
@@ -4228,6 +5054,14 @@
             <li>
               <a [attr.href]="appPath('/products/zest-grocery')" (click)="$event.preventDefault(); openZest()"
                 class="hover:text-teal-700 transition-colors">Zest Grocery App</a>
+            </li>
+            <li>
+              <a [attr.href]="appPath('/products/janovexa')" (click)="$event.preventDefault(); openJanovexa()"
+                class="hover:text-teal-700 transition-colors">Janovexa Civic Platform</a>
+            </li>
+            <li>
+              <a [attr.href]="appPath('/products/fieldora')" (click)="$event.preventDefault(); openFieldora()"
+                class="hover:text-teal-700 transition-colors">Fieldora Staff Tracking</a>
             </li>
           </ul>
         </div>

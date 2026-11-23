@@ -98,6 +98,71 @@ describe('App', () => {
     expect(app['getCategoryCount'](app['janovexaScreens'], '03_Field_Officer_Portal')).toBe(6);
   });
 
+  it('should open and display FIELDORA product details with 40 screens across 2 roles', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openFieldora']();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.fieldora-page')).toBeTruthy();
+    expect(compiled.querySelector('h1')?.textContent).toContain('FIELDORA');
+    expect(app['fieldoraScreens'].length).toBe(40);
+    expect(app['getCategoryCount'](app['fieldoraScreens'], 'Staff')).toBe(19);
+    expect(app['getCategoryCount'](app['fieldoraScreens'], 'Admin')).toBe(21);
+  });
+
+  it('should display JANOVEXA disclaimer and classification as independent demonstration project', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openJanovexa']();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Independent Product Demonstration / Portfolio Project');
+    expect(compiled.textContent).toContain('INDEPENDENT PRODUCT DEMONSTRATION');
+    expect(compiled.textContent).toContain('These products are independently developed by SAMRIQUE and are not officially commissioned');
+  });
+
+  it('should display FIELDORA disclaimer and classification as independent demonstration project', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    app['openFieldora']();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Independent Product Demonstration / Portfolio Project');
+    expect(compiled.textContent).toContain('INDEPENDENT PRODUCT DEMONSTRATION');
+    expect(compiled.textContent).toContain('These products are independently developed by SAMRIQUE and are not officially commissioned');
+  });
+
+  it('should render the dedicated Government & Public Sector Technology Demonstrations section on home', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const govSection = compiled.querySelector('#gov-solutions');
+    expect(govSection).toBeTruthy();
+    expect(govSection?.textContent).toContain('Government & Public Sector Technology Demonstrations');
+    expect(govSection?.textContent).toContain('JANOVEXA – Citizen Services Platform');
+    expect(govSection?.textContent).toContain('FIELDORA — Field Workforce & Staff Tracking Platform');
+    expect(govSection?.textContent).toContain('INDEPENDENT PRODUCT DEMONSTRATION');
+  });
+
+  it('should render correct studio counts for product builds and documented screens', async () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(app['totalProductBuilds']).toBe(7);
+    expect(app['totalDocumentedScreens']).toBe(165);
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('7');
+    expect(compiled.textContent).toContain('165');
+  });
+
   it('should open screen modal and allow switching between preview mockup and raw asset', async () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;

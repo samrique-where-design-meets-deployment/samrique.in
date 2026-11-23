@@ -389,7 +389,8 @@ footer.product-footer-rich::before {
 .product-page.mama-page,
 .product-page.zipi-page,
 .product-page.zest-page,
-.product-page.janovexa-page {
+.product-page.janovexa-page,
+.product-page.fieldora-page {
   --product-bg: #f8fafc;
   --product-panel: #fff;
   --product-line: #e2e7f0;
@@ -409,6 +410,10 @@ footer.product-footer-rich::before {
 
 .janovexa-page {
   --product-coral: #4A1525;
+}
+
+.fieldora-page {
+  --product-coral: #059669;
 }
 
 /* --- Screens & Previews Reference Design (Matches User Specification) --- */
